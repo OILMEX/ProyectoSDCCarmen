@@ -1,0 +1,214 @@
+﻿<div class="container-fluid">
+    <div class="container-fluid lbl-mod-tit pdb-20 pdl-0">
+        <div class="media">
+            <div class="media-left media-middle">
+                <img class="media-object" src="/Images/iconos_secciones/avisos_alarmas.png">
+            </div>
+            <div class="media-body">
+                <span>AVISOS Y ALARMAS</span>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid cnt-envio-alarma">
+        <label  class="col-sm-10 control-label" style="text-align: left!important;">Seleccione los días del mes para enviar el mail de notificací&oacute;n</label><br /><br />
+        </div>
+        <div class="container-fluid cnt-envio-alarma">
+            <form class="form-horizontal" id="frm-enviar-alarma" action="~/Avisos/saveAlarma">
+                <div class="form-group">
+                    
+                    <label for="DiadelMesPrimerAviso" class="col-sm-2 control-label" style="text-align: left!important;">Primer Aviso</label>
+                    <div class="col-sm-3">
+                        <select class="form-control select-day" data-nelem="1" id="DiadelMesPrimerAviso" name="DiadelMesPrimerAviso" data-vinicial="@ViewData["DiadelMesPrimerAviso"]">
+                            <option value="">Seleccione un d&iacute;a del mes</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="DiadelMesSegundoAviso" class="col-sm-2 control-label" style="text-align: left!important;">Segundo Aviso</label>
+                    <div class="col-sm-3">
+                        <select class="form-control select-day" data-nelem="2" id="DiadelMesSegundoAviso" name="DiadelMesSegundoAviso" data-vinicial="@ViewData["DiadelMesSegundoAviso"]" disabled>
+                            <option value="">Seleccione un d&iacute;a del mes</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="DiadelMesTercerAviso" class="col-sm-2 control-label" style="text-align: left!important;">Tercer Aviso</label>
+                    <div class="col-sm-3">
+                        <select class="form-control select-day" data-nelem="3" id="DiadelMesTercerAviso" name="DiadelMesTercerAviso" data-vinicial="@ViewData["DiadelMesTercerAviso"]" disabled>
+                            <option value="">Seleccione un d&iacute;a del mes</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-3 text-right">
+                        <a class="btn btn-default" href="~/Principal">Cancelar</a>
+                        <button type="button" class="btn btn-default" id="enviarAlarma" style="background-color: #5ABA00; color: #FFF;">Guardar</button>
+                    </div>
+                </div>
+            </form>
+            <div class="alert alert-success edit hidden" role="alert"><strong>Completado!</strong> Tus datos han sido guardados corrrectamente.</div>
+            <div class="alert alert-warning hidden" role="alert"><strong>Enviando...!</strong> Espere un momento por favor.</div>
+            <div class="alert alert-danger hidden" role="alert"><strong>Oh!</strong> Los datos no se pudieron guardar correctamente.</div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(function () {
+        var iniciarcombos = function () {
+            $('.select-day').each(function () {
+                var vini = $(this).data('vinicial');
+                var id = $(this).attr('id');
+                $('#' + id + ' > option[value="' + vini + '"]').attr('selected', 'selected');
+            });
+        }();
+
+        //Se valida secuencia de select
+        $('.select-day').change(function () {
+            var v = this.value,
+                index = $(this).data('nelem'),
+                indexSig = (index === $('.select-day').length) ? '' : index;
+
+            if (v !== "" && indexSig !== '') {
+                if (index > 1) {
+                    $('.select-day:eq(' + indexSig + ')').prop('selectedIndex', 0);
+                } else {
+                    $('.select-day:gt(0)').prop({'selectedIndex': 0,'disabled': true});
+                }
+                $('.select-day:eq(' + indexSig + ')').prop('disabled', false);
+                $('.select-day:eq(' + indexSig + ') > option').removeClass('disable-opt');
+                for (var i = 1; i <= v; i++) {
+                    $('.select-day:eq(' + indexSig + ') > option:eq(' + i + ')').addClass('disable-opt').prop('disabled', true);
+                }
+            }
+        });
+
+        //Validación del formulario alarma
+        $('#frm-enviar-alarma').validate({
+            rules: {
+                'DiadelMesPrimerAviso': { required: true },
+                'DiadelMesSegundoAviso': { required: true },
+                'DiadelMesTercerAviso': { required: true }
+            },
+            messages: {
+                'DiadelMesPrimerAviso': { required: "Seleccione un número día." },
+                'DiadelMesSegundoAviso': { required: "Seleccione un número día." },
+                'DiadelMesTercerAviso': { required: "Seleccione un número día." },
+            }
+        });
+
+        //Envio del formulario alarma
+        $(document).on('click', '#frm-enviar-alarma #enviarAlarma', function () {
+            $('#frm-enviar-alarma').submit();
+        });
+
+        //Procesar envío de nuevo elemento
+        $('#frm-enviar-alarma').submit(function () {
+            if ($(this).valid() === true) {
+                $('#frm-enviar-alarma').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('.cnt-envio-alarma .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('.cnt-envio-alarma .alert-warning').addClass('hidden');
+                        var action = $(".cnt-envio-alarma input#actionEtapa").val();
+                        if (d > 0) {
+                            $('.cnt-envio-alarma .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('.cnt-envio-alarma .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('.cnt-envio-alarma .alert-success').addClass('hidden');
+                            $('.cnt-envio-alarma .alert-danger').addClass('hidden');
+                            location.href="../Principal";
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+    });
+</script>

@@ -1,0 +1,257 @@
+﻿<div class="container-fluid pdl-5 pdr-5">
+    <div class="container-fluid no-pd lbl-mod-tit">
+        <img />
+        <span>EDITAR PROYECTO</span>
+    </div>
+
+    <div id="form_editar" class="panel panel-default pdl-5 pdr-5">
+        <form>
+            <div class="container-fluid no-pd">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label" for="NombreProyecto">Nombre del Proyecto</label>
+                        <input type="text" class="form-control" id="NombreProyecto" name="NombreProyecto">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="AreaOperativa">Área Operativa</label>
+                        <select class="form-control" id="AreaOperativa" name="AreaOperativa">
+                            <option>Área responsable 1</option>
+                            <option>Área responsable 2</option>
+                            <option>Área responsable 3</option>
+                            <option>Área responsable 4</option>
+                            <option>Área responsable 5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="Responsable">Responsable</label>
+                        <select class="form-control" id="Responsable" name="Responsable">
+                            <option>Responsable 1</option>
+                            <option>Responsable 2</option>
+                            <option>Responsable 3</option>
+                            <option>Responsable 4</option>
+                            <option>Responsable 5</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="FechaInicio">F. Inicio</label>
+                        <input type="text" class="form-control" id="FechaInicio" name="FechaInicio">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="FechaFin">F. Fin</label>
+                        <input type="text" class="form-control" id="FechaFin" name="FechaFin">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div id="etapas_proyecto"></div>
+
+
+    </div>
+</div>
+
+<script id="navigation_template" type="text/template">
+<% _.each(etapas, function(e){ %>
+
+    <div  class="container-fluid">
+        <div class="col-md-8">
+            <% if(e.subetapas.length>0) { %>
+            <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-eleme<%= e.id_etapa %>" role="button"></i>
+            <% }else{ %>
+            <i class="fa" style="width:13px; height:14px;"></i>
+            <% } %>
+            &nbsp;<i class="fa fa-folder-o"></i>&nbsp;
+            <%= e.nombre_etapa %>
+        </div>
+        <div class="col-md-2">01-ENE-2016</div>
+        <div class="col-md-2"></div>
+    </div>
+    <% if(e.subetapas.length>0) { %>
+    <div id="box-eleme<%= e.id_etapa %>" class="collapse nivel-1">
+        <% _.each(e.subetapas, function(sub){ %>
+        <div class="container-fluid">
+            <div class="col-md-8">
+                <% if(sub.subsistemas.length>0) { %>
+                <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-subetapa<%= sub.id_subetapa %>" role="button"></i>
+                <% }else{ %>
+                <i class="fa" style="width:13px; height:14px;"></i>
+                <% } %>
+                &nbsp;<i class="fa fa-folder-o"></i>&nbsp;
+                <%= sub.nombre_subetapa %>
+            </div>
+            <div class="col-md-2">01-ENE-2016</div>
+            <div class="col-md-2 pdr-0"><a role="button" href="#" class="btn btn-success pull-right pdt-0 pdb-0">Editar</a></div>
+        </div>
+
+        <% if(sub.subsistemas.length>0) { %>
+        <div id="box-subetapa<%= sub.id_subetapa %>" class="collapse nivel-2">
+            <% _.each(sub.subsistemas, function(sis){ %>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <% if(sis.procesos.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-sistemas<%= sis.id_subsistema %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= sis.siglas %>
+                </div>
+            </div>
+            
+            <% if(sis.procesos.length>0) { %>
+            <div id="box-sistemas<%= sis.id_subsistema %>" class="collapse nivel-3">
+                <% _.each(sis.procesos, function(proc){ %>
+                <div class="container-fluid">
+                    <div class="col-md-10">
+                        <% if(proc.indicadores.length>0) { %>
+                        <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-procesos<%= proc.id_proceso %>" role="button"></i>
+                        <% }else{ %>
+                        <i class="fa" style="width:13px; height:14px;"></i>
+                        <% } %>
+                        <%= proc.clave_proceso %> <%= proc.nombre_proceso %>
+                    </div>
+                    <div class="col-md-2 pdr-0">
+                        <a id="btn-tipo-vista" class="btn btn-vista-tbl pull-right">
+                            <i class="fa fa-plus" ></i>
+                        </a>
+                    </div>
+                </div>
+
+                <% if(proc.indicadores.length>0) { %>
+                <div id="box-procesos<%= proc.id_proceso %>" class="collapse nivel-4">
+                    <% _.each(proc.indicadores, function(ind){ %>
+                    <div class="container-fluid">
+                        <div class="col-md-8">
+                            <% if(ind.responsables.length>0) { %>
+                            <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-indicadores<%= ind.indicador_id %>" role="button"></i>
+                            <% }else{ %>
+                            <i class="fa" style="width:13px; height:14px;"></i>
+                            <% } %>
+                            <%= ind.indicador_clave %> <%= ind.indicador_nombre %>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <span><%= ind.indicador_tipo %></span><br />
+                            <span><%= ind.indicador_actualizacion %></span><br />
+                            <span>Meta <%= ind.indicador_meta %>%</span><br />
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <% if(ind.indicador_tipo=="seguimiento"){ %>
+                            <span><%= ind.indicador_meta %></span>
+                            <% } %>
+
+                            <% if(ind.indicador_tipo=="programa"){ %>
+                            <a class="btn btn-meta"><%= ind.indicador_meta %>%</a>
+                            <a class="btn btn-datos">Datos</a>
+                            <% } %>
+
+                            <% if(ind.indicador_tipo=="checkbox"){ %>
+                            <div class="checkbox checkbox-slider--b-flat mrl-20">
+                                <label>
+                                    <input type="checkbox" <%= (ind.indicador_meta=='100')? 'checked="checked"' : '' %>  disabled="disabled" /><span></span>
+                                </label>
+                            </div>
+
+                            <% } %>
+                        </div>
+                        <div class="col-md-1 pdr-0">
+                            <a id="btn-tipo-vista" class="btn btn-vista-tbl pull-right">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <% if(ind.responsables.length>0) { %>
+                    <div id="box-indicadores<%= ind.indicador_id %>" class="collapse nivel-5">
+                        <% _.each(ind.responsables, function(resp){ %>
+                        <div class="container-fluid">
+                            <div class="col-md-8">
+                                <i class="fa fa-user"></i>&nbsp;
+                                <%= resp.ficha %> <%= resp.nombre %>
+                            </div>
+                            <div class="col-md-2"><%= resp.correo %></div>
+                            <div class="col-md-2 pdr-0">
+                                <a id="btn-tipo-vista" class="btn btn-vista-tbl pull-right">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% } %>
+
+
+                    <% }); %>
+                </div>
+                <% } %>
+
+                <% }); %>
+            </div>
+            <% } %>
+
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% }); %>
+    </div>
+    <% } %>
+
+<% }); %>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+
+        var OBJ = [];
+        initialize();
+
+        //$(document).on('click', '.cnt-vista-opciones .btn-opc-ind', function () {
+        //    var mod = $(this).data('modvista');
+        //    var id = $(this).data('subsistema');
+        //    $('#tab-subsistema' + id + ' .cnt-vista').addClass('hidden');
+        //    $('#tab-subsistema' + id + ' .cnt-vista' + mod).removeClass('hidden');
+        //    $('.btn-opc-ind').removeClass('activo');
+        //    $(this).addClass('activo');
+
+        //});
+
+        //$(document).on('show.bs.tab', '#nav-subsis-ind a[data-toggle="tab"]', function (e) {
+        //    $('.btn-opc-ind[data-modvista="1"]').removeClass('activo');
+        //    $('.btn-opc-ind[data-modvista="2"]').addClass('activo');
+        //    $('.cnt-vista1').addClass('hidden');
+        //    $('.cnt-vista2').removeClass('hidden');
+        //});
+
+    });
+
+    function initialize() {
+       
+        $.getJSON('../Models/DetalleProyecto.json', function (data) {
+            console.log('x');
+            OBJ = data;
+            //cargarDataSistemas(OBJ);
+            cargarArbolEtapas(OBJ);
+        });
+    }
+
+    function cargarArbolEtapas(d) {
+        console.log(d.proyectos[0].etapas);
+        if (d.proyectos[0].etapas.length > 0) {
+            var tmpl = $("#navigation_template").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "etapas": d.proyectos[0].etapas });
+            $('#etapas_proyecto').html(html);
+        }
+    }
+</script>

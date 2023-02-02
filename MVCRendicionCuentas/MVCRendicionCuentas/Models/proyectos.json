@@ -1,0 +1,372 @@
+﻿{
+    "subsistemas": [
+        {
+            "subsistema_nombre": "12 MPI",
+            "subsistema_nombre_largo": "12 MEJORES PRACTICAS I",
+            "subsistema_id": 1,
+            "color": "#D64148"
+        },
+        {
+            "subsistema_nombre": "SASP",
+            "subsistema_nombre_largo": "Subsistema de Administración de Seguridad de los Procesos",
+            "subsistema_id": 2,
+            "color": "#008EB2"
+        },
+        {
+            "subsistema_nombre": "SAA",
+            "subsistema_nombre_largo": "PRUEBAS 3",
+            "subsistema_id": 3,
+            "color": "#38A125"
+        },
+        {
+            "subsistema_nombre": "SAST",
+            "subsistema_nombre_largo": "PRUEBAS 4",
+            "subsistema_id": 4,
+            "color": "#74716A"
+        }
+    ],
+    "proyectos": [
+        {
+
+            "proyecto_id": 1,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Verde",
+            "proyecto_responsable": "GPAP-CEIP-SPE",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 2,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Amarillo",
+            "proyecto_responsable": "GPAP-CEIP-SPE",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 3,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Verde",
+            "proyecto_responsable": "GPAP",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "85%",
+                    "ss_color": "Amarillo"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "85%",
+                    "ss_color": "Amarillo"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 4,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Rojo",
+            "proyecto_responsable": "GPEO",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 5,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Amarillo",
+            "proyecto_responsable": "GPCCEP",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "85%",
+                    "ss_color": "Amarillo"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 6,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Amarillo",
+            "proyecto_responsable": "GPAS",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "85%",
+                    "ss_color": "Amarillo"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "85%",
+                    "ss_color": "Amarillo"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 7,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Verde",
+            "proyecto_responsable": "GPAS",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+         {
+            "proyecto_id": 8,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Amarillo",
+            "proyecto_responsable": "GPAS",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 9,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Verde",
+            "proyecto_responsable": "GPAS",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "85%",
+                    "ss_color": "Amarillo"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "85%",
+                    "ss_color": "Amarillo"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        },
+        {
+            "proyecto_id": 10,
+            "proyecto_nombre": "PERFORACIÓN DE POZO EXPLORACIÓN ABC",
+            "proyecto_indicador": "Rojo",
+            "proyecto_responsable": "GPAS",
+            "proyecto_fecha_ini": "01-Ene-2016",
+            "proyecto_fecha_fin": "31-Dic-2016",
+            "proyecto_indicadores_ss": [
+                {
+                    "ss_id": 1,
+                    "ss_nombre": "12MPI",
+                    "ss_porcentaje": "65%",
+                    "ss_color": "Rojo"
+                },
+                {
+                    "ss_id": 2,
+                    "ss_nombre": "SASP",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 3,
+                    "ss_nombre": "SAA",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                },
+                {
+                    "ss_id": 4,
+                    "ss_nombre": "SAST",
+                    "ss_porcentaje": "95%",
+                    "ss_color": "Verde"
+                }
+            ]
+        }
+    ]
+}
+

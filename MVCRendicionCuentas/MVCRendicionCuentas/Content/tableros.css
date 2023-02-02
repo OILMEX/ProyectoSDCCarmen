@@ -1,0 +1,290 @@
+.cnt-grafica-pie {
+    background: url("../Images/tableros/fondo_grafica_pastel_p.png") no-repeat center center;
+    background-size: 90px;
+    display: block;
+    height: 160px;
+    margin: 10px auto;
+    position: relative;
+    width: 160px;
+}
+    .cnt-grafica-pie .container-fluid span {
+        font-size: 20px;
+    }
+.cnt-tbl-subsis-glob>.container-fluid>.container-fluid>.nodo-conec {
+    width: 1px !important;
+    margin: 0 auto;
+}
+.cnt-grafica-pies{
+    float:left;
+    background: url("../Images/tableros/fondo_grafica_pastel_p.png") no-repeat center center;
+    background-size: 90px;
+    display: block;
+    height: 150px;
+    margin: 5px 40px 0;
+    position: relative;
+    width: 160px;
+}
+.cnt-tbl-subsis {
+    text-align:center;
+}
+.cnt-graficas-subsis {
+    display: inline-block;
+    margin: 0 auto;
+}
+.circulo-dinamico {
+    top: -5px;
+    left: 0;
+    position: absolute;
+}
+.cnt-grafica-text {
+    background: url("../Images/tableros/circulo_blanco_grafica_pastel_p.png") no-repeat center center;
+    background-size: 110px;
+    color: #707888;
+    width: 160px;
+    height: 160px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    text-align: center;
+}
+.cnt-grafica-text span:first-child{
+    font-size: 45px;
+    line-height: 160px;
+    font-weight: 600;
+}
+.cnt-grafica-text span:last-child{
+    font-size: 30px;
+    line-height: 145px;
+    font-weight: 600;
+}
+.cnt-wrp-diagrama {
+    position: relative;
+    float:left;
+}
+.diagrama-nodo {
+    position: relative;
+}
+
+/** Nodos **/
+.nodo {
+    height: 30px;
+}
+.nodo-conec {
+    border-left: 1px solid #B8BEC5;
+}
+.nodo-left,
+.nodo-right,
+.nodo-inter:first-child,
+.nodo-inter:last-child {
+    border-top: 1px solid #B8BEC5;
+}
+
+.ind-item-flecha {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 35px;
+    background-color: #66718A;
+    margin: 30px auto 0;
+}
+.proc-item-flecha {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    line-height: 20px;
+    border-radius: 35px;
+    background-color: #66718A;
+}
+    .proc-item-flecha span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #FFF;
+        font-size: 12px;
+        width: 100%;
+        height: 100%;
+        line-height: 20px;
+    }
+
+/** colores de etiquetas sistemas **/
+.lbl-nombre-subsis.rojo {
+   background-color: #EB242D;
+}
+.lbl-nombre-subsis.verde {
+   background-color: #00CF58;
+}
+.lbl-nombre-subsis.azul {
+   background-color: #008DAC;
+}
+.lbl-nombre-subsis.gris {
+   background-color: #00CF58;
+}
+.lbl-nombre-subsis.amarillo {
+   background-color: #00CF58;
+}
+.ind-item-flecha.pos {
+    top: 30px;
+}
+.ind-item-flecha i{
+   color: #FFF;
+   text-align:center;
+   font-size: 11px; 
+   margin: 0px 5px;
+}
+.lbl-comp {
+    position: relative;
+    text-align: center;
+    font-size: 11px;
+    color: #66718A;
+    bottom: -50px;
+}
+.cnt-tbl-subsis-glob > div:nth-child(2) > span {
+    color: #6F7582;
+    font-size: 22px;
+}
+.logo-subsistema {
+    position: absolute;
+    width: 120px;
+    right: -120px;
+    background-image: url("../Images/logos/sspa_.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 77px;
+}
+.cnt-vista-graf-pie div[class*="logo-subsis-"] {
+    position: absolute;
+    width: 120px;
+    left: 20px;
+    bottom: -100px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 77px;
+}
+.cnt-vista-graf-bar .cnt-grafica-subsis-bar {
+    border-bottom: 1px solid #66718A;
+}
+.cnt-vista-graf-bar .cnt-grafica-subsis-bar:last-child {    
+    border-bottom: none;
+}
+    .cnt-vista-graf-bar .cnt-grafica-subsis-bar > div {
+        height: 100%;
+    }
+.cnt-vista-graf-bar div[class*="logo-subsis-"],
+.cnt-vista-graf-bar a[class*="logo-subsis-"], 
+.cnt-vista-subsis-det a[class*="logo-subsis-"]  {
+    display: block;
+    width: 120px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 90px;
+    margin: 7%;
+}
+.cnt-vista-graf-bar a[class*="logo-subsis-"] {
+    cursor: pointer;
+}
+.logo-subsis-0 { background-image: url("../Images/logos/sspa_.png"); }
+.logo-subsis-1 { background-image: url("../Images/logos/12_mpi.png"); }
+.logo-subsis-2 { background-image: url("../Images/logos/sasp.png"); }
+.logo-subsis-3 { background-image: url("../Images/logos/saa.png"); }
+.logo-subsis-4 { background-image: url("../Images/logos/sast.png"); }
+
+.lbl-n-proyectos {
+    float:right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #66718A;
+}
+
+.btn-vista-tbl {
+    float: right;
+    padding: 2px !important;
+    width: 22px !important; 
+    height: 22px !important;
+    background-color: #B0C2CE;
+    color: #E7E6E6 !important;
+    line-height: 16px;
+}
+
+/** Estilos en gráficas de barra **/
+.cnt-grafica-subsis-bar {
+    height: 120px;
+}
+.cnt-grafica-subsis-bar > div:nth-child(2){
+    display:table;
+}
+
+.cnt-bars .col-md-1 > span{
+    display:block;
+    text-align:center;
+}
+.cnt-bars .col-md-1 > span:first-child {
+    color: #66718A;
+    font-weight: 600;
+}
+.cnt-bars .col-md-1 > span:last-child {
+    color: #889CAF;
+}
+.cnt-bars .col-md-1 > div {
+    position: relative;
+    height: 80px;
+    width: 15px;
+    margin: 0 auto;
+    background-color: #E7E6E6;
+    border-radius: 37px;
+}
+.cnt-bars .col-md-1 > div > div{
+    position: absolute;
+    bottom:0;
+    left:0;
+    width: 15px;
+    border-radius: 37px;
+}
+
+
+.lbl-avance {
+    display: table-cell;
+    vertical-align: middle;
+} 
+.lbl-avance > div {
+    text-align: center;
+}
+.lbl-avance>div>span{
+    height: 100%;
+    font-size: 400%;
+    font-weight: bold;
+    color: #66718A;
+}
+    .lbl-avance > div.txt {
+        height: 55px;
+        line-height: 50px;
+    }
+    .lbl-avance>div:first-child,
+    .lbl-avance>div:last-child {
+        font-size: 25px;
+        font-weight: 600;
+        color: #889CAF;
+        height: 25px;
+        line-height: 25px;
+    }
+.bar-prom {
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    border-top: 1px dashed #66718A;
+}
+    .bar-prom span {        
+        position: absolute;
+        color: #66718A;
+        height: 2px;
+        width: 2px;
+        font-size: 25px;
+        line-height: 0px;
+        top: -2px;
+    }
+    .bar-prom span:first-child { left: -10px;  }
+    .bar-prom span:last-child { right: -3px; }

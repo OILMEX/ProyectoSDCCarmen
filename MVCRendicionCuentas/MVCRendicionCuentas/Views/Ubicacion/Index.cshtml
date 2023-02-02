@@ -1,0 +1,139 @@
+﻿@model List<RendicionCuentasServices.Model.SP_SelectAll_Ubicaciones_Result>
+    <div class="@*panel panel-heading*@" style="padding-top:10px; padding-bottom:15px;"><img src="~/Images/logos/Usuario1.png" alt="Nuevo Usuario" style="width:40px;height:40px;" /><span class="HeaderUsuarios">CATÁLOGO DE UBICACIONES</span></div>
+    <div class="panel panel-default">
+        <div>
+            <a class="pull-right btn glyphicon glyphicon-plus btn" style="color:#b0c2ce;" href="#" id="btnNuevaUbicacion"></a>
+        </div>
+        <div class="container panel-body">
+            <table id="tablaUsuarios1" class="table table-condensed table-hover table-striped grid-Usuarios">
+                <thead>
+                    <tr class="CentrarTexto">
+                        <th>#</th>
+                        <th>UBICACI&Oacute;N</th>
+                        <th>USUARIO CREACI&Oacute;N</th>
+                        <th>FECHA CREACI&Oacute;N</th>
+                        <th>USUARIO ACTUALIZACI&Oacute;N</th>
+                        <th>FECHA ACTUALIZACI&Oacute;N</th>
+                        <th>ELIMINAR</th>
+                        <th>EDITAR</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaUsuarios2">
+                    @if (Model != null || Model.Count > 0)
+                    {
+                        var i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr class="CentrarTexto elemUbicacion">
+                                <td>@i</td>
+                                <td>@item.Ubicacion</td>
+                                <td>@item.UsuarioCreacion</td>
+                                <td>@(item.FechaCreacion != null ? item.FechaCreacion.Value.ToShortDateString() : "")</td>
+                                <td>@item.UsuarioActualizacion</td>
+                                <td>@(item.FechaActualizacion != null ? item.FechaActualizacion.Value.ToShortDateString() : "")</td>
+                                <td><a class="pull-right wp-100 btn glyphicon glyphicon-trash btnEliminar" data-nombre="@item.Ubicacion" data-rel="@item.idUbicacion" style="color:#b0c2ce;"></a></td>
+                                <td><a class="pull-right wp-100 btn glyphicon glyphicon glyphicon-edit btnEditar" data-nombre="@item.Ubicacion" data-rel="@item.idUbicacion" style="color:#b0c2ce;"></a></td>
+                            </tr>
+                            ++i;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /*rutinas para popup nuevo Personal*/
+        $(document).ready(function () {
+
+            //validacion formulario add ubicación
+            $('#frmCatUbicacion').validate({
+                rules: {
+                    'nombre_ubicacion': { required: true, maxlength: 500 },
+                },
+                messages: {
+                    'nombre_ubicacion': { required: "El campo es requerido", maxlength: "Nombre no debe ser mayor de 500 caracteres" },
+                }
+            });
+
+            //Nueva ubidcación
+            $("#btnNuevaUbicacion").click(function (e) {
+                var modal = $("#modalCatUbicacion");
+                modal.find('.modal-title').text('AGREGAR UBICACIÓN');
+                modal.find('.modal-body #actionUbicacion').val('add');
+                modal.modal('show');
+            });
+
+            //Editar ubidcación
+            $(".elemUbicacion .btnEditar").click(function (e) {
+                var idUbicacion = $(this).attr("data-rel");
+                var nombre = $(this).attr("data-nombre");
+                var modal = $("#modalCatUbicacion");
+                modal.find('.modal-title').text('EDITAR UBICACIÓN');
+                modal.find('.modal-body #idUbicacion').val(idUbicacion);
+                modal.find('.modal-body #nombre_ubicacion').val(nombre);
+                modal.find('.modal-body #actionUbicacion').val('edit');
+                modal.modal('show');
+            });
+
+            //Eliminar ubidcación
+            $(".elemUbicacion .btnEliminar").click(function (e) {
+                var idUbicacion = $(this).attr("data-rel");
+                var nombre = $(this).attr("data-nombre");
+                var modal = $("#modalCatUbicacion");
+                modal.find('.modal-title').text('ELIMINAR UBICACIÓN');
+                modal.find('.msjEliminarModal').removeClass('hidden');
+                modal.find('.modal-body #idUbicacion').val(idUbicacion);
+                modal.find('.modal-body #nombre_ubicacion').val(nombre);
+                modal.find('.modal-body #actionUbicacion').val('eliminar');
+                modal.modal('show');
+            });
+
+            //Envio del formulario Nuevo
+            $(document).on("click", "#modalCatUbicacion .btnAceptar", function () {
+                var action = $("#frmCatUbicacion #actionUbicacion").val();
+                if (action != null && action != undefined) {
+                    var act = (action === 'add') ? '/Ubicacion/saveUbicacion/' : ((action === 'edit') ? '/Ubicacion/updateUbicacion/' : '/Ubicacion/deleteUbicacion/');
+                    $("#frmCatUbicacion").attr('action', act);
+                    $('#frmCatUbicacion').submit();
+                }
+            });
+
+            //Procesar envío de ubicación
+            $('#modalCatUbicacion .modal-body #frmCatUbicacion').submit(function () {
+                if ($(this).valid() === true) {
+                    $('#modalCatUbicacion .modal-body #frmCatUbicacion').ajaxSubmit({
+                        dataType: 'json',
+                        beforeSend: function () { $('#modalCatUbicacion .modal-body .alert-warning').removeClass('hidden'); },
+                        success: function (d) {
+                            $('#modalCatUbicacion .msjEliminarModal').addClass('hidden');
+                            $('#modalCatUbicacion .modal-body .alert-warning').addClass('hidden');
+                            var action = $("#modalCatUbicacion .modal-body #actionUbicacion").val();
+                            if (d > 0) {
+                                if (action === "add" || "edit") {
+                                    $('#modalCatUbicacion .modal-body .alert-success.edit').removeClass('hidden');
+                                } else {
+                                    $('#modalCatUbicacion .modal-body .alert-success.delete').removeClass('hidden');
+                                }
+                            } else {
+                                $('#modalCatUbicacion .modal-body .alert-danger').removeClass('hidden');
+                            }
+                            setTimeout(function () {
+                                $('#modalCatUbicacion').modal('hide');
+                                $('#modalCatUbicacion .modal-body .alert-success').addClass('hidden');
+                                $('#modalCatUbicacion .modal-body .alert-danger').addClass('hidden');
+                                location.reload();
+                            }, 1500);
+                        }
+                    });
+                }
+                return false;
+            });
+
+            $(document).on('click', '.modal-dialog .modal-footer .btn.btnCancelar', function () {
+                $('.modal-dialog .modal-body form input[type="text"]').val('');
+                $('.modal-dialog .modal-body input.error').removeClass('error');
+                $('.modal-dialog .modal-body label.error').remove();
+            });
+
+        });
+    </script>

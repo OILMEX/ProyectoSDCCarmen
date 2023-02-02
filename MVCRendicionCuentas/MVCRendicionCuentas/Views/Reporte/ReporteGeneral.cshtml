@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    @Html.DevExpress().GetStyleSheets(
+    new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout, Theme = "Metropolis" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor, Theme = "Metropolis" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.GridView, Theme = "Metropolis" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Editors, Theme = "Metropolis" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid, Theme = "Metropolis" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Chart, Theme = "Metropolisblue" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Report, Theme = "Metropolis" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Scheduler },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList, Theme = "Metropolis" },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Spreadsheet },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.SpellChecker }
+
+)
+
+
+    @Html.DevExpress().GetScripts(
+    new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+    new Script { ExtensionSuite = ExtensionSuite.HtmlEditor },
+    new Script { ExtensionSuite = ExtensionSuite.GridView },
+    new Script { ExtensionSuite = ExtensionSuite.Editors },
+    new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+    new Script { ExtensionSuite = ExtensionSuite.Editors },
+    new Script { ExtensionSuite = ExtensionSuite.Chart },
+    new Script { ExtensionSuite = ExtensionSuite.Report },
+    new Script { ExtensionSuite = ExtensionSuite.TreeList },
+    new Script { ExtensionSuite = ExtensionSuite.Spreadsheet },
+    new Script { ExtensionSuite = ExtensionSuite.SpellChecker }
+)
+
+}
+@model  List<RendicionCuentasServices.Model.SP_VistaparaPivotGridProyectos_Result>
+@{string select = "selected='selected'";}
+
+<div class="col-md-12" id="divFiltro">
+    <div class="form-group">
+        <div class="col-md-7">
+            <div class="form-group">
+                <label class="control-label" for="selEstatus">Estatus</label>
+                <select class="form-control" name="selEstatus" id="selEstatus">
+                    <option value="" @(Request.Params["est"] == null ? select : "")>Todos</option>
+                    <option value="En Proceso" @(Request.Params["est"] == "En Proceso" ? select : "")>En Proceso</option>
+                    <option value="Concluido" @(Request.Params["est"] == "Concluido" ? select : "")>Concluido</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2 modal-footer pdt-15 pdb-0" style="border-top:0px none;"><button type="button" class="btn btnAceptar">Aceptar</button></div>
+        <div class="col-md-12 pdl-0">
+            <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+            <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido cargados corrrectamente. </div>
+            <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+            <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron cargar correctamente. </div>
+        </div>
+    </div>
+</div>
+
+
+@{string estatus = (Request.Params["est"] != null)? Request.Params["est"] : null;}
+@using (Html.BeginForm("ExportToDataGeneral", "Reporte", new { est = estatus }))
+{
+    <script>
+    function OnEndCallback2(s, e) {
+        var hasFilter = s.cpFilterExpression && s.cpFilterExpression !== "";
+        //btnExportToXLSX.SetEnabled(hasFilter);
+    }
+    function OnClick2(s, e) {
+        var actionParams = $("form").attr("action").split("?OutputFormat=");
+        actionParams[1] = s.GetMainElement().getAttribute("OutputFormatAttribute");
+        $("form").attr("action", actionParams.join("?OutputFormat="));
+    }
+
+    $(function () {
+        $(document).on('click', '.btnAceptar', function () {
+
+            if ($('#selEstatus').val() != '') {
+                document.location.href = "@Url.Action("ReporteGeneral", "Reporte")" + "?est=" + $('#selEstatus').val();
+                }else{
+                document.location.href = "@Url.Action("ReporteGeneral", "Reporte")";
+                }
+                console.log($('#selEstatus').val());
+            });
+        });
+
+
+
+    </script>
+    <table style="clear:both;">
+        <tr>
+            <td>
+                @Html.DevExpress().Button(btn =>
+           {
+               btn.Name = "btnExportToXLSX";
+               btn.Width = 16;
+               btn.Height = 16;
+               btn.Text = "Exportar Excel";
+               btn.RenderMode = ButtonRenderMode.Button;
+               btn.ImagePosition = ImagePosition.Left;
+               btn.ToolTip = "Exportar Datos";
+               btn.Images.Image.Url = "~/Images/export.png";
+
+               btn.Attributes["OutputFormatAttribute"] = "XLSX";
+               btn.Text = "Exportar Excel";
+               btn.UseSubmitBehavior = true;
+               btn.ClientSideEvents.Click = "OnClick2";
+           }).GetHtml()
+            </td>
+        </tr>
+    </table>
+
+    @Html.Partial("ExportarDatosPartial", Model)
+}

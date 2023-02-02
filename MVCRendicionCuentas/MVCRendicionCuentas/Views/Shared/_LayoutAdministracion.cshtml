@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @RenderPage(Url.Content("~/views/shared/_heads.cshtml"))
+    @RenderSection("ScriptsHead", false)
+</head>
+
+<body>
+    <!-- Navegación TOP layout-top-bar-Lat -->
+    <div class="container-fluid no-pd">
+        <div class="row no-mr bg-header h-40">
+            @RenderPage(Url.Content("~/views/shared/_header.cshtml"))
+        </div>
+    </div>
+    <!-- Contenedor general -->
+    <div id="fullheight" class="container no-pd pos-rel" style="min-height:calc(100% - 40px); overflow: hidden;">
+        <div class="col-md-3 no-pd" id="sidebar">
+            @RenderPage(Url.Content("~/views/shared/_sidebar.cshtml"))
+        </div>
+
+        <div class="col-md-9 no-pd pull-right">
+            <!--Set donde se muestra la ruta actual-->
+            <div class=" row no-mr set-ruta-actual h-40">
+            <ul class="pager text-left no-mr">
+                @*<li><a href="#">Ubicación</a></li>
+                <li><a href="#">Localidad</a></li>
+                <li><a href="#">Piso</a></li>
+                <li><a href="#">Sala</a></li>*@
+                @*<div class="row no-mr" id="HeadPrincipal">
+
+                </div>*@
+            </ul>
+        </div>
+
+
+            <!--Set-content para modulos-->
+            <div class="row no-mr" id="ContentPrincipal">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!--Context menu organigrama -->
+    <div id="contextMenu" class="dropdown clearfix" style="display:none; position:absolute;">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li><a tabindex="-1" href="#" data-action="1" data-target="modalOrganigrama"><i class="fa fa-plus-square-o"></i> Agregar Nivel</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#" data-action="2" data-target="modalOrganigrama"><i class="glyphicon glyphicon-user" aria-hidden="true"></i> Agregar Puesto</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#" data-action="3" data-target="modalOrganigrama"><i class="fa fa-edit" aria-hidden="true"></i> Editar Elemento</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#" data-action="4" data-target="modalOrganigrama"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar Elemento</a></li>
+        </ul>
+    </div>
+    <!--Context Menu Proyectos Etapas y subetapas-->
+    <div id="contextMenuProyecto" class="dropdown clearfix" style="display:none; position:absolute;">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li><a tabindex="-1" href="#" data-action="1" data-target="modalProyectoEtapa"><i class="fa fa-plus-square-o"></i> Agregar Etapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="2" data-target="modalProyectoEtapa"><i class="fa fa-edit" aria-hidden="true"></i> Editar Etapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="3" data-target="modalProyectoEtapa"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar Etapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="4" data-target="modalProyectoSubetapa"><i class="fa fa-plus-square-o"></i> Agregar SubEtapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="5" data-target="modalProyectoSubetapa"><i class="fa fa-edit" aria-hidden="true"></i> Editar SubEtapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="6" data-target="modalProyectoSubetapa"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar SubEtapa</a></li>
+        </ul>
+    </div>
+    <!--Contenedor de loading-->
+    <div class="loading-mod hidden">
+        <div></div><div><span>Cargando...</span><span class="hidden">¡Error de conexi&oacute;n!</span></div>
+    </div>
+    @RenderPage(Url.Content("~/views/shared/_modals.cshtml"))
+    <script type="text/javascript">
+        $(function() {
+            $(document).on('click', 'li.dropdown > a.dropdown-toggle span#title', function(e){
+                window.location.href = "/compromisos/index";
+            });
+
+            $(document).on('click', 'li.dropdown > a#liCompromisos', function (e) {
+                //mostrarLoading();
+            });
+        });
+    </script>
+</body>
+</html>

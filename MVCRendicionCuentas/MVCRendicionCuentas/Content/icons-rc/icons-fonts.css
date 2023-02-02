@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'Rendicion de Cuentas';
+
+  src: url('fonts/RendiciondeCuentas-Regular.eot');
+  src: url('fonts/RendiciondeCuentas-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/RendiciondeCuentas-Regular.woff2') format('woff2'), url('fonts/RendiciondeCuentas-Regular.woff') format('woff'), url('fonts/RendiciondeCuentas-Regular.ttf') format('truetype');
+}
+.icon-rc {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Rendicion de Cuentas';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 0;
+  font-size:30px;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-rc-check:before{
+  content: "A";
+}
+
+.icon-rc-checkbox:before {
+  content: "A";
+}
+
+.icon-rc-programa:before {
+  content: "B";
+}
+
+.icon-rc-formula:before {
+  content: "C";
+}
+
+.icon-rc-etapa:before {
+  content: "H";
+}
+
+.icon-rc-subetapa:before {
+  content: "I";
+}
+
+.icon-rc-adduser:before {
+  content: "K";
+}
+

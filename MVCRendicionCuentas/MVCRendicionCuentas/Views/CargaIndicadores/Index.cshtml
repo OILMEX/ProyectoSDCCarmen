@@ -1,0 +1,1529 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model HtmlString
+
+<div class="container-fluid lbl-mod-tit pdb-20 pdl-0">
+
+    <div class="media">
+        <div class="media-left media-middle">
+            <img class="media-object" src="~/Images/iconos_secciones/proyectos.png" />
+        </div>
+        <div class="media-body">
+            <span>ACTUALIZACIÓN DE INDICADORES</span>
+            <span class="label label-default mrl-10 bulet" id="bulet-proy"></span>
+        </div>
+        <div class="content-leyenda">
+            <div class="cnt-leyendas">
+                <div class="circle circle-red"></div><div class="text-circle"> 0% a 80%</div>
+                <div class="circle circle-amarillo"></div><div class="text-circle"> 81% a 95%</div>
+                <div class="circle circle-verde"></div><div class="text-circle"> 96% a 100%</div>
+                <div class="circle circle-gris"></div><div class="text-circle"> No aplica </div>
+                <div class="leyenda-flecha"><span class="fa fa-check-square green "></span> Indicador actualizado </div>
+                <div class="leyenda-flecha"><span class="fa fa-times red "></span> Indicador NO actualizado </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid Square-indicadores">
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-ind" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#tab-12mpi" id="tabOpc12mpi" aria-controls="tab-tablero1" role="tab" data-toggle="tab">12 MPI</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-subsistemas" id="tabOpcSubsistema" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Subsistemas</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-faltantes-12mpi" id="tabOpc12mpiFaltantes" aria-controls="tab-tablero1" role="tab" data-toggle="tab">FALTANTES 12 MPI</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-faltantes-subsis" id="tabOpcSubsistemaFaltantes" aria-controls="tab-tablero1" role="tab" data-toggle="tab">FALTANTES Subsistemas</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tab-12mpi">
+            <!-- Tab panes -->
+            <div id="cnt-indicadores-12mpi" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-subsistemas">
+            <!-- Tab panes -->
+            <div id="cnt-indicadores-subsis" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-faltantes-12mpi">
+            <!-- Tab panes -->
+            <div id="cnt-indicadores-12mpi-faltantes" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-faltantes-subsis">
+            <!-- Tab panes -->
+            <div id="cnt-indicadores-subsis-faltantes" class="tab-content">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+    <table class="table table-condensed">
+        <tr>
+            <th width="50">&nbsp;</th>
+            <th width="150">Clave Indicador</th>
+            <th width="30">&nbsp;</th>
+            <th>Nombre</th>
+            <th width="100" class="text-center">Estatus</th>
+            <th width="100" class="text-center">Información</th>
+            <th width="100" class="text-center">Valor</th>
+            <th width="100" class="text-center">Otros</th>
+        </tr>
+
+        <% _.each(indicadores,function(indicador, i){ %>
+        <tr class="row-indicadores">
+            <td><div id="divCirculo<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="circle <%= indicador.Semaforo %>"></div></td>
+            <td><%= indicador.Prefijo %></td>
+            <td><a class="btn fa fa-info-circle btn-infoCompromiso" rel='popover' data-toggle="popover" title="Detalles del Indicador" data-content="<p><strong><%= indicador.Prefijo %></strong></p> <p class='text-center'> <%= indicador.DescripcionCorta %> </p> <button class='btn btn-default center-block' data-id='<%= indicador.IdIndicador %>' onclick='chkModal(this)'>Ver</button>"></a></td>
+            <td><%= indicador.DescripcionCorta %></td>
+            <td class="text-center">
+                <span id="lblestatus<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="fa <%= (indicador.Valor!=null)? 'fa-check-square green':'fa-times red'  %> "></span>
+                <br />
+                @*<span><%= indicador.indicador_fechactualizado %></span>*@
+            </td>
+            <td class="text-center">
+                <span><%= indicador.TipoIndicador %></span>
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                - <%= indicador.TipoCalculo %>
+                <% } %>
+                <br />
+                <span><%= indicador.TipoFrecuencia %> días</span><br />
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                <span>Meta <%= indicador.Meta > 0 ? indicador.Meta + '%' : indicador.Meta %></span><br />
+                <% } %>
+            </td>
+            <td class="text-center">
+                <% if(indicador.TipoIndicador=="Seguimiento"){ %>
+                <a class="btn btn-meta" id="lblMeta<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"><%= indicador.Valor %>%</a>
+                <a id="btnDatos<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="btn btn-datos"
+                   data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                   data-idindicador="<%= indicador.IdIndicador %>"
+                   data-idpro="<%= pid %>"
+                   data-idconfigresp="<%= indicador.IdConfigIndicadorResponsable %>">Datos</a>
+                <% } %>
+
+                <% if(indicador.TipoIndicador=="Checkbox" || indicador.TipoIndicador=="Check"){ %>
+                ¿Realizado?
+                <div class="checkbox checkbox-slider--b-flat mrl-20">
+                    <label>
+                        <input id="chk<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="chkDataValor" onclick="checkedBox12mpi(this)" data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                               data-estatus="<%= (indicador.Valor=='100')? 'True' : 'False' %>"
+                               data-idindicador="<%= indicador.IdIndicador %>"
+                               data-idconfigresp="<%= indicador.IdConfigIndicadorResponsable %>"
+                               data-idpro="<%= pid %>"
+                               type="checkbox" <%= (indicador.Valor=='100')? 'checked="checked"' : '' %>  ><span></span>
+                    </label>
+                </div>
+
+                <% } %>
+
+            </td>
+            <td class="text-center">
+                <a class="btn btnDocumentIndicador <%= indicador.SemaforoSoportes %> <%= (indicador.IdDataValoresIndicadores == null)? 'disabled': 'activo' %>
+                   " href="#" id="btnSoportes<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"
+                   data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                   data-prefijo="<%= indicador.Prefijo %>"
+                   data-desccort="<%= indicador.DescripcionCorta %>"
+                   data-tipoindicador="<%= indicador.TipoIndicador %>"
+                   data-tipocalculo="<%= indicador.TipoCalculo %>"
+                   data-frecuencia="<%= indicador.TipoFrecuencia %>"
+                   data-meta="<%= indicador.Meta %>">Soportes</a>
+
+                <br />
+
+                <a disable class="btn btnNotaIndicador <%= indicador.SemaforoComentarios %>
+                   <%= (indicador.IdDataValoresIndicadores == null)? 'disabled': 'activo' %>
+                   " href="#" id="btnNotas<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"
+                   data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                   data-prefijo="<%= indicador.Prefijo %>"
+                   data-desccort="<%= indicador.DescripcionCorta %>"
+                   data-tipoindicador="<%= indicador.TipoIndicador %>"
+                   data-tipocalculo="<%= indicador.TipoCalculo %>"
+                   data-frecuencia="<%= indicador.TipoFrecuencia %>"
+                   data-meta="<%= indicador.Meta %>">Notas</a>
+            </td>
+        </tr>
+
+        <% }); %>
+
+    </table>
+</script>
+
+<script id="tmp-colection-proy" type="text/template">
+    <div class="container-fluid no-pd headProyectos">
+        <div class="col-md-1 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd text-center">#</div>
+                <div class="col-md-6 no-pd">IND</div>
+            </div>
+        </div>
+        <div class="col-md-4">Componente de Proyecto</div>
+        <div class="col-md-3">Responsable</div>
+        <div class="col-md-2">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">F. Inicio</div>
+                <div class="col-md-6 no-pd text-center">F. Fin</div>
+            </div>
+        </div>
+        <div class="col-md-2 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center">SASP</div>
+                <div class="col-md-4 no-pd text-center">SAA</div>
+                <div class="col-md-4 no-pd text-center">SAST</div>
+            </div>
+        </div>
+    </div>
+
+    <% _.each(indicadores, function(p, i){ %>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">
+                    <% if(p.Etapas.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-eleme<%= p.proyecto_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= i+1 %>
+                </div>
+                <div class="col-md-6 no-pd">
+                    <div class="circle <%= p.proyecto_indicador_global %>"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"><%= p.proyecto_nombre %></div>
+        <div class="col-md-3"><%= p.proyecto_responsable %></div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_ini!=null)? moment(p.proyecto_fecha_ini).format('DD/MM/YYYY'): '' %></div>
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_fin!=null)? moment(p.proyecto_fecha_fin).format('DD/MM/YYYY'): '' %></div>
+            </div>
+        </div>
+        <div class="col-md-2 no-pd Semaforos-idproy-<%= p.proyecto_id %>">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SASP %>" data-color="<%= p.semaforo_SASP %>"> <%= p.porcentaje_SASP %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAA %>" data-color="<%= p.semaforo_SAA %>"> <%= p.porcentaje_SAA %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAST %>" data-color="<%= p.semaforo_SAST %>"> <%= p.porcentaje_SAST %>% </a></div>
+            </div>
+        </div>
+    </div>
+
+    <% if(p.Etapas.length>0) { %>
+    <div id="box-eleme<%= p.proyecto_id %>" class="collapse etapas-proyecto">
+        <%= ( templateFn({etapas: p.Etapas, pid:p.proyecto_id}) ) %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+<script id="tmp-colection-proy-falt" type="text/template">
+    <div class="container-fluid no-pd headProyectos">
+        <div class="col-md-1 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd text-center">#</div>
+                <div class="col-md-6 no-pd">IND</div>
+            </div>
+        </div>
+        <div class="col-md-4">Componente de Proyecto</div>
+        <div class="col-md-3">Responsable</div>
+        <div class="col-md-2">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">F. Inicio</div>
+                <div class="col-md-6 no-pd text-center">F. Fin</div>
+            </div>
+        </div>
+        <div class="col-md-2 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center">SASP</div>
+                <div class="col-md-4 no-pd text-center">SAA</div>
+                <div class="col-md-4 no-pd text-center">SAST</div>
+            </div>
+        </div>
+    </div>
+
+    <% _.each(indicadores, function(p, i){ %>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">
+                    <% if(p.Etapas.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-elemef<%= p.proyecto_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= i+1 %>
+                </div>
+                <div class="col-md-6 no-pd">
+                    <div class="circle <%= p.proyecto_indicador_global %>"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"><%= p.proyecto_nombre %></div>
+        <div class="col-md-3"><%= p.proyecto_responsable %></div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_ini!=null)? moment(p.proyecto_fecha_ini).format('DD/MM/YYYY'): '' %></div>
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_fin!=null)? moment(p.proyecto_fecha_fin).format('DD/MM/YYYY'): '' %></div>
+            </div>
+        </div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SASP %>"> <%= p.porcentaje_SASP %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAA %>"> <%= p.porcentaje_SAA %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAST %>"> <%= p.porcentaje_SAST %>% </a></div>
+            </div>
+        </div>
+    </div>
+
+    <% if(p.Etapas.length>0) {  console.log(p.proyecto_id);  %>
+    <div id="box-elemef<%= p.proyecto_id %>" class="collapse etapas-proyecto">
+        <%= (templateFnFalt({etapas: p.Etapas, pid:p.proyecto_id})) %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+
+<script id="tmp-colection-etapas" type="text/template">
+    <%
+    var i = 0;
+    _.each(etapas, function(e){
+    i++; %>
+    <div class="container-fluid <%= (i == etapas.length)? 'last' : '' %> ">
+        <div class="col-md-7">
+            <% if(e.SubEtapas.length>0) { %>
+            <i class="glyphicon glyphicon-triangle-right pull-left" data-toggle="collapse" data-target="#box-eleme<%= e.etapa_id %><%= pid %>" role="button"></i>
+            <% }else{ %>
+            <i class="fa pull-left" style="width:13px; height:14px;"></i>
+            <% } %>
+            &nbsp;<i class="icon-rc-img icon-rc-etapa-g"></i>&nbsp;
+            <%= e.clave %> <%= e.etapa_nombre %>
+        </div>
+        <div class="col-md-4 text-right">Fecha de conclusión de la etapa:</div>
+        <div class="col-md-1"><%= (e.FechaFin!=null)? moment(e.FechaFin).format('DD/MM/YYYY') : '' %>&nbsp;</div>
+    </div>
+    <% if(e.SubEtapas.length>0) { %>
+    <div id="box-eleme<%= e.etapa_id %><%= pid %>" class="collapse nivel-1">
+        <% _.each(e.SubEtapas, function(sub){ %>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <% if(sub.Subsistemas.length>0) { %>
+                <i class="glyphicon glyphicon-triangle-right pull-left" data-toggle="collapse" data-target="#box-subetapa<%= sub.subetapa_id %><%= pid %>" role="button"></i>
+                <% }else{ %>
+                <i class="fa pull-left" style="width:13px; height:14px;"></i>
+                <% } %>
+                &nbsp;<i class="icon-rc-img icon-rc-subetapa-g"></i>&nbsp;
+                <%= sub.clave %> <%= sub.subetapa_nombre %>
+            </div>
+
+        </div>
+
+        <% if(sub.Subsistemas.length>0) { %>
+        <div id="box-subetapa<%= sub.subetapa_id %><%= pid %>" class="collapse nivel-2">
+            <% _.each(sub.Subsistemas, function(sis){ %>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <% if(sis.Procesos.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-sistemas<%= sub.subetapa_id %>-<%= sis.id_subsistema %><%= pid %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= sis.siglas %>
+                </div>
+            </div>
+
+            <% if(sis.Procesos.length>0) { %>
+            <div id="box-sistemas<%= sub.subetapa_id %>-<%= sis.id_subsistema %><%= pid %>" class="collapse nivel-3">
+                <% _.each(sis.Procesos, function(proc){ %>
+                <div class="container-fluid">
+                    <div class="col-md-10">
+                        <% if(proc.IndicadoresProy.length>0) { %>
+                        <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-procesos<%= sub.subetapa_id %>-<%= proc.proceso_id %><%= pid %>" role="button"></i>
+                        <% }else{ %>
+                        <i class="fa" style="width:13px; height:14px;"></i>
+                        <% } %>
+                        <%= proc.proceso_sigla %> <%= proc.proceso_nombre %>
+                    </div>
+
+                </div>
+
+                <% if(proc.IndicadoresProy.length>0) { %>
+                <div id="box-procesos<%= sub.subetapa_id %>-<%= proc.proceso_id %><%= pid %>" class="collapse nivel-4">
+
+                    <%= ( tblndicadoresFN({indicadores: proc.IndicadoresProy, pid: pid}) ) %>
+
+                </div>
+                <% } %>
+
+                <% }); %>
+            </div>
+            <% } %>
+
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% }); %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+<script id="tmp-colection-etapas-falt" type="text/template">
+    <%
+    var i = 0;
+    _.each(etapas, function(e){
+    i++; %>
+    <div class="container-fluid <%= (i == etapas.length)? 'last' : '' %> ">
+        <div class="col-md-7">
+            <% if(e.SubEtapas.length>0) { %>
+            <i class="glyphicon glyphicon-triangle-right pull-left" data-toggle="collapse" data-target="#box-elemef<%= e.etapa_id %><%= pid %>" role="button"></i>
+            <% }else{ %>
+            <i class="fa pull-left" style="width:13px; height:14px;"></i>
+            <% } %>
+            &nbsp;<i class="icon-rc-img icon-rc-etapa-g"></i>&nbsp;
+            <%= e.clave %> <%= e.etapa_nombre %>
+        </div>
+        <div class="col-md-4 text-right">Fecha de conclusión de la etapa:</div>
+        <div class="col-md-1"><%= (e.FechaFin!=null)? moment(e.FechaFin).format('DD/MM/YYYY') : '' %>&nbsp;</div>
+    </div>
+    <% if(e.SubEtapas.length>0) { %>
+    <div id="box-elemef<%= e.etapa_id %><%= pid %>" class="collapse nivel-1">
+        <% _.each(e.SubEtapas, function(sub){ %>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <% if(sub.Subsistemas.length>0) { %>
+                <i class="glyphicon glyphicon-triangle-right pull-left" data-toggle="collapse" data-target="#box-subetapaf<%= sub.subetapa_id %><%= pid %>" role="button"></i>
+                <% }else{ %>
+                <i class="fa pull-left" style="width:13px; height:14px;"></i>
+                <% } %>
+                &nbsp;<i class="icon-rc-img icon-rc-subetapa-g"></i>&nbsp;
+                <%= sub.clave %> <%= sub.subetapa_nombre %>
+            </div>
+
+        </div>
+
+        <% if(sub.Subsistemas.length>0) { %>
+        <div id="box-subetapaf<%= sub.subetapa_id %><%= pid %>" class="collapse nivel-2">
+            <% _.each(sub.Subsistemas, function(sis){ %>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <% if(sis.Procesos.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-sistemasf<%= sub.subetapa_id %>-<%= sis.id_subsistema %><%= pid %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= sis.siglas %>
+                </div>
+            </div>
+
+            <% if(sis.Procesos.length>0) { %>
+            <div id="box-sistemasf<%= sub.subetapa_id %>-<%= sis.id_subsistema %><%= pid %>" class="collapse nivel-3">
+                <% _.each(sis.Procesos, function(proc){ %>
+                <div class="container-fluid">
+                    <div class="col-md-10">
+                        <% if(proc.IndicadoresProy.length>0) { %>
+                        <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-procesosf<%= sub.subetapa_id %>-<%= proc.proceso_id %><%= pid %>" role="button"></i>
+                        <% }else{ %>
+                        <i class="fa" style="width:13px; height:14px;"></i>
+                        <% } %>
+                        <%= proc.proceso_sigla %> <%= proc.proceso_nombre %>
+                    </div>
+
+                </div>
+
+                <% if(proc.IndicadoresProy.length>0) { %>
+                <div id="box-procesosf<%= sub.subetapa_id %>-<%= proc.proceso_id %><%= pid %>" class="collapse nivel-4">
+
+                    <%= ( tblndicadoresFN({indicadores: proc.IndicadoresProy, pid:pid}) ) %>
+
+                </div>
+                <% } %>
+
+                <% }); %>
+            </div>
+            <% } %>
+
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% }); %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-det-programa">
+    <tr class="trData">
+        <td><b>P</b></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioAnteriorProg%>" name="AnioAnteriorProg" id="agnoAnteriorProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.EneroProg%>" name="EneroProg" id="eneroProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.FebreroProg%>" name="FebreroProg" id="febreroProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MarzoProg%>" name="MarzoProg" id="marzoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AbrilProg%>" name="AbrilProg" id="abrilProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MayoProg%>" name="MayoProg" id="mayoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JunioProg%>" name="JunioProg" id="junioProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JulioProg%>" name="JulioProg" id="julioProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AgostoProg%>" name="AgostoProg" id="agostoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.SeptiembreProg%>" name="SeptiembreProg" id="septiembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.OctubreProg%>" name="OctubreProg" id="octubreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.NoviembreProg%>" name="NoviembreProg" id="noviembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.DiciembreProg%>" name="DiciembreProg" id="diciembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.ProyeccionAnualProg%>" name="ProyeccionAnualProg" id="anualProgramdo" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioSiguienteProg%>" name="AnioSiguienteProg" id="agnoSiguienteProgramado" /></td>
+    </tr>
+    <tr class="trData">
+        <td><b>R</b></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioAnteriorReal%>" name="AnioAnteriorReal" id="agnoAnteriorReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.EneroReal%>" name="EneroReal" id="eneroReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.FebreroReal%>" name="FebreroReal" id="febreroReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MarzoReal%>" name="MarzoReal" id="marzoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AbrilReal%>" name="AbrilReal" id="abrilReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MayoReal%>" name="MayoReal" id="mayoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JunioReal%>" name="JunioReal" id="junioReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JulioReal%>" name="JulioReal" id="julioReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AgostoReal%>" name="AgostoReal" id="agostoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.SeptiembreReal%>" name="SeptiembreReal" id="septiembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.OctubreReal%>" name="OctubreReal" id="octubreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.NoviembreReal%>" name="NoviembreReal" id="noviembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.DiciembreReal%>" name="DiciembreReal" id="diciembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.ProyeccionAnualReal%>" name="ProyeccionAnualReal" id="anualReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioSiguienteReal%>" name="AnioSiguienteReal" id="agnoSiguienteReal" /></td>
+    </tr>
+</script>
+
+
+<script type="text/javascript">
+    var templateFn = _.template($('#tmp-colection-etapas').html());
+    var templateFnFalt = _.template($('#tmp-colection-etapas-falt').html());
+    var tblndicadoresFN = _.template($('#tmp-coleccion-tabcont-ind').html());
+    $(function () {
+        var OBJ = [];
+        initCarga();
+
+        var popOverSetting = {
+            placement: 'top',
+            container: 'body',
+            html: true,
+            selector: '[rel="popover"]',
+        }
+
+        $('body').popover(popOverSetting);
+
+        $('body').on('click', function (e) {
+            $('[data-toggle="popover"]').each(function () {
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('hide');
+                }
+            });
+        });
+
+        
+        //Eventos para árbol
+        $(document).on('click', 'i[data-toggle="collapse"]', function () {
+            if ($(this).hasClass('glyphicon-triangle-right')) {
+                $(this).removeClass('glyphicon-triangle-right').addClass('glyphicon-triangle-bottom');
+            } else {
+                $(this).removeClass('glyphicon-triangle-bottom').addClass('glyphicon-triangle-right');
+            }
+        });
+
+        //Eventos clic en tabs
+        $('#tabOpc12mpiFaltantes').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/getIndicadores12mpiFaltantes',
+                data: { },
+                beforeSend: function() {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-indicadores-12mpi-faltantes', "#tmp-coleccion-tabcont-ind", d.ind12mpifaltantes);
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $('#tabOpc12mpi').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/getIndicadores12mpi',
+                data: { },
+                beforeSend: function() {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-indicadores-12mpi', "#tmp-coleccion-tabcont-ind", d.ind12mpi);
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+
+        //Eventos clic en tabs
+        $('#tabOpcSubsistema').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/getIndicadoresSubsistemas',
+                data: { },
+                beforeSend: function() {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-indicadores-subsis', "#tmp-colection-proy", d.indicadoressubsistemas);
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        //Eventos clic en tabs
+        $('#tabOpcSubsistemaFaltantes').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/getIndicadoresSubsistemasFaltantes',
+                data: { },
+                beforeSend: function() {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-indicadores-subsis-faltantes', "#tmp-colection-proy-falt", d.faltantessubsis);
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+
+
+        //Envio del formulario elemento
+        $(document).on('click', '#modalEditValoresIndicador .btnAceptar', function () {
+            action =  '/CargaIndicadores/editDataIndicadorFormulaValor' ;
+            $("#modalEditValoresIndicador .modal-body form").attr('action', action);
+            $('#modalEditValoresIndicador .modal-body form').submit();
+        });
+
+        //Envio del formulario agregar Nota
+        $(document).on('click', '#modalNotaIndicador .btnAceptar', function () {
+            action =  '/CargaIndicadores/editNotaIndicador' ;
+            $("#modalNotaIndicador .modal-body form").attr('action', action);
+            $('#modalNotaIndicador .modal-body form').submit();
+        });
+
+        //Envio datos indicador programa
+        $(document).on('click', '#modalProgramaAsociado .btnAceptar', function () {
+            action = '/CargaIndicadores/editDataIndicadorPrograma';
+            $("#modalProgramaAsociado .modal-body form").attr('action', action);
+            $("#modalProgramaAsociado .modal-body form").attr('method', 'post');
+            $('#modalProgramaAsociado .modal-body form').submit();
+
+        });
+
+        //Validación del formulario edit valor
+        var validFormula = {
+            rules: {
+                'dataProgramada': { required: true, number: true },
+                'dataReal': { required: true, number: true },
+                'ResultFormula': { required: true, number: true },
+            },
+            messages: {
+                'dataProgramada': { required: "Coloque un valor", number: "El campo debe ser numérico" },
+                'dataReal': { required: "Coloque un valor", number: "El campo debe ser numérico" },
+                'ResultFormula': { required: "Coloque un valor", number: "El campo debe ser numérico" },
+            }
+        };
+
+        var validValor = {
+            rules: {
+                'ResultValor': { required: true, number: true, maxlength: 6 }
+            },
+            messages: {
+                'ResultValor': { required: "Coloque un valor", number: "El campo debe ser numérico", maxlength:"Solo se permiten 6 caracteres" }
+            }
+        };
+
+        //Validacion del formulario edit valor indicador programa
+        $('#modalProgramaAsociado .modal-body form').validate({
+            rules: {
+                'ResultPrograma': { required: true, number: true, maxlength: 6 },
+            },
+            messages: {
+                'ResultPrograma': { required: "Coloque un valor", number: "El campo debe ser numérico", maxlength:"Solo se permiten 6 caracteres" }
+            }
+        });
+
+        //Validacion agregar documento soporte
+        //$.validator.addMethod('filesize', function(value, element, param) {
+        //    console.log(element.files[0].size);
+        //    return this.optional(element) || (element.files[0].size <= param)
+        //});
+        //validacion formulario subetapa
+        $('#frmAddDocumento').validate({
+            rules: {
+                'NombreDoc': { required: true },
+                'inputFiles': {required:true},
+            },
+            messages: {
+                'NombreDoc': { required: "El campo es requerido" },
+                'inputFiles': {required: "Debe adjuntar un archivo"}
+            }
+        });
+
+
+        //Procesar envío de nuevo elemento
+        $('#modalEditValoresIndicador .modal-body form').submit(function () {
+            var tform = $("#modalEditValoresIndicador .modal-body form input#TipoCalculo").val();
+            switch (tform) {
+                case "Valor":
+                    $(this).validate(validValor);
+                    break;
+                case "Formula":
+                    $(this).validate(validFormula);
+                    break;
+            }
+
+
+            if ($(this).valid() === true) {
+                $('#modalEditValoresIndicador .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalEditValoresIndicador .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        var data = JSON.parse(d);
+                        $('#modalEditValoresIndicador .modal-body .alert-warning').addClass('hidden');
+
+                        if (data.accion) {
+                            var tabactivo = $('div.tab-pane.active');
+                            var semaforo = data.semaforo;
+                            var idIndicador = data.idIndicador;
+                            var idconfig = data.idResponsable;
+
+                            if(tabactivo.attr('id') == 'tab-faltantes-12mpi' || tabactivo.attr('id') == 'tab-faltantes-subsis')
+                            {
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Rojo');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Amarillo');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Verde');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Gris');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).addClass(semaforo);
+
+                                $('div.tab-pane.active #lblestatus'+idIndicador + idconfig).attr('class','');
+                                $('div.tab-pane.active #lblestatus'+idIndicador + idconfig).attr('class','fa fa-check-square green');
+
+                                $('div.tab-pane.active #lblMeta'+data.idIndicador + data.idResponsable).text(data.valor + '%');
+                                $('div.tab-pane.active #btnDatos'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                                $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                                $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).addClass('activo');
+                                $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                                $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                                $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).addClass('activo');
+                                $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+                            }
+
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Rojo');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Amarillo');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Verde');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Gris');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).addClass(semaforo);
+
+                            $('#lblestatus'+idIndicador + idconfig).attr('class','');
+                            $('#lblestatus'+idIndicador + idconfig).attr('class','fa fa-check-square green');
+
+                            $('#lblMeta'+data.idIndicador + data.idResponsable).text(data.valor + '%');
+                            $('#btnDatos'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                            $('#btnNotas'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                            $('#btnNotas'+data.idIndicador + data.idResponsable).addClass('activo');
+                            $('#btnNotas'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                            $('#btnSoportes'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                            $('#btnSoportes'+data.idIndicador + data.idResponsable).addClass('activo');
+                            $('#btnSoportes'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+                            ActualizarSemaforosProy(data.semaforoxproy, data.idproy);
+
+                            $('#modalEditValoresIndicador .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalEditValoresIndicador .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalEditValoresIndicador').modal('hide');
+                            $('#modalEditValoresIndicador .modal-body .alert-success').addClass('hidden');
+                            $('#modalEditValoresIndicador .modal-body .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        //Procesar envío de nueva nota
+        $('#modalNotaIndicador .modal-body form').submit(function () {
+            {
+                $('#modalNotaIndicador .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalNotaIndicador .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalNotaIndicador .modal-body .alert-warning').addClass('hidden');
+
+                        if (parseInt(d) > 0) {
+                            $('#modalNotaIndicador .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalNotaIndicador .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalNotaIndicador').modal('hide');
+                            $('#modalNotaIndicador .modal-body .alert-success').addClass('hidden');
+                            $('#modalNotaIndicador .modal-body .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+
+        //Procesar envío de formulario nuevo valor tipo programa
+        $('#modalProgramaAsociado .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                $('#modalProgramaAsociado .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalProgramaAsociado .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalProgramaAsociado .modal-body .alert-warning').addClass('hidden');
+                        var data = JSON.parse(d);
+                        if (data.accion) {
+                            var tabactivo = $('div.tab-pane.active');
+                            var semaforo = data.semaforo;
+
+                            if(tabactivo.attr('id') == 'tab-faltantes-12mpi' || tabactivo.attr('id') == 'tab-faltantes-subsis')
+                            {
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Rojo');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Amarillo');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Verde');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Gris');
+                                $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).addClass(semaforo);
+
+                                $('div.tab-pane.active #lblestatus'+data.idIndicador + data.idResponsable).attr('class','');
+                                $('div.tab-pane.active #lblestatus'+data.idIndicador + data.idResponsable).attr('class','fa fa-check-square green');
+
+                                $('div.tab-pane.active #lblMeta'+data.idIndicador + data.idResponsable).text(data.valor + '%');
+                                $('div.tab-pane.active #btnDatos'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                                $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                                $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).addClass('activo');
+                                $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                                $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                                $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).addClass('activo');
+                                $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+                            }
+
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Rojo');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Amarillo');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Verde');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Gris');
+                            $('#divCirculo'+data.idIndicador + data.idResponsable).addClass(semaforo);
+
+                            $('#lblestatus'+data.idIndicador + data.idResponsable).attr('class','');
+                            $('#lblestatus'+data.idIndicador + data.idResponsable).attr('class','fa fa-check-square green');
+
+                            $('#lblMeta'+data.idIndicador + data.idResponsable).text(data.valor + '%');
+                            $('#btnDatos'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                            $('#btnNotas'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                            $('#btnNotas'+data.idIndicador + data.idResponsable).addClass('activo');
+                            $('#btnNotas'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                            $('#btnSoportes'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                            $('#btnSoportes'+data.idIndicador + data.idResponsable).addClass('activo');
+                            $('#btnSoportes'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+                            ActualizarSemaforosProy(data.semaforoxproy, data.idproy);
+
+                            $('#modalProgramaAsociado .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalProgramaAsociado .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalProgramaAsociado').modal('hide');
+                            $('#modalProgramaAsociado .modal-body .alert-success').addClass('hidden');
+                            $('#modalProgramaAsociado .modal-body .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        //accion boton calcular indicador programa
+        $('#modalProgramaAsociado .modal-body form .btnCalculo').on('click',function(){
+
+            var val = $("#modalProgramaAsociado .modal-body form #selMesCalculo").val();
+
+            if(val != "" && val != undefined){
+                var mesprog = $("#" + val + "Programado");
+                var mesreal = $("#" + val + "Real");
+                if(mesprog.val() != "" && mesreal.val() != ""){
+                    var total = (mesreal.val()/mesprog.val())*100 ;
+                    var totalformating = accounting.formatNumber(total, 2, " ") ;
+                    $("#modalProgramaAsociado .modal-body form #ResultPrograma").val(totalformating);
+                    $("#modalProgramaAsociado .modal-body form #ResultPrograma").attr('value', totalformating);
+                }
+                else{
+                    alert("Ingrese el valor programado y real para el mes: " + val);
+                }
+            }else{
+                alert("Seleccione un mes");
+            }
+        });
+
+        //accion boton calcular indicador formula
+        $('#modalEditValoresIndicador .modal-body form .btnCalculo').on('click',function(){
+
+            var valprog = $("#modalEditValoresIndicador .modal-body form #dataProgramada");
+            var valreal = $("#modalEditValoresIndicador .modal-body form #dataReal");
+
+
+            if(valprog.val() != "" && valreal.val() != ""){
+                var total = (valreal.val()/valprog.val())*100;
+                var totalformating = accounting.formatNumber(total, 2, " ") ;
+                $("#modalEditValoresIndicador .modal-body form #ResultFormula").val( totalformating );
+                $("#modalEditValoresIndicador .modal-body form #ResultFormula").attr('value', totalformating );
+            }
+            else{
+                alert("Ingrese el valor programado y real ");
+            }
+
+        });
+
+        //Proceso de envio de nuevo recurso
+        $('#modalAddResource .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                $('#modalAddResource .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalAddResource .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalAddResource .modal-body .alert-warning').addClass('hidden');
+                        var doc = JSON.parse(d);
+                        if (doc.documentos.length > 0) {
+                            cargaTablaDocumentos($('#modalDocumentosIndicador .modal-body #grid-documentos'), doc.documentos);
+                            $('#modalAddResource .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalAddResource .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalAddResource').modal('hide');
+                            $('#modalAddResource .modal-body .alert-success').addClass('hidden');
+                            $('#modalAddResource .modal-body .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        //Proceso de envio para eliminar recurso
+        $('#modalConfirmDelete .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                $('#modalConfirmDelete .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalConfirmDelete .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalConfirmDelete .modal-body .alert-warning').addClass('hidden');
+                        var doc = JSON.parse(d);
+                        if (doc.accion) {
+                            cargaTablaDocumentos($('#modalDocumentosIndicador .modal-body #grid-documentos'), doc.documentos);
+                            $('#modalConfirmDelete .modal-body .alert-success.delete').removeClass('hidden');
+                        } else {
+                            $('#modalConfirmDelete .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalConfirmDelete').modal('hide');
+                            $('#modalConfirmDelete .modal-body .alert-success').addClass('hidden');
+                            $('#modalConfirmDelete .modal-body .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+
+        //Accion que manda traer la info del indicador
+        $(document).on('click', '.btn-datos', function(){
+            var idIndicador = $(this).data('idindicador');
+            var idconfig = $(this).data('idconfigresp');
+            var iddata = ($(this).attr('data-iddatavaloresind') != "")? $(this).attr('data-iddatavaloresind') : 0;
+            var idproy = $(this).data('idpro');
+            console.log(idproy);
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/infoIndicador',
+                data: { idIndicador: idIndicador, idconfig: idconfig, iddata:iddata, idproy:idproy },
+                beforeSend: function(){
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    showDetails(data, idconfig, idproy);
+                    //Eventos para los botones del modal
+                    //$('#modalEditValoresIndicador').modal('show');
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $(document).on('click','.btnDocumentIndicador.activo' , function(){
+            var modal = $('#modalDocumentosIndicador');
+            modal.find('#IndicadorPrefijo').text($(this).data('prefijo'));
+            modal.find('#DescripcionCortaIndicador').text($(this).data('desccort'));
+            modal.find('#btnAddDocumentoIndicador').attr('data-iddatavaloresind', $(this).data('iddatavaloresind'));
+
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/getDocumentos',
+                data: { iddataidentificador: $(this).data('iddatavaloresind')},
+                beforeSend: function(){
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargaTablaDocumentos(modal.find('#grid-documentos'), d.documentos);
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                    //Eventos para los botones del modal
+                    modal.modal('show');
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $('#modalDocumentosIndicador #btnAddDocumentoIndicador').on('click', function() {
+            var modal2 = $('#modalAddResource');
+            modal2.find('form#frmAddDocumento').trigger('reset');
+            modal2.find('.error').text('');
+            modal2.find('#IdDataValoresIndicadores').val($(this).attr('data-iddatavaloresind'));
+            modal2.modal('show');
+        });
+
+        $('#modalAddResource .btnAceptar').on('click', function(){
+            var modal2 = $('#modalAddResource');
+            modal2.find('form').attr('action', '/CargaIndicadores/addRecurso/');
+            modal2.find('form').submit();
+        });
+
+        $('#modalConfirmDelete #btnConfirmDelete').on('click', function(e) {
+            $("#frmConfirmDelete").attr('action', '/CargaIndicadores/deleteRecurso/');
+            $('#frmConfirmDelete').submit();
+        });
+
+        $(document).on('click','.btnNotaIndicador.activo', function(){
+
+            var iddata = ($(this).data('iddatavaloresind') != "")? $(this).data('iddatavaloresind') : 0;
+            var modal = $('#modalNotaIndicador');
+            var tipoind = ($(this).data('tipoindicador') == 'Seguimiento')? $(this).data('tipoindicador') + ' - ' + $(this).data('tipocalculo') : $(this).data('tipoindicador');
+
+            if($(this).data('tipoindicador') == 'Seguimiento')
+            {
+                modal.find('.seguimiento').show();
+            }
+            else{
+                modal.find('.seguimiento').hide();
+            }
+
+            modal.find('#IdDataValoresIndicadores').val(iddata);
+            modal.find('.prefijo-indicador').text($(this).data('prefijo'));
+            modal.find('.desc-indicador').text($(this).data('desccort'));
+            modal.find('.tipo-indicador').text(tipoind);
+            modal.find('.meta-indicador').text($(this).data('meta') + '%');
+            modal.find('.frecuencia-indicador').text($(this).data('frecuencia') + ' Días');
+
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/infoNota',
+                data: { iddata:iddata },
+                beforeSend: function(){
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    //Eventos para los botones del modal
+                    var jdata = JSON.parse(data);
+                    var nota = (jdata.nota=="")? "" : jdata.nota;
+                    modal.find('#Comentario').val(nota);
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                    modal.modal('show');
+
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+
+        });
+
+        function initCarga() {
+            OBJ = @Model;
+            cargarCntSistemas('#cnt-indicadores-12mpi', "#tmp-coleccion-tabcont-ind", OBJ.ind12mpi);
+        }
+
+        function cargarCntSistemas(elem, temp, d) {
+            //if (d.length > 0)
+            {
+                var tmpl = $(temp).html();
+                var compiled = _.template(tmpl);
+                var html = compiled({ "indicadores": d, "pid": ''});
+                $(elem).html(html);
+            }
+        }
+
+        function showDetails(data, idconf, idproy) {
+
+            var jdata = JSON.parse(data);
+            var jvalor = jdata.data;
+            jdata = jdata.detalle;
+            if(jdata.TipoCalculo != 'Programa'){
+                //Populando
+                var modal = $('#modalEditValoresIndicador');
+                modal.find('form').trigger('reset');
+                modal.find('#idIndicador').val(jdata.IdIndicador);
+                modal.find('#TipoCalculo').val(jdata.TipoCalculo);
+                modal.find('#idConfigRespInd').val(idconf);
+                modal.find('#idproy').val(idproy);
+                modal.find('.prefijo-indicador').text(jdata.Prefijo);
+                modal.find('.desc-indicador').text(jdata.DescripcionCorta);
+                modal.find('.tipo-indicador').text(jdata.TipoIndicador + ' - ' + jdata.TipoCalculo);
+                modal.find('.meta-indicador').text(jdata.Meta + '%');
+                modal.find('.frecuencia-indicador').text(jdata.TipoFrecuencia + ' Días');
+                modal.find('#IdDataValoresIndicadores').val(jvalor.IdDataValoresIndicadores);
+            }else{
+                var modal = $('#modalProgramaAsociado');
+                modal.find('form').trigger('reset');
+                modal.find('.modal-body .infoActualizar').addClass('hidden');
+                modal.find('.modal-body .infoCalculo').removeClass('hidden');
+                modal.find('.modal-body span.text-clave b').text(jdata.Prefijo);
+                modal.find('.modal-body div.text-desc').text(jdata.DescripcionCorta);
+                modal.find('#IdIndicador').val(jdata.IdIndicador);
+                modal.find('#TipoCalculo').val(jdata.TipoCalculo);
+                modal.find('#idConfigRespInd').val(idconf);
+                modal.find('#idproy').val(idproy);
+                modal.find('#IdDataValoresIndicadores').val(jvalor.IdDataValoresIndicadores);
+            }
+
+            switch(jdata.TipoCalculo)
+            {
+                case 'Valor':
+                    modal.find('.lblResultValor').text(jdata.DescripcionValorFormula);
+                    modal.find('div.form-group.Valor').show();
+                    modal.find('div.form-group.Formula').hide();
+                    modal.find('#ResultValor').val(jvalor.Valor);
+
+                    //LimpiamosCampos
+                    modal.find('#ResultFormula').val('');
+                    break;
+                case 'Formula':
+                    modal.find('.lbldataProgramada').text(jdata.EtiquetaValorProgramado);
+                    modal.find('.lbldataReal').text(jdata.EtiquetaValorReal);
+                    //modal.find('.lblResultValor').text(jdata.DescripcionValorFormula);
+                    modal.find('div.form-group.Valor').hide();
+                    modal.find('div.form-group.Formula').show();
+
+                    //LimpiamosCampos
+                    modal.find('#ResultValor').val('');
+                    if(jvalor.Predata_ValoresIndicadoresFormula[0] != undefined){
+                        modal.find('#dataProgramada').val(jvalor.Predata_ValoresIndicadoresFormula[0].ValorProgramado);
+                        modal.find('#dataReal').val(jvalor.Predata_ValoresIndicadoresFormula[0].ValorReal);
+                    }
+                    else{
+                        modal.find('#dataProgramada').val('');
+                        modal.find('#dataReal').val('');
+                    }
+                    modal.find('#ResultFormula').val(jvalor.Valor);
+                    break;
+                case 'Programa':
+                    modal.find('#ResultPrograma').val(jvalor.Valor);
+                    cargarProgramaAsociado(jvalor.Predata__ValoresIndicadoresPrograma[0]);
+                    break;
+            }
+
+            modal.modal('show');
+        }
+
+    });
+
+    function checkedBox12mpi(e) {
+        var idIndicador = $(e).attr('data-idindicador');
+        var idconfig = $(e).attr('data-idconfigresp');
+        var iddatavalor = $(e).attr('data-iddatavaloresind');
+        var Status = $(e).attr('data-estatus');
+        var idchek = $(e).attr('id');
+        var tabactivo = $('div.tab-pane.active');
+        var idproy = $(e).attr('data-idpro');
+
+        if(Status === 'True'){
+            Status = 'False';
+            $('#'+idchek).attr('data-estatus', 'False');
+            //$('#'+idchek).attr('checked', false);
+
+            if(tabactivo.attr('id') == 'tab-faltantes-12mpi' || tabactivo.attr('id') == 'tab-faltantes-subsis'){
+                $('div.tab-pane.active #'+idchek).attr('data-estatus', 'False');
+                //$('div.tab-pane.active #'+idchek).attr('checked', false);
+            }
+        }
+        else{
+            Status = 'True';
+            $('#'+idchek).attr('data-estatus', 'True');
+            //$('#'+idchek).prop('checked', true);
+
+            if(tabactivo.attr('id') == 'tab-faltantes-12mpi' || tabactivo.attr('id') == 'tab-faltantes-subsis'){
+                $('div.tab-pane.active #'+idchek).attr('data-estatus', 'True');
+                //$('div.tab-pane.active #'+idchek).attr('checked', true);
+            }
+        }
+
+        var valor = (Status == 'True')? 100 : 0;
+        iddatavalor = (iddatavalor != "")? iddatavalor : 0;
+
+        $.ajax({
+            type: 'POST',
+            url: idproy === "" ? '/CargaIndicadores/editDataIndicadorCheck' : '/CargaIndicadores/editDataIndicadorCheckProy',
+            data: idproy === "" ?  {idIndicador: idIndicador, idConfigRespInd: idconfig, valor: valor, IdDataValoresIndicadores: iddatavalor } :  { idIndicador: idIndicador, idConfigRespInd: idconfig, valor: valor, IdDataValoresIndicadores: iddatavalor,  idproy: idproy },
+            success: function (d) {
+                var data = JSON.parse(d);
+                if(data.accion){
+                    var semaforo = data.semaforo;
+
+
+                    if(tabactivo.attr('id') == 'tab-faltantes-12mpi' || tabactivo.attr('id') == 'tab-faltantes-subsis')
+                    {
+                        $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Rojo');
+                        $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Amarillo');
+                        $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Verde');
+                        $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).removeClass('Gris');
+                        $('div.tab-pane.active #divCirculo'+data.idIndicador + data.idResponsable).addClass(semaforo);
+
+                        $('div.tab-pane.active #'+idchek).attr('data-iddatavaloresind', data.idresult);
+                        $('div.tab-pane.active #lblestatus'+idIndicador + idconfig).attr('class','');
+                        $('div.tab-pane.active #lblestatus'+idIndicador + idconfig).attr('class','fa fa-check-square green');
+
+                        $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                        $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).addClass('activo');
+                        $('div.tab-pane.active #btnNotas'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                        $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                        $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).addClass('activo');
+                        $('div.tab-pane.active #btnSoportes'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+                    }
+
+
+                    $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Rojo');
+                    $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Amarillo');
+                    $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Verde');
+                    $('#divCirculo'+data.idIndicador + data.idResponsable).removeClass('Gris');
+                    $('#divCirculo'+data.idIndicador + data.idResponsable).addClass(semaforo);
+
+                    //$(e).attr('iddatavaloresind', data.idresult);
+                    //$('#chk'+data.idIndicador + data.idResponsable).attr('iddatavaloresind', data.idresult);
+                    $('#'+idchek).attr('data-iddatavaloresind', data.idresult);
+                    $('#lblestatus'+idIndicador + idconfig).attr('class','');
+                    $('#lblestatus'+idIndicador + idconfig).attr('class','fa fa-check-square green');
+
+                    $('#btnNotas'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                    $('#btnNotas'+data.idIndicador + data.idResponsable).addClass('activo');
+                    $('#btnNotas'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+
+                    $('#btnSoportes'+data.idIndicador + data.idResponsable).removeClass('disabled');
+                    $('#btnSoportes'+data.idIndicador + data.idResponsable).addClass('activo');
+                    $('#btnSoportes'+data.idIndicador + data.idResponsable).attr('data-iddatavaloresind', data.idresult);
+                    //alert("Indicador actualizado.");
+
+                    if(idproy !== "")
+                        ActualizarSemaforosProy(data.semaforoxproy, data.idproy);
+                }
+                else{
+                    alert("Error al procesar la petición.");
+                }
+            },
+            error: function (msg) {
+                console.log('Error: ' + msg);
+            }
+        });
+
+    }
+
+
+    function cargaTablaDocumentos(elem, dt) {
+        _.each(dt, function (d,i) { dt[i].cont = (i + 1); });
+        var d = { "rows": dt };
+        $(elem).bootgrid({
+            rowCount: 5,
+            navigation:2,
+            columnSelection: false,
+            labels: {
+                infos: "",
+                noResults: "No hay resultados"
+            },
+            formatters: {
+                "fecha-ini-format": function(colum, row){
+                    var fecha = moment(row.proyecto_fecha_ini);
+                    return fecha.locale('es').format('L');
+                },
+                "view-document": function(colum, row){
+                    return '<a data-ruta="' + row.RutaDoc + '" data-iddoc="'+ row.IdSoportesAsignadosaIndicador +'" href="/CargaIndicadores/Download/?idFile='+row.IdSoportesAsignadosaIndicador+'" class="btn btnConsultarDoc activo"  title="Ver documento" >Consultar</a>';
+                },
+                "menu-contextual": function(culumn, row)
+                {
+                    return '<a data-iddoc="'+ row.IdSoportesAsignadosaIndicador +'" class="btn btn-vista-tbl pull-right" onclick="deleteDocument(this);" title="Eliminar documento" ><i class="fa fa-trash"></i></a>';
+                }
+            }
+            //Carga de datos
+        }).bootgrid("clear").bootgrid("append", d.rows);
+    }
+
+    function deleteDocument(elem){
+        //var btnpress = elem;
+        var modal = $('#modalConfirmDelete');
+        modal.find('.modal-body form#frmConfirmDelete input#idConfig').val($(elem).data('iddoc'));
+        modal.modal({ backdrop: 'static', keyboard: false })
+
+    }
+
+    function cargarProgramaAsociado(d) {
+        if (d !== null) {
+            var tmpl = $("#tmp-det-programa").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "programa": d });
+            $('#modalProgramaAsociado .trData').remove();
+            $('#modalProgramaAsociado .trEncabezados').after(html);
+        }
+    }
+
+    function ActualizarSemaforosProy(d, id)
+    {
+        var parent = $('.Semaforos-idproy-' + id);
+        var child = $(parent).find('a[class*="clr_indicador_"]');
+
+        //Semaforo SASP
+        var color = $(child[0]).data('color');
+        $(child[0]).removeClass('clr_indicador_Verde');
+        $(child[0]).removeClass('clr_indicador_Amarillo');
+        $(child[0]).removeClass('clr_indicador_Rojo');
+        $(child[0]).removeClass('clr_indicador_Gris');
+        $(child[0]).addClass('clr_indicador_' + d.SemaforoSASP);
+        $(child[0]).html(d.PorcentajeSASP + '%');
+
+        //Semaforo SAA
+        var color = $(child[0]).data('color');
+        $(child[1]).removeClass('clr_indicador_Verde');
+        $(child[1]).removeClass('clr_indicador_Amarillo');
+        $(child[1]).removeClass('clr_indicador_Rojo');
+        $(child[1]).removeClass('clr_indicador_Gris');
+        $(child[1]).addClass('clr_indicador_' + d.SemaforoSAA);
+        $(child[1]).html(d.PorcentajeSAA + '%');
+
+        //Semaforo SAST
+        var color = $(child[0]).data('color');
+        $(child[2]).removeClass('clr_indicador_Verde');
+        $(child[2]).removeClass('clr_indicador_Amarillo');
+        $(child[2]).removeClass('clr_indicador_Rojo');
+        $(child[2]).removeClass('clr_indicador_Gris');
+        $(child[2]).addClass('clr_indicador_' + d.SemaforoSAST);
+        $(child[2]).html(d.PorcentajeSAST + '%');
+    }
+
+    //Función que obtiene el detalle del indicador
+    function chkModal(e) {
+        var id = $(e).data('id');
+        
+        $.ajax({
+            type: 'POST',
+            url: '/Compromisos/infoIndicador',
+            data: { idIndicador: id },
+            beforeSend: function () {
+                mostrarLoading();
+            },
+            success: function (data) {
+                showDetails(data);
+
+                //Cerramos Loading
+                cerrarLoading();
+                $('#modalInfoCompromisos').modal('show');                    
+            },
+            error: function (msg) {
+                errorLoading();
+            }
+        });        
+    }
+
+    function showDetails(data) {
+        var jdata = JSON.parse(data);
+        //Desactivar opciones que no son utilizadas
+        var modal = $('#modalInfoCompromisos');
+        modal.find('#ClaveIndicador').text(jdata.Clave);
+        modal.find('#PrefijoIndicador').text(jdata.Prefijo);
+        modal.find('#DescripcionCortaIndicador').text(jdata.DescripcionCorta);
+        modal.find('#DescripcionLargaIndicador').text(jdata.DescripcionLarga);
+        modal.find('#MetaIndicador').text(jdata.Meta + '%');
+        modal.find('#FrecuenciaActualizacionIndicador').text(jdata.TipoFrecuencia + ' Días');
+        modal.find('#DescripcionFormulaIndicador').text(jdata.DescripcionValorFormula);
+        modal.find('#EtiquetaValorProgramadoIndicador').text(jdata.EtiquetaValorProgramado);
+        modal.find('#EtiquetaValorRealIndicador').text(jdata.EtiquetaValorReal);
+        modal.find('#DescripcionValorIndicador').text(jdata.DescripcionValorFormula);
+        modal.find('#FechaCreacionIndicador').text(jdata.UsuarioCreacion + ' - ' + jdata.FechaCreacion);
+        modal.find('#FechaActualizacionIndicador').text(jdata.UsuarioActualizacion + ' - ' + jdata.FechaActualizacion);
+        modal.find('#Ayuda').text(jdata.Ayuda);
+        //configurar RadioButton
+        switch (jdata.TipoIndicador) {
+            case "Seguimiento":
+                checkRadiobuttons(1);
+                modal.find('#RadioButtonsTipoCalculo').show();
+                modal.find('#divMeta').show();
+
+                switch (jdata.TipoCalculo) {
+                    case 'Formula':
+                        modal.find('#tipoCalculoFormula').attr('checked', true);
+                        modal.find('#tipoCalculoValor').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoPrograma').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Formula
+                        modal.find('#detalle-formula').show();
+                        modal.find('#detalle-valor').hide();
+                        break;
+                    case 'Valor':
+                        modal.find('#tipoCalculoValor').attr('checked', true);
+                        modal.find('#tipoCalculoFormula').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoPrograma').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Valor
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').show();
+                        break;
+                    case 'Programa':
+                        modal.find('#tipoCalculoPrograma').attr('checked', true);
+                        modal.find('#tipoCalculoFormula').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoValor').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Programa Asociado
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').hide();
+                        modal.find('#DescripcionValorIndicador').hide();
+                        break;
+                }
+                break;
+            case "Check":
+                checkRadiobuttons(2);
+                modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+                modal.find('#tipoIndicadorCheck').attr('checked', true);
+
+                //Ocultar info cuando el tipo de indicador en Check
+                modal.find('#RadioButtonsTipoCalculo').hide();
+                modal.find('#divMeta').hide();
+                modal.find('#detalle-formula').hide();
+                modal.find('#detalle-valor').hide();
+                break;
+        }
+
+        //Configurar Checks
+        removeChecks(1);
+        jdata.CheckSoporte === false ? modal.find('input#HabilitarSoporteIndicador').removeAttr('checked') : modal.find('input#HabilitarSoporteIndicador').trigger('click');
+        jdata.CheckReqSoporte === false ? modal.find('input#RequerirSoporteIndicador').removeAttr('checked') : modal.find('input#RequerirSoporteIndicador').trigger('click');
+        jdata.CheckComentarios === false ? modal.find('input#HabilitarComentariosIndicador').removeAttr('checked') : modal.find('input#HabilitarComentariosIndicador').trigger('click');
+        jdata.CheckReqComentario === false ? modal.find('input#RequerirComentariosIndicador').removeAttr('checked') : modal.find('input#RequerirComentariosIndicador').trigger('click');
+        removeChecks(2);
+
+        $('#modalInfoCompromisos .modal-body > #detalle-programa').hide();
+    }
+
+    function removeChecks(i)
+    {
+        var modal = $('#modalInfoCompromisos');
+
+        if (i === 1) {
+
+            modal.find('input#HabilitarSoporteIndicador').removeAttr('checked');
+            modal.find('input#RequerirSoporteIndicador').removeAttr('checked')
+            modal.find('input#HabilitarComentariosIndicador').removeAttr('checked')
+            modal.find('input#RequerirComentariosIndicador').removeAttr('checked')
+
+            modal.find('input#HabilitarSoporteIndicador').removeAttr('disabled');
+            modal.find('input#RequerirSoporteIndicador').removeAttr('disabled');
+            modal.find('input#HabilitarComentariosIndicador').removeAttr('disabled');
+            modal.find('input#RequerirComentariosIndicador').removeAttr('disabled');
+
+        } else {
+
+            modal.find('input#HabilitarSoporteIndicador').attr('disabled', 'disabled');
+            modal.find('input#RequerirSoporteIndicador').attr('disabled', 'disabled');
+            modal.find('input#HabilitarComentariosIndicador').attr('disabled', 'disabled');
+            modal.find('input#RequerirComentariosIndicador').attr('disabled', 'disabled');
+        }
+
+    }
+
+    function checkRadiobuttons(id) {
+        var modal = $('#modalInfoCompromisos');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('checked');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('disabled');
+        modal.find('#tipoIndicadorCheck').removeAttr('checked');
+        modal.find('#tipoIndicadorCheck').removeAttr('disabled');
+
+        if (id === 1) {
+            modal.find('#tipoIndicadorSeguimiento').trigger('click');
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+        }
+        else {
+            modal.find('#tipoIndicadorCheck').trigger('click');
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+        }
+    }
+
+</script>

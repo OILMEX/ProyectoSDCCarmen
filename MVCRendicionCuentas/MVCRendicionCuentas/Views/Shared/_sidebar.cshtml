@@ -1,0 +1,29 @@
+﻿<nav class="navbar navbar-custom sidebar" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        @*<div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>*@
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="@Url.Action("Index", "Indicadores")"><i class="pull-left hidden-xs showopacity fa fa-th" aria-hidden="true"></i> Indicadores <span class="fa fa-caret-right pull-right"></span></a>
+                    
+                </li>
+                <li><a href="@Url.Action("Index", "Proyectos")"><i class="pull-left hidden-xs showopacity fa fa-check-square" aria-hidden="true"></i>Proyectos<span class="fa fa-caret-right pull-right"></span></a></li>
+                <li><a href="@Url.Action("Index", "Organigrama")"><i class="pull-left hidden-xs showopacity fa fa-sitemap" aria-hidden="true"></i>Organigrama<span class="fa fa-caret-right pull-right"></span></a></li>
+                <li class="dropdown">
+                    <a id="liCompromisos" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="pull-left hidden-xs showopacity fa fa-bookmark" aria-hidden="true"></i><span id="title">Compromisos</span></a>
+                    <ul id="listCompromisos"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

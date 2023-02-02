@@ -1,0 +1,2507 @@
+﻿{
+    "subsistemas": [
+        {
+            "subsistema_nombre": "12 MPI",
+            "subsistema_nombre_largo": "MEJORES PRÁCTICAS",
+            "subsistema_id": 1,
+            "color": "#D64148",
+            "etapas": [
+                {
+                    "etapa_idetapa": 1,
+                    "etapa_nombre": "MP01-CVD",
+                    "etapa_nombre_largo": "Compromiso visible y demostrado",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 1,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Índice de Cumplimiento de CVD=Prom",
+                            "indicador_clave": "12MPI.MP01-CVD.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 2,
+                    "etapa_nombre": "MP02-POL",
+                    "etapa_nombre_largo": "Compromiso visible y demostrado",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 2,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP02-POL.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+
+                        },
+                        {
+                            "indicador_id": 3,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP02-POL.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 4,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP02-POL.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 3,
+                    "etapa_nombre": "MP03-RLM",
+                    "etapa_nombre_largo": "RESPONSABILIDAD DE LÍNEA DE MANDO",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 5,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "TENER VIGENTE Y DISPONIB",
+                            "indicador_clave": "12MPI.MP03-RLM.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 6,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 7,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 8,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 9,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 10,
+                            "indicador_numero": "I06",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I06",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 11,
+                            "indicador_numero": "I07",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I07",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 12,
+                            "indicador_numero": "I08",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I08",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 13,
+                            "indicador_numero": "I09",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I09",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 14,
+                            "indicador_numero": "I10",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP03-RLM.I10",
+                            "indicador_info": "Checkbox Mensual Meta 100%"
+                                ,
+                            "indicador_check": false
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 4,
+                    "etapa_nombre": "MP05-MyO",
+                    "etapa_nombre_largo": "METAS Y OBJETIVOS AGRESIVOS",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 15,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP05-MyO.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 16,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP05-MyO.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 17,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP05-MyO.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 18,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP05-MyO.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 19,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP05-MyO.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 19,
+                            "indicador_numero": "I06",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP05-MyO.I06",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 20,
+                            "indicador_numero": "I07",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP05-MyO.I07",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 21,
+                            "indicador_numero": "I08",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP05-MyO.I08",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 5,
+                    "etapa_nombre": "MP06-AED",
+                    "etapa_nombre_largo": "ALTOS ESTADARES DE DESEMPEÑO",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 22,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP06-AED.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 23,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP06-AED.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 24,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP06-AED.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 25,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP06-AED.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 26,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP06-AED.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 27,
+                            "indicador_numero": "I06",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP06-AED.I06",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 28,
+                            "indicador_numero": "I07",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP06-AED.I07",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 6,
+                    "etapa_nombre": "MP08-AE",
+                    "etapa_nombre_largo": "AUDITORÍAS EFECTIVAS",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 29,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP08-AE.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 30,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP08-AE.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 31,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP08-AE.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 32,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP08-AE.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 33,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP08-AE.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 34,
+                            "indicador_numero": "I06",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP08-AE.I06",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 35,
+                            "indicador_numero": "I07",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP08-AE.I07",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 36,
+                            "indicador_numero": "I08",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP08-AE.I08",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 37,
+                            "indicador_numero": "I09",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP08-AE.I09",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 38,
+                            "indicador_numero": "I10",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP08-AE.I10",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 39,
+                            "indicador_numero": "I11",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP08-AE.I11",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 7,
+                    "etapa_nombre": "MP09-IAI",
+                    "etapa_nombre_largo": "INVESTIGACIÓN Y ANÁLISIS DE INCIDENTES",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 40,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP09-IAI.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 41,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP09-IAI.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 42,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP09-IAI.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 43,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP09-IAI.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 44,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP09-IAI.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 45,
+                            "indicador_numero": "I06",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP09-IAI.I06",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 46,
+                            "indicador_numero": "I07",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP09-IAI.I07",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 47,
+                            "indicador_numero": "I08",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP09-IAI.I08",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 48,
+                            "indicador_numero": "I09",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP09-IAI.I09",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 49,
+                            "indicador_numero": "I10",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP09-IAI.I10",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 50,
+                            "indicador_numero": "I11",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP09-IAI.I11",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 8,
+                    "etapa_nombre": "MP10-CyE",
+                    "etapa_nombre_largo": "CAPACITACIÓN Y ENTRENAMIENTO",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 51,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP10-CyE.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 52,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP10-CyE.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 53,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP10-CyE.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 54,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP10-CyE.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 55,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP10-CyE.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 56,
+                            "indicador_numero": "I06",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP10-CyE.I06",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 57,
+                            "indicador_numero": "I07",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP10-CyE.I07",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 58,
+                            "indicador_numero": "I08",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP10-CyE.I08",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 59,
+                            "indicador_numero": "I09",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP10-CyE.I09",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 9,
+                    "etapa_nombre": "MP11-CE",
+                    "etapa_nombre_largo": "COMUNICACIÓN EFECTIVA",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 60,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP11-CE.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 61,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                             "indicador_clave": "12MPI.MP11-CE.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 62,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP11-CE.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 63,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                             "indicador_clave": "12MPI.MP11-CE.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 64,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP11-CE.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 65,
+                            "indicador_numero": "I06",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                             "indicador_clave": "12MPI.MP11-CE.I06",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": false
+                        },
+                        {
+                            "indicador_id": 66,
+                            "indicador_numero": "I07",
+                            "indicador_tipo": "S",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                             "indicador_clave": "12MPI.MP11-CE.I07",
+                            "indicador_info": "Checkbox Mensual Meta 100%"
+                        }
+                    ]
+                },
+                {
+                    "etapa_idetapa": 10,
+                    "etapa_nombre": "MP12-MP",
+                    "etapa_nombre_largo": "MOTIVACIÓN PROGRESIVA",
+                    "etapa_indicador": "INDICADORES",
+                    "etapa_color": "Verde",
+                    "etapa_actualizado": "04-Abr-2016",
+                    "indicadores": [
+                        {
+                            "indicador_id": 67,
+                            "indicador_numero": "I01",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP12-MP.I01",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 68,
+                            "indicador_numero": "I02",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP12-MP.I02",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 69,
+                            "indicador_numero": "I03",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP12-MP.I03",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 70,
+                            "indicador_numero": "I04",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "LISTA DE METAS Y OBJETIVOS",
+                            "indicador_clave": "12MPI.MP12-MP.I04",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        },
+                        {
+                            "indicador_id": 71,
+                            "indicador_numero": "I05",
+                            "indicador_tipo": "C",
+                            "indicador_nombre": "Evidencias de que la Política de SSPA",
+                            "indicador_clave": "12MPI.MP12-MP.I05",
+                            "indicador_info": "Checkbox Mensual Meta 100%",
+                            "indicador_check": true
+                        }
+                    ]
+                }
+            ],
+            "proyectos": [
+                {
+                    "proyecto_id": 1,
+                    "proyecto_nombre": "DESCRIPCIÓN DEL PROYECTO 1",
+                    "proyecto_indicador_global": "verde",
+                    "proyecto_responsable": "GPCCEP-CDIP",
+                    "etapas": [
+                        {
+                            "etapa_id": 1,
+                            "etapa_nombre": "4.1 Generación de Opciones de Desarrollo",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 1,
+                                    "etapa_nombre": "4.1.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "100",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 2,
+                                    "etapa_nombre": "4.1.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 2,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 3,
+                                    "etapa_nombre": "4.1.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 3,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "etapa_id": 2,
+                            "etapa_nombre": "4.2 Establecimiento del esquema recomendado de explotación",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 4,
+                                    "etapa_nombre": "4.2.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 5,
+                                    "etapa_nombre": "4.2.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 6,
+                                    "etapa_nombre": "4.2.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "etapa_id": 3,
+                            "etapa_nombre": "4.3 Plan de Ejecución",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 7,
+                                    "etapa_nombre": "4.3.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 8,
+                                    "etapa_nombre": "4.3.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 9,
+                                    "etapa_nombre": "4.3.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "etapa_id": 4,
+                            "etapa_nombre": "4.4  Desarrollo de Ingenierías",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 10,
+                                    "etapa_nombre": "4.4.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 11,
+                                    "etapa_nombre": "4.4.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 12,
+                                    "etapa_nombre": "4.4.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+
+                }
+            ]
+
+        },
+        {
+            "subsistema_nombre": "SASP",
+            "subsistema_nombre_largo": "Subsistema de Administración de Seguridad de los Procesos",
+            "subsistema_id": 2,
+            "color": "#008EB2",
+            "etapas": [ ],
+            "proyectos": [
+                {
+                    "proyecto_id": 1,
+                    "proyecto_nombre": "DESCRIPCIÓN DEL PROYECTO 1",
+                    "etapas": [
+                        {
+                            "etapa_id": 1,
+                            "etapa_nombre": "4.1 Generación de Opciones de Desarrollo",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 1,
+                                    "etapa_nombre": "4.1.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "100",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 2,
+                                    "etapa_nombre": "4.1.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 2,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 3,
+                                    "etapa_nombre": "4.1.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 3,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "etapa_id": 2,
+                            "etapa_nombre": "4.2 Establecimiento del esquema recomendado de explotación",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 4,
+                                    "etapa_nombre": "4.2.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 5,
+                                    "etapa_nombre": "4.2.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 6,
+                                    "etapa_nombre": "4.2.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "etapa_id": 3,
+                            "etapa_nombre": "4.3 Plan de Ejecución",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 7,
+                                    "etapa_nombre": "4.3.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 8,
+                                    "etapa_nombre": "4.3.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 9,
+                                    "etapa_nombre": "4.3.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "etapa_id": 4,
+                            "etapa_nombre": "4.4  Desarrollo de Ingenierías",
+                            "subetapas": [
+                                {
+                                    "etapa_id": 10,
+                                    "etapa_nombre": "4.4.1 Análisis de la Información de los Estudios de caracterización inicial",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 11,
+                                    "etapa_nombre": "4.4.2 Elaboración de la caracterización estática y dinámica para el desarrollo de campo.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "etapa_id": 12,
+                                    "etapa_nombre": "4.4.3 Elaboración de estudios de yacimientos.",
+                                    "procesos": [
+                                        {
+                                            "proceso_id": 1,
+                                            "proceso_nombre": "Tecnología del Proceso.",
+                                            "proceso_sigla": "E01-TP",
+                                            "indicadores": [
+                                                {
+                                                    "indicador_id": 1,
+                                                    "indicador_clave": "SASP.E01-TP.I01",
+                                                    "indicador_nombre": "Listado de Procesos (Información de la descripción de los procesos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 2,
+                                                    "indicador_clave": "SASP.E01-TP.I02",
+                                                    "indicador_nombre": "Listado de los equipos (diseño de equipos)",
+                                                    "indicador_estatus": "1",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "90%",
+                                                    "indicador_tipo": "seguimiento",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 1,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 1
+                                                },
+                                                {
+                                                    "indicador_id": 3,
+                                                    "indicador_clave": "SASP.E01-TP.I03",
+                                                    "indicador_nombre": "Listado de Materiales peligrosos.",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "checkbox",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                },
+                                                {
+                                                    "indicador_id": 4,
+                                                    "indicador_clave": "SASP.E01-TP.I04",
+                                                    "indicador_nombre": "Índice de Bases de Diseño de Procesos= (Bases de diseño del proceso)/(Listado de Procesos)",
+                                                    "indicador_estatus": "0",
+                                                    "indicador_fechactualizado": "04-05-2016",
+                                                    "indicador_actualizacion": "Mensual",
+                                                    "indicador_meta": "0",
+                                                    "indicador_tipo": "programa",
+                                                    "indicador_tipo_dato": "valor",
+                                                    "indicador_soporte": 0,
+                                                    "indicador_checklist": 1,
+                                                    "indicador_notas": 0
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+
+                }
+            ]
+        },
+        {
+            "subsistema_nombre": "SAA",
+            "subsistema_nombre_largo": "PRUEBAS 3",
+            "subsistema_id": 3,
+            "color": "#38A125",
+            "etapas": [ ]
+        },
+        {
+            "subsistema_nombre": "SAST",
+            "subsistema_nombre_largo": "PRUEBAS 4",
+            "subsistema_id": 4,
+            "color": "#74716A",
+            "etapas": [ ]
+        }
+    ]
+}

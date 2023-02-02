@@ -1,0 +1,156 @@
+[{
+    "subsistema": "12 MPI",
+    "estatus": "verde",
+    "fecha": "15-Abr-2016",
+    "avance": 95,
+    "mejora": 1,
+    "color":"amarillo",
+    "procesos": [{
+        "proceso_id": 1,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 2,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 3,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 4,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 5,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 6,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 7,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 8,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 9,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 10,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        }]
+},{
+    "subsistema": "SASP",
+    "estatus": "verde",
+    "fecha": "14-Abr-2016",
+    "avance": 95,
+    "mejora": 1,
+    "color":"amarillo",
+    "procesos": [{
+        "proceso_id": 1,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 2,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 3,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 4,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1
+        },{
+        "proceso_id": 5,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 6,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 7,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 8,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 9,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        },{
+        "proceso_id": 10,
+        "proceso_nombre": "Tecnología del Proceso.",
+        "proceso_sigla": "E01-TP",
+        "proceso_avance": 95,
+        "proceso_mejora": 1,
+        "proceso_color":"verde"
+        }]
+}]

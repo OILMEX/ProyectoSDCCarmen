@@ -1,0 +1,819 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdministracion.cshtml";
+}
+<div class="container-fluid">
+    <div class="titulo-subetapa-compromisos"></div>
+
+    <!-- Nav tabs -->
+    <ul id="nav-compromisos-ind" class="nav nav-tabs" role="tablist"></ul>
+
+    <!-- Tab panes -->
+    <div id="cnt-compromisos-ind" class="tab-content">
+    </div>
+</div>
+
+<script type="text/template" id="tmp-menu">
+
+    <div><a class="12mpi" href="#"><i class="fa fa-square cRed" aria-hidden="true"></i> 12 MPI </a></div>
+    <div class="subMenu-Etapas">
+        <% if(model.etapas !== undefined) {
+        _.each(model.etapas, function(e,i){  var NombreEtapa, NombreSetapa; %>
+    <div href="#" class="subMenu-Etapas dropdown" data-toggle="tooltip" data-placement="top" title="<%= i +1 %> <%= e.etapa_nombre %>">
+        <a href="#Submenus-<%= i %>" class="trigger right-caret" data-toggle="collapse" data-idetapa="<%= e.etapa_id %>" aria-expanded="false" aria-controls="Submenus-<%= i %>">
+            <% if(e.etapa_nombre.length > 25) { NombreEtapa = e.etapa_nombre.substr(0,22) + '...'; } else {  NombreEtapa= e.etapa_nombre; } %>
+            <i class="icon-rc-img icon-rc-etapa-w"></i> <%= i + 1 %> <%= NombreEtapa %>
+            <% if( e.subetapas.length > 0) { %>
+            <% }else{ %>
+            <i class="fa" style="width:13px; height:14px;"></i>
+            <% } %>
+        </a>
+        <% if(e.subetapas.length > 0) { %>
+        <div class="collapse" id="Submenus-<%= i %>">
+                <% _.each(e.subetapas, function(se,j){  %>
+            <div class="a-subetapa" href="#" data-idetapa="<%= e.etapa_id %>" data-idsubetapa="<%= se.etapa_id %>" data-nombresubetapa="<%= i + 1 %>.<%= j + 1 %> <%= se.etapa_nombre %>" title="<%= i + 1 %>.<%= j + 1 %> <%= se.etapa_nombre %>">
+                <% if(se.etapa_nombre.length > 17) { NombreSetapa = se.etapa_nombre.substr(0,17) + '...'; } else { NombreSetapa = se.etapa_nombre; } %>
+                <i class="icon-rc-img icon-rc-subetapa-w"></i> <%= i + 1 %>.<%= j + 1 %> <%= NombreSetapa %>
+            </div>
+                <% }); } %>
+        </div>
+    </div>
+    <% }); } %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tab-ind">
+    <% _.each(subsistemas,function(subsistema, i){
+    if(subsistema.subsistema_nombre == "12MPI") { %>
+
+    <li role="presentation" class="ss-red <%= (i===0)?'active':'' %>">
+        <a href="#tab-subsistema<%= i %>" aria-controls="tab-subsistema<%= i %>" role="tab" data-toggle="tab"><%= subsistema.subsistema_nombre %></a>
+    </li>
+
+    <% } else { %>
+
+    <li role="presentation" class="ss-blue <%= (i===0)?'active':'' %>">
+        <a href=" #tab-subsistema<%= i %>" aria-controls="tab-subsistema<%= i %>" role="tab" data-toggle="tab"><%= subsistema.subsistema_nombre %></a>
+    </li>
+
+    <% }});%>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+
+    <% _.each(subsistemas,function(subsistema, i){ %>
+    <div role="tabpanel" class="tab-pane<%= (i===0)?' active':'' %>" id="tab-subsistema<%= i %>">
+        <div class="container-fluid cnt-vista no-pd">
+            <!-- Elemento de Etapas  -->
+            <div class="ListEtapas">
+                <ul id="nav-compromisos-etapas" class="nav nav-pills" role="tablist">
+                    <% _.each(subsistema.elementos, function(elemento, j){
+                    if(subsistema.subsistema_nombre == "12MPI") { %>
+                    <li role="presentation"<%= (j === 0)? 'class="ss-red active"': 'class="ss-red"' %>>
+                        <a href="#tab-subsistemaE<%= i %><%= j %>" aria-controls="tab-subsistemaE<%= i %><%= j %>" role="tab" data-toggle="tab"><%= elemento.elemento_nombre %></a>
+                    </li>
+                    <% } else { %>
+                    <li role="presentation"<%= (j === 0)? 'class="ss-blue active"': 'class="ss-blue"' %>>
+                        <a href="#tab-subsistemaE<%= i %><%= j %>" aria-controls="tab-subsistemaE<%= i %><%= j %>" role="tab" data-toggle="tab"><%= elemento.elemento_nombre %></a>
+                    </li>
+                    <% }}); %>
+                </ul>
+            </div>
+            <!-- <div class="TituloCompromisos">TECNOLOGÍA DE PROCESO</div> -->
+            <div id="ListSubEtapa" class="tab-content">
+                <% _.each(subsistema.elementos, function(indicador, k){ %>
+                <div role="tabpanel" class="tab-pane<%= (k===0)?' active':'' %>" id="tab-subsistemaE<%= i %><%= k %>">
+                    <table id="grid-indicadores-Compromisos<%= i %><%= k %>" class="table table-condensed table-hover table-striped grid-indicadores-Compromisos">
+                        <thead>
+                            <tr>
+                                <th data-column-id="indicador_Prefijo" data-type="numeric">Clave del Indicador</th>
+                                <th data-column-id="indicador_DescripcionCorta" data-width="34% !important">Nombre</th>
+                                <th data-column-id="indicador_TipoIndicador" data-formatter="info-indicador">Información</th>
+                                <% if(subsistema.subsistema_nombre === "12MPI") { %>
+                                <th data-column-id="sw-control12mpi" data-formatter="sw-control12mpi"></th>
+                                <th data-column-id="responsable-control" data-formatter="responsable-control"></th>
+                                <!--<th data-column-id="fecha-compromiso" data-formatter="fecha-compromiso"></th>-->
+                                <% } else { %>
+                                <th data-column-id="sw-control" data-formatter="sw-control"></th>
+                                <% } %>
+                                <th data-column-id="info-control" data-formatter="info-control"></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/javascript">
+    var OBJ = [];
+
+    $(function () {
+
+        $('[data-toggle="popover"]').popover();
+
+        var OBJs = [];
+        var LISTUSER = {
+            saveUser: function () {
+                var listUser = [];
+                var listNoUser = [];
+                $('#ListaAsignados li').each(function () {
+                    listUser.push($(this).attr('data-id'));
+                });
+
+                $('#ListaUsuarios li').each(function () {
+                    listNoUser.push($(this).attr('data-id'));
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Compromisos/SaveUsers',
+                    data: { idIndicador: localStorage.getItem('idIndicador'), User: listUser, NoUser: listNoUser },
+                    success: function (data) {
+                        var d = JSON.parse(data);
+                        $('#modalAddUserCompromisos .modal-body .alert-warning').addClass('hidden');
+                        if (d.accion) {
+                            $('#modalAddUserCompromisos .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalAddUserCompromisos .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalAddUserCompromisos').modal('hide');
+                            $('#modalAddUserCompromisos .modal-body .alert-success').addClass('hidden');
+                            $('#modalAddUserCompromisos .modal-body .alert-danger').addClass('hidden');
+                        }, 1000);
+                    },
+                    error: function (data) {
+                        console.log('Error: ' + data);
+                    }
+                });
+            }
+        }
+
+        initCarga();
+
+        $(document).on("click", '#listCompromisos > .subMenu-Etapas > a.trigger', function (e) {
+            var current = $(this).next();
+            var grandparent = $(this).parent().parent();
+            grandparent.find('.right-caret').not(this).toggleClass('right-caret');
+            grandparent.find(".sub-menu:visible").not(current).hide();
+            current.toggle();
+        });
+
+        $(document).on('click', '.a-subetapa', function (e) {
+            var elem = $(this);
+            $('.titulo-subetapa-compromisos').html($(elem).attr('data-nombresubetapa'));
+            removeClassActiveLis();
+            elem.addClass('active');
+            var Subetapa = $(this).attr('data-idSubEtapa');
+            localStorage.setItem('Subetapa', Subetapa);
+            $.ajax({
+                type: 'GET',
+                url: '/Compromisos/GetCompromisos',
+                data: { idSubetapa: Subetapa },
+                beforeSend: function(){
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    OBJ = JSON.parse(data);
+                    OBJs = OBJ;
+                    cargarTabsSistemas(OBJ, false);
+                    cargarCntSistemas(OBJ);
+                    cargarEtapas(OBJ)
+                    activarTabs();
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $(document).on('click', '.12mpi', function (e) {
+            var Subetapa = $(this).attr('data-idSubEtapa');
+            removeClassActiveLis();
+            $.ajax({
+                type: 'GET',
+                url: '/Compromisos/GetCompromisosInit',
+                data: { idSubetapa: Subetapa },
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    localStorage.setItem('JCompromiso', data);
+                    OBJ = JSON.parse(data);
+                    cargarTabsSistemas(OBJ, false);
+                    cargarCntSistemas(OBJ);
+                    cargarEtapas(OBJ)
+                    activarTabs();
+                    //Cerramos Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $("#ListaUsuarios, #ListaAsignados").sortable({
+            connectWith: ".connectedSortable",
+            cursor: "move",
+            click: function (event, ui) { alert('over'); }
+        }).disableSelection();
+
+        $(document).on('click', '#ListaUsuarios li', function (elem) {
+            var parent = $(this).parent();
+            parent.find('li.active').removeClass('active');
+            $(this).addClass('active');
+
+            var value = $(this).attr('data-id');
+            $('body').data('idRow', value);
+        });
+
+        $(document).on('click', '#ListaAsignados li', function (elem) {
+            var parent = $(this).parent();
+            parent.find('li.active').removeClass('active');
+            $(elem).addClass('active');
+
+            var value = $(this).attr('data-id');
+            $('body').data('idRow', value);
+        });
+
+        $(document).on('click', '.btn-asig-user-rgt', function (elem) {
+            var value = $('body').data('idRow');
+            var row = $('#ListaUsuarios li[data-id=' + value + ']');
+            //asignar elemento - li
+            if (row.length > 0) {
+                var elem = document.createElement('li');
+                elem.className = 'ui-state-default ui-sortable-handle';
+                elem.setAttribute('data-id',value );
+                elem.innerHTML = row.html();
+                //colocarlo en la lista asignados
+                var list = document.getElementById('ListaAsignados');
+                list.appendChild(elem);
+                row.remove();
+            }
+        });
+
+        $(document).on('click', '.btn-asig-user-lft', function (elem) {
+            var value = $('body').data('idRow');
+            var row = $('#ListaAsignados li[data-id=' + value + ']');
+            //asignar elemento - li
+            if (row.length > 0) {
+                var elem = document.createElement('li');
+                elem.className = 'ui-state-default ui-sortable-handle';
+                elem.setAttribute('data-id', value);
+                elem.innerHTML = row.html();
+                //colocarlo en la lista asignados
+                var list = document.getElementById('ListaUsuarios');
+                list.appendChild(elem);
+                var li = _.sortBy($('#ListaUsuarios li'), 'innerText');
+                $(list).empty().html(li);
+                row.remove();
+            }
+        });
+
+        $('#btnModalCrearProgramaAsociado').click(function () {
+            $('#modalProgramaAsociado').modal('show');
+        });
+
+
+
+        $(document).on('click', '.btn.btnAceptar', function (elem) {
+            LISTUSER.saveUser();
+        }); 
+
+        //Eventos para edición fecha compromiso
+        $('#modalAgregarFechaCompriso .modal-body form #FechaCompromiso').datetimepicker({
+            format: 'DD/MM/YYYY',
+            showClear: true,
+            locale: moment.locale('Es')
+        });
+
+        //Envio del fecha compromiso
+        $(document).on('click', '#modalAgregarFechaCompriso .btnAceptar', function () {
+            $('#modalAgregarFechaCompriso .modal-body form').submit();
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#modalAgregarFechaCompriso .modal-body form').submit(function () {
+
+            $('#modalAgregarFechaCompriso .modal-body form').ajaxSubmit({
+                dataType: 'json',
+                success: function (d) {
+                    $('#modalAgregarFechaCompriso .modal-body .alert-warning').addClass('hidden');
+                    if (d > 0) {
+                        $('#modalAgregarFechaCompriso .modal-body .alert-success.edit').removeClass('hidden');
+                    } else {
+                        $('#modalAgregarFechaCompriso .modal-body .alert-danger').removeClass('hidden');
+                    }
+                    setTimeout(function () {
+                        $('#modalAgregarFechaCompriso').modal('hide');
+                        $('#modalAgregarFechaCompriso .modal-body .alert-success').addClass('hidden');
+                        $('#modalAgregarFechaCompriso .modal-body .alert-danger').addClass('hidden');
+                        location.reload();
+                    }, 1000);
+                }
+            });
+            return false;
+        });
+
+        $(document).on('click', 'table.grid-indicadores-Compromisos th input.chkall-indicadores', function () {
+            var chk = $(this).is(':checked'), 
+                elem = $(this).data('idelem'),
+                idSubsistema = localStorage.getItem('Subetapa');
+                elemPadre = "",
+                Status = [];
+
+            $(elem).find('tbody tr').each(function (i, e) {
+                var idindicador = $(e).find('td:eq(3) > .checkbox > label > input[type="checkbox"]').data('idindicador');
+                elemPadre = $(e).find('td:eq(3) > .checkbox > label > input[type="checkbox"]').data('padre');
+                if (chk === true) {
+                    $(e).find('td:eq(3) > .checkbox > label > input[type="checkbox"]').attr('checked', true).prop('checked', true);
+                } else {
+                    $(e).find('td:eq(3) > .checkbox > label > input[type="checkbox"]').attr('checked', false).prop('checked', false);                    
+                }
+                Status.push({ "idIndicador": idindicador, "idSubetapa": idSubsistema, "Estatus": chk });
+            });
+
+            if (elemPadre !== undefined) {
+                sendEstatusInidicadores('/Compromisos/UpdateAllIndicador12mpi', Status);
+            } else {
+                sendEstatusInidicadores('/Compromisos/UpdateAllIndicador', Status);
+            }
+        });
+
+        //Se cargan opciones pa
+        cargarFiltroUbicacionesAdministrador();
+
+        $('#modalAddUserCompromisos #filtroUbicaciones').change(function () {
+            var opc = $(this).val();
+            $('#ListaUsuarios li').removeClass('hidden');
+            $('#ListaUsuarios li').each(function (i,e) {
+                var rol = $(e).attr('data-idubicacion');               
+                if (opc !== rol && opc !== "") {
+                    $(e).addClass('hidden');
+                } else if(opc === ""){
+                    $(e).removeClass('hidden');
+                }
+            });
+        });
+
+    });
+
+    function cargarFiltroUbicacionesAdministrador() {
+        var rol = $(document).find('#div-btn-eng ul').attr('data-rol');
+        if (rol === 'Administrador') {
+            $.ajax({
+                type: 'POST',
+                url: '/Ubicacion/getListUbicacion',
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (datos) {
+                    var ubicaciones = JSON.parse(datos);
+                    if (ubicaciones.length > 0) {
+                        $.each(ubicaciones, function (i, e) {
+                            var opc = '<option value="' + e.idUbicacion + '">' + e.Ubicacion + '</option>';
+                            $('#modalAddUserCompromisos #filtroUbicaciones').append(opc);
+                        });
+                        $('#modalAddUserCompromisos #filtroUbicaciones').html();
+                        $('#modalAddUserCompromisos #filtroUbicaciones').removeClass('hidden');
+                    }
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        } else {
+            $('#modalAddUserCompromisos #filtroUbicaciones').addClass('hidden');
+        }
+    }
+
+    function sendEstatusInidicadores(url, Status) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: { Status: JSON.stringify(Status) },
+            beforeSend: function () {
+                mostrarLoading();
+            },
+            success: function (result) {
+                cerrarLoading();
+            },
+            error: function (msg) {
+                errorLoading();
+            }
+        });
+    }
+
+    //Eventos para ejecutar el envío fecha compromiso
+    function fehcaCompromisoModal(elem) {
+        var idindicador = $(elem).data('idindicador');
+        var modal = $('#modalAgregarFechaCompriso');
+        modal.find('.modal-body form').attr('action', '/Compromisos/addFechaCompromiso');
+        modal.find('#IdElemento').val(idindicador);
+        modal.find('#FechaCompromiso').val('');
+        modal.modal('show');
+    }
+
+    function checkedBox(e) {
+        var Id = $(e).attr('data-idIndicador');
+        var Subetapa = localStorage.getItem('Subetapa');
+        var Status = $(e).attr('checked') === undefined ? false : true;
+        var grid = $(e).parents('table:first').attr('id');
+        var idss = $(e).attr('data-idss');
+
+        searchIndicadorAndUpdate(Id, Status, idss);
+        cargaTablaEtapas('#' + grid, OBJ, idss);
+
+        if (Id !== undefined) {
+            $.ajax({
+                type: 'POST',
+                url: '/Compromisos/UpdateIndicador',
+                data: { idIndicador: Id, idSubetapa: Subetapa, Status: !Status },
+                success: function (msg) {
+                    console.log(msg);                    
+                },
+                error: function (msg) {
+                    console.log('Error: ' + msg);
+                }
+            });
+        }
+    }
+
+    function checkedBox12mpi(e) {
+        var Id = $(e).attr('data-idIndicador');
+        var Subetapa = localStorage.getItem('Subetapa');
+        var Status = $(e).attr('checked') === undefined ? false : true;
+        var elmPadre = $(e).attr('data-padre');
+        if (Id !== undefined) {
+            $.ajax({
+                type: 'POST',
+                url: '/Compromisos/UpdateIndicador12mpi',
+                data: { idIndicador: Id, Status: !Status },
+                success: function (msg) {
+                    console.log(msg);
+                    setChkAllActive(elmPadre);
+                },
+                error: function (msg) {
+                    console.log('Error: ' + msg);
+                }
+            });
+        }
+
+
+    }
+
+    function searchIndicadorAndUpdate(idIndicador, status, idss) {
+        var i = 0;
+        var indicador = {};
+        while (OBJ.subsistemas[idss].elementos[i] !== undefined) {
+            indicador = _.find(OBJ.subsistemas[idss].elementos[i].indicadores, function (ele) { return ele.indicador_IdIndicador == idIndicador; });
+            if (indicador !== undefined) {
+                indicador.indicador_Estatus = (status === true ? false : true);
+                break;
+            }
+            i++;
+        }
+        
+    }
+
+    function activarTabs(ctl) {
+        if (ctl !== undefined) {
+            $('.nav-tabs li:first()').addClass('active');
+            var next = $('#cnt-compromisos-ind > .tab-pane.active');
+            $('#cnt-compromisos-ind > .tab-pane.active').removeClass('active');
+            $(next).next().addClass('active');
+        } else {
+            $('.nav-tabs li:first()').addClass('active');
+        }
+
+    }
+
+    function initCarga() {
+        $.getJSON('/Compromisos/GetCompromisosInit', function (data) {
+            localStorage.setItem('JCompromiso', data);
+            OBJ = JSON.parse(data);
+            OBJs = OBJ;
+            cargarMenu(OBJ);
+        });
+    }
+
+    function cargarMenu(d) {
+        var templateFn = _.template($('#tmp-menu').html());
+        var nivel = 0;
+        $("#listCompromisos").html(templateFn({ model: d, templateFn: templateFn, nivel: 0 }));
+    }
+
+    function removeClassActiveLis() {
+        $('.subMenu-Etapas > .collapse  > .a-subetapa').removeClass('active');
+    }
+
+    function cargarTabsSistemas(d, is12mpi) {
+        if (d.subsistemas.length > 0) {
+            var tmpl = $("#tmp-coleccion-tab-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.subsistemas, "is12mpi": is12mpi });
+            $('#nav-compromisos-ind').html(html);
+        }
+    }
+
+    function cargarCntSistemas(d) {
+        if (d.subsistemas.length > 0) {
+            var tmpl = $("#tmp-coleccion-tabcont-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.subsistemas, "ss": false });
+            $('#cnt-compromisos-ind').html(html);
+        }
+    }
+
+    function cargarEtapas(d) {
+        _.each(d.subsistemas, function (subsistema, i) {
+            _.each(subsistema.elementos, function (indicador, j) {
+                if (indicador !== undefined > 0) {
+                    var d = _.sortBy(indicador.indicadores, 'indicador_Prefijo');
+                    cargaTablaEtapas('#grid-indicadores-Compromisos' + i + j, d, i);
+                }
+            });
+        });
+    }
+
+    function chkModal(e) {
+        var id = $(e).data('id');
+        var PrefijoSubetapa = $(e).data('prefijo');
+        var NombreCortoSubetapa = $(e).data('nombrecorto');
+        localStorage.setItem('idIndicador', id);
+        var nclss = $(e).attr('class');
+        var clss = nclss.substr(nclss.lastIndexOf(' ') + 1);
+
+        if (clss === "btn-infoCompromiso") {
+            $.ajax({
+                type: 'POST',
+                url: '/Compromisos/infoIndicador',
+                data: { idIndicador: id },
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    showDetails(data);
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                    $('#modalInfoCompromisos').modal('show');                    
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: '/Compromisos/GetUsers',
+                data: { idIndicador: id },
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (msg) {
+                    var ListUsers = document.getElementById('ListaUsuarios');
+                    var ListRespon = document.getElementById('ListaAsignados');
+                    ListUsers.innerHTML = '';
+                    ListRespon.innerHTML = '';
+                    var users = JSON.parse(msg);
+
+
+                    $.each(users, function (i, elem) {
+                        elemUser = _.sortBy(elem.User, 'Nombre');
+                        $.each(elemUser, function (l, ele) {
+                            var li = document.createElement('li');
+                            li.className = 'ui-state-default';
+                            li.setAttribute('data-id', ele.IdUsuario);
+                            li.setAttribute('data-idubicacion', ele.idUbicacion);
+                            li.innerHTML = ele.Nombre;
+                            var list = elem.Listaid == 1 ? ListUsers : ListRespon;
+                            $(list).append(li);
+                        });
+                    });
+
+                    //data-nombre
+                    var modal = $('#modalAddUserCompromisos');
+                    modal.find('#AddUser-Prefijo').text(PrefijoSubetapa);
+                    modal.find('#AddUser-NombreCorto').text(NombreCortoSubetapa);
+                    NombreCortoSubetapa;
+
+                    //Cerramos Loading
+                    cerrarLoading();
+                    $('#modalAddUserCompromisos').modal('show');
+                    
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        }
+    }
+
+    function showDetails(data) {
+        var jdata = JSON.parse(data);
+        //Desactivar opciones que no son utilizadas
+        var modal = $('#modalInfoCompromisos');
+        modal.find('#ClaveIndicador').text(jdata.Clave);
+        modal.find('#PrefijoIndicador').text(jdata.Prefijo);
+        modal.find('#DescripcionCortaIndicador').text(jdata.DescripcionCorta);
+        modal.find('#DescripcionLargaIndicador').text(jdata.DescripcionLarga);
+        modal.find('#MetaIndicador').text(jdata.Meta + '%');
+        modal.find('#FrecuenciaActualizacionIndicador').text(jdata.TipoFrecuencia + ' Días');
+        modal.find('#DescripcionFormulaIndicador').text(jdata.DescripcionValorFormula);
+        modal.find('#EtiquetaValorProgramadoIndicador').text(jdata.EtiquetaValorProgramado);
+        modal.find('#EtiquetaValorRealIndicador').text(jdata.EtiquetaValorReal);
+        modal.find('#DescripcionValorIndicador').text(jdata.DescripcionValorFormula);
+        modal.find('#FechaCreacionIndicador').text(jdata.UsuarioCreacion + ' - ' + jdata.FechaCreacion);
+        modal.find('#FechaActualizacionIndicador').text(jdata.UsuarioActualizacion + ' - ' + jdata.FechaActualizacion);
+        modal.find('#Ayuda').text(jdata.Ayuda);
+        //configurar RadioButton
+        switch (jdata.TipoIndicador) {
+            case "Seguimiento":
+                checkRadiobuttons(1);
+                modal.find('#RadioButtonsTipoCalculo').show();
+                modal.find('#divMeta').show();
+
+                switch (jdata.TipoCalculo) {
+                    case 'Formula':
+                        modal.find('#tipoCalculoFormula').attr('checked', true);
+                        modal.find('#tipoCalculoValor').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoPrograma').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Formula
+                        modal.find('#detalle-formula').show();
+                        modal.find('#detalle-valor').hide();
+                        break;
+                    case 'Valor':
+                        modal.find('#tipoCalculoValor').attr('checked', true);
+                        modal.find('#tipoCalculoFormula').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoPrograma').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Valor
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').show();
+                        break;
+                    case 'Programa':
+                        modal.find('#tipoCalculoPrograma').attr('checked', true);
+                        modal.find('#tipoCalculoFormula').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoValor').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Programa Asociado
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').hide();
+                        modal.find('#DescripcionValorIndicador').hide();
+                        break;
+                }
+                break;
+            case "Check":
+                checkRadiobuttons(2);
+                modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+                modal.find('#tipoIndicadorCheck').attr('checked', true);
+
+                //Ocultar info cuando el tipo de indicador en Check
+                modal.find('#RadioButtonsTipoCalculo').hide();
+                modal.find('#divMeta').hide();
+                modal.find('#detalle-formula').hide();
+                modal.find('#detalle-valor').hide();
+                break;
+        }
+
+        //Configurar Checks
+        removeChecks(1);
+        jdata.CheckSoporte === false ? modal.find('input#HabilitarSoporteIndicador').removeAttr('checked') : modal.find('input#HabilitarSoporteIndicador').trigger('click');
+        jdata.CheckReqSoporte === false ? modal.find('input#RequerirSoporteIndicador').removeAttr('checked') : modal.find('input#RequerirSoporteIndicador').trigger('click');
+        jdata.CheckComentarios === false ? modal.find('input#HabilitarComentariosIndicador').removeAttr('checked') : modal.find('input#HabilitarComentariosIndicador').trigger('click');
+        jdata.CheckReqComentario === false ? modal.find('input#RequerirComentariosIndicador').removeAttr('checked') : modal.find('input#RequerirComentariosIndicador').trigger('click');
+        removeChecks(2);
+
+        $('#modalInfoCompromisos .modal-body > #detalle-programa').hide();
+    }
+
+    function removeChecks(i)
+    {
+        var modal = $('#modalInfoCompromisos');
+
+        if (i === 1) {
+
+            modal.find('input#HabilitarSoporteIndicador').removeAttr('checked');
+            modal.find('input#RequerirSoporteIndicador').removeAttr('checked')
+            modal.find('input#HabilitarComentariosIndicador').removeAttr('checked')
+            modal.find('input#RequerirComentariosIndicador').removeAttr('checked')
+
+            modal.find('input#HabilitarSoporteIndicador').removeAttr('disabled');
+            modal.find('input#RequerirSoporteIndicador').removeAttr('disabled');
+            modal.find('input#HabilitarComentariosIndicador').removeAttr('disabled');
+            modal.find('input#RequerirComentariosIndicador').removeAttr('disabled');
+
+        } else {
+
+            modal.find('input#HabilitarSoporteIndicador').attr('disabled', 'disabled');
+            modal.find('input#RequerirSoporteIndicador').attr('disabled', 'disabled');
+            modal.find('input#HabilitarComentariosIndicador').attr('disabled', 'disabled');
+            modal.find('input#RequerirComentariosIndicador').attr('disabled', 'disabled');
+        }
+
+    }
+
+    function checkRadiobuttons(id) {
+        var modal = $('#modalInfoCompromisos');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('checked');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('disabled');
+        modal.find('#tipoIndicadorCheck').removeAttr('checked');
+        modal.find('#tipoIndicadorCheck').removeAttr('disabled');
+
+        if (id === 1) {
+            modal.find('#tipoIndicadorSeguimiento').trigger('click');
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+        }
+        else {
+            modal.find('#tipoIndicadorCheck').trigger('click');
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+        }
+    }
+
+    function cargaTablaEtapas(elem, dt, idss) {
+        var i = 1;
+        d = { "rows": dt };
+        $(elem).bootgrid({
+            rowCount: 5,
+            columnSelection: true,
+            labels: {
+                infos: "",
+                noResults: "No hay resultados"
+            },
+            formatters: {
+                "sw-control12mpi": function (culumn, row) {
+                    return '<div class="checkbox checkbox-slider--b-flat">'
+                               + '<label>'
+                               + '<input type="checkbox" onclick="checkedBox12mpi(this)"' + ((row.indicador_Estatus) ? 'checked=\"checked\"' : '') + '" data-idindicador="' + row.indicador_IdIndicador + '" data-padre="'+elem+'" ><span></span>'
+                               + '</label>'
+                            + '</div>';
+                },
+                "sw-control": function (culumn, row) {
+                    return '<div class="checkbox checkbox-slider--b-flat">'
+                               + '<label>'
+                               + '<input type="checkbox" onclick="checkedBox(this)"' + ((row.indicador_Estatus === true) ? 'checked=\"checked\"' : '') + '" data-idindicador="' + row.indicador_IdIndicador + '" data-idss="'+ idss +'" ><span></span>'
+                               + '</label>'
+                            + '</div>';
+                },
+                "responsable-control": function (culumn, row) {
+                    return '<a class="btn fa fa-user-plus btn-newUserCompromiso" onclick="chkModal(this)" data-id="' + row.indicador_IdIndicador + '" data-prefijo="' + row.indicador_Prefijo + '" data-nombrecorto="' + row.indicador_DescripcionCorta + '"></a>';
+                },
+                //"fecha-compromiso": function (culumn, row) {
+                //    return '<a class="btn glyphicon glyphicon-time btn-newFechaCompromiso" onclick="fehcaCompromisoModal(this)" data-idindicador="' + row.indicador_IdIndicador + '"></a>';
+                //},
+                "info-control": function (culumn, row) {
+                    return '<a class="btn fa fa-info-circle btn-infoCompromiso" onclick="chkModal(this)" data-id="' + row.indicador_IdIndicador + '"></a>';
+                },
+                "info-indicador": function (culumn, row) {
+
+                    if (row.indicador_TipoIndicador === "Check" || row.indicador_TipoIndicador === "Checkbox") {
+                        return '<div class="info-indicador">'
+                                + '<div class="info-Indicador">' + row.indicador_TipoIndicador + '</div>'
+                                + '<div class="info-Indicador">' + row.indicador_TipoFrecuencia + ' Días </div>'
+                        + '</div>';
+                    }
+                    else {
+                        return '<div class="info-indicador">'
+                                + '<div class="info-Indicador">' + row.indicador_TipoIndicador + '</div>'
+                                + '<div class="info-Indicador">' + row.indicador_TipoFrecuencia + ' Días </div>'
+                                + '<div class="info-Indicador"> Meta ' + row.indicador_Meta + '% </div>'
+                        + '</div>';
+                    }
+                }
+            }
+            //Carga de datos
+        }).bootgrid("append", d.rows).on("loaded.rs.jquery.bootgrid", function () {
+            
+        });
+
+    }
+
+    function setChkAllActive(elem) {   
+            var nChkT = $(elem).find('tbody tr').length;
+            var nChkR = 0;
+            $(elem).find('tbody tr').each(function (i, e) {
+                var chk = $(e).find('td:eq(3) > .checkbox > label > input[type="checkbox"]').is(':checked');
+                if (chk === true) {
+                    nChkR++;
+                } else if(nChkR > 0) {
+                    nChkR--;
+                }
+            });
+            if (nChkT === nChkR) {
+                $(elem).find('th input.chkall-indicadores').attr('checked', true).prop('checked', true);
+            } else {
+                $(elem).find('th input.chkall-indicadores').attr('checked', false).prop('checked', false);
+            }
+    }
+
+</script>

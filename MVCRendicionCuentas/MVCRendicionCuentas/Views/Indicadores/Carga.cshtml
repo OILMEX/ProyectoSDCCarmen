@@ -1,0 +1,163 @@
+﻿<div class="container-fluid">
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-ind" class="nav nav-tabs" role="tablist"></ul>
+
+    <!-- Tab panes -->
+    <div id="cnt-subsis-ind" class="tab-content">
+    </div>
+</div>
+
+
+<!--Templaetes -->
+<script type="text/template" id="tmp-coleccion-tab-ind">
+    <% _.each(subsistemas,function(subsistema, i){ %>
+    <li role="presentation"<%= (i===0)?' class="active"':'' %>>
+        <a href="#tab-subsistema<%= i %>" aria-controls="tab-subsistema<%= i %>" role="tab" data-toggle="tab"><%= subsistema.subsistema_nombre %></a>
+    </li>
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+    <% _.each(subsistemas,function(subsistema, i){ %>
+    <div role="tabpanel" class="tab-pane<%= (i===0)?' active':'' %>" id="tab-subsistema<%= i %>">
+        <div class="container-fluid cnt-vista-opciones pdt-10 pdr-0">
+            <span class="subsistema-nombre-largo"><%= subsistema.subsistema_nombre_largo %></span>
+        </div>
+        <div class="container-fluid no-pd pdt-15">
+            <% _.each(subsistema.proyectos, function(proyecto, k){ %>
+            <div class="col-md-12 title-proyecto" data-toggle="collapse" data-target="#box-etapas" aria-controls="box-etapas" role="button">
+                <%= proyecto.proyecto_nombre %>                
+            </div>
+            <div class="container-fluid pdt-10 pdr-0 collapse" id="box-etapas">
+                <% _.each(proyecto.etapas, function(etapa, k){ %>
+                <div class="col-md-12 pdr-0 title-etapa" data-toggle="collapse" data-target="#box-subetapas<%= etapa.etapa_id %>" role="button"><%= etapa.etapa_nombre %></div>
+                <div id="box-subetapas<%= etapa.etapa_id %>" class="container-fluid collapse pdr-0">
+                    <% _.each(etapa.subetapas, function(subetapa, k){ %>
+                    <div class="col-md-12 pdr-0 title-subetapa" data-toggle="collapse" data-target="#box-procesos<%= subetapa.subetapa_id %>" role="button"><%= subetapa.subetapa_nombre %></div>
+                    <div id="box-procesos<%= subetapa.subetapa_id %>" class="container-fluid collapse pdr-0">
+                        <% _.each(subetapa.procesos, function(proceso, k){ %>
+                        <div class="col-md-12 pdr-0 title-proceso" data-toggle="collapse" data-target="#box-indicadores<%= proceso.proceso_id %>" role="button">
+                            [<%= proceso.proceso_sigla %>] <%= proceso.proceso_nombre %> (<%= proceso.indicadores.length %> Indicadores)
+                        </div>
+                        <div id="box-indicadores<%= proceso.proceso_id %>" class="container-fluid collapse pdr-0 pdl-0">
+                            <div class="col-md-12 pdr-0 pdl-0">
+                                <div class="container-fluid pd-0 row-indicadores cabecera">
+                                    <div class="col-md-4 pdl-0">Indicador</div>
+                                    <div class="col-md-2 text-center">Estatus</div>
+                                    <div class="col-md-2 text-center">Información</div>
+                                    <div class="col-md-2 text-center">Resultado</div>
+                                    <div class="col-md-2 pdr-0"></div>
+                                </div>
+                                <% _.each(proceso.indicadores, function(indicador, k){ %>
+                                <div class="container-fluid pd-0 row-indicadores">
+                                    <div class="col-md-4 pdl-0">[<%= indicador.indicador_clave %>] <%= indicador.indicador_nombre %></div>
+                                    <div class="col-md-2 text-center">
+                                        <span class="fa <%= (indicador.indicador_estatus=='1')? 'fa-check-square green':'fa-times red'  %> "></span>
+                                        <br />
+                                        <span><%= indicador.indicador_fechactualizado %></span>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <span><%= indicador.indicador_tipo %></span><br />
+                                        <span><%= indicador.indicador_actualizacion %></span><br />
+                                        <span>Meta</span><br />
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <% if(indicador.TipoIndicador=="Seguimiento"){ %>
+                                            <% if(indicador.TipoCalculo=="Valor"){ %>
+                                            <span><%= indicador.Meta %></span>
+                                            <% } %>
+
+                                            <% if(indicador.indicador_tipo=="Programa"){ %>
+                                                <a class="btn btn-meta"><%= indicador.Meta %>%</a>
+                                                <a class="btn btn-datos">Datos</a>
+                                            <% } %>
+
+                                        <% } %>
+
+                                        <% if(indicador.TipoIndicador=="Checkbox" || indicador.TipoIndicador=="Check"){ %>
+                                        ¿Realizado?
+                                        <div class="checkbox checkbox-slider--b-flat mrl-20">
+                                            <label>
+                                                <input type="checkbox" <%= (indicador.Meta=='100')? 'checked="checked"' : '' %> disabled="disabled" ><span></span>
+                                            </label>
+                                        </div>
+
+                                        <% } %>
+                                    </div>
+                                    <div class="col-md-2 text-center pdr-0">
+                                        <a class="btn <%= (indicador.indicador_soporte == 1)? 'btn-success':'btn-danger' %>" href="#" role="button">Soportes</a><br />
+                                        <a class="btn <%= (indicador.indicador_checklist == 1)? 'btn-success':'btn-danger' %>" href="#" role="button">Checklist</a><br />
+                                        <a class="btn <%= (indicador.indicador_notas == 1)? 'btn-success':'btn-danger' %>" href="#" role="button">Notas</a>
+                                    </div>
+                                </div>
+                                <% }); %>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% }); %>
+                </div>
+                <% }); %>
+            </div>
+            
+            <% }); %>
+        </div>
+        
+    </div>
+    <% }); %>
+</script>
+
+
+
+<script type="text/javascript">
+    $(function () {
+
+        var OBJ = [];
+        initCarga();
+
+        $(document).on('click', '.cnt-vista-opciones .btn-opc-ind', function () {
+            var mod = $(this).data('modvista');
+            var id = $(this).data('subsistema');
+            $('#tab-subsistema' + id + ' .cnt-vista').addClass('hidden');
+            $('#tab-subsistema' + id + ' .cnt-vista' + mod).removeClass('hidden');
+            $('.btn-opc-ind').removeClass('activo');
+            $(this).addClass('activo');
+
+        });
+
+        $(document).on('show.bs.tab', '#nav-subsis-ind a[data-toggle="tab"]', function (e) {
+            $('.btn-opc-ind[data-modvista="1"]').removeClass('activo');
+            $('.btn-opc-ind[data-modvista="2"]').addClass('activo');
+            $('.cnt-vista1').addClass('hidden');
+            $('.cnt-vista2').removeClass('hidden');
+        });
+
+    });
+
+    function initCarga() {
+        $.getJSON('../Models/Indicadores.json', function (data) {
+            OBJ = data;
+            cargarTabsSistemas(OBJ);
+            cargarCntSistemas(OBJ);
+        });
+    }
+
+    function cargarTabsSistemas(d) {
+        if (d.subsistemas.length > 0) {
+            var tmpl = $("#tmp-coleccion-tab-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.subsistemas });
+            $('#nav-subsis-ind').html(html);
+        }
+    }
+
+    function cargarCntSistemas(d) {
+        if (d.subsistemas.length > 0) {
+            var tmpl = $("#tmp-coleccion-tabcont-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.subsistemas });
+            $('#cnt-subsis-ind').html(html);
+        }
+    }
+
+</script>

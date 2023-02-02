@@ -1,0 +1,1181 @@
+﻿<div class="container-fluid">
+    <div class="container-fluid lbl-mod-tit pdb-20 pdl-0">
+
+        <div class="media">
+            <div class="media-left media-middle">
+                <img class="media-object" src="~/Images/iconos_secciones/tableros_gestion.png" />
+            </div>
+            <div class="media-body">
+                <span>TABLEROS DE GESTI&Oacute;N</span>
+            </div>
+        </div>
+    </div>
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-ind" class="nav nav-tabs" role="tablist">
+        <li id="tabpanel-1" role="presentation" class="active">
+            <a href="#tab-tablero1" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Tablero Global</a>
+        </li>
+        <li id="tabpanel-2" role="presentation">
+            <a href="#tab-tablero2" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Por Comp. de Proyecto</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div id="cnt-subsis-ind" class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tab-tablero1">
+            <div class="container-fluid no-pd opc-tbl">
+                <div class="group-opc-graf">
+                    <select class="sel-tbl-glob" id="sel-tbl-glob"></select>
+                    <button class="btn btn-verde" id="btn-tbl-buscar">Ir</button>
+                    <span>Informaci&oacute;n al:</span>
+                    <span class="fecha"></span>
+                    <a class="btn btn-vista-tbl" id="btn-tipo-vista">
+                        <i id="btn-graficas-pie" class="glyphicon glyphicon-stats"></i>
+                        <i id="btn-graficas-bar" class="fa fa-circle-o-notch hidden"></i>
+                    </a>
+                    <div id="idTitleProyectos" class="lbl-n-proyectos mrr-20"></div>
+                </div>
+                <div class="group-opc-det hidden">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6"><div class="w-300 center-block" style="line-height: 50px;"><span class="lbl-n-proyectos text-center"></span></div></div>
+                    <div class="col-md-3">
+                        <a class="pull-right btn btn-regresar" id="btn-tbl-det-regresar"><i class="glyphicon glyphicon-chevron-left"></i>REGRESAR</a>
+                    </div>
+                </div>
+            </div>
+            <div class="cnt-vista-graf-pie">
+                <div class="container-fluid no-pd cnt-tbl-subsis-glob"></div>
+                <div class="container-fluid no-pd cnt-tbl-subsis"></div>
+            </div>
+            <div class="cnt-vista-graf-bar hidden"></div>
+            <div class="cnt-vista-subsis-det hidden">
+                <div class="container-fluid row-subsis-det-glob"></div>
+                <div class="container-fluid row-subsis-det"></div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-tablero2">
+
+            <div id="divTablaProyectos" class="">
+                <div class="container-fluid no-pd opc-tbl">
+                    <div class="group-opc-graf">
+                        <div class="col-md-7">
+                            <select class="sel-tbl-glob" id="sel-tbl-glob2"></select>
+                            <button class="btn btn-verde" id="btn-tbl-buscar2">Ir</button>
+                            <span>Informaci&oacute;n al:</span>
+                            <span class="fecha"></span>
+                        </div>
+                        <div class="col-md-5" id="divFiltro">
+                            <div class="form-group">
+                                <form id="frmFiltroUbicacion" name="frmFiltroUbicacion" method="get" action="/Tableros/PorProyecto">
+                                    <div class="col-md-10 pdl-0 pdt-5">
+                                        <select class="form-control" name="selUbicacion" id="selUbicacion"></select>
+                                    </div>
+                                    <div class="col-md-2 modal-footer pdt-0 pdb-0" style="border-top:0px none;"><button type="button" class="btn btnAceptar">Aceptar</button></div>
+                                    <div class="col-md-12 pdl-0">
+                                        <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                                        <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido cargados corrrectamente. </div>
+                                        <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                                        <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron cargar correctamente. </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-opc-det hidden">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6"><div class="w-300 center-block" style="line-height: 50px;"><span class="lbl-n-proyectos text-center"></span></div></div>
+                        <div class="col-md-3">
+                            <a class="pull-right btn btn-regresar" id="btn-tbl-det-regresar"><i class="glyphicon glyphicon-chevron-left"></i>REGRESAR</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subfiltros -->
+                <div id="cnt-subfiltros" class="cnt-subfiltros"></div>
+
+                <!-- Tab panes -->
+                <div id="cnt-subsis-ind-tab2" class="tab-content"></div>
+
+                <!-- Tab panes -->
+                <div id="cnt-subsis-ind-con" class="tab-content"></div>
+            </div>
+
+            <div id="divdetalle-proyecto" class="hidden"></div>
+        </div>
+
+        <div class="content-leyenda col-md-12">
+            <div class="cnt-leyendas">
+                <div class="circle circle-red"></div><div class="text-circle"> 0% a 80%</div>
+                <div class="circle circle-amarillo"></div><div class="text-circle"> 81% a 95%</div>
+                <div class="circle circle-verde"></div><div class="text-circle"> 96% a 100%</div>
+                <div class="circle circle-gris"></div><div class="text-circle"> No aplica </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-up"></i> Mejoró </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-down"></i> Empeoró </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-right"></i> Igual </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/template" id="tmp-tablero-subsis-glob">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    var clss = (e.mejora === 1)?"up":((e.mejora === 2)?"down":"right"); %>
+    <div class="cnt-grafica-pie cnt-grafica-nivel1">
+        <canvas class="circulo-dinamico" id="chart-nivel1-container<%=i%>" width="160" height="160" data-elem="#chart-nivel1-container<%=i%>" data-avance="<%= e.avance %>" data-color="<%= e.estatus %>"></canvas>
+        <div class="cnt-grafica-text lnk-concepto" data-lnk=""><span><%= e.avance %></span><span>%</span></div>
+        <% if(e.mejora !== undefined){ %><div class="ind-item-flecha pos"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+        <div class="logo-subsistema"></div>
+    </div>
+    <div class="container-fluid text-center">
+        <span>AVANCE GLOBAL</span>
+        <div class="container-fluid">
+            <div class="nodo nodo-conec no-pd"></div>
+        </div>
+    </div>
+    <% } }); %>
+</script>
+
+<script type="text/template" id="tmp-tablero-subsis">
+    <div class="cnt-graficas-subsis">
+        <% _.each(elementos, function(e,i){
+        if(elementos.length > 0){
+        var clss = (e.mejora === 1)?"up":((e.mejora === 2)?"down":"right");  %>
+        <div class="cnt-wrp-diagrama">
+            <div class="container-fluid diagrama-nodo no-pd">
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === (elementos.length - 1)))?' nodo-right':((i > 0)?' nodo-inter':''))%>"></div>
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === 0))?' nodo-left':((i < elementos.length - 1)?' nodo-inter':''))%> nodo-conec"></div>
+            </div>
+            <div class="cnt-grafica-pie<%=(elementos.length>1)?'s':''%> cnt-grafica-nivel2" data-subsistema="<%=e.subsistema_id%>" data-idpub="<%= e.subsistema_idpublicacion %>">
+                <canvas class="circulo-dinamico" id="chart-nivel2-container<%=i%>" width="160" height="160" data-elem="#chart-nivel2-container<%=i%>" data-avance="<%= e.avance %>" data-color="<%= e.estatus %>"></canvas>
+                <div class="cnt-grafica-text lnk-concepto" data-lnk="" role="button" rel='popover' data-toggle="popover" data-placement="top" data-trigger="manual" data-content="<strong>Click</strong> para ver detalle de subsistema"><span><%=e.avance%></span><span>%</span></div>
+                <% if(e.mejora !== undefined){ %><div class="ind-item-flecha"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+                <% if(e.completados !== undefined){ %><span class="lbl-comp"><%=e.completados%></span><% } %>
+                <div class="logo-subsis-<%=(i+1)%>"></div>
+            </div>
+        </div>
+        <% } }); %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-tablero-subsis-bar">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    var clss = (e.mejora === 1)?"up":((e.mejora === 2)?"down":"right");  %>
+    <div class="container-fluid cnt-grafica-subsis-bar no-pd">
+        <div class="col-md-2">
+            <a data-tproy="<%=elementos[0].TotalProyectos%>" data-idpub="<%= e.subsistema_idpublicacion %>" data-subsistema="<%=e.subsistema_id%>" class="lnk-susbsis-det <%=(elementos.length === 1)?'logo-subsis-0':'logo-subsis-' + (i+1) %>"></a>
+        </div>
+        <div class="col-md-3 no-pd">
+            <div class="container-fluid lbl-avance no-pd">
+                <div class="container-fluid"><%=(elementos.length === 1)?'año ' + e.anio:''%></div>
+                <div class="container-fluid txt"><span><%=e.avance%></span><span>%</span></div>
+                <div class="container-fluid"><%=(elementos.length === 1)?'Promedio':''%></div>
+            </div>
+        </div>
+        <div class="col-md-7 no-pd cnt-bars">
+            <% var prom = 0;
+            var promi = 0;
+            _.each(e.avances_mes,function(e,i){  if(e.valor > 0) { prom+= e.valor; promi++; } %>
+            <div class="col-md-1 no-pd">
+                <span class="wp-100"><%=e.valor%>%</span>
+                <div><div style="height:<%=e.valor%>%; background-color:<%=setColor(e.color)%>;"></div></div>
+                <span class="wp-100"><%=setMes(i)%></span>
+            </div>
+            <% });%>
+            <div class="bar-prom" style="bottom: <%=((80*((prom/promi)/100))+19)%>px;">
+                <span>&#8226;</span><span>&#8226;</span>
+            </div>
+        </div>
+    </div>
+    <% } }); %>
+</script>
+
+<script type="text/template" id="tmp-subsis-det-glob">
+    <div class="col-md-3">
+        <a data-subsistema="<%=elementos[0].subsistema%>" class="logo-subsis-<%=elementos[0].logo%>"></a>
+    </div>
+    <div class="col-md-6">
+        <div class="graf-bar-prom">
+            <div class="h-30 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%= elementos[0].avance %>%;  background-color: <%=setColor(elementos[0].color)%>; "></div></div>
+            <div class="w-100 cnt-bar-lbl-prom glob center-block">
+                <span><%=elementos[0].avance%>%</span>
+                <% var clss = (elementos[0].mejora === 1)?"up":((elementos[0].mejora === 2)?"down":"right");
+                if(elementos[0].mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-subsis-det-globTitle">
+    <div class="col-md-3">
+        <a data-subsistema="<%=elementos.subsistema%>" class="logo-subsis-<%=elementos.subsistema_id%>"></a>
+    </div>
+    <div class="col-md-6">
+        <div class="graf-bar-prom">
+            <div class="h-30 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%= elementos.avance %>%;  background-color: <%=setColor(elementos.color)%>; "></div></div>
+            <div class="w-100 cnt-bar-lbl-prom glob center-block">
+                <span><%=elementos.avance%>%</span>
+                <% var clss = (elementos.mejora === 1)?"up":((elementos.mejora === 2)?"down":"right");
+                if(elementos.mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-subsis-det">
+    <div class="container-fluid cnt-vista2 cnt-vista no-pd pdt-15">
+        <% _.each(elementos, function(proceso, k){
+        var clss = (proceso.proceso_mejora === 1)?"up":((proceso.proceso_mejora === 2)?"down":"right"); %>
+        <div class="col-md-4 cnt-box-subsistema">
+            <div class="container-fluid box-subsistema no-pd">
+                <div class="container-fluid cnt-head-ss<%= idss %>">
+                    <%= proceso.proceso_sigla %>
+                </div>
+                <div class="container-fluid cnt-recuadro no-pd">
+                    <div class="container-fluid no-pd">
+                        <a><%= proceso.proceso_nombre %></a>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="cnt-bar-lbl-prom">
+                            <span><%=proceso.proceso_avance%>%</span>
+                            <% if(proceso.proceso_mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+                        </div>
+                        <div class="h-20 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%=proceso.proceso_avance%>%; background-color: <%=setColor(proceso.proceso_color)%>;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tab-ind">
+    <% _.each(subsistemas,function(subsistema, i){ %>
+    <div class="graf-subsistema">
+        <span class="titulo-ss" style="color: <%= subsistema.color %> !important;"><%= subsistema.subsistema_nombre %></span>
+        <div class="grafico-ss">
+            <img src="/Images/grafverde.PNG" />
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tab-ind">
+    <% _.each(subsistemas,function(subsistema, i){ %>
+    <div class="graf-subsistema">
+        <span class="titulo-ss" style="color: <%= subsistema.color %> !important;"><%= subsistema.subsistema_nombre %></span>
+        <div class="grafico-ss">
+            <img src="/Images/grafverde.PNG" />
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+    <% _.each(subsistemas,function(subsistema, i){ %>
+    <div role="tabpanel" class="tab-pane<%= (i===0)?' active':'' %>" id="tab-subsistema<%= i %>">
+
+        <div class="container-fluid cnt-vista1 cnt-vista no-pd">
+            <table id="grid-proyectos-<%= estatus %>" class="table table-condensed table-hover table-striped grid-proyectos">
+                <thead>
+                    <tr>
+                        <th data-column-id="proyecto_id" data-type="numeric" data-align="center" data-sortable="false">#</th>
+                        <th data-column-id="proyecto_indicador_global" data-align="center" data-formatter="indicador-global">IND</th>
+                        <th data-column-id="proyecto_nombre" data-formatter="proyecto_nombre" data-order="asc">COMP. DE PROYECTO</th>
+                        <th data-column-id="proyecto_responsable" data-align="center" data-headeralign="center">RESPONSABLE</th>
+                        <th data-column-id="proyecto_fecha_ini" data-align="center" data-formatter="fecha-ini-format">F.INICIO</th>
+                        <th data-column-id="proyecto_fecha_fin" data-align="center" data-formatter="fecha-fin-format">F.FIN</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-align="center" data-formatter="component-indicador" data-sortable="false">12MPI</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-align="center" data-formatter="component-indicador-2" data-sortable="false">SASP</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-align="center" data-formatter="component-indicador-3" data-sortable="false">SAA</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-alignheader="center" data-align="center" data-formatter="component-indicador-4" data-sortable="false">SAST</th>
+                        <th data-formatter="menu-contextual" data-sortable="false"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-coleccion-detalleProy">
+    <div class="opc-regresar">
+        <a class="btn btn-regresar" id="btn-tbl-det-regresar"><i class="glyphicon glyphicon-chevron-left"></i>REGRESAR</a>
+    </div>
+    <div class="opc-regresar-sub hidden">
+        <a class="btn btn-regresar" id="btn-tbl-det-regresar"><i class="glyphicon glyphicon-chevron-left"></i>REGRESAR</a>
+    </div>
+    <div class="detalle-proy">
+        <div class="title-detalle-proy">DESCRIPCIÓN DEL COMPONENTE DE PROYECTO</div>
+        <div class="body-detalle-proy row">
+            <div class="desc-detalle-proy col-md-7">
+                <div class="elem-proy"> <span class="subtitle-detalleproy"> Responsable: </span> <%= Proyecto.proyecto_nombre %> </div>
+                <div class="elem-proy col-md-4"> 
+                    <span class="subtitle-detalleproy"> Inicio: </span> <% var fini = (Proyecto.proyecto_fecha_ini != null)? moment(Proyecto.proyecto_fecha_ini).locale('es').format('L') : '-'; %> <%= fini %> 
+                </div>
+                <div class="col-md-8">
+                    <div><i class="circle Rojo" style="display:inline-block"></i> <%= Proyecto.indicadoresnocargados %> <%= (Proyecto.indicadoresnocargados > 1)? 'Indicadores no cargados' : 'Indicador no cargado' %></div>
+                </div>
+                <div class="elem-proy col-md-4">
+                    <span class="subtitle-detalleproy"> Fin: </span> <% var ffin = (Proyecto.proyecto_fecha_fin != null)? moment(Proyecto.proyecto_fecha_fin).locale('es').format('L') : '-'; %> <%= ffin %>
+                </div>
+                <div class="col-md-8">
+                    <div><i class="circle Verde" style="display:inline-block"></i> <%= Proyecto.indicadorescargados %> <%= (Proyecto.indicadorescargados > 1)? 'Indicadores cargados' : 'Indicador cargado' %></div>
+                </div>
+            </div>
+            <div class="semaforos-proy col-md-5">
+                <div class="col-md-3">
+                    <span> 12MPI </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_12MPI %>"><%= Proyecto.porcentaje_12MPI %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="title-nombre-ss"> SASP </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_SASP %>"><%= Proyecto.porcentaje_SASP %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="title-nombre-ss"> SAA </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_SAA %>"><%= Proyecto.porcentaje_SAA %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="title-nombre-ss"> SAST </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_SAST %>"><%= Proyecto.porcentaje_SAST %>% </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="body-detalle-subetapa" class="body-detalle-subetapa hidden"></div>
+    <div class="elementos-proy" id="elementos-proy"></div>
+
+</script>
+
+<script type="text/template" id="tmp-Subcoleccion-detalleProy">
+    <div class="detalle-proy">
+        <% console.log(Proyecto); %>
+        <div class="title-detalle-proy">ETAPA: <%= idEtapa %> <%= Proyecto.proyecto_nombre %></div>
+        <div class="body-detalle-proy row">
+            <div class="desc-detalle-proy col-md-6">
+                <div class="elem-proy"> <span class="subtitle-detalleproy"> Fin: </span> <% var ffin = (Proyecto.proyecto_fecha_fin!=null)? moment(Proyecto.proyecto_fecha_fin).locale('es').format('L') : '-'; %> <%= ffin %> </div>
+                <div><i class="circle Rojo" style="display:inline-block"></i> <%= Proyecto.indicadoresnocargados %> <%= (Proyecto.indicadoresnocargados > 1)? 'Indicadores no cargados' : 'Indicador no cargado' %></div>
+                <div><i class="circle Verde" style="display:inline-block"></i> <%= Proyecto.indicadorescargados %> <%= (Proyecto.indicadorescargados > 1)? 'Indicadores cargados' : 'Indicador cargado' %></div>
+            </div>
+            <div class="semaforos-proy col-md-6">
+                <div class="col-md-3">
+                    <span> 12MPI </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_12MPI %>"><%= Proyecto.porcentaje_12MPI %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="title-nombre-ss"> SASP </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_SASP %>"><%= Proyecto.porcentaje_SASP %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="title-nombre-ss"> SAA </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_SAA %>"><%= Proyecto.porcentaje_SAA %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="title-nombre-ss"> SAST </span><br />
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= Proyecto.semaforo_SAST %>"><%= Proyecto.porcentaje_SAST %>% </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="subelementos-proy" id="subelementos-proy"></div>
+
+</script>
+
+<script type="text/template" id="tmp-elemento-detalleProy">
+    <% _.each(Proyecto, function(elem,i) { %>
+    <div class="elemento-detalleproy estatus-tiempo-<%= elem.EstatusTiempo %>" <%= isSubEtapa === true ? '' : 'role="button"' %> data-idpublicacion="<%= elem.proyecto_idpublicacion %>" data-idproy="<%= elem.proyecto_id %>" data-idEtapa="<%= elem.proyecto_clave %>">
+        <div class="title-elemento-detalleproy"> <% var nombreElem = elem.proyecto_nombre.length < 60 ? elem.proyecto_nombre :  elem.proyecto_nombre.substr(0, 57) + '...' %> <%= elem.proyecto_clave %> <%= nombreElem %></div>
+        <div class="body-elemento-detalleproy">
+            <div class="subtitle-detalleproy">FIN</div><div class="title-fecha-body">
+                <%
+                var ffin = (elem.proyecto_fecha_fin != null)? moment(elem.proyecto_fecha_fin).locale('es').format('L') : '-';
+                %>
+                <%= ffin %>
+            </div>
+        </div>
+        <div class="semaforos-elemento-detalleproy">
+            <div class="content-semaforos">
+                <div class="col-md-3">
+                    <span class="mrl-7"> 12MPI </span>
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= elem.semaforo_12MPI %>"><%= elem.porcentaje_12MPI %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="mrl-7"> SASP </span>
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= elem.semaforo_SASP %>"><%= elem.porcentaje_SASP %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="mrl-7"> SAA </span>
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= elem.semaforo_SAA %>"><%= elem.porcentaje_SAA %>% </a>
+                </div>
+                <div class="col-md-3">
+                    <span class="mrl-7"> SAST </span>
+                    <a class="btn pdt-0 pdb-0 clr_indicador_<%= elem.semaforo_SAST %>"><%= elem.porcentaje_SAST %>% </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-11 col-md-offset-1 pdb-10">
+            <div><i class="circle Rojo" style="display:inline-block"></i> <%= elem.indicadoresnocargados %> <%= (elem.indicadoresnocargados > 1)? 'Indicadores no cargados' : 'Indicador no cargado' %></div>
+            <div><i class="circle Verde" style="display:inline-block"></i> <%= elem.indicadorescargados %> <%= (elem.indicadorescargados > 1)? 'Indicadores cargados' : 'Indicador cargado' %></div>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-subfiltros">
+    <div class="ListEtapas">
+        <ul id="nav-subfiltros" class="nav nav-pills" role="tablist">
+            <li role="presentation" class="tp-subfiltro active">
+                <a href="#" data-id="0" role="tab" data-toggle="tab">Todos</a>
+            </li>
+            <% _.each(elementos, function(ele, i) { %>
+                <li role="presentation" class="tp-subfiltro">
+                    <a href="#" data-id="<%= ele.IdTipoProyecto %>" role="tab" data-toggle="tab"><%= ele.TipoProyecto %></a>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</script>
+
+<script type="text/javascript">
+
+    var obj = [];
+
+    $(function () {
+        var OBJ = [];
+
+        initTablerosSubsistema();
+
+        var popOverSetting = {
+            placement: 'top',
+            container: 'body',
+            html: true,
+            selector: '[rel="popover"]',
+            trigger: 'hover'
+        }
+
+        $('body').popover(popOverSetting);
+    });
+
+    function initEventos() {
+
+        initComboTblGlobal();
+
+        setFechaTblGlobal();
+
+        $(document).on('click', '#tab-tablero1 #btn-tbl-buscar', function () {
+            if (OBJ.tablero_subsistema.length > 0) {
+                var f = $('#tab-tablero1 #sel-tbl-glob').val();
+                obj = _.where(OBJ.tablero_subsistema, { fecha: f });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-glob",
+                    datos: obj,
+                    cnt: ".cnt-tbl-subsis-glob"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis",
+                    datos: obj[0].tablero_subsistema,
+                    cnt: ".cnt-tbl-subsis"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+                });
+
+                $('.cnt-vista-graf-bar').empty();
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: obj,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: obj[0].tablero_subsistema,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+            }
+        });
+
+        $(document).on('click', '#tab-tablero2 #btn-tbl-buscar2', function () {
+            if (OBJ.enproceso.length > 0) {
+                var f = $('#tab-tablero2 #sel-tbl-glob2').val();
+                OBJ.enproceso.forEach(function (item) {
+                    if (moment(item.FechaPublicacion).locale('es').format('YYYY-MM-DD HH:mm') === f) {
+                        obj = item;
+                    }
+                });
+
+                $('#bulet-proy').html((obj.length > 0) ? obj.length : 0);
+                cargarCntSistemas('#cnt-subsis-ind-tab2', obj.Proyectos, 'proceso');
+                cargaTablaProyectos('#grid-proyectos-proceso', obj.Proyectos);
+
+                //Eliminamos la clase .active del elemento que la tenga y la regresamos al elemento "todo"
+                $('.nav-pills > li.tp-subfiltro').removeClass('active');
+                $('.nav-pills > li.tp-subfiltro:first()').addClass('active')
+
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 #btn-tipo-vista', function () {
+            if ($(this).find('#btn-graficas-pie').hasClass('hidden')) {
+                $(this).find('#btn-graficas-pie').removeClass('hidden');
+                $(this).find('#btn-graficas-bar').addClass('hidden');
+                $('.cnt-vista-graf-bar').addClass('hidden');
+                $('.cnt-vista-graf-pie').removeClass('hidden');
+
+            } else if ($(this).find('#btn-graficas-bar').hasClass('hidden')) {
+                $(this).find('#btn-graficas-bar').removeClass('hidden');
+                $(this).find('#btn-graficas-pie').addClass('hidden');
+                $('.cnt-vista-graf-pie').addClass('hidden');
+                $('.cnt-vista-graf-bar').removeClass('hidden');
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 .lnk-susbsis-det', function () {
+            $('#tab-tablero1 #btn-tbl-det-regresar').data('acceso', 1);
+            cargarDetalleProcesos(this);
+        });
+
+        $(document).on('click', '#tab-tablero1 #btn-tbl-det-regresar', function () {
+            var opc = $(this).data('acceso');
+            if (opc === 1) {
+                $('.group-opc-graf').removeClass('hidden');
+                $('.group-opc-det').addClass('hidden');
+                $('.cnt-vista-graf-bar').removeClass('hidden');
+                $('.cnt-vista-subsis-det').addClass('hidden');
+            } else {
+                $('.group-opc-graf').removeClass('hidden');
+                $('.group-opc-det').addClass('hidden');
+                $('.cnt-vista-graf-pie').removeClass('hidden');
+                $('.cnt-vista-subsis-det').addClass('hidden');
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 .cnt-grafica-pies', function () {
+            $('#tab-tablero1 #btn-tbl-det-regresar').data('acceso', 2);
+            cargarDetalleProcesos(this);
+        });
+
+        $(document).on('click', 'ul#nav-subsis-ind > li#tabpanel-1', function () {
+            window.location.reload();
+        });
+
+        $(document).on('click', 'ul#nav-subsis-ind > li#tabpanel-2 ', function (e) {
+
+            //Se asigna popover a los elementos creados dinámicamente
+            $('body').popover('destroy');
+
+            var popOverSetting = {
+                placement: 'right',
+                container: 'body',
+                html: true,
+                selector: '[rel="popover"]',
+                trigger: 'hover focus'
+            }
+
+            $('body').popover(popOverSetting);
+            //Fin de asignación de popover
+
+            $.ajax({
+                type: 'GET',
+                url: '/Tableros/PorProyecto',
+                beforeSend: function (data) {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    OBJ = JSON.parse(data);
+                    if (OBJ.admin) { $('#divFiltro').removeClass('hidden'); }
+
+                    //Se ingresan botones subfiltros para subproyectos
+                    cargarSubFiltros("#cnt-subfiltros", OBJ.subfiltros);
+
+                    $("#selUbicacion option").remove().end();
+
+                    var option = $(document.createElement('option'));
+                    option.text("TODOS");
+                    option.val("0");
+                    $("#selUbicacion").append(option);
+
+
+                    $(OBJ.ubicaciones).each(function () {
+                        var option = $(document.createElement('option'));
+                        option.text(this.Ubicacion);
+                        option.val(this.idUbicacion);
+                        $("#selUbicacion").append(option);
+                    });
+
+                    if (OBJ.enproceso != undefined && OBJ.enproceso.length > 0) {
+                        initComboTblGlobal2(OBJ.enproceso);
+                        $('#bulet-proy').html((OBJ.enproceso.length > 0) ? OBJ.enproceso.length : 0);
+                        cargarCntSistemas('#cnt-subsis-ind-tab2', OBJ.enproceso[0].Proyectos, 'proceso');
+                        cargaTablaProyectos('#grid-proyectos-proceso', OBJ.enproceso[0].Proyectos);
+                    } else {
+                        $('.cnt-vista-graf-pie').html('<div class="alert alert-info text-center"><strong>¡No existen elementos para mostrar!</strong></div>');
+                        $('#grid-proyectos-proceso').bootgrid("clear");
+                        MsjEmptyList('#grid-proyectos-proceso', 'Todos');
+                    }
+
+                    //Cerrando Loading
+                    cerrarLoading();
+                },
+                error: function (data) {
+                    errorLoading();
+                }
+            });
+        });
+
+
+        //Envio del formulario indicadores x responsable
+        $(document).on('click', '#frmFiltroUbicacion .btnAceptar', function () {
+            $('#frmFiltroUbicacion').submit();
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#frmFiltroUbicacion').submit(function () {
+            if ($(this).valid() === true) {
+                $('#frmFiltroUbicacion').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#frmFiltroUbicacion .alert-warning').removeClass('hidden'); },
+                    success: function (data) {
+                        OBJ = JSON.parse(data);
+
+                        //Se ingresan botones subfiltros para subproyectos
+                        cargarSubFiltros("#cnt-subfiltros", OBJ.subfiltros);
+
+                        if (OBJ.enproceso != undefined && OBJ.enproceso.length > 0) {
+                            initComboTblGlobal2(OBJ.enproceso);
+                            $('#bulet-proy').html((OBJ.enproceso.length > 0) ? OBJ.enproceso.length : 0);
+                            cargarCntSistemas('#cnt-subsis-ind-tab2', OBJ.enproceso[0].Proyectos, 'proceso');
+                            cargaTablaProyectos('#grid-proyectos-proceso', OBJ.enproceso[0].Proyectos);
+                        } else {
+                            $('.cnt-vista-graf-pie').html('<div class="alert alert-info text-center"><strong>¡No existen elementos para mostrar!</strong></div>');
+                            MsjEmptyList('#grid-proyectos-proceso', 'Todos');
+                        }
+
+                        $('#frmFiltroUbicacion .alert-warning').addClass('hidden');
+                        $('#frmFiltroUbicacion .alert-success.edit').removeClass('hidden');
+                        setTimeout(function () {
+                            //$('#modalProgramaAsociado').modal('hide');
+                            $('#frmFiltroUbicacion .alert-success').addClass('hidden');
+                            $('#frmFiltroUbicacion .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    },
+                    error: function (data) {
+                        $('#frmFiltroUbicacion .alert-danger').removeClass('hidden');
+                        setTimeout(function () {
+                            //$('#modalProgramaAsociado').modal('hide');
+                            $('#frmFiltroUbicacion .alert-success').addClass('hidden');
+                            $('#frmFiltroUbicacion .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(document).on('click', '.elemento-detalleproy', function (elem) {
+            var idproy = $(this).data('idproy');
+            var idpub = $(this).data('idpublicacion');
+            var idEtapa = $(this).data('idetapa');
+
+            if (idproy > 0) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Tableros/GetSubEtapasxIdProy",
+                    data: { idproyecto: idproy, idpublicacion: idpub },
+                    beforeSend: function (data) {
+                        mostrarLoading();
+                    },
+                    success: function (data) {
+                        var jdata = JSON.parse(data);
+                        cargarDetalleProyectoSubElem(jdata, idEtapa);
+                        cargarSubElementosDetalles(jdata);
+                        $('#elementos-proy').addClass('hidden');
+                        $('#body-detalle-subetapa').removeClass('hidden');
+                        //Habilitamos boton regresar a estado previo
+                        $('.opc-regresar').addClass('hidden');
+                        $('.opc-regresar-sub').removeClass('hidden');
+
+                        //Cerrando Loading
+                        cerrarLoading();
+                    },
+                    error: function (data) {
+                        errorLoading();
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '.opc-regresar > a#btn-tbl-det-regresar', function (ele) {
+            $('#divdetalle-proyecto').addClass('hidden');
+            $('#divTablaProyectos').removeClass('hidden');
+        });
+
+        $(document).on('click', '.opc-regresar-sub > a#btn-tbl-det-regresar', function (ele) {
+            $('#body-detalle-subetapa').addClass('hidden');
+            $('#elementos-proy').removeClass('hidden');
+
+            //Habilitamos boton regresar a estado previo
+            $('.opc-regresar-sub').addClass('hidden');
+            $('.opc-regresar').removeClass('hidden');
+        });
+
+        $(document).on('click', '.nav-pills > li.tp-subfiltro > a', function (ele) {
+            var id = $(this).data('id');
+            var filtro = $(this).html();
+            console.log($(this).html());
+            if( obj.length === undefined)
+            {
+                if (id !== 0) {
+                    var listafiltrada = _.where(obj.Proyectos, { proyecto_idTipoProyecto: id });
+                } else
+                {
+                    var listafiltrada = obj.Proyectos;
+                }
+            } else {
+                if (OBJ.enproceso != undefined && OBJ.enproceso.length > 0) {
+                    if (id !== 0) {
+                        var listafiltrada = _.where(OBJ.enproceso[0].Proyectos, { proyecto_idTipoProyecto: id });
+                    } else {
+                        var listafiltrada = OBJ.enproceso[0].Proyectos;
+                    }
+                }
+                else {
+                    var listafiltrada = {};
+                }
+            }
+
+            if (listafiltrada.length) {
+                cargarCntSistemas('#cnt-subsis-ind-tab2', listafiltrada, 'proceso');
+                cargaTablaProyectos('#grid-proyectos-proceso', listafiltrada);
+            } else {
+                MsjEmptyList('#grid-proyectos-proceso', filtro);
+            }
+        });
+
+    }
+
+
+    //Iniciar vista de gráficas
+    function initTablerosSubsistema() {
+        $.ajax({
+            type: 'GET',
+            url: '/Tableros/TablerosJsonInit',
+            beforeSend: function (data) {
+                mostrarLoading();
+            },
+            success: function (data) {
+                var GBL = [];
+                OBJ = JSON.parse(data);
+                if (OBJ.tablero_subsistema[0] != undefined) {
+                    GBL[0] = OBJ.tablero_subsistema[0];
+                    setTotalProyecto(GBL[0].TotalProyectos);
+                    cargarDiagrama({
+                        tmpl: "#tmp-tablero-subsis-glob",
+                        datos: GBL,
+                        cnt: ".cnt-tbl-subsis-glob"
+                    }, function () {
+                        initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                    });
+                    cargarDiagrama({
+                        tmpl: "#tmp-tablero-subsis",
+                        datos: OBJ.tablero_subsistema[0].tablero_subsistema,
+                        cnt: ".cnt-tbl-subsis"
+                    }, function () {
+                        initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+                    });
+                    cargarDiagrama({
+                        tmpl: "#tmp-tablero-subsis-bar",
+                        datos: GBL,
+                        cnt: ".cnt-vista-graf-bar",
+                        agregar: true
+                    });
+                    cargarDiagrama({
+                        tmpl: "#tmp-tablero-subsis-bar",
+                        datos: OBJ.tablero_subsistema[0].tablero_subsistema,
+                        cnt: ".cnt-vista-graf-bar",
+                        agregar: true
+                    });
+                    initEventos();
+                } else {
+                    $('.cnt-vista-graf-pie').html('<div class="alert alert-info text-center"><strong>¡No existen elementos para mostrar!</strong></div>');
+                }
+                //Cerrar Loading al terminar carga
+                cerrarLoading();
+            },
+            error: function (data) {
+                errorLoading();
+            }
+        });
+    }
+
+    //Carga para gráficas
+    function cargarDiagrama(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.length > 0) {
+
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos, "idss": atr.idss });
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).append(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+            $('.cnt-tbl-subsis').empty().html('');
+        }
+    }
+
+    function cargarDiagramaTitle(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.procesos.length > 0) {
+
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos });
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).append(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+            $('.cnt-tbl-subsis').empty().html('');
+        }
+    }
+
+    function initGraficaDinamicaPie(elemp) {
+        $(elemp).each(function (i, e) {
+            var elem = $(e).data('elem');
+            var avance = $(e).data('avance');
+            var color = $(e).data('color');
+            GraficaDinamicaPie(elem, avance, color);
+        });
+    }
+
+    function GraficaDinamicaPie(elem, avance, color) {
+        var avance_rest = 100 - avance;
+        var ctx = $(elem);
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [avance, avance_rest],
+                    backgroundColor: [setColor(color), setColor('default')],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: { enabled: false }
+            }
+        });
+    }
+
+    function cargarSubFiltros(cnt, elem) {
+        if (elem.length > 0) {
+            var tmpl = $('#tmp-subfiltros').html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": elem });
+            $(cnt).html(html);
+        }
+    }
+
+    function setColor(c) {
+        var setColor = [];
+        setColor["verde"] = "#00CE93";
+        setColor["amarillo"] = "#FFC542";
+        setColor["rojo"] = "#FF364D";
+        setColor["azul"] = "#008DAC";
+        setColor["gris"] = "#A4A09B";
+        setColor["default"] = "#E9E7E4";
+
+        return setColor[c];
+    }
+
+    function initComboTblGlobal() {
+        $('#sel-tbl-glob').empty();
+        _.each(OBJ.tablero_subsistema, function (e, i) {
+            //$('#sel-tbl-glob').append('<option value="' + e.fecha + '">' + e.fecha + '</option>');
+            $('#sel-tbl-glob').append('<option data-id="' + e.idpublicacion + '" value="' + e.fecha + '">' + e.fecha + '</option>');
+        });
+    }
+
+    function initComboTblGlobal2(data) {
+        $('#sel-tbl-glob2').empty();
+        _.each(data, function (e, i) {
+            var fecha = moment(e.FechaPublicacion);
+            $('#sel-tbl-glob2').append('<option value="' + fecha.locale('es').format('YYYY-MM-DD HH:mm') + '">' + fecha.locale('es').format('YYYY-MM-DD HH:mm') + '</option>');
+        });
+    }
+
+    function setFechaTblGlobal(opc) {
+        if (opc === undefined || opc === "") {
+            var f = OBJ.tablero_subsistema[0].fecha;
+
+        } else {
+            var f = opc;
+        }
+        $('.group-opc-graf .fecha').text(f);
+    }
+
+    function setTotalProyecto(N) {
+        if (N > 0) {
+            $('.lbl-n-proyectos').text(N + " COMP. DE PROYECTO" + ((N > 1) ? "S" : "") + " EN EJECUCIÓN");
+        }
+    }
+
+    function setMes(m) {
+        var setMes = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+        return setMes[m];
+    }
+
+    function cargarDetalleProcesos(e) {
+        var subsis = $(e).data('subsistema');
+        var fecha = $('#tab-tablero1 #sel-tbl-glob').val();
+        var publicacion = $(e).data('idpub');
+        var option = $('option:selected', publicacion).attr('data-id');
+
+        if (subsis !== "") {
+            //Se esconden elementos necesarios
+            $('div[class*="cnt-vista-graf-"]').addClass('hidden');
+            $('.cnt-vista-subsis-det').removeClass('hidden');
+            $('.group-opc-det').removeClass('hidden');
+            $('.group-opc-graf').addClass('hidden');
+
+            $.ajax({
+                type: 'GET',
+                url: '/Tableros/TablerosDetJson',
+                data: { idpublicacion: publicacion, idss: subsis },
+                beforeSend: function (data) {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var jdata = JSON.parse(data);
+
+                    if (jdata !== undefined) {
+                        cargarDiagramaTitle({
+                            tmpl: "#tmp-subsis-det-globTitle",
+                            datos: jdata,
+                            cnt: ".row-subsis-det-glob"
+                        }, function () {
+                            $('.row-subsis-det-glob').removeClass("hidden");
+                        });
+                        console.log(jdata);
+                        cargarDiagrama({
+                            tmpl: "#tmp-subsis-det",
+                            datos: jdata.procesos,
+                            cnt: ".row-subsis-det",
+                            idss: jdata.subsistema_id
+                        });
+                    }
+
+                    //Cerrando Loading
+                    cerrarLoading();
+                },
+                error: function (data) {
+                    errorLoading();
+                }
+            });
+        }
+    }
+
+    function cargarTabsSistemas(d) {
+        if (d.enproceso.length > 0) {
+            var tmpl = $("#tmp-coleccion-tab-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.enproceso });
+            $('#nav-proyecto').html(html);
+        }
+    }
+
+    function cargarCntSistemas(elem, d, estatus) {
+        if (d.length > 0) {
+            var tmpl = $("#tmp-coleccion-tabcont-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d, "estatus": estatus });
+            $(elem).html(html);
+        }
+    }
+
+    function cargaTablaProyectos(elem, dt) {
+        var d = { "rows": dt };
+        $(elem).bootgrid({
+            rowCount: 5,
+            columnSelection: true,
+            labels: {
+                infos: "",//"{{ctx.start}} de {{ctx.end}}, Total: {{ctx.total}}",
+                noResults: "No hay resultados"
+            },
+            formatters: {
+                "fecha-ini-format": function (colum, row) {
+                    var fecha = moment(row.proyecto_fecha_ini);
+                    return fecha.locale('es').format('L');
+                },
+                "fecha-fin-format": function (colum, row) {
+                    var fecha = moment(row.proyecto_fecha_fin);
+                    return fecha.locale('es').format('L');
+                },
+                "indicador-global": function (colum, row) {
+                    return '<div class="circle ' + row.proyecto_indicador_global + '"></div>'
+                },
+                "proyecto_nombre": function (colum, row) {
+                    return '<a class="btn fa fa-info-circle btn-infoCompromiso" data-idproy="' + row.proyecto_id + '" data-idtipoproy="' + row.proyecto_idTipoProyecto + '"  rel="popover" data-toggle="popover" title="Estructura del Componente de Proyecto" data-content="<p><strong>' + SetLevel(row.proyecto_trace) + '</strong></p>"></a> <a class="link-Proyecto" role="button" data-idproy="' + row.proyecto_id + '" data-idpublicacion="' + row.proyecto_idpublicacion + '" onclick="selectDetallesProy(this)">' + row.proyecto_nombre + '</a>';
+                },
+                "component-indicador": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_12MPI + '">' + row.porcentaje_12MPI + '% </a>';
+                },
+                "component-indicador-2": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_SASP + '">' + row.porcentaje_SASP + '% </a>';
+                },
+                "component-indicador-3": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_SAA + '">' + row.porcentaje_SAA + '% </a>';
+                },
+                "component-indicador-4": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_SAST + '">' + row.porcentaje_SAST + '% </a>';
+                },
+                "menu-contextual": function (culumn, row) {
+                    return '<a data-idproy="' + row.proyecto_id + '" class="btn btn-vista-tbl pull-right btn-opc-proy hidden" onclick="opcionProyecto(this);" title="Eliminar proyecto" ><i class="fa fa-ellipsis-h"></i></a>';
+                }
+            }
+            //Carga de datos
+        }).bootgrid("append", d.rows);
+    }
+
+    function SetLevel(trace)
+    {
+        var resultstr = "";
+        if (trace != null) {
+            var level = trace.split('-');
+            
+            level.forEach(function (ele, i) {
+                var spacer = "";
+
+                for (j = 0 ; j < i ; j++)
+                    spacer += '&nbsp&nbsp';
+
+                resultstr += spacer + ele + '<br />';
+            });
+        }
+        else {
+            resultstr = "No Definido";
+        }
+
+        return resultstr;
+    }
+
+    function opcionProyecto(elem) {
+        //TODO: Método para mostrar Opciones para proyecto
+        alert(":D");
+    }
+
+    function selectDetallesProy(elem) {
+        var idproy = $(elem).data('idproy');
+        var idpub = $(elem).data('idpublicacion');
+
+        if (idproy > 0) {
+            $.ajax({
+                type: "GET",
+                url: "/Tableros/GetEtapasxIdProy",
+                data: { idproyecto: idproy, idpublicacion: idpub },
+                beforeSend: function (data) {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var jdata = JSON.parse(data);
+                    cargarDetalleProyectoElem(jdata);
+                    $('#divTablaProyectos').addClass('hidden');
+                    $('#divdetalle-proyecto').removeClass('hidden');
+
+                    cargarElementosDetalles(jdata);
+
+                    //Cerrando Loading
+                    cerrarLoading();
+                },
+                error: function (data) {
+                    errorLoading();
+                }
+            });
+        }
+    }
+
+    function cargarDetalleProyectoElem(elementos) {
+        if (elementos.Proyecto.length > 0) {
+            var tmpldetalle = $("#tmp-coleccion-detalleProy").html();
+            var compdetalle = _.template(tmpldetalle);
+            var html = compdetalle({ "Proyecto": elementos.Proyecto[0] });
+            $('#divdetalle-proyecto').html(html);
+        }
+    }
+
+    function cargarDetalleProyectoSubElem(elementos, idetapa) {
+        if (elementos.Proyecto.length > 0) {
+            var tmpldetalle = $("#tmp-Subcoleccion-detalleProy").html();
+            var compdetalle = _.template(tmpldetalle);
+            var html = compdetalle({ "Proyecto": elementos.Proyecto[0], "idEtapa": idetapa });
+            $('#body-detalle-subetapa').html(html);
+        }
+    }
+
+    function cargarElementosDetalles(elementos) {
+        if (elementos.Etapas.length > 0) {
+            var tmpldetalle = $("#tmp-elemento-detalleProy").html();
+            var compdetalle = _.template(tmpldetalle);
+            var html = compdetalle({ "Proyecto": elementos.Etapas, "isSubEtapa": false });
+            $('#elementos-proy').html(html);
+        }
+    }
+
+    function cargarSubElementosDetalles(elementos) {
+        if (elementos.Etapas.length > 0) {
+            var tmpldetalle = $("#tmp-elemento-detalleProy").html();
+            var compdetalle = _.template(tmpldetalle);
+            var html = compdetalle({ "Proyecto": elementos.Etapas, "isSubEtapa": true });
+            $('#subelementos-proy').html(html);
+        }
+    }
+
+    function MsjEmptyList(cnt, nombreFiltro)
+    {
+        var msj = '<div class="alert alert-danger error0 text-center" style="width: 500px; margin: 30px 200px;" role="alert"> No existen proyectos del Tipo <strong>' + nombreFiltro + '</strong>  </div>';
+
+
+        $(cnt).empty().append(msj);
+
+        setTimeout(function () {
+            $('#grid-proyectos-proceso .alert-danger').addClass('fade');
+            $('#grid-proyectos-proceso .alert-danger').remove();
+            //location.reload();
+        }, 3000);
+    }
+
+</script>

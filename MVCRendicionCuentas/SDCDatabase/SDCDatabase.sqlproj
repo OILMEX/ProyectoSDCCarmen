@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>SDCDatabase</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{ad1b887f-b330-4a0a-9d66-57754d1d1299}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>SDCDatabase</RootNamespace>
+    <AssemblyName>SDCDatabase</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Functions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\tbl_Subsistemas.sql" />
+    <Build Include="dbo\Tables\tbl_SubEtapas.sql" />
+    <Build Include="dbo\Tables\tbl_SoportesAsignadosaIndicador.sql" />
+    <Build Include="dbo\Tables\tbl_Revisiones.sql" />
+    <Build Include="dbo\Tables\tbl_Responsables.sql" />
+    <Build Include="dbo\Tables\tbl_Puesto.sql" />
+    <Build Include="dbo\Tables\tbl_Proyectos.sql" />
+    <Build Include="dbo\Tables\tbl_Organigrama.sql" />
+    <Build Include="dbo\Tables\tbl_Indicadores.sql" />
+    <Build Include="dbo\Tables\tbl_Etapas.sql" />
+    <Build Include="dbo\Tables\tbl_Elementos.sql" />
+    <Build Include="dbo\Tables\tbl_ComentariosAsignadosIndicador.sql" />
+    <Build Include="dbo\Tables\tbl_Areas.sql" />
+    <Build Include="dbo\Tables\Rel_ProgramaAsociadoIndicador.sql" />
+    <Build Include="dbo\Tables\Predata_ValoresIndicadoresFormula.sql" />
+    <Build Include="dbo\Tables\Predata_ ValoresIndicadoresPrograma.sql" />
+    <Build Include="dbo\Tables\Data_ValoresIndicador.sql" />
+    <Build Include="dbo\Tables\Dashboard_PublicacionTabular.sql" />
+    <Build Include="dbo\Tables\Dashboard_PublicacionProyectos.sql" />
+    <Build Include="dbo\Tables\Dashboard_PublicacionProyectoEtapa.sql" />
+    <Build Include="dbo\Tables\Dashboard_Publicaciones.sql" />
+    <Build Include="dbo\Tables\Dashboard_PublicacionElemento.sql" />
+    <Build Include="dbo\Tables\Dashboard_PublicacionAvanceSubsistema.sql" />
+    <Build Include="dbo\Tables\Dashboard_PublicacionAvanceGlobal.sql" />
+    <Build Include="dbo\Tables\Config_SubEtapaIndicador.sql" />
+    <Build Include="dbo\Tables\Config_RelacionIndicadorProyecto.sql" />
+    <Build Include="dbo\Tables\Config_IndicadorResponsable.sql" />
+    <Build Include="dbo\Tables\Config_FechasSubEtapasProyecto.sql" />
+    <Build Include="dbo\Tables\Config_FechasEtapasProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectOne_Responsable.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_Responsables.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_Puestos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_IndicadoresPorElemento.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_ElementosPorSubsistema.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_Areas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_Elementos.sql" />
+    <Build Include="dbo\Tables\RunTime_PorcentajesProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaCargaIndicadores12MPIxReponsable.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertConfiguracionProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllResponsablesIndicadorXProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertRevisiones12MPI.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveSemaforoSubsistemaProyecto.sql" />
+    <Build Include="dbo\Functions\fct_DevuelvePorcentajeSubsistemaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllProyectosByEstatus.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveIdProximaRevision.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaCargaIndicadoresProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertRevisionesIndicadoresSubEtapas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_FechasSubEtapasxProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_UpdateRelacionIndicadorSubEtapaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_ConfiguracionIndicadoresSubEtapasxProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_IndicadoresGlobalesEnProceso.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertConfigSubEtapasIndicadorCompromisos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertConfigResponsables12MPI.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertConfigResponIndSubEProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertConfigIndicador12MPICompromisos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertProgramaAsociadoNuevoIndicador.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveValorRealConsiderandoMeta.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveValor.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveSemaforoSoportes.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveSemaforoNotas.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveSemaforoIndicador.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveIdValorxRIResponsable.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectPromedioRTSubsistemas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectPromedioRT12MPI.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertSemaforosdeProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_RecalculoRevisionesEnProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_Select_PublicacionValoresSemaforosXSubsistemas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_Select_PublicacionSubsistemasxMesTabular.sql" />
+    <Build Include="dbo\Stored Procedures\SP_Select_PublicacionElementoxSubsistema.sql" />
+    <Build Include="dbo\Stored Procedures\SP_Select_PublicacionAvanceGlobal.sql" />
+    <Build Include="dbo\Stored Procedures\SP_Select_Publicacion.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllCount_IndicadoresLlenosFaltantesSubsistemas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_Select_ProgramaAsociadoxIndicador.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllCount_IndicadoresLlenosFaltantes12MPI.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_IndicadoresLlenosFaltantesGlobalesMonitoreo.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_ValoresSemaforoSubsistemasEnProceso.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_MonitoreoIndicadoresResponsablesSubsistemas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_MonitoreoIndicadoresResponsables12MPI.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllCount_MonitoreoIndicadoresFaltantesxResponsableSubsistema.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllCount_MonitoreoIndicadoresFaltantesxResponsable12MPI.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveFechaFinEtapaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertValoresIndicadores.sql" />
+    <Build Include="dbo\Tables\Dashboard_PublicacionProyectoSubetapa.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectOne_PublicacionProyectoEtapaSeleccionada.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllPublicacionProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_PublicacionProyectoSubEtapas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_PublicacionProyectoEtapas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertProgramaConfigIndicadorResponsable.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectOne_PublicacionProyectoSeleccionado.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveFechaFinSubEtapaProyecto.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveIdElemento_1.sql" />
+    <Build Include="dbo\Stored Procedures\SP_ProcesodePublicacion_1.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertIndicadoresProyecto_v2_1.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DevuelveSemaforoConsiderandoMeta.sql" />
+    <Build Include="dbo\Tables\Config_Avisos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertValoresdeMesesxSubsistemasxPublicacion.sql" />
+    <Build Include="dbo\Stored Procedures\SP_UpdateEstatusTiempoSubEtapaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_UpdateEstatusSubetapaProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_UpdateEstatusEtapaProyectos.sql" />
+    <Build Include="dbo\Tables\tbl_Ubicaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertIndicadorDesdeProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectOne_Ubicacion.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_Ubicaciones.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveEstatusSubEtapaProyecto.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveEstatusEtapaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllProyectosByEstatusAndRol.sql" />
+    <Build Include="dbo\Tables\tbl_TipoElementoOrganigrama.sql" />
+    <Build Include="dbo\Tables\tbl_Superintendencias.sql" />
+    <Build Include="dbo\Tables\tbl_Subdirecciones.sql" />
+    <Build Include="dbo\Tables\tbl_Gerencias.sql" />
+    <Build Include="dbo\Tables\tbl_Coordinaciones.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_BusquedaPuestoBeforeInsert.sql" />
+    <Build Include="dbo\Stored Procedures\SP_InsertPuesto.sql" />
+    <Build Include="dbo\Tables\tbl_PuestoOrganigrama.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveFechaInicioEtapaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectTrace_Puesto.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveClaveSubEtapa.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveClaveEtapa.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DevuelveSemaforoComentarios.sql" />
+    <Build Include="dbo\Tables\tbl_TipoProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectTrace_Proyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_TipoProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_SuperintendenciasParaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_PublicacionesProyectosByTipo.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_CoordinacionesParaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_Subsistemas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_IndicadoresPorElementoFaltantesEnSubEtapaProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DevuelveDatosGrid.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveEstatusMejoraElementos.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveEstatusMejora.sql" />
+    <Build Include="dbo\Tables\%2712mpi_%27.sql" />
+    <Build Include="dbo\Stored Procedures\SP_UpdateFechaCompromisoInCRIP.sql" />
+    <Build Include="dbo\Stored Procedures\SP_UpdateFrecuenciaActualizacionInCRIP.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveSemaforoSoportesdeIndicadoresAgrupados.sql" />
+    <Build Include="dbo\Functions\fct_DevuelveSemaforoNotasdeIndicadoresAgrupados.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaCargaIndicadoresAgrupadosProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_SoportesdeIndicadores.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAll_ComentariosdeIndicadores.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaCargaIndicadoresProyectosByProyecto_1.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectPromedioRT12MPIByUbicacion.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaIndicadoresActivadosPeroNoAsignadosEnProyectos.sql" />
+    <Build Include="dbo\Tables\tbl_HistorialCambioFechas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaIndicadores12MPIActivadosPeroAsignados.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaparaPivotGridProyectos.sql" />
+    <Build Include="dbo\Stored Procedures\SP_SelectAllCount_IndicadoresLlenosFaltantesXProyecto.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaCargaIndicadores12MPIAgrupados.sql" />
+    <Build Include="dbo\Tables\tbl_Historico.sql" />
+    <Build Include="dbo\Tables\LogAuditoria.sql" />
+    <Build Include="dbo\Stored Procedures\SP_GenerarHistoricoDiario.sql" />
+    <Build Include="dbo\Stored Procedures\SP_VistaCargaIndicadores12MPIxReponsableSubadministrador.sql" />
+  </ItemGroup>
+</Project>

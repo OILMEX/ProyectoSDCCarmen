@@ -1,0 +1,284 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdministracion.cshtml";
+}
+@model HtmlString
+
+<div class="container-fluid cnt-vista-opciones pdt-10 pdr-5">
+    <span class="subsistema-nombre-largo">ESTRUCTURAS DE MACROPROYECTOS</span>
+    <a class="pull-right btn glyphicon btn-opc-ind fa fa-plus activo" id="btnAddOrganigrama"></a>
+</div>
+<div id="organigrama" style="min-height:300px;">
+
+</div>
+
+<script type="text/template" id="tmpl_organigrama">
+    <% _.each(model ,function(subdir,i){
+    var countGer = subdir.Grencias.length; %>
+    <div class="nodo-padre"
+         data-toggle="collapse"
+         id="box-n0-elem-<%= subdir.IdSubdireccion %>"
+         data-target="<%= (countGer > 0 ) ?'#box-elem-'+ i :'' %>"
+         data-tipo="2"
+         data-id="<%= subdir.IdSubdireccion %>"
+         data-clave="<%= subdir.ClaveSubdireccion %>"
+         data-clavep="<%= subdir.ClaveSubdireccion %>"
+         role="button">
+        <span class="mrl-5">
+            <i class="icon-row icon-rc-img icon-rc-rowright h-20"></i>
+            <i class="glyphicon glyphicon-folder-open h-20"></i>
+            <%= subdir.NombreSubdireccion %>
+        </span>
+    </div>
+    <% if(countGer > 0 ){ %>
+    <div id="box-elem-<%= i %>" class="collapse">
+        <% _.each(subdir.Grencias,function(gerencia, j){
+        var countCoo = gerencia.Coordinaciones.length; %>
+        <div class="nodo-padre"
+             data-toggle="collapse"
+             data-target="<%= (countCoo > 0 )?'#box-elem-'+ i +'_'+ j :'' %>"
+             data-tipo="3"
+             data-id="<%= gerencia.IdGerencia %>"
+             data-clave="<%= gerencia.ClaveGerencias %>"
+             data-clavep="<%= subdir.ClaveSubdireccion+'.'+gerencia.ClaveGerencias %>"
+             role="button">
+            <span class="mrl-5">
+                <i class="icon-row icon-rc-img icon-rc-rowright h-20 mrl-20"></i>
+                <i class="glyphicon glyphicon-folder-open h-20"></i>
+                <%=gerencia.NombreGerencia%>
+            </span>
+        </div>
+        <% if(countCoo > 0 ){ %>
+        <div id="box-elem-<%= i +'_'+ j %>" class="collapse">
+            <% _.each(gerencia.Coordinaciones,function(coordinacion, k){
+            var countSuper = coordinacion.Superintendecias.length; %>
+            <div class="nodo-padre"
+                 data-toggle="collapse"
+                 data-target="<%= (countSuper > 0 )?'#box-elem-'+ i +'_'+ j +'_' + k :'' %>"
+                 data-tipo="4"
+                 data-id="<%= coordinacion.IdCoordinacion %>"
+                 data-clave="<%= coordinacion.ClaveCoordinaciones %>"
+                 data-clavep="<%= subdir.ClaveSubdireccion+'.'+gerencia.ClaveGerencias+'.'+coordinacion.ClaveCoordinaciones %>"
+                 role="button">
+                <span class="mrl-5">
+                    <i class="icon-row icon-rc-img icon-rc-rowright h-20 mrl-40"></i>
+                    <i class="glyphicon glyphicon-folder-open h-20"></i>
+                    <%=coordinacion.NombreCoordinacion%>
+                </span>
+            </div>
+            <% if(countSuper > 0 ){ %>
+            <div id="box-elem-<%= i +'_'+ j + '_' + k%>" class="collapse">
+                <% _.each(coordinacion.Superintendecias,function(superintendencia, l){ %>
+                <div class="nodo-padre"
+                     data-toggle="collapse"
+                     data-target="<%= (countSuper > 0 )?'#box-elem-'+ i +'_'+ j + '_' + k + '_'+ l :'' %>"
+                     data-tipo="5"
+                     data-id="<%= superintendencia.IdSuperintendencia %>"
+                     data-clave="<%= superintendencia.ClaveSuperintendencias %>"
+                     data-clavep="<%= subdir.ClaveSubdireccion+'.'+gerencia.ClaveGerencias+'.'+coordinacion.ClaveCoordinaciones+'.'+superintendencia.ClaveSuperintendencias %>"
+                     role="button">
+                    <span class="mrl-5">
+                        <i class="icon-row icon-rc-img icon-rc-rowright h-20 mrl-60"></i>
+                        <i class="glyphicon glyphicon-folder-open h-20"></i>
+                        <%=superintendencia.NombreSuperIntendencia%>
+                    </span>
+                </div>
+                <% }); %>
+            </div>
+            <% } }); %>
+        </div>
+        <% } }); %>
+    </div>
+    <% } }); %>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+
+        var tmpl = $('#tmpl_organigrama').html();
+        var templateFn = _.template(tmpl);
+        var html = templateFn({ model: @Model });
+        $("#organigrama").html(html);
+
+        ////Accion para ocultar menu contextual cuando se clickea fuera del elemento
+        $(document).mouseup(function (e) {
+            if (!$contextMenu.is(e.target) // if the target of the click isn't the container...
+                && $contextMenu.has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                $contextMenu.hide();
+            }
+        });
+
+        ////Acciones para mostrar el menu contextual
+        var $contextMenu = $("#contextMenu");
+        $("body").on("contextmenu", "div#organigrama div.nodo-padre,div#organigrama div.nodo-fijo", function (e) {
+            var ide = $(this).attr('data-id'),
+                idr = $(this).attr('data-idrel'),
+                tipo = $(this).attr('data-tipo'),
+                clave = $(this).attr('data-clave'),
+                clavep = $(this).attr('data-clavep'),
+                nombre = $(this).text(),
+                nodo = $(this).attr('class');
+
+            $("#contextMenu ul li:eq(2)").addClass('hidden');
+            $("#contextMenu ul li:eq(3)").addClass('hidden');
+            if(tipo == 5){
+                $("#contextMenu ul li:lt(2)").hide();
+            }else{
+                $("#contextMenu ul li:lt(2)").show();
+            }
+
+            $contextMenu.css({
+                display: "block",
+                left: e.pageX,
+                top: e.pageY
+            }).attr({
+                'data-ide': ide,
+                'data-idr': idr,
+                'data-tipo': tipo,
+                'data-nodo': nodo,
+                'data-clave': clave,
+                'data-clavep': clavep,
+                'data-nombre': nombre
+            });
+            return false;
+        });
+
+        ////Eventos del menu contextual
+        $contextMenu.on("click", "a", function () {
+            $contextMenu.hide();
+            var ide = $contextMenu.attr('data-ide'),
+                idr = $contextMenu.attr('data-idr'),
+                tipo = $contextMenu.attr('data-tipo'),
+                nodo = $contextMenu.attr('data-nodo'),
+                clave = $contextMenu.attr('data-clave'),
+                clavep = $contextMenu.attr('data-clavep'),
+                nombre = $.trim($contextMenu.attr('data-nombre')),
+                action = $(this).data("action");
+
+            if(action !== 2 ){
+                var nombreNivel = ((tipo == 2)?"GERENCIA":((tipo==3)?"COORDINACIÓN":"SUPERINTENDENCIA"));
+                var modal = $('#modalOrganigrama');
+                switch (action) {
+                    case 1:
+                        modal.find('.modal-title').text('AGREGAR NIVEL PARA ' + nombreNivel);
+                        modal.find('.msjEliminarModal').addClass('hidden');
+                        modal.find('.modal-body input#tipo').val(tipo);
+                        modal.find('.modal-body input#IdRelacion').val(ide);
+                        modal.find('.modal-body input#IdNivel').val('');
+                        modal.find('.modal-body input#ClaveNivel').val('');
+                        modal.find('.modal-body input#NombreNivel').val('');
+                        modal.find('.modal-body input#actionOrganigrama').val('').val('add');
+                        modal.modal('show');
+                        break;
+                    case 3:
+                        modal.find('.modal-title').text('EDITAR NIVEL');
+                        modal.find('.msjEliminarModal').addClass('hidden');
+                        modal.find('.modal-body input#tipo').val(tipo - 1);
+                        modal.find('.modal-body input#IdNivel').val(ide);
+                        modal.find('.modal-body input#ClaveNivel').val(clave);
+                        modal.find('.modal-body input#NombreNivel').val(nombre);
+                        modal.find('.modal-body input#actionOrganigrama').val('edit');
+                        modal.modal('show');
+                        break;
+                    case 4:
+                        modal.find('.modal-title').text('ELIMINAR NIVEL');
+                        modal.find('.msjEliminarModal').removeClass('hidden');
+                        modal.find('.modal-body input#tipo').val(tipo - 1);
+                        modal.find('.modal-body input#IdNivel').val(ide);
+                        modal.find('.modal-body input#ClaveNivel').val(clave);
+                        modal.find('.modal-body input#NombreNivel').val(nombre);
+                        modal.find('.modal-body input#actionOrganigrama').val('delete');
+                        modal.modal('show');
+                        break;
+                }
+            }
+        });
+
+        //Envio del formulario Nuevo
+        $(document).on("click", "#modalOrganigrama #btnSubmitNivelOrganigrama", function () {
+            var action = $('#modalOrganigrama .modal-body #actionOrganigrama').val();
+            if (action != null && action != undefined) {
+                var act = (action === 'add') ? '/MacroProyectos/addNivel/' : ((action === 'edit') ? '/MacroProyectos/updateNivel/' : '/MacroProyectos/deleteNivel/');
+                $('#modalOrganigrama .modal-body form').attr('action', act);
+                $('#modalOrganigrama .modal-body form').submit();
+            }
+        });
+
+        //validacion formulario organigrama
+        $('#modalOrganigrama .modal-body form').validate({
+            rules: {
+                'ClaveNivel': { required: true },
+                'NombreNivel': {required: true}
+            },
+            messages: {
+                'ClaveNivel': { required: "El campo es requerido" },
+                'NombreNivel': { required: "El campo es requerido" }
+            }
+        });
+
+        //Procesar envío de ubicación
+        $('#modalOrganigrama .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                var tipo = $('#modalOrganigrama .modal-body form #tipo').val();
+                $('#modalOrganigrama .modal-body form').ajaxSubmit({
+                    data: { tipo: tipo },
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalOrganigrama .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalOrganigrama .msjEliminarModal').addClass('hidden');
+                        $('#modalOrganigrama .modal-body .alert-warning').addClass('hidden');
+                        var action = $("#modalOrganigrama .modal-body #actionOrganigrama").val();
+                        if (d > 0) {
+                            if (action === "add" || "edit") {
+                                $('#modalOrganigrama .modal-body .alert-success.edit').removeClass('hidden');
+                            } else {
+                                $('#modalOrganigrama .modal-body .alert-success.delete').removeClass('hidden');
+                            }
+                        } else if(d === 0) {
+                            $('#modalOrganigrama .modal-body .alert-danger.error0').removeClass('hidden');
+                        } else {
+                            $('#modalOrganigrama .modal-body .alert-danger.error1').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalOrganigrama').modal('hide');
+                            $('#modalOrganigrama .modal-body .alert-success').addClass('hidden');
+                            $('#modalOrganigrama .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1500);
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(document).on('click', '.modal-dialog .modal-footer .btn.btnCancelar', function () {
+            $('.modal-dialog .modal-body form input[type="text"]').val('');
+            $('.modal-dialog .modal-body input.error').removeClass('error');
+            $('.modal-dialog .modal-body label.error').remove();
+        });
+
+        //Evento para añadir una nueva subdirección
+        $(document).on('click','#btnAddOrganigrama', function(){
+            var modal = $('#modalOrganigrama');
+            modal.find('.modal-title').text('AGREGAR NIVEL PARA SUBDIRECCIÓN');
+            modal.find('.msjEliminarModal').addClass('hidden');
+            modal.find('.modal-body input#tipo').val(1);
+            modal.find('.modal-body input#IdRelacion').val('');
+            modal.find('.modal-body input#IdNivel').val('');
+            modal.find('.modal-body input#ClaveNivel').val('');
+            modal.find('.modal-body input#NombreNivel').val('');
+            modal.find('.modal-body input#actionOrganigrama').val('').val('add');
+            modal.modal('show');
+        });
+
+        $('.nodo-padre').click(function(){
+            var eNext = $(this).attr('data-target');
+            var n = $(eNext).find('.nodo-padre').length + $(eNext).find('.nodo-fijo').length;
+            if(n > 0){
+                $(this).find('.icon-row').toggleClass('icon-rc-rowdown','icon-rc-rowright');
+            }
+        });
+
+    });
+
+</script>

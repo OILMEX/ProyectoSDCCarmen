@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].['12mpi$'] (
+    [IdIndicador]                FLOAT (53)     NULL,
+    [IdElemento]                 NVARCHAR (255) NULL,
+    [Clave]                      NVARCHAR (255) NULL,
+    [Prefijo]                    NVARCHAR (255) NULL,
+    [DescripcionCorta]           NVARCHAR (255) NULL,
+    [DescripcionLarga]           NVARCHAR (255) NULL,
+    [CheckSoporte]               FLOAT (53)     NULL,
+    [CheckComentarios]           FLOAT (53)     NULL,
+    [CheckReqSoporte]            FLOAT (53)     NULL,
+    [CheckReqComentario]         FLOAT (53)     NULL,
+    [CheckCreacionDesdeProyecto] FLOAT (53)     NULL,
+    [FechaCreacion]              NVARCHAR (255) NULL,
+    [UsuarioCreacion]            NVARCHAR (255) NULL,
+    [FechaActualizacion]         NVARCHAR (255) NULL,
+    [UsuarioActualizacion]       NVARCHAR (255) NULL,
+    [Estatus]                    FLOAT (53)     NULL,
+    [TipoIndicador]              NVARCHAR (255) NULL,
+    [TipoFrecuencia]             FLOAT (53)     NULL,
+    [Meta]                       FLOAT (53)     NULL,
+    [TipoCalculo]                NVARCHAR (255) NULL,
+    [DescripcionValorFormula]    NVARCHAR (255) NULL,
+    [EtiquetaValorProgramado]    NVARCHAR (255) NULL,
+    [EtiquetaValorReal]          NVARCHAR (255) NULL,
+    [CheckAplica]                NVARCHAR (255) NULL
+);
+

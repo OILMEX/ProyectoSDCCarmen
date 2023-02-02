@@ -1,0 +1,1987 @@
+﻿@model HtmlString
+
+<div class="container-fluid pdl-5 pdr-5 pdt-5">
+    <div class="container-fluid lbl-mod-tit pdb-20 pdl-0 pdr-0">
+
+        <div class="media">
+            <div class="media-left media-middle">
+                <img class="media-object" src="~/Images/iconos_secciones/proyectos.png" />
+            </div>
+            <div class="media-body">
+                <span>EDITAR COMPONENTE DE PROYECTO</span>
+                <a id="btn-tbl-det-regresar" class="pull-right btn btn-regresar" href="@Url.Action("Index", "ConfigProyecto")"><i class="glyphicon glyphicon-chevron-left"></i>REGRESAR</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="form_editar" class="panel panel-default pdl-5 pdr-5 pdt-20 pdb-20">
+        <form id="frmEditarDetalleProyecto" name="frmEditarDetalleProyecto" method="post" action="/ConfigProyecto/editProyecto">
+            <input type="hidden" name="IdProyecto" id="IdProyecto" />
+            <div class="container-fluid no-pd">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label" for="NombreProyecto">Nombre del Componente de Proyecto</label>
+                        <input type="text" class="form-control" id="NombreProyecto" name="NombreProyecto">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @*<label class="control-label" for="IdArea">Área Operativa</label>
+                        <select class="form-control" id="IdArea" name="IdArea">
+                            <option value="">Seleccione una opción</option>
+                        </select>*@
+                        <label class="control-label" for="IdUbicacion">Ubicación</label>
+                        <select class="form-control" id="IdUbicacion" name="IdUbicacion"></select>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="IdResponsable">Responsable</label>
+                        <select class="form-control" id="IdResponsable" name="IdResponsable">
+                            <option value="">Seleccione una opción</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="FechaInicio">F. Inicio</label>
+                        <input type="text" class="form-control" id="FechaInicio" name="FechaInicio">
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label" for="FechaFin">F. Fin</label>
+                        <input type="text" class="form-control" id="FechaFin" name="FechaFin">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="NombreCoordinacion">Coordinación</label>
+                        <input type="hidden" name="Coordinaciones" id="Coordinaciones" />
+                        <input type="text" id="NombreCoordinacion" value="" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="NombreSuperintendencia">Superintendencias</label>
+                        <input type="hidden" name="Superintendencias" id="Superintendencias" />
+                        <input type="text" id="NombreSuperintendencia" value="" class="form-control" readonly />
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="TiposProyecto">Tipo Proyecto</label>
+                        <select class="form-control" id="TiposProyecto" name="TiposProyecto"></select>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 modal-footer" style="border-top:0px none;">
+                    <button class="btn btnAceptar pull-right" type="submit">Guardar</button>
+                </div>
+            </div>
+        </form>
+
+        <div id="etapas_proyecto"></div>
+
+
+    </div>
+</div>
+
+<script id="navigation_template" type="text/template">
+    <div class="container-fluid">
+        <div class="col-md-6"></div>
+        <div class="col-md-2 text-center titlefechaeditproyecto">Fecha de inicio de la etapa</div>
+        <div class="col-md-2 text-center titlefechaeditproyecto">Fecha de conclusión de la etapa</div>
+        <div class="col-md-2"></div>
+    </div>
+    <% 
+    var i = 0;
+    _.each(etapas, function(e){ 
+    i++; %>
+    <div class="container-fluid <%= (i == etapas.length)? 'last' : '' %> ">
+        <div class="col-md-6">
+            <% if(e.SubEtapas.length>0) { %>
+            <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-eleme<%= e.etapa_id %>" style="float:left;" role="button"></i>
+            <% }else{ %>
+            <i class="fa" style="width:13px; height:14px;"></i>
+            <% } %>
+            &nbsp;<div class="icon-rc-img icon-rc-etapa-g"></div>&nbsp;
+            <%= e.clave %> <span title="<%= e.etapa_nombre %>"><%= wrapText(e.etapa_nombre, 60, '...') %></span>
+        </div>
+        <div class="col-md-2 text-center divFechaEtapa" id="divFechaIni<%= e.etapa_id %>"><%= (e.FechaIni!=null)? moment(e.FechaIni).format('DD/MM/YYYY') : '' %>&nbsp;</div>
+        <div class="col-md-2 text-center divFechaEtapa" id="divFechaFin<%= e.etapa_id %>"><%= (e.FechaFin!=null)? moment(e.FechaFin).format('DD/MM/YYYY') : '' %>&nbsp;</div>
+        <div class="col-md-1 no-pd">
+            <div class="checkbox checkbox-slider--b-flat mrl-20">
+                <label>
+                    <input class="chkEtapa" id="chkEtapa<%= e.etapa_id %>" onclick="chkEtapa(this)" data-idetapa="<%= e.etapa_id %>" <%= (e.estatus)? 'checked="checked"': '' %>
+                           type="checkbox">
+                    <span></span>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <% if(e.SubEtapas.length>0) { %>
+    <div id="box-eleme<%= e.etapa_id %>" class="collapse nivel-1">
+        <% _.each(e.SubEtapas, function(sub){ %>
+        <div class="container-fluid">
+            <div class="col-md-6">
+                <% if(sub.Subsistemas.length>0) { %>
+                <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-subetapa<%= sub.subetapa_id %>" role="button" style="float:left;"></i>
+                <% }else{ %>
+                <i class="fa" style="width:13px; height:14px;"></i>
+                <% } %>
+                &nbsp;<i class="icon-rc-img icon-rc-subetapa-g"></i>&nbsp;
+                <%= sub.clave %> <span title="<%= sub.subetapa_nombre %>"><%= wrapText(sub.subetapa_nombre, 50, '...') %></span>
+            </div>
+            <div class="col-md-4 pdl-0 pdr-0 fechas-subetapas">
+                <form id="frmCambioFechas<%= sub.subetapa_id %>" name="frmCambioFechas<%= sub.subetapa_id %>">
+                    <div class="col-md-6 text-center">
+
+                        <span id="spanfiniSubEtapa<%= sub.subetapa_id %>" class="collapse in" data-fecha="<%= (sub.FechaIni!=null)? moment(sub.FechaIni).format('DD/MM/YYYY'): '' %>"><%= (sub.FechaIni!=null)? moment(sub.FechaIni).format('DD/MM/YYYY'): '' %>&nbsp;</span>
+                        <input id="inputfiniSubEtapa<%= sub.subetapa_id %>"
+                               class="collapse form-control fechaetapa"
+                               size="10" value="<%= (sub.FechaIni!=null)? moment(sub.FechaIni).format('DD/MM/YYYY'): '' %>"
+                               data-idetapa="<%= e.etapa_id %>"
+                               data-idsubetapa="<%= sub.subetapa_id %>" />
+                    </div>
+
+                    <div class="col-md-6 text-center">
+
+                        <span id="spanffinSubEtapa<%= sub.subetapa_id %>" class="collapse in" data-fecha="<%= (sub.FechaFin!=null)? moment(sub.FechaFin).format('DD/MM/YYYY'): '' %>"><%= (sub.FechaFin!=null)? moment(sub.FechaFin).format('DD/MM/YYYY'): '' %>&nbsp;</span>
+                        <input id="inputffinSubEtapa<%= sub.subetapa_id %>"
+                               class="collapse form-control fechaetapa"
+                               size="10" value="<%= (sub.FechaFin!=null)? moment(sub.FechaFin).format('DD/MM/YYYY'): '' %>"
+                               data-idetapa="<%= e.etapa_id %>"
+                               data-idsubetapa="<%= sub.subetapa_id %>" />
+                    </div>
+                    <div class="col-md-12 text-center pdt-0 pdb-0">
+                        <!-- <span id="spanMotivo<%= sub.subetapa_id %>" class="collapse in"><%= 'motivo' %>&nbsp;</span>-->
+                        <input id="inputMotivo<%= sub.subetapa_id %>"
+                               name="inputMotivo"
+                               placeholder="Justificación de cambio de fecha"
+                               class="collapse form-control motivoFecha"
+                               size="10" value="<%= '' %>"
+                               data-msg-maxlength="Solo se permiten 300 caracteres"
+                               data-msg-required="El campo motivo es obligatorio"
+                               data-idetapa="<%= e.etapa_id %>"
+                               data-idsubetapa="<%= sub.subetapa_id %>" />
+                        <span id="spanMensaje" class="collapse">300 caracteres máximo</span>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-md-1 no-pd">
+                <div class="checkbox checkbox-slider--b-flat mrl-20">
+                    <label>
+                        <input class="chkSubEtapa chkEtapa<%= e.etapa_id %>" id="chkSubEtapa<%= sub.subetapa_id %>" data-idsubetapa="<%= sub.subetapa_id %>" <%= (sub.estatus)? 'checked="checked"': '' %>
+                               type="checkbox" onclick="chkSubEtapa(this)">
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-1 pdr-0 pdl-0">
+                <a class="btn btn-success pull-left no-pd w-20 h-20 mrt-4 btnAddInidicadoresES" data-se="<%= sub.subetapa_id %>">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </a>
+                
+                <a id="btnViewHistorial<%= sub.subetapa_id %>" role="button" title="Ver historial de cambios de fechas"
+                   data-idetapa="<%= e.etapa_id %>"
+                   data-idsubetapa="<%= sub.subetapa_id %>"
+                   class="btnVerHistorialCambios btn btn-primary pull-right no-pd pdl-4 pdr-4 collapse in mrt-5" data-toggle="collapse"><i aria-hidden="true" class="glyphicon glyphicon-eye-open"></i></a>
+                <a id="btnEditFechaSubetapa<%= sub.subetapa_id %>" role="button" title="Editar fechas subetapa"
+                   data-target="#inputfiniSubEtapa<%= sub.subetapa_id %>,#spanfiniSubEtapa<%= sub.subetapa_id %>,#inputffinSubEtapa<%= sub.subetapa_id %>,#spanffinSubEtapa<%= sub.subetapa_id %>,#btnGuardarFecha<%= sub.subetapa_id %>,#btnCancelarFecha<%= sub.subetapa_id %>,#btnEditFechaSubetapa<%= sub.subetapa_id %>,#btnViewHistorial<%= sub.subetapa_id %>,#spanMotivo<%= sub.subetapa_id %>,#inputMotivo<%= sub.subetapa_id %>,#spanMensaje"
+                   class="btn btn-success pull-right no-pd pdl-4 pdr-4 collapse in mrt-5" data-toggle="collapse"><i aria-hidden="true" class="glyphicon glyphicon-edit"></i></a>
+
+                <a id="btnCancelarFecha<%= sub.subetapa_id %>" role="button" title="Cancelar edición de fechas"
+                   data-target="#inputfiniSubEtapa<%= sub.subetapa_id %>,#spanfiniSubEtapa<%= sub.subetapa_id %>,#inputffinSubEtapa<%= sub.subetapa_id %>,#spanffinSubEtapa<%= sub.subetapa_id %>,#btnGuardarFecha<%= sub.subetapa_id %>,#btnCancelarFecha<%= sub.subetapa_id %>,#btnEditFechaSubetapa<%= sub.subetapa_id %>,#btnViewHistorial<%= sub.subetapa_id %>,#spanMotivo<%= sub.subetapa_id %>,#inputMotivo<%= sub.subetapa_id %>,#spanMensaje"
+                   class="btn btn-danger pull-right no-pd pdl-4 pdr-4 collapse btnCancelarFecha mrt-5 text-center" data-toggle="collapse" data-idsubetapa="<%= sub.subetapa_id %>"><i aria-hidden="true" class="glyphicon glyphicon-remove-sign"></i></a>
+                <a id="btnGuardarFecha<%= sub.subetapa_id %>" role="button" title="Guardar fechas"
+                   data-target="#inputfiniSubEtapa<%= sub.subetapa_id %>,#spanfiniSubEtapa<%= sub.subetapa_id %>,#inputffinSubEtapa<%= sub.subetapa_id %>,#spanffinSubEtapa<%= sub.subetapa_id %>,#btnGuardarFecha<%= sub.subetapa_id %>,#btnCancelarFecha<%= sub.subetapa_id %>,#btnEditFechaSubetapa<%= sub.subetapa_id %>,#btnViewHistorial<%= sub.subetapa_id %>,#spanMotivo<%= sub.subetapa_id %>,#inputMotivo<%= sub.subetapa_id %>,#spanMensaje"
+                   class="btn btn-success pull-right no-pd pdl-4 pdr-4 collapse btnGuardarFecha mrt-5 text-center" data-toggle="collapse" data-idsubetapa="<%= sub.subetapa_id %>"><i aria-hidden="true" class="glyphicon glyphicon-ok-sign"></i></a>
+            </div>
+        </div>
+
+        <% if(sub.Subsistemas.length>0) { %>
+        <div id="box-subetapa<%= sub.subetapa_id %>" class="collapse nivel-2">
+            <% _.each(sub.Subsistemas, function(sis){ %>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <% if(sis.Procesos.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-sistemas<%= sub.subetapa_id %>-<%= sis.id_subsistema %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= sis.siglas %>
+                </div>
+            </div>
+
+            <% if(sis.Procesos.length>0) { %>
+            <div id="box-sistemas<%= sub.subetapa_id %>-<%= sis.id_subsistema %>" class="collapse nivel-3">
+                <% _.each(sis.Procesos, function(proc){ %>
+                <div class="container-fluid">
+                    <div class="col-md-10">
+                        <% if(proc.Indicadores.length>0) { %>
+                        <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-procesos<%= sub.subetapa_id %>-<%= proc.proceso_id %>" role="button"></i>
+                        <% }else{ %>
+                        <i class="fa" style="width:13px; height:14px;"></i>
+                        <% } %>
+                        <%= proc.proceso_sigla %> <%= proc.proceso_nombre %>
+                    </div>
+                    <div class="col-md-2 pdr-0">
+                        @*<a id="btn-tipo-vista" class="btn btn-vista-tbl pull-right btn-agregar-proceso"
+                           data-idelemento="<%= proc.proceso_id %>"
+                           data-nombresubsistema="<%= sis.siglas %>"
+                           data-clave="<%= proc.proceso_sigla %>"
+                           data-idsubetapa="<%= sub.subetapa_id %>">
+                            <i class="fa fa-plus"></i>
+                        </a>*@
+                    </div>
+                </div>
+
+                <% if(proc.Indicadores.length>0) { %>
+                <div id="box-procesos<%= sub.subetapa_id %>-<%= proc.proceso_id %>" class="collapse nivel-4">
+                    <% _.each(proc.Indicadores, function(ind){ %>
+                    <div class="container-fluid">
+                        <div class="col-md-8">
+                            <% if(ind.Responsables.length>0) { %>
+                            <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#box-indicadores<%= e.etapa_id %><%= sub.subetapa_id %><%= ind.indicador_id %>" role="button"></i>
+                            <% }else{ %>
+                            <i class="fa" style="width:13px; height:14px;"></i>
+                            <% } %>
+                            <i class="fa fa-tachometer"></i>
+                            <span role="button" data-idindicador="<%= ind.indicador_id %>" class="btn-det-indicador <%= (ind.indicador_creacionproy)? 'divIndicadorProy' : '' %>"><%= ind.indicador_clave %> <%= ind.indicador_nombre %></span>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <span><%= ind.indicador_tipo %></span><br />
+                            <% if(ind.indicador_fechacompromiso == null){ %>
+                            <div class="col-md-7 no-pd text-right pdr-3">
+                                <span id="spanFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>" class="collapse in" data-frecuencia="<%= ind.indicador_acttualizacion %>"><%= ind.indicador_acttualizacion %> días</span>
+                                <input id="inputFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>"
+                                       class="collapse form-control frecuenciaInd"
+                                       type="number" min="0"
+                                       size="10" value="<%= ind.indicador_acttualizacion %>"
+                                       data-idindicador="<%= ind.indicador_id %>"
+                                       data-idsubetapa="<%= sub.subetapa_id %>"
+                                       data-idconfig="<%= ind.IdConfigIndicadorResponsable %>" />
+                            </div>
+                            <div class="col-md-5 no-pd">
+                                <a id="btnEditFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>" title="Editar" role="button"
+                                   data-target="#inputFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#spanFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnEditFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnGuardarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnCancelarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>"
+                                   class="btn btn-success pull-left pdt-0 pdb-0 pdl-4 pdr-3 collapse in" data-toggle="collapse"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a>
+                                
+                                <a id="btnGuardarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>" title="Guardar" role="button"
+                                   data-target="#inputFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#spanFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnEditFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnGuardarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnCancelarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>"
+                                   class="btn btn-success pull-left no-pd pdl-4 pdr-4 collapse btnGuardarFrecuencia text-center" data-toggle="collapse" data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"><i class="glyphicon glyphicon-ok-sign" aria-hidden="true"></i></a>
+                                <a id="btnCancelarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>" title="Cancelar" role="button"
+                                   data-target="#inputFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#spanFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnEditFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnGuardarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>,#btnCancelarFrecuenciaInd<%= ind.IdConfigIndicadorResponsable %>"
+                                   class="btn btn-danger pull-left no-pd pdl-4 pdr-4 collapse btnCancelarFrecuencia text-center" data-toggle="collapse" data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"><i class="glyphicon glyphicon-remove-sign" aria-hidden="true"></i></a>
+                                <br />
+                            </div>
+                            <% }else{ %>
+                            <span><%= moment(ind.indicador_fechacompromiso).format('DD/MM/YYYY') %></span><br />
+                            <% } %>
+
+                            <% if(ind.indicador_tipo == 'seguimiento'){ %>
+                            <span>Meta <%= ind.indicador_meta %>%</span><br />
+                            <% } %>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <div class="checkbox checkbox-slider--b-flat mrl-20">
+                                <label>
+                                    <input class="checkIndicadorEstatus"
+                                           type="checkbox"
+                                           data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"
+                                           data-estatus="<%= ind.indicador_estatus %>"
+                                           <%= (ind.indicador_estatus=='True')? 'checked="checked"' : '' %>
+                                    >
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 pdr-0">
+                            <div class="dropdown">
+                                <a class="btn btn-vista-tbl  pull-right"
+                                   id="dLabel"
+                                   data-idindicador="<%= ind.indicador_id %>"
+                                   data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"
+                                   data-idelemento="<%= proc.proceso_id %>"
+                                   data-nombresubsistema="<%= sis.siglas %>"
+                                   data-clave="<%= proc.proceso_sigla %>"
+                                   data-idsubetapa="<%= sub.subetapa_id %>"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                                    @*<li>
+                                        <a class="btn-edit-indicador"
+                                           data-idindicador="<%= ind.indicador_id %>"
+                                           data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"
+                                           data-idelemento="<%= proc.proceso_id %>"
+                                           data-nombresubsistema="<%= sis.siglas %>"
+                                           data-prefijoind="<%= ind.indicador_clave %>"
+                                           data-nombreind="<%= ind.indicador_nombre %>"
+                                           data-clave="<%= proc.proceso_sigla %>"
+                                           data-idsubetapa="<%= sub.subetapa_id %>"><i class="fa fa-edit"></i>Editar Indicador</a>
+                                    </li>*@
+                                    <li>
+                                        <a class="btn-fecha-compromiso"
+                                           data-fechacompromiso="<%= ind.indicador_fechacompromiso %>"
+                                           data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"><i class="glyphicon glyphicon-time"></i>Agregar Fecha Compromiso</a>
+                                    </li>
+                        <li>
+                            <a class="btn-edit-responsable"
+                               data-prefijoind="<%= ind.indicador_clave %>"
+                               data-nombreind="<%= ind.indicador_nombre %>"
+                               data-idindicador="<%= ind.indicador_id %>"
+                               data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"
+                               data-idelemento="<%= proc.proceso_id %>"
+                               data-nombresubsistema="<%= sis.siglas %>"
+                               data-clave="<%= proc.proceso_sigla %>"
+                               data-idsubetapa="<%= sub.subetapa_id %>"><i class="icon-rc icon-rc-adduser"></i>Editar Responsables</a>
+                        </li>
+                    </ul>
+                </div>
+
+                @*<a class="btn btn-vista-tbl btn-edit-responsable pull-right"
+       data-idindicador="<%= ind.indicador_id %>"
+       data-idconfig="<%= ind.IdConfigIndicadorResponsable %>"
+       data-idelemento="<%= proc.proceso_id %>"
+       data-nombresubsistema="<%= sis.siglas %>"
+       data-clave="<%= proc.proceso_sigla %>"
+       data-idsubetapa="<%= sub.subetapa_id %>">
+
+        <i class="fa fa-ellipsis-h"></i>
+    </a>*@
+                        </div>
+                    </div>
+
+                    <% if(ind.Responsables.length>0) { %>
+                    <div id="box-indicadores<%= e.etapa_id %><%= sub.subetapa_id %><%= ind.indicador_id %>" class="collapse nivel-5">
+                        <% _.each(ind.Responsables, function(resp){ %>
+                        <div class="container-fluid">
+                            <div class="col-md-8">
+                                <i class="fa fa-user"></i>&nbsp;
+                                <%= resp.ficha %> <%= resp.nombre %>
+                            </div>
+                            <div class="col-md-2"><%= resp.correo %></div>
+                            <div class="col-md-2 pdr-0">
+                                <a id="btn-tipo-vista" class="btn btn-vista-tbl pull-right btn-delete-responsable"
+                                   data-idresponsable="<%= resp.id_responsable %>"
+                                   data-idindicador="<%= resp.IdIndicador %>"
+                                   data-idconfigrlation="<%= ind.IdConfigIndicadorResponsable %>">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% } %>
+
+
+                    <% }); %>
+                </div>
+                <% } %>
+
+                <% }); %>
+            </div>
+            <% } %>
+
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% }); %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        //Eventos para árbol
+        $(document).on('click','i[data-toggle="collapse"]', function(){
+            if($(this).hasClass('glyphicon-triangle-right')){
+                $(this).removeClass('glyphicon-triangle-right').addClass('glyphicon-triangle-bottom');
+            }else{
+                $(this).removeClass('glyphicon-triangle-bottom').addClass('glyphicon-triangle-right');
+            }
+        });
+
+        //Validacion de input frecuencia de actualizacion para evitar numeros negativos y letras
+        $(document).on('keydown', 'input.frecuenciaInd ', function(e){
+            if(!((e.keyCode > 95 && e.keyCode < 106)
+              || (e.keyCode > 47 && e.keyCode < 58) 
+              || e.keyCode == 8)) {
+                return false;
+            }
+        });
+
+        //Mostrar dialogo para agregar indicadores a subetapas
+        $(document).on('click','#etapas_proyecto a.btnAddInidicadoresES',function(){
+            var IdProyecto = $('#IdProyecto').val();
+            var IdSE = $(this).attr('data-se');
+            $('#modalAgregarIndSE .modal-body form')[0].reset();
+            $('#modalAgregarIndSE .modal-footer .btnAceptar').removeAttr("disabled");
+            $('#modalAgregarIndSE .modal-body form #IdSubsistema').selectpicker();
+            $('#modalAgregarIndSE .modal-body form #IdElemento').selectpicker('render');
+            $('#modalAgregarIndSE .modal-body form #Indicadores').selectpicker('deselectAll').selectpicker({  size: 4  });
+            //$('#modalAgregarIndSE .modal-body form select').selectpicker('render');
+            combosSubsistemas(function(){
+                $('#modalAgregarIndSE .modal-body form #IdSubsistema').selectpicker('refresh');
+            });
+            $('#modalAgregarIndSE .modal-body form #IdProyecto').val(IdProyecto); 
+            $('#modalAgregarIndSE .modal-body form #IdSubEtapa').val(IdSE);
+            $('#modalAgregarIndSE').modal('show');
+        });
+
+        //Evento combo elementos 
+        $('#modalAgregarIndSE .modal-body form #IdSubsistema').change(function(){
+            var IdSubsistema = $(this).val();
+            combosElementos(IdSubsistema, function(){
+                $('#modalAgregarIndSE .modal-body form #IdElemento').selectpicker('refresh');
+            });
+        });
+
+        //Evento combo elementos
+        $(document).on('change','#modalAgregarIndSE .modal-body form #IdElemento',function(){
+            var IdElemento = $(this).val();
+            var IdSubEtapa = $('#modalAgregarIndSE .modal-body form #IdSubEtapa').val();
+            var IdProyecto = $('#modalAgregarIndSE .modal-body form #IdProyecto').val();
+            combosIndicadores(IdElemento, IdSubEtapa, IdProyecto, function(){
+                //Iniciar elemento listamultiple
+                $('#modalAgregarIndSE .modal-body form #Indicadores').selectpicker('refresh');
+            });
+        })
+
+        //validacion formulario organigrama
+        $('#modalAgregarIndSE .modal-body form').validate({
+            rules: {
+                'IdSubsistema': { required: true },
+                'IdElemento': { required: true },
+                'Indicadores': { required: true }
+            },
+            messages: {
+                'IdSubsistema': { required: "El campo es requerido" },
+                'IdElemento': { required: "El campo es requerido" },
+                'Indicadores': { required: "El campo es requerido" }
+            }
+        });
+
+        //Envio del formulario Nuevo
+        $(document).on("click", "#modalAgregarIndSE .btnAceptar", function (e) {
+            $(this).attr("disabled", "disabled");
+            $('#modalAgregarIndSE .modal-body form').attr('action', '/ConfigProyecto/addIndicadoresFaltantes');
+            $('#modalAgregarIndSE .modal-body form').submit();
+        });
+
+        //Procesar envío de ubicación
+        $('#modalAgregarIndSE .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                var tipo = $('#modalAgregarIndSE .modal-body form #tipo').val();
+                $('#modalAgregarIndSE .modal-body form').ajaxSubmit({
+                    data: { tipo: tipo },
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalAgregarIndSE .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalAgregarIndSE .msjEliminarModal').addClass('hidden');
+                        $('#modalAgregarIndSE .modal-body .alert-warning').addClass('hidden');
+                        var action = $("#modalAgregarIndSE .modal-body #actionOrganigrama").val();
+                        if (d > 0) {
+                            $('#modalAgregarIndSE .modal-body .alert-success.edit').removeClass('hidden');
+                        } else if(d === 0) {
+                            $('#modalAgregarIndSE .modal-body .alert-danger.error0').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalAgregarIndSE').modal('hide');
+                            $('#modalAgregarIndSE .modal-body .alert-success').addClass('hidden');
+                            $('#modalAgregarIndSE .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1500);
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(document).on('click', '.modal-dialog .modal-footer .btn.btnCancelar', function () {
+            $('.modal-dialog .modal-body form select').prop('selectedIndex',0);
+            $('.modal-dialog .modal-body input.error').removeClass('error');
+            $('.modal-dialog .modal-body label.error').remove();
+        });
+
+        $('[data-toggle="popover"]').popover()
+
+        var OBJ = [];
+        initialize();
+
+        //Seleccionar Vigencia en Agregar Recurso
+        $('.fechaetapa').datetimepicker({
+            format: 'DD/MM/YYYY',
+            showClear: true,
+            locale: moment.locale('Es')
+        });
+
+        $('#FechaInicio').datetimepicker({
+            format: 'DD/MM/YYYY',
+            showClear: true,
+            locale: moment.locale('es')
+        });
+
+        $('#FechaFin').datetimepicker({
+            format: 'DD/MM/YYYY',
+            showClear: true,
+            locale: moment.locale('es')
+        });
+
+        $("#FechaInicio").on("dp.change", function (e) {
+            var date = e.date.add(1, 'days');
+            $('#FechaFin').data("DateTimePicker").minDate(date);
+        });
+        $("#FechaFin").on("dp.change", function (e) {
+            var date = e.date.add(-1, 'days');
+            $('#FechaInicio').data("DateTimePicker").maxDate(date);
+        });
+
+        $(".fechaetapa").on("dp.change", function (e) {
+            var idsub = $(e.currentTarget).attr('data-idsubetapa');
+            var idelem = $(e.currentTarget).attr('id');
+
+            if(idelem == 'inputfiniSubEtapa'+idsub){
+                var date = e.date.add(1, 'days');
+                $('#inputffinSubEtapa'+idsub).data("DateTimePicker").minDate(date);
+            }
+            if(idelem == 'inputffinSubEtapa'+idsub)
+            {
+                var date = e.date.add(-1, 'days');
+                $('#inputfiniSubEtapa'+idsub).data("DateTimePicker").maxDate(date);
+            }
+
+            //$('#FechaFin').data("DateTimePicker").minDate(date);
+        });
+
+        //validacion formulario organigrama
+        $('#frmEditarDetalleProyecto').validate({
+            rules: {
+                'NombreProyecto': { required: true },
+                'IdArea': {required: true},
+                'IdResponsable': {required: true},
+                'FechaInicio': {required: true},
+                'FechaFin': {required: true},
+                'IdUbicacion': {required: true},
+                'Coordinaciones': {required: true},
+                'TiposProyecto': {required: true}
+            },
+            messages: {
+                'NombreProyecto': { required: "El campo es requerido" },
+                'IdArea': { required: "El campo es requerido" },
+                'IdResponsable': { required: "El campo es requerido" },
+                'FechaInicio': { required: "El campo es requerido" },
+                'FechaFin': { required: "El campo es requerido" },
+                'IdUbicacion': { required: "El campo es requerido" },
+                'Coordinaciones': {required: "El campo es requerido"},
+                'TiposProyecto': {required: "El campo es requerido"}
+            }
+        });
+
+        //Evento chech estatus indicador
+        $('.checkIndicadorEstatus').click(function(){
+            
+            var Status = $(this).attr('data-estatus');
+            if(Status === 'True'){
+                Status = 'False';
+                $(this).attr('data-estatus', 'False');
+                //$(this).prop('checked', false);
+            }
+            else{
+                Status = 'True';
+                $(this).attr('data-estatus', 'True');
+                //$(this).prop('checked', true);
+            }
+
+            
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/ConfigProyecto/setEstatusIndicador',
+                data: {
+                    idConfig: $(this).attr('data-idconfig'), estatus: Status.toLowerCase()
+                },
+                success: function (data) {
+                    console.log('success')
+                },
+                error: function (data) {
+                    console.log('Error: ' + data);
+                }
+            });
+
+        });
+
+        //Eventos para edición fecha compromiso
+        $('#modalAgregarFechaCompriso .modal-body form #FechaCompromiso').datetimepicker({
+            format: 'DD/MM/YYYY',
+            showClear: true,
+            locale: moment.locale('Es')
+        });
+
+        //Eventos para ejecutar el envío fecha compromiso
+        $('.btn-fecha-compromiso').click(function(){
+            var idconfig = $(this).data('idconfig'); 
+            var fecha = ($(this).data('fechacompromiso') != "") ? moment($(this).data('fechacompromiso')).format('DD/MM/YYYY') : "";
+            var modal = $('#modalAgregarFechaCompriso');
+            modal.find('.modal-body form').attr('action', '/ConfigProyecto/addFechaCompromiso');
+            modal.find('#IdElemento').val(idconfig);
+            modal.find('#FechaCompromiso').val(fecha);
+            modal.modal('show');
+        });
+
+        //Envio del fecha compromiso
+        $(document).on('click', '#modalAgregarFechaCompriso .btnAceptar', function () {
+            $('#modalAgregarFechaCompriso .modal-body form').submit();
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#modalAgregarFechaCompriso .modal-body form').submit(function () {
+ 
+            if ($(this).valid() === true) {
+                $('#modalAgregarFechaCompriso .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    success: function (d) {
+                        $('#modalAgregarFechaCompriso .modal-body .alert-warning').addClass('hidden');
+                        if (d > 0) {
+                            $('#modalAgregarFechaCompriso .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalAgregarFechaCompriso .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalAgregarFechaCompriso').modal('hide');
+                            $('#modalAgregarFechaCompriso .modal-body .alert-success').addClass('hidden');
+                            $('#modalAgregarFechaCompriso .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        //Evenbto para abrir el popup de agregar usuarios
+        $('.btn-edit-responsable').click(function(){
+            chkModal(this);
+        });
+
+        //Evento para eliminar uusuario
+        $('.btn-delete-responsable').click(function(){
+            var btnpress = $(this);
+            var modal = $('#modalConfirmDelete');
+            modal.modal({ backdrop: 'static', keyboard: false })
+            .one('click', '#btnConfirmDelete', function() {
+                modal.find('.modal-body form#frmConfirmDelete input#idResposable').val(btnpress.data('idresponsable'));
+                modal.find('.modal-body form#frmConfirmDelete input#idIndicador').val(btnpress.data('idindicador'));
+                modal.find('.modal-body form#frmConfirmDelete input#idConfig').val(btnpress.data('idconfigrlation'));
+                modal.find('.modal-body form#frmConfirmDelete input#idproyecto').val('@Request.Params["idproyecto"]');
+                modal.find('.modal-body form#frmConfirmDelete input#IdUbicacion').val('@Request.Params["idubicacion"]');
+
+                $("#frmConfirmDelete").attr('action', '/ConfigProyecto/deleteResponsable/');
+                $('#frmConfirmDelete').submit();
+
+            });
+        });
+
+        $("#ListaUsuarios, #ListaAsignados").sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+
+        //Mostrar form para agregar indicadores
+        $(document).on('click', '.btn-agregar-proceso', function () {
+            var idelemento = $(this).data('idelemento'),
+                subsistema =  $(this).data('nombresubsistema'),
+                idsubetapa = $(this).data('idsubetapa'),
+                clavelemento = $(this).data('clave'),
+                modal = $('#modalDetalleIndicadorEdit');
+
+            modal.find('.modal-title').text('AGREGAR INDICADOR');
+            modal.find("label.error").html('');
+            modal.find('#idElemento').val(idelemento);
+            modal.find('#nombreSubsistema').val(subsistema);
+            modal.find('#IdSubEtapa').val(idsubetapa);
+            modal.find('#IdProyecto').val($("#frmEditarDetalleProyecto input#IdProyecto").val());
+            modal.find('#nombreElemento').val(clavelemento);
+            modal.find('#actionForm').val('add');
+            modal.find('.edit-ind').removeClass('hidden');
+            modal.find('.edit-ind.set-btn-programa').addClass('hidden');
+            modal.find('.info-ce').addClass('hidden');
+            modal.find('.msjEliminarModal').addClass('hidden');
+            $('#modalDetalleIndicadorEdit form').data('tipo', 'validFormula');
+            $('#modalDetalleIndicadorEdit input[type="text"]').val('').prop('readonly', false);
+
+            //Se marcan los checks
+            modal.find('input#tipoIndicador[value="Seguimiento"]').prop('checked', true);
+            modal.find('input#tipoCalculo[value="Formula"]').prop('checked', true);
+
+            //Se resetea la vista de elementos a mostrar
+            var eOrigen = $('#modalDetalleIndicadorEdit .group-ind.seguimiento');
+            eOrigen.removeClass('hidden');
+            eOrigen.find('.set-formula').removeClass('hidden');
+            eOrigen.find('.set-formula .lbl-desc').text('Descripción de la fórmula');
+
+            modal.modal('show');
+        });
+
+        $(document).on('click', 'div#etapas_proyecto .btn-det-indicador', function(){
+
+            var id = $(this).data('idindicador');
+            $.getJSON('@Url.Action("getDataIndicador", "ConfigProyecto")', { idIndicador: id }).done(function (data) {
+
+
+                var jdata = JSON.parse(data);
+                //Desactivar opciones que no son utilizadas
+                var modal = $('#modalInfoCompromisos');
+                modal.find('#ClaveIndicador').text(jdata.Clave);
+                modal.find('#PrefijoIndicador').text(jdata.Prefijo);
+                modal.find('#DescripcionCortaIndicador').text(jdata.DescripcionCorta);
+                modal.find('#DescripcionLargaIndicador').text(jdata.DescripcionLarga);
+                modal.find('#MetaIndicador').text(jdata.Meta + '%');
+                modal.find('#FrecuenciaActualizacionIndicador').text(jdata.TipoFrecuencia + ' Días');
+                modal.find('#DescripcionFormulaIndicador').text(jdata.DescripcionValorFormula);
+                modal.find('#EtiquetaValorProgramadoIndicador').text(jdata.EtiquetaValorProgramado);
+                modal.find('#EtiquetaValorRealIndicador').text(jdata.EtiquetaValorReal);
+                modal.find('#DescripcionValorIndicador').text(jdata.DescripcionValorFormula);
+                modal.find('#FechaCreacionIndicador').text(jdata.UsuarioCreacion + ' - ' + jdata.FechaCreacion);
+                modal.find('#FechaActualizacionIndicador').text(jdata.UsuarioActualizacion + ' - ' + jdata.FechaActualizacion);
+
+                //configurar RadioButton
+                switch(jdata.TipoIndicador){
+                    case "Seguimiento":
+                        checkRadiobuttons(1);
+                        modal.find('#RadioButtonsTipoCalculo').show();
+                        modal.find('#divMeta').show();
+                        break;
+                    case "Check":
+                    case "Checkbox":
+                        checkRadiobuttons(2);
+                        modal.find('#tipoIndicadorSeguimiento').prop('disabled', true);
+                        modal.find('input#tipoIndicador[value="Checkbox"]').prop('checked', true);
+
+                        //Ocultar info cuando el tipo de indicador en Check
+                        modal.find('#RadioButtonsTipoCalculo').hide();
+                        modal.find('#divMeta').hide();
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').hide();
+                        break;
+                }
+
+                switch (jdata.TipoCalculo) {
+                    case 'Formula':
+                        modal.find('#tipoCalculoFormula').prop('checked', true);
+                        modal.find('#tipoCalculoValor').prop('disabled', true);
+                        modal.find('#tipoCalculoPrograma').prop('disabled', true);
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Formula
+                        modal.find('#detalle-formula').show();
+                        modal.find('#detalle-valor').hide();
+                        break;
+                    case 'Valor':
+                        modal.find('#tipoCalculoValor').prop('checked', true);
+                        modal.find('#tipoCalculoFormula').prop('disabled', true);
+                        modal.find('#tipoCalculoPrograma').prop('disabled', true);
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Valor
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').show();
+                        break;
+                    case 'Programa':
+                        modal.find('#tipoCalculoPrograma').prop('checked', true);
+                        modal.find('#tipoCalculoFormula').prop('disabled', true);
+                        modal.find('#tipoCalculoValor').prop('disabled', true);
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Programa Asociado
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').hide();
+                        modal.find('#DescripcionValorIndicador').hide();
+                        break;
+                }
+
+                //Configurar Checks
+                jdata.CheckSoporte === false ? modal.find('input#HabilitarSoporteIndicador').prop('checked', false) : modal.find('input#HabilitarSoporteIndicador').prop('checked', true) ;
+                jdata.CheckReqSoporte === false ? modal.find('input#RequerirSoporteIndicador').prop('checked', false)  : modal.find('input#RequerirSoporteIndicador').prop('checked', true);
+                jdata.CheckComentarios === false ? modal.find('input#HabilitarComentariosIndicador').prop('checked', false)  : modal.find('input#HabilitarComentariosIndicador').prop('checked', true) ;
+                jdata.CheckReqComentario === false ? modal.find('input#RequerirComentariosIndicador').prop('checked', false)  : modal.find('input#RequerirComentariosIndicador').prop('checked', true) ;
+
+
+                $('#modalInfoCompromisos .modal-body > #detalle-programa').hide();
+
+            });
+
+            modal = $('#modalInfoCompromisos');
+            modal.find('.modal-title').text('DETALLE INDICADOR');
+            modal.modal('show');
+
+        });
+
+        //Modal para editar indicaodres
+        $(document).on('click', 'div#etapas_proyecto .btn-edit-indicador', function(){
+            var id = $(this).data('idindicador')
+            var idelemento = $(this).data('idelemento'),
+               subsistema =  $(this).data('nombresubsistema'),
+               pref = $(this).data('prefijoind'),
+               dsc_c = $(this).data('nombreind'),
+               idsubetapa = $(this).data('idsubetapa'),
+               clavelemento = $(this).data('clave');
+            $.getJSON('@Url.Action("getDataIndicador", "ConfigProyecto")', { idIndicador: id }).done(function (data) {
+                var ind = JSON.parse(data);
+
+
+                var modal = $('#modalDetalleIndicadorEdit');
+                modal.find('.modal-title').text('EDITAR INDICADOR');
+                modal.find("label.error").html('');
+                modal.find('#nombreSubsistema').val(subsistema);
+                modal.find('#nombreElemento').val(clavelemento);
+                modal.find('#idElemento').val(idelemento);
+                modal.find('#idIndicador').val(ind.IdIndicador);
+                modal.find('#claveIndicador').val(ind.Clave);
+                modal.find('#prefijoIndicador').val(ind.Prefijo);
+                modal.find('#descripcionCortaIndicador').val(ind.DescripcionCorta);
+                modal.find('#descripcionCompletaIndicador').val(ind.DescripcionLarga);
+                modal.find('#actionForm').val('edit');
+                modal.find('.edit-ind').addClass('hidden');
+                modal.find('.msjEliminarModal').addClass('hidden');
+                //if (ind.TipoCalculo === "Programa") {
+                //    $('#modalDetalleIndicadorEdit .set-btn-programa').removeClass('hidden');
+                //    $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').removeClass('hidden');
+                //    $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').attr('data-idindicador', id);
+                //    $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').attr('data-clave', pref);
+                //    $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').attr('data-desc', dsc_c);
+                //}
+                $('#modalDetalleIndicadorEdit form').data('tipo', 'validEdit');
+                $('#modalDetalleIndicadorEdit input[type="text"]').prop('readonly', false);
+
+                modal.modal('show');
+            });
+        });
+
+        //Validación del formulario nuevo elemento
+        var validEdit = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." }
+            }
+        };
+
+        var validFormula = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'Meta': { required: true },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 },
+                'DescripcionValorFormula': { required: true, maxlength: 500 },
+                'EtiquetaValorProgramado': { required: true, maxlength: 100 },
+                'EtiquetaValorReal': { required: true, maxlength: 100 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'Meta': { required: "Seleccione un valor." },
+                'TipoFrecuencia': { required: "Coloque un valor", number: "El campo debe ser numérico" },
+                'DescripcionValorFormula': { required: "Debe colocar una descripción" },
+                'EtiquetaValorProgramado': { required: "Debe colocar una descripción" },
+                'EtiquetaValorReal': { required: "Debe colocar una descripción" }
+            }
+        };
+
+        var validValor = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'Meta': { required: true },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 },
+                'DescripcionValorFormula': { required: true, maxlength: 500 },
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'Meta': { required: "Seleccione un valor." },
+                'TipoFrecuencia': { required: "Coloque un valor", number: "El campo debe ser numérico" },
+                'DescripcionValorFormula': { required: "Debe colocar una descripción" }
+            }
+        };
+
+        var validPrograma = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'Meta': { required: true },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'Meta': { required: "Seleccione un valor." },
+                'TipoFrecuencia': { required: "Coloque un valor", number: "El campo debe ser numérico" }
+            }
+        };
+
+        var validCheck = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'TipoFrecuencia': { required: "Coloque un valor", number: "El campo debe ser numérico" }
+            }
+        };
+
+        //Envio del formulario indicadores
+        $(document).on('click', '#modalDetalleIndicadorEdit .btnAceptar', function () {
+            var action = $("#modalDetalleIndicadorEdit .modal-body input#actionForm").val();
+            if (action != null && action != undefined) {
+                action = (action == 'add') ? '/ConfigProyecto/addIndicador' : '/ConfigProyecto/editIndicador';
+                $("#modalDetalleIndicadorEdit .modal-body form").attr('action', action);
+                $('#modalDetalleIndicadorEdit .modal-body form').submit();
+            }
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#modalDetalleIndicadorEdit .modal-body form').submit(function () {
+            var tform = $("#modalDetalleIndicadorEdit .modal-body form").data('tipo');
+            switch (tform) {
+                case "validEdit":
+                    $(this).validate(validEdit);
+                    break;
+                case "validFormula":
+                    $(this).validate(validFormula);
+                    break;
+                case "validValor":
+                    $(this).validate(validValor);
+                    break;
+                case "validPrograma":
+                    $(this).validate(validPrograma);
+                    break;
+                case "validCheck":
+                    $(this).validate(validCheck);
+                    break;
+            }
+
+            if ($(this).valid() === true) {
+                $('#modalDetalleIndicadorEdit .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalDetalleIndicadorEdit .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalDetalleIndicadorEdit .modal-body .alert-warning').addClass('hidden');
+                        var action = $("#modalDetalleIndicadorEdit .modal-body input#actionForm").val();
+                        if (d > 0) {
+                            if (action === "add" || "edit") {
+                                $('#modalDetalleIndicadorEdit .modal-body .alert-success.edit').removeClass('hidden');
+                            } else {
+                                $('#modalDetalleIndicadorEdit .modal-body .alert-success.delete').removeClass('hidden');
+                            }
+                        } else {
+                            $('#modalDetalleIndicadorEdit .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalDetalleIndicadorEdit').modal('hide');
+                            $('#modalDetalleIndicadorEdit .modal-body .alert-success').addClass('hidden');
+                            $('#modalDetalleIndicadorEdit .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(document).on('click', '#modalDetalleIndicadorEdit input[type="radio"]', function () {
+            var tipo = this.value;
+            var eOrigen = $('#modalDetalleIndicadorEdit .group-ind.seguimiento');
+            switch (tipo) {
+                case "Seguimiento":
+                    eOrigen.removeClass('hidden');
+                    break;
+                case "Checkbox":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validCheck');
+                    eOrigen.addClass('hidden');
+                    break;
+                case "Formula":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validFormula');
+                    eOrigen.find('.set-formula').removeClass('hidden');
+                    eOrigen.find('.set-formula .lbl-desc').text('Descripción de la fórmula');
+                    break;
+                case "Valor":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validValor');
+                    eOrigen.find('.set-formula').addClass('hidden');
+                    eOrigen.find('.set-valor').removeClass('hidden');
+                    eOrigen.find('.set-valor .lbl-desc').text('Descripción de valor');
+                    break;
+                case "Programa":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validPrograma');
+                    eOrigen.find('.set-formula').addClass('hidden');
+                    break;
+            }
+        });
+
+        $(document).on('click', '#modalDetalleIndicadorEdit .chkpadre', function () {
+            var elem = $(this).data('check');
+            var val = $(this).val();
+            switch (elem) {
+                case "cheksup":
+                    $('#modalDetalleIndicadorEdit .content-checkbox .cheksup').prop({ 'disabled': false, 'checked': false });
+                    break;
+                case "chekcom":
+                    $('#modalDetalleIndicadorEdit .content-checkbox .chekcom').prop({ 'disabled': false, 'checked': false });
+                    break;
+            }
+        });
+
+        $(document).on('keyup', '#modalDetalleIndicadorEdit #claveIndicador', function (key) {
+            var subsistema = $('#modalDetalleIndicadorEdit #nombreSubsistema').val(),
+                clavelemento = $('#modalDetalleIndicadorEdit #nombreElemento').val();
+            $('#modalDetalleIndicadorEdit #prefijoIndicador').val(subsistema + '.' + clavelemento + '.' + this.value);
+        });
+
+        $(document).on('click', '#modalDetalleIndicadorEdit #btnModalConsultarProgramaAsociado', function () {
+            var IdInidcador = $(this).data('idindicador'),
+                clave = $(this).data('clave'),
+                desc = $(this).data('desc');
+
+            if (IdInidcador > 0) {
+                $.getJSON('@Url.Action("ProgramaAsociadoIndicador", "Indicadores")', {IdIndicador:IdInidcador}, function (data) {
+                    OBJ = JSON.parse(data);
+                    var anio = (new Date).getFullYear();
+                    cargarProgramaAsociado(OBJ);
+                    $('#modalProgramaAsociado').find('#IdIndicador').val(IdInidcador);
+                    $('#modalProgramaAsociado').find('#actionForm').val('edit');
+                    $('#modalProgramaAsociado').find('.text-clave').text(clave);
+                    $('#modalProgramaAsociado').find('.text-desc').text(desc);
+                    $('#modalProgramaAsociado').find('.usuario_creacion').text(OBJ.NombreUsuarioCreacion);
+                    $('#modalProgramaAsociado').find('.fecha_creacion').text(OBJ.FechaCreacionStr);
+                    $('#modalProgramaAsociado').find('.usuario_actualizacion').text(OBJ.NombreUsuarioActualizacion);
+                    $('#modalProgramaAsociado').find('.fecha_actualizacion').text(OBJ.FechaActualizacionStr);
+                    $('#modalProgramaAsociado .trTitulo td span').text(anio);
+                    $('#modalProgramaAsociado').modal('show');
+                });
+            }
+        });
+
+        $(document).on('click', '#modalProgramaAsociado .btnAceptar', function () {
+            var action = $("#modalProgramaAsociado #actionForm").val();
+            if (action != null && action != undefined) {
+                action = ((action == 'edit') ? '/Indicadores/EditProgramaAsociadoIndicador' : '/Indicadores/DeleteProgramaAsociadoIndicador');
+                $("#modalProgramaAsociado .modal-body form").attr('action', action);
+                $('#modalProgramaAsociado .modal-body form').submit();
+            }
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#modalProgramaAsociado .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                $('#modalProgramaAsociado .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalProgramaAsociado .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalProgramaAsociado .modal-body .alert-warning').addClass('hidden');
+                        var action = $("#modalProgramaAsociado .modal-body input#actionForm").val();
+                        if (d > 0) {
+                            if (action === "add" || "edit") {
+                                $('#modalProgramaAsociado .modal-body .alert-success.edit').removeClass('hidden');
+                            } else {
+                                $('#modalProgramaAsociado .modal-body .alert-success.delete').removeClass('hidden');
+                            }
+                        } else {
+                            $('#modalProgramaAsociado .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalProgramaAsociado').modal('hide');
+                            $('#modalProgramaAsociado .modal-body .alert-success').addClass('hidden');
+                            $('#modalProgramaAsociado .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+    });
+
+    function initialize() {
+
+        OBJ = @Model;
+        //cargarDataSistemas(OBJ);
+        cargarArbolEtapas(OBJ);
+        cargarFormDetalleProyecto(OBJ);
+
+        //Funcion para el guardado de responsables
+        var LISTUSER = {
+            saveUser: function () {
+                var listUser = [];
+                var listNoUser = [];
+                $('#ListaAsignados li').each(function () {
+                    listUser.push($(this).attr('data-id'));
+                });
+
+                $('#ListaUsuarios li').each(function () {
+                    listNoUser.push($(this).attr('data-id'));
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/ConfigProyecto/SaveUsers',
+                    data: {
+                        idIndicador: localStorage.getItem('idIndicador'),
+                        User: listUser,
+                        NoUser: listNoUser,
+                        idConfig: localStorage.getItem('idConfigRelation'),
+                        idSubetapa: localStorage.getItem('idSubetapa'), 
+                        idProyecto: $('form#frmEditarDetalleProyecto input#IdProyecto').val()
+                    },
+                    beforeSend: function () { $('#modalAddUserCompromisos .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (data) {
+                        var d = JSON.parse(data);
+                        $('#modalAddUserCompromisos .modal-body .alert-warning').addClass('hidden');
+                        if (d.accion) {
+                            $('#modalAddUserCompromisos .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalAddUserCompromisos .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalAddUserCompromisos').modal('hide');
+                            $('#modalAddUserCompromisos .modal-body .alert-success').addClass('hidden');
+                            $('#modalAddUserCompromisos .modal-body .alert-danger').addClass('hidden');
+                        }, 1000);
+
+                    },
+                    error: function (data) {
+                        console.log('Error: ' + data);
+                    }
+                });
+            }
+        }
+
+        //evento de edicion de frecuencia
+        $(".btnGuardarFrecuencia").click(function(){
+            var idconfig = $(this).data("idconfig");
+            var input = $("#inputFrecuenciaInd"+idconfig);
+            var span = $("#spanFrecuenciaInd"+idconfig);
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/ConfigProyecto/setFrecuenciaIndicador',
+                data: {
+                    idIndicador: input.data('idindicador'),
+                    idConfigRelacionIndicadorProyecto: input.data('idconfig'),
+                    idSubetapa: input.data('idsubetapa'),
+                    idProyecto: $('form#frmEditarDetalleProyecto input#IdProyecto').val(),
+                    frecuencia: input.val()
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    if(d.accion){
+                        span.html(d.frecuencia + ' días');
+                        span.attr('data-frecuencia', d.frecuencia);
+                    }
+                    else{
+                        input.val(parseInt(span.data('frecuencia')));
+                        console.log(d.msj);
+                    }
+                },
+                error: function (data) {
+                    input.val(parseInt(span.data('frecuencia')));
+                    console.log('Error: ' + data);
+                }
+            });
+
+
+        });
+        //Evento cancelar edicion de frecuencia de indicador
+        $(".btnCancelarFrecuencia").click(function(){
+            var idconfig = $(this).data("idconfig");
+            var input = $("#inputFrecuenciaInd"+idconfig);
+            var span = $("#spanFrecuenciaInd"+idconfig);
+
+            input.val(parseInt(span.data('frecuencia')));
+        });
+
+        //Evento para cancelacion de edicion de fechas subetapas
+        $(".btnCancelarFecha").click(function(){
+            var idsub = $(this).data('idsubetapa');
+            var inputIni = $("#inputfiniSubEtapa"+idsub);
+            var spanIni = $("#spanfiniSubEtapa"+idsub);
+            var input = $("#inputffinSubEtapa"+idsub);
+            var span = $("#spanffinSubEtapa"+idsub);
+            var inputMotivo = $("#inputMotivo"+idsub);
+            var spanMotivo = $("#spanMotivo"+idsub);
+
+            input.val(span.data('fecha'));
+            inputIni.val(spanIni.data('fecha'));
+            inputMotivo.val("");
+        });
+
+        //Evento para la seleccion de responsable
+        $("form#frmEditarDetalleProyecto #IdResponsable").on('change', function () {
+            setCoordSuper($('option:selected', this).data('idpuesto'));
+        });
+
+        //Evento para guardado de fecha
+        $(".btnGuardarFecha").click(function(){
+            var idsub = $(this).data('idsubetapa');
+            var inputIni = $("#inputfiniSubEtapa"+idsub);
+            var spanIni = $("#spanfiniSubEtapa"+idsub);
+            var input = $("#inputffinSubEtapa"+idsub);
+            var span = $("#spanffinSubEtapa"+idsub);
+            var inputMotivo = $("#inputMotivo"+idsub);
+            var spanMotivo = $("#spanMotivo"+idsub);
+
+            //aqui se debe validar las fechas vecinas
+            var result = validarFechasSubetapas(input, OBJ);
+            var resultIni = validarFechasSubetapas(inputIni, OBJ);
+
+            var form = $('#frmCambioFechas'+idsub);
+            var validator  = form.validate({
+                rules:{
+                    'inputMotivo':{ required: true, maxlength: 300 }
+                },
+                errorPlacement: function(error,element) {
+                    return true;
+                }
+            });
+
+            if(result.cumple && resultIni.cumple && form.valid()){
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: '/ConfigProyecto/setFechaSubetapa',
+                    data: {
+                        idProyecto: OBJ.dataproyecto.proyecto_id,
+                        idEtapa: input.data('idetapa'),
+                        idSubetapa: input.data('idsubetapa'),
+                        fechaini: inputIni.val(),
+                        fechafin: input.val(),
+                        motivo: inputMotivo.val(),
+                        fechainiant: spanIni.data('fecha'),
+                        fechafinant: span.data('fecha')
+                    },
+                    success: function (data) {
+                        var d = JSON.parse(data);
+
+                        spanIni.html(inputIni.val());
+                        spanIni.attr('data-fecha', inputIni.val());
+
+                        span.html(input.val());
+                        span.attr('data-fecha', input.val());
+
+                        $('#divFechaIni'+d.IdEtapa).html(moment(d.FechaInicio).format('DD/MM/YYYY'));
+                        $('#divFechaFin'+d.IdEtapa).html(moment(d.FechaFin).format('DD/MM/YYYY'));
+                       
+                       inputMotivo.val('');
+                        //$('#modalAddUserCompromisos').modal('hide');
+                    },
+                    error: function (data) {
+                        console.log('Error: ' + data);
+                    }
+                });
+
+            }
+            else{
+                input.val(span.data('fecha'));
+                inputIni.val(spanIni.data('fecha'));
+                var msj = "";
+                msj += "Errores detectados:\n";
+                msj += (!resultIni.cumple)? "Fecha Inicio: " + resultIni.msj + "\n" : "";
+                msj += (!result.cumple)? "Fecha Fin: " + result.msj + "\n" : "";
+                if(!form.valid()){
+                    for (var i=0;i<validator.errorList.length;i++){
+                        msj += "Motivo: " + validator.errorList[i].message;
+                    }
+                }
+                alert(msj);
+            }
+        });
+
+
+        //Evento para la carga de tabla historial cambios de fechas
+        $(document).on('click','.btnVerHistorialCambios' , function(){
+            var modal = $('#modalHistorialCambiosFechas');
+
+            $.ajax({
+                type: 'POST',
+                url: '/ConfigProyecto/getHistorialFechas',
+                data: {
+                    idProyecto: OBJ.dataproyecto.proyecto_id,
+                    idEtapa: $(this).data('idetapa'),
+                    idSubetapa: $(this).data('idsubetapa'),
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargaTablaHistorial(modal.find('#grid-historial'), d.historial);
+
+                    //Eventos para los botones del modal
+                    modal.modal('show');
+                },
+                error: function (msg) {
+                    console.log('Error: ' + msg);
+                }
+            });
+        });
+
+        //Eventos para la lsistas de asignados de responsables
+        $("#ListaUsuarios, #ListaAsignados").sortable({
+            connectWith: ".connectedSortable",
+            cursor: "move",
+            click: function (event, ui) { alert('over'); }
+        }).disableSelection();
+
+        $(document).on('click', '#ListaUsuarios li', function (elem) {
+            var parent = $(this).parent();
+            parent.find('li.active').removeClass('active');
+            $(this).addClass('active');
+
+            var value = $(this).attr('data-id');
+            $('body').data('idRow', value);
+        });
+
+        $(document).on('click', '#ListaAsignados li', function (elem) {
+            var parent = $(this).parent();
+            parent.find('li.active').removeClass('active');
+            $(this).addClass('active');
+
+            var value = $(this).attr('data-id');
+            $('body').data('idRow', value);
+        });
+
+        $(document).on('click', '.btn-asig-user-rgt', function (elem) {
+            var value = $('body').data('idRow');
+            if(value != undefined && value != ''){
+                var row = $('#ListaUsuarios li[data-id=' + value + ']');
+                //asignar elemento - li
+                if (row.length > 0) {
+                    var elem = document.createElement('li');
+                    elem.className = 'ui-state-default ui-sortable-handle';
+                    elem.setAttribute('data-id', value);
+                    elem.innerHTML = row.html();
+                    //colocarlo en la lista asignados
+                    var list = document.getElementById('ListaAsignados');
+                    list.appendChild(elem);
+                    row.remove();
+                    $('body').data('idRow', '');
+                }
+            }
+        });
+
+        $(document).on('click', '.btn-asig-user-lft', function (elem) {
+            var value = $('body').data('idRow');
+            if(value != undefined && value != ''){
+                var row = $('#ListaAsignados li[data-id=' + value + ']');
+                //asignar elemento - li
+                if (row.length > 0) {
+                    var elem = document.createElement('li');
+                    elem.className = 'ui-state-default ui-sortable-handle';
+                    elem.setAttribute('data-id', value);
+                    elem.innerHTML = row.html();
+                    //colocarlo en la lista asignados
+                    var list = document.getElementById('ListaUsuarios');
+                    list.appendChild(elem);
+                    row.remove();
+                    $('body').data('idRow', '');
+                }
+            }
+        });
+
+        $(document).on("click", '.dropdown-menu > li.subMenu-Etapas > a.trigger', function (e) {
+            var current = $(this).next();
+            var grandparent = $(this).parent().parent();
+            grandparent.find('.right-caret').not(this).toggleClass('right-caret');
+            grandparent.find(".sub-menu:visible").not(current).hide();
+            current.toggle();
+            e.stopPropagation();
+        });
+
+        $(document).on('click', '#modalAddUserCompromisos .modal-footer .btn.btnAceptar', function (elem) {
+            LISTUSER.saveUser();
+        });
+
+        //Rellenar Combo para Superintencia dependiendo de la idCoordinacion Seleccionado
+        $('#Coordinaciones').change(function () {
+            var id = $(this).val();
+            
+            if(id !== undefined && id > 0)
+            {      
+                $('#Superintendencias').prop('disabled', true);
+
+                $.ajax({
+                    type: 'POST',
+                    data: { IdCoordinacion: id},
+                    url: '/ConfigProyecto/SelectAllSuperIntendencias',
+                    success: function(data){
+
+                        data = JSON.parse(data); 
+                        console.log(data);
+
+                        if(data.length > 0)
+                        {
+                            $("#Superintendencias").empty();
+
+                            //Rellenamos el Combo superintendencia con los datos obtenidos
+                            var option = $(document.createElement('option'));
+                            option.text('Seleccione una opción');
+                            option.val('');
+
+                            if($("#Superintendencias").length > 0)
+                            {                                
+                                $("#Superintendencias").append(option);
+                            } else{
+                                $("#Superintendencias").append(option);
+                            }
+
+                            $(data).each(function () {
+                                var option = $(document.createElement('option'));
+                                option.text(this.NombreSuperIntendencia);
+                                option.val(this.IdSuperintendencia);
+                                $("#Superintendencias").append(option);
+                            });
+
+                            $('#Superintendencias').removeAttr('disabled', false);
+                        }
+
+                    },
+                    error: function(data){
+                        console.log('Error');
+                    }
+                });                
+            }
+        });
+
+    }
+
+    function cargarArbolEtapas(d) {
+        if (d.etapas.length > 0) {
+            var tmpl = $("#navigation_template").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "etapas": d.etapas });
+            $('#etapas_proyecto').html(html);
+        }
+    }
+
+    function cargarFormDetalleProyecto(d)
+    {
+        var form = $("#frmEditarDetalleProyecto");
+        form.find('#IdProyecto').val(d.dataproyecto.proyecto_id);
+        form.find('#NombreProyecto').val(d.dataproyecto.proyecto_nombre);
+        //form.find('#IdProyecto').val(d.dataproyecto.proyecto_id);
+        //form.find('#IdProyecto').val(d.dataproyecto.proyecto_id);
+
+        //console.log(d.responsables);
+
+        
+        $(d.areas).each(function () {
+            var option = $(document.createElement('option'));
+            option.text(this.NombreArea);
+            option.val(this.idArea);
+            
+            if(this.idArea == d.dataproyecto.proyecto_idarea){option.prop('selected', true)}
+            $("#IdArea").append(option);
+        });
+
+        $(d.responsables).each(function () {
+            var option = $(document.createElement('option'));
+            option.attr('data-idpuesto', this.idPuesto);
+            option.text(this.Nombre);
+            option.val(this.id);
+            if(this.id == d.dataproyecto.proyecto_idresponsable){
+                option.prop('selected', true)
+                setCoordSuper(this.idPuesto);
+            }
+            $("#IdResponsable").append(option);
+        });
+
+        $(d.ubicaciones).each(function () {
+            var option = $(document.createElement('option'));
+            option.text(this.Ubicacion);
+            option.val(this.idUbicacion);
+            if(this.idUbicacion == d.dataproyecto.proyecto_idubicacion){option.prop('selected', true)}
+            $("#IdUbicacion").append(option);
+        });
+
+        //Se agregan Coordinaciones al Modal
+        //$(d.coordinaciones).each(function () {
+            //var option = $(document.createElement('option'));
+            //option.text(this.NombreCoordinacion);
+            //option.val(this.IdCoordinacion);
+            //if(this.IdCoordinacion == d.dataproyecto.proyecto_idCoordinacion){
+            //    option.prop('selected', true)
+            //}
+            //$("#Coordinaciones").append(option);
+        //});
+
+        //Se agregan Superintendencias a modal
+        //$(d.superintendencias).each(function () {
+        //    var option = $(document.createElement('option'));
+        //    option.text(this.NombreSuperIntendencia);
+        //    option.val(this.IdSuperintendencia);
+        //    if(this.IdSuperintendencia == d.dataproyecto.proyecto_idSuperintendencia){option.prop('selected', true)}
+        //    $("#Superintendencias").append(option);
+        //});
+
+        //Se agregan Tipo Proyecto a modal
+        $(d.tiposproyectos).each(function () {
+            var option = $(document.createElement('option'));
+            option.text(this.TipoProyecto);
+            option.val(this.IdTipoProyecto);
+            if(this.IdTipoProyecto == d.dataproyecto.proyecto_idTipoProyecto){option.prop('selected', true)}
+            $("#TiposProyecto").append(option);
+        });
+
+        var di = moment(d.dataproyecto.proyecto_fecha_ini);
+        var df = moment(d.dataproyecto.proyecto_fecha_fin);
+
+        form.find('#FechaInicio').val(di.locale('es').format('L'));
+        form.find('#FechaFin').val(df.locale('es').format('L'));
+    }
+
+    function chkModal(e) {
+        var id = $(e).data('idindicador');
+        var idsubetapa = $(e).data('idsubetapa');
+        localStorage.setItem('idIndicador', id);
+        localStorage.setItem('idConfigRelation', $(e).data('idconfig'));
+        localStorage.setItem('idSubetapa', idsubetapa);
+        var nclss = $(e).attr('class');
+        var clss = nclss.substr(nclss.lastIndexOf(' ') + 1);
+        var claveind = $(e).data('prefijoind');
+        var nombreind = $(e).data('nombreind');
+        var idconfig=$(e).data('idconfig');
+        if (clss === "btn-infoCompromiso") {
+            $('#modalInfoCompromisos').modal('show');
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: '/Proyectos/GetUsers',
+                data: { idIndicador: id, idconfig:idconfig },
+                success: function (msg) {
+                    var users = JSON.parse(msg);
+                    $('#ListaUsuarios').html("") ;$('#ListaAsignados').html("");
+                    $.each(users, function (i, elem) {
+                        $.each(elem.User, function (l, ele) {
+                            var li = document.createElement('li');
+                            li.className = 'ui-state-default';
+                            li.setAttribute('data-id', ele.IdUsuario);
+                            li.innerHTML = ele.Nombre;
+                            var list = elem.Listaid == 1 ? $('#ListaUsuarios') : $('#ListaAsignados');
+                            $(list).append(li);
+                        });
+                    });
+
+                    $('#modalAddUserCompromisos').find('.modal-subtitle .title-addUserCompromisos').html(claveind);
+                    $('#modalAddUserCompromisos').find('.modal-subtitle .subtitle-addUserCompromisos').html(nombreind);
+                    $('#modalAddUserCompromisos').modal('show');
+
+                },
+                error: function (msg) {
+                    $('#ListaUsuarios').html("") ;$('#ListaAsignados').html("");
+                    console.log('Error: ' + msg);
+                }
+            });
+        }
+    }
+
+    function checkRadiobuttons(id)
+    {
+        var modal = $('#modalInfoCompromisos');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('checked');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('disabled');
+        modal.find('#tipoIndicadorCheck').removeAttr('checked');
+        modal.find('#tipoIndicadorCheck').removeAttr('disabled');
+
+        if (id === 1) {
+            modal.find('#tipoIndicadorSeguimiento').trigger('click');
+            modal.find('#tipoIndicadorSeguimiento').prop('checked', true);
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+        }
+        else {
+            modal.find('#tipoIndicadorCheck').trigger('click');
+            modal.find('#tipoIndicadorCheck').prop('checked', true);
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+        }
+    }
+
+    function chkEtapa(elem)
+    {
+        var id = $(elem).attr('id');
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/ConfigProyecto/actualizarEtapaSubEtapa',
+            data: {
+                id: $(elem).attr('data-idetapa'), idproyecto:$("#frmEditarDetalleProyecto #IdProyecto").val(), estatus: $(elem).prop("checked"), isetapa: true
+            },
+            success: function (data) {
+                var d = JSON.parse(data);
+                if(d.accion){
+                    //se deshabilitan todo los checkbos de lassubetapas
+                    if(!$(elem).prop("checked")==true){
+                        var checkBoxes =  $('#etapas_proyecto .'+id);
+                        checkBoxes.attr("checked", false);
+                    }
+
+                    $(elem).attr("checked", !$(elem).attr("checked"));
+                }
+                else{
+                    console.log(d.msj)
+                }
+            },
+            error: function (data) {
+                console.log('Error: ' + data);
+            }
+        });
+    }
+
+    function chkSubEtapa(elem)
+    {
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/ConfigProyecto/actualizarEtapaSubEtapa',
+            data: {
+                id: $(elem).attr('data-idsubetapa'), idproyecto:$("#frmEditarDetalleProyecto #IdProyecto").val(), estatus: $(elem).prop("checked"), isetapa: false
+            },
+            success: function (data) {
+                var d = JSON.parse(data);
+                if(d.accion){
+                    
+                    //console.log(!$(elem).attr("checked"));
+                    if(!$(elem).attr("checked")==true){
+                        var myClasses = $(elem).attr('class').split(/\s+/);
+
+                        if(myClasses != undefined && myClasses.length > 0){
+                            var checketapa = $('#'+myClasses[1]);
+                            checketapa.attr("checked", true);
+                            checketapa.prop("checked", true);
+                        }
+                    }
+        
+                    $(elem).attr("checked", !$(elem).attr("checked"));
+
+                }
+                else{
+                    console.log(d.msj)
+                }
+            },
+            error: function (data) {
+                console.log('Error: ' + data);
+            }
+        });
+        
+    }
+
+    function validarFechasSubetapas(input, Obj)
+    {
+
+        var ret = {cumple:false, msj:""};
+
+        var ffinput = moment(input.val(), "DD-MM-YYYY");
+        var feciniproy = moment(Obj.dataproyecto.proyecto_fecha_ini);
+        var fecfinproy = moment(Obj.dataproyecto.proyecto_fecha_fin);
+
+        var idetapa = input.data('idetapa');
+        var idsubetapa = input.data('idsubetapa');
+
+        var etapas = Obj.etapas;
+        var indexEtapaActual = _.findLastIndex(etapas, {etapa_id: idetapa});
+        var etapa = etapas[indexEtapaActual];
+
+        var subetapas = [];
+
+        _.each(etapas, function(e){
+            _.each(e.SubEtapas, function(s){
+                subetapas.push(s);
+            });
+        });
+
+
+        //var subetapas = etapa.SubEtapas;
+        var indexSubetapaActual = _.findLastIndex(subetapas, {subetapa_id: idsubetapa});
+        var subetapa = subetapas[indexSubetapaActual];
+
+        //Validamos si es la primera subetapa
+        if(true){//indexSubetapaActual == 0 ){
+            if(ffinput.isSameOrAfter(feciniproy) && ffinput.isSameOrBefore(fecfinproy)){
+
+                ret.cumple = true;
+                ret.msj = "validación aceptada";
+                etapas[indexEtapaActual].SubEtapas[ _.findLastIndex(etapas[indexEtapaActual].SubEtapas, {subetapa_id: idsubetapa})].FechaFin = ffinput.format();
+
+                //if(subetapas[indexSubetapaActual+1].FechaFin != null){
+                //    if(ffinput.isBefore(subetapas[indexSubetapaActual+1].FechaFin)){
+                //        ret.cumple = true;
+                //        ret.msj = "validación aceptada";
+                //        etapas[indexEtapaActual].SubEtapas[ _.findLastIndex(etapas[indexEtapaActual].SubEtapas, {subetapa_id: idsubetapa})].FechaFin = ffinput.format();
+                //    }
+                //    else{
+                //        ret.cumple = false;
+                //        ret.msj ="La fecha seleccionada debe ser menor a " + moment(subetapas[indexSubetapaActual+1].FechaFin).format('DD/MM/YYYY');
+                //        return ret;
+                //    }
+                //}
+                //else{
+                //    ret.cumple = true;
+                //    ret. msj = "validación aceptada";
+                //    etapas[indexEtapaActual].SubEtapas[ _.findLastIndex(etapas[indexEtapaActual].SubEtapas, {subetapa_id: idsubetapa})].FechaFin = ffinput.format();
+                //}
+            }
+            else{
+                ret.cumple = false;
+                ret.msj="La fecha seleccionada debe ser mayor o igual a la fecha inicial del proyeto y menor o igual a la fecha final del proyecto";
+            }
+        } //validamos las etapas intermedias
+        //else if(indexSubetapaActual > 0 && indexSubetapaActual < (subetapas.length-1)){
+        //    if(subetapas[indexSubetapaActual-1].FechaFin != null){
+        //        if(ffinput.isAfter(subetapas[indexSubetapaActual-1].FechaFin)){
+        //            ret.cumple = true;
+        //            ret.msj = "validación aceptada";
+
+        //            //Aqui se valida la fecha con el nodo siguiente
+        //            //------------------------------------------------
+        //            if(subetapas[indexSubetapaActual+1].FechaFin != null){
+        //                if(ffinput.isBefore(subetapas[indexSubetapaActual+1].FechaFin)){
+        //                    ret.cumple = true;
+        //                    ret.msj = "validación aceptada";
+        //                    etapas[indexEtapaActual].SubEtapas[ _.findLastIndex(etapas[indexEtapaActual].SubEtapas, {subetapa_id: idsubetapa})].FechaFin = ffinput.format();
+        //                }
+        //                else{
+        //                    ret.cumple = false;
+        //                    ret.msj ="La fecha seleccionada debe ser menor a " + moment(subetapas[indexSubetapaActual+1].FechaFin).format('DD/MM/YYYY');
+        //                    return ret;
+        //                }
+        //            }
+        //            else{
+        //                if(ffinput.isBefore(fecfinproy)){
+        //                    ret.cumple = true;
+        //                    ret.msj = "validación aceptada";
+        //                    etapas[indexEtapaActual].SubEtapas[ _.findLastIndex(etapas[indexEtapaActual].SubEtapas, {subetapa_id: idsubetapa})].FechaFin = ffinput.format();
+        //                }
+        //                else{
+        //                    ret.cumple = false;
+        //                    ret.msj ="La fecha seleccionada debe ser menor a " + fecfinproy.format('DD/MM/YYYY');
+        //                    return ret;
+        //                }
+        //            }
+        //            //------------------------------------------------
+
+        //        }
+        //        else{
+        //            ret.cumple = false;
+        //            ret.msj ="La fecha seleccionada debe ser mayor a " + moment(subetapas[indexSubetapaActual-1].FechaFin).format('DD/MM/YYYY');
+        //            return ret;
+        //        }
+        //    }
+        //    else{
+        //        ret.cumple = false;
+        //        ret.msj = "Ingrese la fecha fin para la subetapa: " + subetapas[indexSubetapaActual-1].clave;
+        //        return ret;
+        //    }
+        //}
+        //else if(indexSubetapaActual == (subetapas.length-1))
+        //{
+        //    if(subetapas[indexSubetapaActual-1].FechaFin != null){
+        //        if(ffinput.isAfter(subetapas[indexSubetapaActual-1].FechaFin)){
+        //            if(ffinput.isSameOrBefore(fecfinproy)){
+        //                ret.cumple = true;
+        //                ret.msj = "validación aceptada";
+        //                etapas[indexEtapaActual].SubEtapas[ _.findLastIndex(etapas[indexEtapaActual].SubEtapas, {subetapa_id: idsubetapa})].FechaFin = ffinput.format();
+        //            }
+        //            else{
+        //                ret.cumple = false;
+        //                ret.msj ="La fecha seleccionada debe ser menor o igual a " + fecfinproy.format('DD/MM/YYYY');
+        //                return ret;
+        //            }
+        //        }
+        //        else{
+        //            ret.cumple = false;
+        //            ret.msj ="La fecha seleccionada debe ser mayor a " + moment(subetapas[indexSubetapaActual-1].FechaFin).format('DD/MM/YYYY');
+        //            return ret;
+        //        }
+        //    }
+        //    else{
+        //        ret.cumple = false;
+        //        ret.msj = "Ingrese la fecha fin para la subetapa: " + subetapas[indexSubetapaActual-1].clave;
+        //        return ret;
+        //    }
+        //}
+
+        return ret;
+
+    }
+
+    function combosSubsistemas(callback){
+        $.ajax({
+            url: '@Url.Action("getSubsistema", "ConfigProyecto")',
+            dataType: "json",
+            data: {},
+            beforeSend: function(){
+                $('#modalAgregarIndSE form #IdSubsistema').append('<option>Cargando...</option>'); 
+            },
+            success: function (data) {
+                var ind = JSON.parse(data);
+                $('#modalAgregarIndSE form #IdSubsistema').html('<option>Seleccione un subsistema</option>');
+                $.each(ind, function(i,e){
+                    var opc = '<option value="'+e.IdSubsistema+'">'+e.NombreSubsistema+'</option>';
+                    $('#modalAgregarIndSE form #IdSubsistema').append(opc);
+                });
+                if (typeof callback === "function") {
+                    callback();
+                }
+            },
+            error: function () {
+                errorLoading();
+            }
+        });
+    }
+
+    function combosElementos(IdSubsistema,callback){
+        $.ajax({
+            url: '@Url.Action("getElementos", "ConfigProyecto")',
+            dataType: "json",
+            data: {IdSubsistema:IdSubsistema},
+            beforeSend: function(){
+                $('#modalAgregarIndSE form #IdElemento').append('<option>Cargando...</option>'); 
+            },
+            success: function (data) {
+                var ind = JSON.parse(data);
+                $('#modalAgregarIndSE form #IdElemento').html('<option>No hay selección</option>');
+                $.each(ind, function(i,e){
+                    var opc = '<option value="'+e.IdElemento+'">'+e.NombreElemento+'</option>';
+                    $('#modalAgregarIndSE form #IdElemento').append(opc);
+                });
+
+                if (typeof callback === "function") {
+                    callback();
+                }
+            },
+            error: function () {
+                errorLoading();
+            }
+        });
+    }
+
+    function combosIndicadores(IdElemento, IdSubEtapa, IdProyecto, callback){
+        $.ajax({
+            url: '@Url.Action("getIndicadoresFaltantes", "ConfigProyecto")',
+            dataType: "json",
+            data: {IdElemento:IdElemento, IdSubEtapa:IdSubEtapa, IdProyecto:IdProyecto},
+            beforeSend: function(){
+                $('#modalAgregarIndSE form #Indicadores').append('<option>Cargando...</option>'); 
+            },
+            success: function (data) {
+                var ind = JSON.parse(data);
+                $('#modalAgregarIndSE form #Indicadores').html('');
+                $.each(ind, function(i,e){
+                    var opc = '<option value="'+e.IdIndicador+'">'+ e.Clave+ " -" + wrapText(e.DescripcionCorta, 55, '...') + '</option>';
+                    $('#modalAgregarIndSE form #Indicadores').append(opc);
+                });
+
+                if (typeof callback === "function") {
+                    callback();
+                }
+            },
+            error: function () {
+                errorLoading();
+            }
+        });
+    }
+
+    function cargaTablaHistorial(elem, dt) {
+        _.each(dt, function (d,i) { dt[i].cont = (i + 1); });
+        var d = { "rows": dt };
+        $(elem).bootgrid({
+            rowCount: 5,
+            navigation:2,
+            columnSelection: false,
+            labels: {
+                infos: "",
+                noResults: "No hay resultados"
+            },
+            formatters: {
+                "fecha-ini-format": function(colum, row){
+
+                    if(row[colum.id] == null){
+                        return "";
+                    }
+                    else{
+                        var fecha = moment(row[colum.id]);
+                        return fecha.locale('es').format('L');
+                    }
+                },
+                "menu-contextual": function(culumn, row)
+                {
+                    return '';
+                }
+            }
+            //Carga de datos
+        }).bootgrid("clear").bootgrid("append", d.rows);
+    }
+
+    function setCoordSuper(idPuesto){
+        if (idPuesto != "") {
+                //Se manda a traer la informacion dependiente de este puesto
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("getDependencias", "Catalogos")",
+                    data: { idpuesto:idPuesto },
+                dataType: "json",
+                success: function (msg) {
+                    var data = JSON.parse(msg);
+                    if (data[0] != undefined) {
+                        var d = data[0];
+
+                        var idsuper = (d.IdSuperintendencia != null)? d.IdSuperintendencia : 0;
+                        var idcoor = (d.IdCoordinacion != null)? d.IdCoordinacion : 0;
+                        var namesuper = (d.IdSuperintendencia != null)? d.NombreSuperintendencia : "No Aplica";
+                        var namecoor = (d.IdCoordinacion != null)? d.NombreCoordinacion : "No Aplica";
+
+                        var form = $("form#frmEditarDetalleProyecto");
+                        form.find("#Superintendencias").val(idsuper);
+                        form.find("#NombreSuperintendencia").val(namesuper);
+                        form.find("#Coordinaciones").val(idcoor);
+                        form.find("#NombreCoordinacion").val(namecoor);
+                    }
+                },
+                error: function (msg) {
+                    console.log("Error al llenar el combo");
+                }
+            });
+        }
+        else {
+            var form = $("form#frmEditarDetalleProyecto");
+            form.find("#Superintendencias").val(0);
+            form.find("#NombreSuperintendencia").val("No Aplica");
+            form.find("#Coordinaciones").val(0);
+            form.find("#NombreCoordinacion").val("No Aplica");     
+        }
+    }
+</script>

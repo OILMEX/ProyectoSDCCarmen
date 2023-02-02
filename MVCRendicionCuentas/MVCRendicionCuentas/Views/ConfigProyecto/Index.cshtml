@@ -1,0 +1,566 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model HtmlString
+
+<div class="container-fluid lbl-mod-tit pdb-20 pdl-0">
+
+    <div class="media">
+        <div class="media-left media-middle">
+            <img class="media-object" src="~/Images/iconos_secciones/proyectos.png" />
+        </div>
+        <div class="media-body">
+            <span>COMPONENTES DE PROYECTO</span>
+            <span class="label label-default mrl-10 bulet" id="bulet-proy"></span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid Square-indicadores">
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-ind" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#tab-enproceso" aria-controls="tab-tablero1" role="tab" data-toggle="tab">En Proceso</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-concluido" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Concluidos</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tab-enproceso">
+
+            <div class="cnt-vista-opciones">
+                <span class="titulo-proyecto">INDICADORES ASOCIADOS</span>
+                <a id="btnAddProyectoProceso" class="pull-right btn glyphicon btn-opc-ind fa fa-plus activo" title="Agregar Componente de Proyecto"></a>
+            </div>
+            <div class="separador-indicadores"></div>
+            <!-- Grafica de subsistemas -->
+            <div class="cnt-vista-graf-pie">
+                <div class="container-fluid no-pd cnt-tbl-subsis cnt-tab-subsist-grl"></div>
+            </div>
+
+            <!-- Tab panes -->
+            <div id="cnt-subsis-ind" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-concluido">
+            <div class="cnt-vista-opciones">
+                <span class="titulo-proyecto">INDICADORES ASOCIADOS</span>
+                @*<a id="btnAddProyectoConcluido" class="pull-right btn glyphicon btn-opc-ind fa fa-plus activo"></a>*@
+            </div>
+            <div class="separador-indicadores"></div>
+
+            <!-- Tab panes -->
+            <div id="cnt-subsis-ind-con" class="tab-content">
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script type="text/template" id="tmp-tablero-subsis">
+    <div class="cnt-graficas-subsis">
+        <% _.each(elementos, function(e,i){
+        if(elementos.length > 0 && i < 4){
+        var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":"right");  %>
+        <div class="cnt-nomb-sub sub<%= e.IdSubsistema %>"><span><%=e.NombreSubsistema%></span></div>
+        <div class="cnt-wrp-diagrama">
+            <div class="cnt-grafica-pie<%=(elementos.length>1)?'s':''%> cnt-grafica-nivel2" data-subsistema="<%=e.NombreSubsistema%>" data-tproy="<%=elementos.length%>">
+                <canvas class="circulo-dinamico" id="chart-nivel2-container<%=i%>" width="80" height="80" data-elem="#chart-nivel2-container<%=i%>" data-avance="<%= e.Porcentaje %>" data-color="<%= e.Semaforo %>"></canvas>
+                <div class="cnt-grafica-text lnk-concepto" data-lnk="" role="button"><span><%=e.Porcentaje%></span><span>%</span></div>
+                
+                <% if(e.completados !== undefined){ %><span class="lbl-comp"><%=e.completados%></span><% } %>
+            </div>
+        </div>
+        <% } }); %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tab-ind">
+        <% _.each(subsistemas,function(subsistema, i){ %>
+        <div class="graf-subsistema">
+            <span class="titulo-ss" style="color: <%= subsistema.color %> !important;"><%= subsistema.subsistema_nombre %></span>
+            <div class="grafico-ss">
+                <img src="/Images/grafverde.PNG" />
+            </div>
+        </div>
+        <% }); %>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+    <% _.each(subsistemas,function(subsistema, i){ %>
+    <div role="tabpanel" class="tab-pane<%= (i===0)?' active':'' %>" id="tab-subsistema<%= i %>">
+        
+        <div class="container-fluid cnt-vista1 cnt-vista no-pd">
+            <table id="grid-proyectos-<%= estatus %>" class="table table-condensed table-hover table-striped grid-proyectos">
+                <thead>
+                    <tr>
+                        <th data-column-id="proyecto_id" data-type="numeric" data-align="center" data-sortable="false">#</th>
+                        <th data-column-id="proyecto_indicador_global" data-align="center" data-formatter="indicador-global">IND</th>
+                        <th data-column-id="proyecto_nombre" data-formatter="proyecto_nombre" data-order="asc">COMP. DE PROYECTO</th>
+                        <th data-column-id="proyecto_responsable" data-align="center" data-headeralign="center">RESPONSABLE</th>
+                        <th data-column-id="proyecto_fecha_ini" data-align="center" data-formatter="fecha-ini-format">F.INICIO</th>
+                        <th data-column-id="proyecto_fecha_fin" data-align="center" data-formatter="fecha-fin-format">F.FIN</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-align="center" data-formatter="component-indicador" data-sortable="false">12MPI</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-align="center" data-formatter="component-indicador-2" data-sortable="false">SASP</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-align="center" data-formatter="component-indicador-3" data-sortable="false">SAA</th>
+                        <th data-column-id="proyecto_indicadores_ss.ss_porcentaje" data-alignheader="center" data-align="center" data-formatter="component-indicador-4" data-sortable="false">SAST</th>
+                        <th data-formatter="menu-contextual" data-sortable="false"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+
+        var OBJ = [];
+        initCarga();
+
+        $('#FechaInicio').datetimepicker({
+            format: 'DD/MM/YYYY',
+            showClear: true,
+            locale: moment.locale('es')
+        });
+
+        $('#FechaFin').datetimepicker({
+            format: 'DD/MM/YYYY',
+            showClear: true,
+            locale: moment.locale('es')
+        });
+
+        $("#FechaInicio").on("dp.change", function (e) {
+            var date = e.date.add(1, 'days');
+            $('#FechaFin').data("DateTimePicker").minDate(date);
+        });
+        $("#FechaFin").on("dp.change", function (e) {
+            var date = e.date.add(-1, 'days');
+            $('#FechaInicio').data("DateTimePicker").maxDate(date);
+        });
+
+        //validacion formulario subetapa
+        $('#frmAddProyectoConfig').validate({
+            rules: {
+                'NombreProyecto': { required: true },
+                'FechaInicio': {required: true},
+                'FechaFin': {required: true},
+                'AreaOperativa': {required: true},
+                'Responsable': {required: true},
+                'Ubicaciones': {required: true},
+                //'Coordinaciones': {required: true},
+                'TiposProyecto': {required: true}
+            },
+            messages: {
+                'NombreProyecto': { required: "El campo es requerido" },
+                'FechaInicio': { required: "El campo es requerido" },
+                'FechaFin': { required: "El campo es requerido" },
+                'AreaOperativa': { required: "El campo es requerido" },
+                'Responsable': { required: "El campo es requerido" },
+                'Ubicaciones': {required: "El campo es requerido"},
+                //'Coordinaciones': {required: "El campo es requerido"},
+                'TiposProyecto': {required: "El campo es requerido"}
+            }
+        });
+
+        //Open modal nuevo proyecto concluido
+        //$("#btnAddProyectoConcluido").click(function(){
+        //    var modal = $("#modalDetalleIndicadorEdit");
+        //    modal.find('.modal-body form#frmAddProyectoConfig input#EstatusProyecto').val('Concluido');
+        //    modal.find('.modal-body form#frmAddProyectoConfig input#NombreProyecto').val('');
+        //    modal.find('.modal-body form#frmAddProyectoConfig input#FechaInicio').val('');
+        //    modal.find('.modal-body form#frmAddProyectoConfig input#FechaFin').val('');
+        //    modal.modal('show');
+        //});
+
+        //Envio del formulario etapa
+        $("#btnSubmitFrmAddProyectoConfig").click(function(){
+            var action = '/ConfigProyecto/addProyecto/';
+            $("#frmAddProyectoConfig").attr('action', action);
+            $('#frmAddProyectoConfig').submit();
+        });
+
+
+        //Procesar envío de nuevo indicadores
+        $('#modalAddProyectoConfig .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                $('#modalAddProyectoConfig .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalAddProyectoConfig .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (data) {
+                        var d = JSON.parse(data);
+                        $('#modalAddProyectoConfig .modal-body .alert-warning').addClass('hidden');
+                        //var action = $("#modalAddProyectoConfig .modal-body input#actionForm").val();
+                        if (d.accion) {
+                            $('#modalAddProyectoConfig .modal-body .alert-success.edit').removeClass('hidden');
+                        } else {
+                            $('#modalAddProyectoConfig .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalAddProyectoConfig').modal('hide');
+                            $('#modalAddProyectoConfig .modal-body .alert-success').addClass('hidden');
+                            $('#modalAddProyectoConfig .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        //Rellenar Combo para Superintencia dependiendo de la idCoordinacion Seleccionado
+        //$('#Coordinaciones').change(function () {
+        //    var id = $(this).val();
+            
+        //    if(id !== undefined && id > 0)
+        //    {
+        //        var modal = $("#modalAddProyectoConfig");          
+        //        $('#Superintendencias').prop('disabled', true);
+
+        //        $.ajax({
+        //            type: 'POST',
+        //            data: { IdCoordinacion: id},
+        //            url: '/ConfigProyecto/SelectAllSuperIntendencias',
+        //            success: function(data){
+
+        //                data = JSON.parse(data); 
+
+        //                if(data.length > 0)
+        //                {
+        //                    //Rellenamos el Combo superintendencia con los datos obtenidos
+        //                    var option = $(document.createElement('option'));
+        //                    option.text('Seleccione una opción');
+        //                    option.val('');
+
+        //                    modal.find(".modal-body form#frmAddProyectoConfig select#Superintendencias option").remove().end();
+        //                    modal.find(".modal-body form#frmAddProyectoConfig #Superintendencias").append(option);
+
+        //                    $(data).each(function () {
+        //                        var option = $(document.createElement('option'));
+        //                        option.text(this.NombreSuperIntendencia);
+        //                        option.val(this.IdSuperintendencia);
+        //                        modal.find(".modal-body form#frmAddProyectoConfig #Superintendencias").append(option);
+        //                    });
+
+        //                    $('#Superintendencias').removeAttr('disabled', false);
+        //                }
+
+        //            },
+        //            error: function(data){
+        //                console.log('Error');
+        //            }
+        //        });                
+        //    }
+        //});
+
+
+
+    });
+
+    function initCarga() {
+        OBJ = @Model;
+        $('#bulet-proy').html((OBJ.enproceso.length > 0)? OBJ.enproceso.length : 0);
+        cargarTabsSistemas(OBJ);
+        cargarCntSistemas('#cnt-subsis-ind', OBJ.enproceso, 'proceso');
+        cargarCntSistemas('#cnt-subsis-ind-con', OBJ.concluidos, 'concluido');
+        cargaTablaProyectos('#grid-proyectos-proceso', OBJ.enproceso);
+        cargaTablaProyectos('#grid-proyectos-concluido', OBJ.concluidos);
+
+        cargarDiagrama({
+            tmpl: "#tmp-tablero-subsis",
+            datos: OBJ.graficas,
+            cnt: ".cnt-tbl-subsis"
+        }, function () {
+            initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+        });
+
+        //Evento para la seleccion de responsable
+        $("form#frmAddProyectoConfig #Responsable").on('change', function () {
+            setCoordSuper($('option:selected', this).data('idpuesto'));
+        });
+
+
+        //Open modal nuevo proyecto en proceso
+        $("#btnAddProyectoProceso").click(function(){
+            var modal = $("#modalAddProyectoConfig");
+
+            var option = $(document.createElement('option'));
+            option.text('Seleccione una opción');
+            option.val('');
+
+            var optionR = $(document.createElement('option'));
+            optionR.text('Seleccione una opción');
+            optionR.val('');
+
+            var optionU = $(document.createElement('option'));
+            optionU.text('Seleccione una opción');
+            optionU.val('');
+
+            var optionC = $(document.createElement('option'));
+            optionC.text('Seleccione una opción');
+            optionC.val('');
+
+            var optionCo = $(document.createElement('option'));
+            optionCo.text('Seleccione una opción');
+            optionCo.val('');
+
+            modal.find(".modal-body form#frmAddProyectoConfig select#AreaOperativa option").remove().end();
+            modal.find(".modal-body form#frmAddProyectoConfig select#Responsable option").remove().end();
+            modal.find(".modal-body form#frmAddProyectoConfig select#Ubicaciones option").remove().end();
+            //modal.find(".modal-body form#frmAddProyectoConfig select#Coordinaciones option").remove().end();
+            modal.find(".modal-body form#frmAddProyectoConfig select#TiposProyecto option").remove().end();
+
+            modal.find(".modal-body form#frmAddProyectoConfig #Responsable").append(optionR);
+            modal.find(".modal-body form#frmAddProyectoConfig #AreaOperativa").append(option);
+            modal.find(".modal-body form#frmAddProyectoConfig #Ubicaciones").append(optionU);
+            //modal.find(".modal-body form#frmAddProyectoConfig #Coordinaciones").append(optionC);
+            modal.find(".modal-body form#frmAddProyectoConfig #TiposProyecto").append(optionCo);
+
+            modal.find("label.error").html('');
+
+
+            $(OBJ.areas).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.NombreArea);
+                option.val(this.idArea);
+                modal.find(".modal-body form#frmAddProyectoConfig #AreaOperativa").append(option);
+            });
+
+            $(OBJ.responsables).each(function () {
+                var option = $(document.createElement('option'));
+                option.attr('data-idpuesto', this.idPuesto);
+                option.text(this.Nombre);
+                option.val(this.id);
+                modal.find(".modal-body form#frmAddProyectoConfig #Responsable").append(option);
+            });
+
+            //Se agregan ubicaciones al Modal
+            $(OBJ.ubicaciones).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.Ubicacion);
+                option.val(this.idUbicacion);
+                modal.find(".modal-body form#frmAddProyectoConfig #Ubicaciones").append(option);
+            });
+
+            //Se agregan Coordinaciones al Modal
+            //$(OBJ.coordinaciones).each(function () {
+            //    var option = $(document.createElement('option'));
+            //    option.text(this.NombreCoordinacion);
+            //    option.val(this.IdCoordinacion);
+            //    modal.find(".modal-body form#frmAddProyectoConfig #Coordinaciones").append(option);
+            //});
+
+            //Inhabilitar Superintendencias
+            //$('#Superintendencias').prop('disabled', true);
+
+            //Se agregan Coordinaciones al Modal
+            $(OBJ.tiposproyectos).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.TipoProyecto);
+                option.val(this.IdTipoProyecto);
+                modal.find(".modal-body form#frmAddProyectoConfig #TiposProyecto").append(option);
+            });
+
+            modal.find('.modal-body form#frmAddProyectoConfig input#EstatusProyecto').val('En Proceso');
+            modal.find('.modal-body form#frmAddProyectoConfig input#NombreProyecto').val('');
+            modal.find('.modal-body form#frmAddProyectoConfig input#FechaInicio').val('');
+            modal.find('.modal-body form#frmAddProyectoConfig input#FechaFin').val('');
+            modal.find('.modal-body form#frmAddProyectoConfig input#Coordinaciones').val('');
+            modal.find('.modal-body form#frmAddProyectoConfig input#Superintendencias').val('');
+            modal.modal('show');
+        });
+
+       
+    }
+
+    //Carga para gráficas
+    function cargarDiagrama(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.length > 0) {
+
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos });
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).append(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+        }
+    }
+
+    function initGraficaDinamicaPie(elemp) {
+        $(elemp).each(function (i, e) {
+            var elem = $(e).data('elem');
+            var avance = $(e).data('avance');
+            var color = $(e).data('color');
+            GraficaDinamicaPie(elem, avance, color);
+        });
+    }
+
+    function GraficaDinamicaPie(elem, avance, color) {
+        var avance_rest = 100 - avance;
+        var ctx = $(elem);
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [avance, avance_rest],
+                    backgroundColor: [setColor(color), setColor('default')],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: { enabled: false }
+            }
+        });
+    }
+
+    function setColor(c) {
+        var setColor = [];
+        setColor["Verde"] = "#00CE93";
+        setColor["Amarillo"] = "#FFC542";
+        setColor["Rojo"] = "#FF364D";
+        setColor["Azul"] = "#008DAC";
+        setColor["Gris"] = "#A4A09B";
+        setColor["default"] = "#E9E7E4";
+
+        return setColor[c];
+    }
+
+    function cargarTabsSistemas(d) {
+        if (d.enproceso.length > 0) {
+            var tmpl = $("#tmp-coleccion-tab-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.enproceso });
+            $('#nav-proyecto').html(html);
+        }
+    }
+
+    function cargarCntSistemas(elem, d, estatus) {
+        if (d.length > 0) {
+            var tmpl = $("#tmp-coleccion-tabcont-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d , "estatus": estatus});
+            $(elem).html(html);
+        }
+        else{
+            $(elem).html("No hay datos");
+        }
+    }
+
+    function deleteProyecto(elem){
+        //var btnpress = elem;
+        var modal = $('#modalConfirmDelete');
+        modal.modal({ backdrop: 'static', keyboard: false })
+        .one('click', '#btnConfirmDelete', function() {
+            //modal.find('.modal-body form#frmConfirmDelete input#idResposable').val(btnpress.data('idresponsable'));
+            //modal.find('.modal-body form#frmConfirmDelete input#idIndicador').val(btnpress.data('idindicador'));
+            //modal.find('.modal-body form#frmConfirmDelete input#idConfig').val(btnpress.data('idconfigrlation'));
+            modal.find('.modal-body form#frmConfirmDelete input#idproyecto').val($(elem).data('idproy'));
+
+            $("#frmConfirmDelete").attr('action', '/ConfigProyecto/deleteProy/');
+            $('#frmConfirmDelete').submit();
+
+        });
+    }
+
+    function setCoordSuper(idPuesto){
+        if (idPuesto != "") {
+                //Se manda a traer la informacion dependiente de este puesto
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("getDependencias", "Catalogos")",
+                data: { idpuesto:idPuesto },
+                dataType: "json",
+                success: function (msg) {
+                    var data = JSON.parse(msg);
+                    if (data[0] != undefined) {
+                        var d = data[0];
+
+                        var idsuper = (d.IdSuperintendencia != null)? d.IdSuperintendencia : 0;
+                        var idcoor = (d.IdCoordinacion != null)? d.IdCoordinacion : 0;
+                        var namesuper = (d.IdSuperintendencia != null)? d.NombreSuperintendencia : "No Aplica";
+                        var namecoor = (d.IdCoordinacion != null)? d.NombreCoordinacion : "No Aplica";
+
+                        var form = $("#modalAddProyectoConfig form#frmAddProyectoConfig");
+                        form.find("#Superintendencias").val(idsuper);
+                        form.find("#NombreSuperintendencia").val(namesuper);
+                        form.find("#Coordinaciones").val(idcoor);
+                        form.find("#NombreCoordinacion").val(namecoor);
+                    }
+                },
+                error: function (msg) {
+                    console.log("Error al llenar el combo");
+                }
+            });
+        }
+        else {
+            var form = $("#modalAddProyectoConfig form#frmAddProyectoConfig");
+            form.find("#Superintendencias").val(0);
+            form.find("#NombreSuperintendencia").val("No Aplica");
+            form.find("#Coordinaciones").val(0);
+            form.find("#NombreCoordinacion").val("No Aplica");    
+        }
+    }
+
+    function cargaTablaProyectos(elem, dt) {
+        var d = { "rows": dt };
+        $(elem).bootgrid({
+            rowCount: 5,
+            columnSelection: true,
+            labels: {
+                infos: "",//"{{ctx.start}} de {{ctx.end}}, Total: {{ctx.total}}",
+                noResults: "No hay resultados"
+            },
+            formatters: {
+                "fecha-ini-format": function(colum, row){
+                    var fecha = moment(row.proyecto_fecha_ini);
+                    return fecha.locale('es').format('L');
+                },
+                "fecha-fin-format": function(colum, row){
+                    var fecha = moment(row.proyecto_fecha_fin);
+                    return fecha.locale('es').format('L');
+                },
+                "indicador-global": function(colum, row){
+                    return '<div class="circle '+ row.proyecto_indicador_global +'"></div>'
+                },
+                "proyecto_nombre": function (colum, row){
+                    return '<a href="@Url.Action("EditarProyecto", "ConfigProyecto")?idproyecto='+ row.proyecto_id +'">' + row.proyecto_nombre + '</a>';
+                },
+                "component-indicador": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_12MPI + '">' + row.porcentaje_12MPI + '% </a>';
+                },
+                "component-indicador-2": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_SASP + '">' + row.porcentaje_SASP + '% </a>';
+                },
+                "component-indicador-3": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_SAA + '">' + row.porcentaje_SAA + '% </a>';
+                },
+                "component-indicador-4": function (culumn, row) {
+                    return '<a class="btn pdt-0 pdb-0 clr_indicador_' + row.semaforo_SAST + '">' + row.porcentaje_SAST + '% </a>';
+                },
+                "menu-contextual": function(culumn, row)
+                {
+                    return '<a data-idproy="'+ row.proyecto_id +'" class="btn btn-vista-tbl pull-right btn-delete-proy" onclick="deleteProyecto(this);" title="Eliminar proyecto" ><i class="fa fa-trash"></i></a>';
+                }
+            }
+            //Carga de datos
+        }).bootgrid("append", d.rows);
+    }
+</script>

@@ -1,0 +1,277 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdministracion.cshtml";
+}
+@model HtmlString
+
+<div class="container-fluid cnt-vista-opciones pdt-10 pdr-5">
+    <span class="subsistema-nombre-largo">ETAPAS DE UN PROYECTO</span>
+    <a class="pull-right btn glyphicon btn-opc-ind fa fa-plus activo" id="btnAddEtapaProyecto"></a>
+</div>
+
+<div id="proyecto" style="min-height:300px;" class="pdl-10"></div>
+
+<script id="navigation_template" type="text/template">
+    <% _.each(model, function(m){ %>
+    <div data-toggle="collapse" role="button"
+         data-nivel="<%= nivel %>"
+         data-target="#box-eleme<%= m.etapa_id %>"
+         data-idetapa="<%= m.etapa_id %>"
+         data-clave="<%= m.clave %>"
+         data-valor="<%= m.etapa_nombre %>"
+         data-usuariocreacion="<%= m.UsuarioCreacion %>"
+         data-usuarioactualizacion="<%= m.UsuarioActualizacion %>"
+         data-feccreacion="<%= m.FechaCreacion %>"
+         data-fecactualizacion="<%= m.FechaActualizacion %>"
+         class="pos-rel">
+        &nbsp;<i class="icon-rc icon-rc-etapa"></i> &nbsp;
+        <%= m.clave %>&nbsp;<%= m.etapa_nombre %>
+        <% if(m.SubEtapas.length>0) { %>
+        <i class="glyphicon glyphicon-triangle-bottom"></i>
+        <% }else{ %>
+        <i class="fa" style="width:13px; height:14px;"></i>
+        <% } %>
+    </div>
+    <% if(m.SubEtapas.length>0) { %>
+    <div id="box-eleme<%= m.etapa_id %>" class="collapse nivel-1">
+        @*<%= ( templateFn({model: m.hijos, templateFn: templateFn, nivel: nivel+1}) ) %>*@
+
+        <% _.each(m.SubEtapas, function(s){ %>
+
+        <div data-toggle="collapse"
+             data-nivel="1"
+             data-idetapa="<%= m.etapa_id %>"
+             data-idsubetapa="<%= s.subetapa_id %>"
+             data-clave="<%= s.clave %>"
+             data-valor="<%= s.subetapa_nombre %>">
+            &nbsp;<i class="icon-rc icon-rc-subetapa"></i>&nbsp;
+            <%= s.clave %>&nbsp;<%= s.subetapa_nombre %>
+            <i class="fa" style="width:13px; height:14px;"></i>
+        </div>
+        
+        <% }); %>
+
+    </div>
+    <% } %>
+    <% }); %>
+</script>
+
+<script>
+    var templateFn = _.template($('#navigation_template').html());
+    var nivel = 0;
+
+    $("#proyecto").html(templateFn({ model: @Model, templateFn: templateFn, nivel: 0 }));
+
+    $(document).ready(function () {
+
+        //validacion formulario subetapa
+        $('#frmEtapaProyecto').validate({
+            rules: {
+                'claveEtapa': { required: true },
+                'nombreEtapa': {required: true}
+            },
+            messages: {
+                'claveEtapa': { required: "El campo es requerido" },
+                'nombreEtapa': { required: "El campo es requerido" }
+            }
+        });
+
+        //validacion formulario subetapa
+        $('#frmSubEtapaProyecto').validate({
+            rules: {
+                'claveSubEtapa': { required: true },
+                'nombreSubEtapa': {required: true}
+            },
+            messages: {
+                'claveSubEtapa': { required: "El campo es requerido" },
+                'nombreSubEtapa': { required: "El campo es requerido" }
+            }
+        });
+
+        //Open popup add etapa proyecto
+        $("#btnAddEtapaProyecto").click(function(){
+            var modal = $("#modalProyectoEtapa");
+            modal.find('.modal-title').text('AGREGAR ETAPA DEL PROYECTO');
+            modal.find('.infoActualizar').addClass('hidden');
+            modal.find('.msjEliminarModal').addClass('hidden');
+            modal.find('.modal-body input#idEtapa').val('');
+            modal.find('.modal-body input#claveEtapa').val('');
+            modal.find('.modal-body input#nombreEtapa').val('');
+            modal.find('.modal-body input#actionEtapa').val('add');
+            modal.modal('show');
+        });
+
+        //Envio del formulario etapa
+        $("#btnSubmitFrmEtapa").click(function(){
+            var action = $("#frmEtapaProyecto #actionEtapa").val();
+            if(action != null && action != undefined)
+            {
+                action = (action == 'add')? '/Proyectos/addEtapa/' : ( (action == 'edit')? '/Proyectos/editEtapa/' : '/Proyectos/deleteEtapa/');
+                $("#frmEtapaProyecto").attr('action', action);
+                $('#frmEtapaProyecto').submit();
+            }
+            else{
+                $("#frmEtapaProyecto").attr('action', '');
+            }
+        });
+
+        //Envio del formulario subetapa
+        $("#btnSubmitFrmSubetapa").click(function(){
+            var action = $("#frmSubEtapaProyecto #actionSubEtapa").val();
+            if(action != null && action != undefined)
+            {
+                action = (action == 'add')? '/Proyectos/addSubetapa/' : ( (action == 'edit')? '/Proyectos/editSubetapa/' : '/Proyectos/deleteSubetapa/');
+                $("#frmSubEtapaProyecto").attr('action', action);
+                $('#frmSubEtapaProyecto').submit();
+            }
+            else{
+                $("#frmSubEtapaProyecto").attr('action', '');
+            }
+        });
+
+        //Acciones para mostrar el menu contextual
+        var $contextMenu = $("#contextMenuProyecto");
+
+        $("body").on("contextmenu", "div#proyecto, div#proyecto div", function (e) {
+
+            //Seteando las opciones visibles del contexmenu
+            var opt = $contextMenu.children('ul');
+
+            if (e.currentTarget.id === 'proyecto') {
+                opt.children().eq(0).show();
+                opt.children().eq(1).hide();
+                opt.children().eq(2).hide();
+                opt.children().eq(3).hide();
+                opt.children().eq(4).hide();
+                opt.children().eq(5).hide();
+
+                //Se asignana los valores del elemento clickeado
+                $contextMenu.attr("data-idetapa", '');
+                $contextMenu.attr("data-valor", '');
+                $contextMenu.attr("data-clave", '');
+                $contextMenu.attr("data-usuariocreacion", '');
+                $contextMenu.attr("data-usuarioactualizacion", '');
+                $contextMenu.attr("data-feccreacion", '');
+                $contextMenu.attr("data-fecactualizacion", '');
+
+            } else {
+                if ($(this).attr("data-nivel") == "0") {
+                    opt.children().eq(0).hide();
+                    opt.children().eq(1).show();
+                    opt.children().eq(2).show();
+                    opt.children().eq(3).show();
+                    opt.children().eq(4).hide();
+                    opt.children().eq(5).hide();
+
+                    //Se asignana los valores del elemento clickeado
+                    $contextMenu.attr("data-idetapa", $(e.currentTarget).data("idetapa"));
+                    $contextMenu.attr("data-valor", $(e.currentTarget).data("valor"));
+                    $contextMenu.attr("data-clave", $(e.currentTarget).data("clave"));
+                    $contextMenu.attr("data-usuariocreacion", $(e.currentTarget).data("usuariocreacion"));
+                    $contextMenu.attr("data-usuarioactualizacion", $(e.currentTarget).data("usuarioactualizacion"));
+                    $contextMenu.attr("data-feccreacion", $(e.currentTarget).data("feccreacion"));
+                    $contextMenu.attr("data-fecactualizacion", $(e.currentTarget).data("fecactualizacion"));
+                }
+                else {
+                    opt.children().eq(0).hide();
+                    opt.children().eq(1).hide();
+                    opt.children().eq(2).hide();
+                    opt.children().eq(3).hide();
+                    opt.children().eq(4).show();
+                    opt.children().eq(5).show();
+
+                    //Se asignana los valores del elemento clickeado
+                    $contextMenu.attr("data-idetapa", $(e.currentTarget).data("idetapa"));
+                    $contextMenu.attr("data-idsubetapa", $(e.currentTarget).data("idsubetapa"));
+                    $contextMenu.attr("data-valor", $(e.currentTarget).data("valor"));
+                    $contextMenu.attr("data-clave", $(e.currentTarget).data("clave"));
+                }
+            }
+
+            //Se asignana los valores del elemento clickeado
+            //$contextMenu.attr("data-IdNodo", $(this).attr("data-IdNodo"));
+            //$contextMenu.attr("data-tiponodo", $(this).attr("data-tiponodo"));
+            //$contextMenu.attr("data-namenodo", $(this).text());
+            $contextMenu.css({
+                display: "block",
+                left: e.pageX,
+                top: e.pageY
+            });
+            return false;
+        });
+
+        //Accion para ocultar menu contextual cuando se clickea fuera del elemento
+        $(document).mouseup(function (e) {
+
+            if (!$contextMenu.is(e.target) // if the target of the click isn't the container...
+                && $contextMenu.has(e.target).length === 0) // ... nor a descendant of the container
+            {
+                $contextMenu.hide();
+            }
+        });
+
+        //Eventos del menu contextual
+        $contextMenu.on("click", "a", function () {
+            $contextMenu.hide();
+            var modal = $("#" + $(this).data("target")); modal = $(modal);
+            switch ($(this).data("action")) {
+                case 1:
+                    modal.find('.modal-title').text('AGREGAR ETAPA DEL PROYECTO');
+                    modal.find('.infoActualizar').addClass('hidden');
+                    modal.find('.msjEliminarModal').addClass('hidden');
+                    modal.find('.modal-body input#claveEtapa').val('');
+                    modal.find('.modal-body input#nombreEtapa').val('');
+                    modal.find('.modal-body input#actionEtapa').val('add');
+                    modal.modal('show');
+                    break;
+                case 2:
+                    modal.find('.modal-title').text('EDITAR ETAPA DEL PROYECTO');
+                    modal.find('.infoActualizar').removeClass('hidden');
+                    modal.find('.msjEliminarModal').addClass('hidden');
+                    modal.find('.modal-body input#idEtapa').val($contextMenu.attr("data-idetapa"));
+                    modal.find('.modal-body input#claveEtapa').val($contextMenu.attr("data-clave"));
+                    modal.find('.modal-body input#nombreEtapa').val($contextMenu.attr("data-valor"));
+                    modal.find('.modal-body input#actionEtapa').val('edit');
+                    modal.modal('show');
+                    break;
+                case 3:
+                    modal.find('.modal-title').text('ELIMINAR ETAPA DEL PROYECTO');
+                    modal.find('.infoActualizar').addClass('hidden');
+                    modal.find('.msjEliminarModal').removeClass('hidden');
+                    modal.find('.modal-body input#idEtapa').val($contextMenu.attr("data-idetapa"));
+                    modal.find('.modal-body input#claveEtapa').val($contextMenu.attr("data-clave"));
+                    modal.find('.modal-body input#nombreEtapa').val($contextMenu.attr("data-valor"));
+                    modal.find('.modal-body input#actionEtapa').val('delete');
+                    modal.modal('show');
+                    break;
+                case 4:
+                    modal.find('.modal-title').text('AGREGAR SUBETAPA DEL PROYECTO');
+                    modal.find('.msjEliminarModal').addClass('hidden');
+                    modal.find('.modal-body input#claveSubEtapa').val('');
+                    modal.find('.modal-body input#nombreSubEtapa').val('');
+                    modal.find('.modal-body input#idEtapa').val($contextMenu.attr("data-idetapa"));
+                    modal.find('.modal-body input#actionSubEtapa').val('add');
+                    modal.modal('show');
+                    break;
+                case 5:
+                    modal.find('.modal-title').text('EDITAR SUBETAPA DEL PROYECTO');
+                    modal.find('.msjEliminarModal').addClass('hidden');
+                    modal.find('.modal-body input#idSubEtapa').val($contextMenu.attr("data-idsubetapa"));
+                    modal.find('.modal-body input#claveSubEtapa').val($contextMenu.attr("data-clave"));
+                    modal.find('.modal-body input#nombreSubEtapa').val($contextMenu.attr("data-valor"));
+                    modal.find('.modal-body input#actionSubEtapa').val('edit');
+                    modal.modal('show');
+                    break;
+                case 6:
+                    modal.find('.modal-title').text('ELIMINAR SUBETAPA PROYECTO');
+                    modal.find('.msjEliminarModal').removeClass('hidden');
+                    modal.find('.modal-body input#idSubEtapa').val($contextMenu.attr("data-idsubetapa"));
+                    modal.find('.modal-body input#claveSubEtapa').val($contextMenu.attr("data-clave"));
+                    modal.find('.modal-body input#nombreSubEtapa').val($contextMenu.attr("data-valor"));
+                    modal.find('.modal-body input#actionSubEtapa').val('delete');
+                    modal.modal('show');
+                    break;
+            }
+        });
+    });
+
+</script>

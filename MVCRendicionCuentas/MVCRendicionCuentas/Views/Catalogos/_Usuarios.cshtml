@@ -1,0 +1,351 @@
+﻿@model List<RendicionCuentasServices.Model.SP_SelectAll_Responsables_Result>
+<div class="@*panel panel-heading*@" style="padding-top:10px; padding-bottom:15px;"><img src="~/Images/logos/Usuario1.png" alt="Nuevo Usuario" style="width:40px;height:40px;" /><span class="HeaderUsuarios">CATÁLOGO DE USUARIOS DEL SISTEMA</span></div>
+<div class="panel panel-default">
+    <div>
+        <a class="pull-right btn glyphicon glyphicon-plus btn" style="color:#b0c2ce;" href="#" id="btnNuevoPers"></a>
+    </div>
+    <div class="container panel-body">
+        <form class="form-horizontal mrb-15" action="@Url.Action("Usuarios", "Catalogos")" method="post">
+            <div class="col-md-5 no-pd">
+                <select name="IdUbicacion" id="IdUbicacion" class="form-control">
+                    <option value="0">Seleccione una ubicaci&oacute;n</option>
+                    @{var Ubicaciones = ViewData["Ubicaciones"] as List<RendicionCuentasServices.Model.tbl_Ubicaciones>; }
+                    @foreach (var Ubicacion in Ubicaciones)
+                    {
+                        <option value="@Ubicacion.idUbicacion">@Ubicacion.Ubicacion</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-5">
+                <input type="text" name="Nombre" id="Nombre" placeholder="Nombre a buscar" class="form-control col-md-12" />
+            </div>
+            <button type="submit" class="btn btn-primary btnBuscarUsuario">Buscar</button>
+        </form>
+            <table id="tablaUsuarios1" class="table table-condensed table-hover table-striped grid-Usuarios">
+                <thead>
+                    <tr class="CentrarTexto">
+                        <th>#</th>
+                        <th>FICHA</th>
+                        <th>NOMBRE</th>
+                        <th>USUARIO</th>
+                        <th>ÁREA</th>
+                        <th>EMAIL</th>
+                        <th>TIPO DE ACCESO</th>
+                        <th>ELIMINAR</th>
+                        <th>EDITAR</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaUsuarios2">
+                    @if (Model != null)
+{
+    var i = 1;
+    foreach (var item in Model)
+    {
+        <tr id="filaTabla" class="CentrarTexto grid-cell-usuario" data-rel="@item.idResponsable">
+            <td>@i</td>
+            <td>@item.Ficha</td>
+            <td>@item.NombreResponsable</td>
+            <td>@item.Usuario</td>
+            <td>@item.NombreArea</td>
+            <td>@item.Correo</td>
+            <td>@item.Rol</td>
+            <td><a class="pull-right wp-100 btn glyphicon glyphicon-trash btn-elim-usuario" style="color:#b0c2ce;" href='#' data-link='@Url.Action("eliminarResponsables", "Catalogos", new { id = @item.idResponsable })'></a></td>
+            <td id="Col2"><a id="linkUp" class="pull-right wp-100 btn glyphicon glyphicon glyphicon-edit" style="color:#b0c2ce;" href="#" onclick="getfila();"></a></td>
+        </tr>
+        ++i;
+    }
+}
+                </tbody>
+            </table>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    /*rutinas para popup nuevo Personal*/
+    $(document).ready(function () {
+
+        $('.btn-elim-usuario').click(function () {
+            var link = $(this).data('link');
+            $('#modalEliminarGenerico').modal('show');
+            $('#modalEliminarGenerico .btnAceptar').data('link',link);
+        });
+
+        $('#modalEliminarGenerico .btnAceptar').click(function () {
+            var link = $(this).data('link');
+            location.href = link;
+        });
+
+        var PUESTO;
+        //ajax combo Puesto
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("CatalogosPuestos", "Catalogos")",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                PUESTO = JSON.parse(msg);  
+            },
+            error: function (msg) {
+                console.log("Error al llenar el combo");
+            }
+        });
+
+        @*//ajax combo Area
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("CatalogosAreas", "Catalogos")",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                var datos = JSON.parse(msg);
+                $(datos).each(function () {
+                    var option = $(document.createElement('option'));
+                    option.text(this.NombreArea);
+                    option.val(this.idArea);
+                    $(".combo-area").append(option);
+                });
+            },
+            error: function (msg) {
+                console.log("Error al llenar el combo");
+            }
+        });*@
+
+        //ajax combo jefes
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("CatalogosJefes", "Catalogos")",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                var datos = JSON.parse(msg);
+                $(datos).each(function () {
+                    var option = $(document.createElement('option'));
+                    option.text(this.Nombre);
+                    option.val(this.id);
+                    $(".combo-jefes").append(option);
+                });
+            },
+            error: function (msg) {
+                console.log("Error al llenar el combo");
+            }
+        });
+        
+        //ajax combo ubcacion
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("getListUbicacion", "Ubicacion")",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                var datos = JSON.parse(msg);
+                $(datos).each(function () {
+                    var option = $(document.createElement('option'));
+                    option.text(this.Ubicacion);
+                    option.val(this.idUbicacion);
+                    $(".combo-ubicacion").append(option);
+                });
+            },
+            error: function (msg) {
+                console.log("Error al llenar el combo");
+            }
+        });
+
+
+        //validacion formulario add Personal
+        $('#frmNuevoPersonal').validate({
+            rules: {
+                'InputPersonal': { required: true, maxlength: 500 },
+                'InputUsuario': { required: true, maxlength: 200 },
+                'InputPassword1': { required: true, maxlength: 200 },
+                'InputPassword2': { required: true, equalTo: "#InputPassword1" },
+                'InputEmail1': { required: true, maxlength: 200 },
+                'InputFicha': { required: true, maxlength: 200 },
+                'idPuesto': { required: true },
+                'idArea': { required: true },
+                'idRol': { required: true, maxlength: 50 },
+                'idUbicacion': { required: true }
+            },
+            messages: {
+                'InputPersonal': { required: "El campo es requerido", maxlength: "Nombre no debe ser mayor de 500 caracteres" },
+                'InputUsuario': { required: "El campo es requerido", maxlength: "Usuario no debe ser mayor de 200 caracteres " },
+                'InputPassword1': { required: "El campo es requerido", maxlength: "Contraseña no debe ser mayor de 200 caracteres" },
+                'InputPassword2': { required: "El campo es requerido", equalTo: "La contraseña no coincide" },
+                'InputEmail1': { required: "El campo es requerido", maxlength: "Correo no debe ser mayor de 200 caracteres" },
+                'InputFicha': { required: "El campo es requerido", maxlength: "Ficha no debe ser mayor de 200 caracteres" },
+                'idPuesto': { required: "El campo es requerido" },
+                'idArea': { required: "El campo es requerido" },
+                'idRol': { required: "El campo es requerido", maxlength: "Rol no debe ser mayor de 50 caracteres" },
+                'idUbicacion': { required: "El campo es requerido" }
+            }
+        });
+
+        //Open popup  add Nuevo Personal
+        $("#btnNuevoPers").click(function (e) {
+            var modal = $("#nuevoModal");
+            modal.find('form').trigger('reset');
+            modal.find('label.error').text('');
+            var option = $(document.createElement('option'));
+            option.text('Seleccione una opción');
+            option.val('');
+            modal.find(".modal-body form#frmNuevoPersonal select#idPuesto option").remove().end();
+            modal.find(".modal-body form#frmNuevoPersonal select#idPuesto").append(option);
+            modal.find('.modal-body .msj-error').addClass('hidden');
+            modal.find("form#frmNuevoPersonal #InputExistCorreo").val(0);
+            $(PUESTO).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.Clave);
+                option.val(this.idPuestoOrganigrama);
+                modal.find(".modal-body form#frmNuevoPersonal select#idPuesto").append(option);
+            });
+            
+
+            modal.find('.modal-body input#actionPersonal').val('add');
+            modal.modal('show');
+        });
+
+        $(".combo-puesto").on('change', function () {
+            if ($(this).val() != "") {
+                //Se manda a traer la informacion dependiente de este puesto
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("getDependencias", "Catalogos")",
+                    data: { idpuesto: $(this).val() },
+                    dataType: "json",
+                    success: function (msg) {
+                        var data = JSON.parse(msg);
+                        if (data[0] != undefined) {
+                            var d = data[0];
+                            var modal = $("#nuevoModal");
+                            modal.find("#txtSubdireccion").val(d.NombreSubdireccion);
+                            modal.find("#txtGerencia").val(d.NombreGerencia);
+                            modal.find("#txtCoordinacion").val(d.NombreCoordinacion);
+                            modal.find("#txtSuperintendencia").val(d.NombreSuperintendencia);
+                        }
+                    },
+                    error: function (msg) {
+                        console.log("Error al llenar el combo");
+                    }
+                });
+            }
+            else {
+                var modal = $("#nuevoModal");
+                modal.find("#txtSubdireccion").val(null);
+                modal.find("#txtGerencia").val(null);
+                modal.find("#txtCoordinacion").val(null);
+                modal.find("#txtSuperintendencia").val(null);
+            }
+        });
+
+        $(".combo-puestoU").on('change', function () {
+            if ($(this).val() != "") {
+                //Se manda a traer la informacion dependiente de este puesto
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("getDependencias", "Catalogos")",
+                    data: { idpuesto: $(this).val() },
+                    dataType: "json",
+                    success: function (msg) {
+                        var data = JSON.parse(msg);
+                        if (data[0] != undefined) {
+                            var d = data[0];
+                            var modal = $("#UpdateModal");
+                            modal.find("#txtSubdireccion").val(d.NombreSubdireccion);
+                            modal.find("#txtGerencia").val(d.NombreGerencia);
+                            modal.find("#txtCoordinacion").val(d.NombreCoordinacion);
+                            modal.find("#txtSuperintendencia").val(d.NombreSuperintendencia);
+                        }
+                    },
+                    error: function (msg) {
+                        console.log("Error al llenar el combo");
+                    }
+                });
+            }
+            else {
+                var modal = $("#nuevoModal");
+                modal.find("#txtSubdireccion").val(null);
+                modal.find("#txtGerencia").val(null);
+                modal.find("#txtCoordinacion").val(null);
+                modal.find("#txtSuperintendencia").val(null);
+            }
+        });
+
+        $('#frmNuevoPersonal #InputEmail1').focusout(function () {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("validarMail", "Catalogos")",
+                data: { mail: $(this).val() },
+                dataType: "json",
+                success: function (msg) {
+                    $('.frmNuevoResponsable #InputExistCorreo').val(msg);
+                    if (msg == -1) {
+                        $('.frmNuevoResponsable .modal-body .msj-error.msj-mail').removeClass('hidden');
+                    } else {
+                        $('.frmNuevoResponsable .modal-body .msj-error.msj-mail').addClass('hidden');
+                    }
+                }
+            });
+        });
+
+        $('#frmNuevoPersonal #InputPersonal').focusout(function () {
+            var vPersonal = $(this).val();
+            if (vPersonal == " " || vPersonal == "") {
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("validarNombre", "Catalogos")",
+                data: { nombre: $(this).val() },
+                dataType: "json",
+                success: function (msg) {
+                    $('.frmNuevoResponsable #InputExistNombre').val(msg);
+                    if (msg == -1) {
+                        $('.frmNuevoResponsable .modal-body .msj-error.msj-nombre').removeClass('hidden');
+                    } else {
+                        $('.frmNuevoResponsable .modal-body .msj-error.msj-nombre').addClass('hidden');
+                    }
+                }
+            });
+        });
+
+        //Envio del formulario Nuevo
+        $("#btnSubmitFrmPersonal").click(function () {
+            var action = $("form#frmNuevoPersonal #actionPersonal").val();
+            var msjMail = $('form#frmNuevoPersonal #InputExistCorreo').val();
+            var msjNombre = $('form#frmNuevoPersonal #InputExistNombre').val();
+
+            if (msjMail == -1) {
+                $('#modalProyectoElementos .modal-body .alert-danger.alert-mail').removeClass('hidden');
+                setTimeout(function () {
+                    $('#modalProyectoElementos .modal-body .alert-danger.alert-mail').addClass('hidden');
+                }, 2000);
+            }
+            if (msjNombre == -1) {
+                $('#modalProyectoElementos .modal-body .alert-danger.alert-nombre').removeClass('hidden');
+                setTimeout(function () {
+                    $('#modalProyectoElementos .modal-body .alert-danger.alert-nombre').addClass('hidden');
+                }, 2000);
+            }
+            if (msjMail == 0 && msjNombre == 0) {
+                if (action != null && action != undefined) {
+                    action = '/Catalogos/NuevoResponsable/';
+                    $("form#frmNuevoPersonal").attr('action', action);
+                    $('form#frmNuevoPersonal').submit();
+                }
+            }
+        });      
+
+        //Envio del formulario update
+        $("#btnSubmitFrmPersonalU").click(function () {
+            var action = '/Catalogos/UpdateResponsable/';
+            $("#frmUpdatePersonal").attr('action', action);
+            $('#frmUpdatePersonal').submit();
+        });
+    });
+</script>
+

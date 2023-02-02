@@ -1,0 +1,925 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdministracion.cshtml";
+}
+<div class="container-fluid">
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-ind" class="nav nav-tabs" role="tablist"></ul>
+
+    <!-- Tab panes -->
+    <div id="cnt-subsis-ind" class="tab-content">
+    </div>
+</div>
+<script type="text/template" id="tmp-coleccion-tab-ind">
+    <% _.each(subsistemas,function(subsistema, i){
+    if(subsistema.Elementos.length > 0){ %>
+    <li role="presentation"<%= (i===0)?' class="active"':'' %>>
+        <a class="bg-color-ss<%=subsistema.IdSubsistema%>" href="#tab-subsistema<%=subsistema.IdSubsistema%>" aria-controls="tab-subsistema<%=subsistema.IdSubsistema%>" role="tab" data-toggle="tab"><%= subsistema.NombreSubsistema %></a>
+    </li>
+    <% } }); %>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+    <% _.each(subsistemas,function(subsistema, i){
+    if(subsistema.Elementos.length  > 0){ %>
+    <div role="tabpanel" class="tab-pane<%= (subsistema.IdSubsistema===1)?' active':'' %>" id="tab-subsistema<%= subsistema.IdSubsistema %>">
+        <div class="container-fluid cnt-vista-opciones pdt-10 pdr-0">
+            <span class="subsistema-nombre-largo"><%= wrapText(subsistema.DescripcionLargaSubsistema, 48 , '...')  %></span>
+            <span class="label label-default mrl-10"><%= subsistema.Elementos.length %></span>
+            <a class="pull-right btn glyphicon glyphicon-plus btn-agregar-proceso" data-subsistema="<%= subsistema.IdSubsistema %>"></a>
+            <a class="pull-right btn glyphicon btn-opc-ind glyphicon-th-large activo" data-modvista="2" data-subsistema="<%= subsistema.IdSubsistema %>"></a>
+            <a class="pull-right btn glyphicon btn-opc-ind fa fa-bars" data-modvista="1" data-subsistema="<%= subsistema.IdSubsistema %>"></a>
+        </div>
+        <div class="container-fluid cnt-vista2 cnt-vista no-pd pdt-15">
+            <% _.each(subsistema.Elementos, function(elemento, k){  %>
+            <div class="col-md-4 cnt-box-subsistema">
+                <div class="container-fluid box-subsistema no-pd">
+                    <div class="container-fluid cnt-head-ss<%= subsistema.IdSubsistema %>">
+                        <%= wrapText(elemento.NombreElemento, 13 , '...') %>
+                        <a class="fa fa-trash btn-elim-proceso" aria-hidden="true" data-idetapa="<%= elemento.IdElemento %>"></a>
+                        <a class="fa fa-file-o btn-edit-proceso" aria-hidden="true" data-idetapa="<%= elemento.IdElemento %>"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>
+                        <input type="hidden" id="datos-etapas-<%= elemento.IdElemento %>" data-nombresubsistema="<%= subsistema.NombreSubsistema %>" data-desc="<%= elemento.DescripcionElemento %>" data-clave="<%= elemento.NombreElemento %>" />
+                        <input type="hidden" id="datos-etapas-fechas-<%= elemento.IdElemento %>" data-fechacreacion="<%= elemento.FechaCreacion %>" data-fechaactualizacion="<%= elemento.FechaActualizacion %>" />
+                        <input type="hidden" id="datos-etapas-usuarios-<%= elemento.IdElemento %>" data-responsablecreacion="<%= elemento.ResponsableCreacion %>" data-responsableactualizacion="<%= elemento.ResponsableActualizacion %>" />
+                    </div>
+                    <div class="container-fluid cnt-recuadro no-pd">
+                        <div class="container-fluid no-pd mrt-20">
+                            <a><%= wrapText(elemento.DescripcionElemento, 62 , '...') %></a>
+                        </div>
+                        <div class="container-fluid no-pd">
+                            <a class="btn clr_indicador_VERDE btn-ver-indicadores" data-idelemento="<%= elemento.IdElemento %>" data-subsistemadesc="<%= subsistema.DescripcionLargaSubsistema %>">INDICADORES</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+        <div class="container-fluid cnt-vista1 cnt-vista no-pd hidden">
+            <table id="grid-indicadores-<%= i %>" class="table table-condensed table-hover table-striped grid-indicadores" data-subsistemadesc="<%= subsistema.DescripcionLargaSubsistema %>">
+                <thead>
+                    <tr>
+                        <th data-column-id="IdElemento" data-formatter="component-conta" data-type="numeric">#</th>
+                        <th data-column-id="NombreElemento">Identificador</th>
+                        <th data-column-id="DescripcionElemento">Descripci&oacute;n</th>
+                        <th data-column-id="FechaActualizacion">Actualizado</th>
+                        <th data-column-id="" data-formatter="component-indicador">Indicadores</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <% } }); %>
+</script>
+
+<script type="text/template" id="tmp-etapas-ind">
+    <div class="container-fluid cnt-vista2 cnt-vista no-pd pdt-15">
+        <% _.each(indicadores, function(indicador, l){ %>
+        <div class="col-md-4 cnt-box-subsistema" id="cnt-indasoc<%=indicador.indicador_IdIndicador%>">
+            <div class="container-fluid box-subsistema no-pd">
+                <div class="container-fluid cnt-head-ss<%= idss %>">
+                    <%= indicador.indicador_Clave %>
+                    <a class="fa fa-trash btn-elim-proceso" aria-hidden="true" data-idindicador="<%= indicador.indicador_IdIndicador %>"></a>
+                    <a class="fa fa-file-o btn-edit-proceso" aria-hidden="true" data-idindicador="<%= indicador.indicador_IdIndicador %>"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>
+                    <input type="hidden" class="datos-ind1" data-clave="<%= indicador.indicador_Clave %>" data-prefijo="<%= indicador.indicador_Prefijo %>" />
+                    <input type="hidden" class="datos-ind2" data-desccorta="<%= indicador.indicador_DescripcionCorta %>" data-desclarga="<%= indicador.indicador_DescripcionLarga %>" />
+                    <input type="hidden" class="datos-ind3" data-tipocalculo="<%= indicador.indicador_TipoCalculo %>">
+                    <input type="hidden" class="datos-ind4" data-ayuda="<%= indicador.indicador_Ayuda %>">
+                    <input type="hidden" class="datos-ind5" data-fechacompromiso="<%= indicador.indicador_FechaCompromisoFormat %>">
+                </div>
+                <div class="container-fluid cnt-recuadro no-pd pdb-5 pdl-5">
+                    <div class="container-fluid no-pd mrt-10 mrb-10"><%= indicador.indicador_Prefijo %></div>
+                    <div class="container-fluid no-pd mrt-10 mrb-10">
+                        <%= wrapText(indicador.indicador_DescripcionCorta, 151, "...") %>
+                    </div>
+                    <ul class="mrl-25 list-unstyled">
+                        <% var v = indicador.indicador_TipoCalculo.toLowerCase(); %>
+                        <li><i class="item-icon-ind icon-rc<%=((v!=='valor')?' icon-rc-' + v :'')%>"></i><%=indicador.indicador_TipoIndicador%></li>
+                        <li><%= indicador.indicador_TipoFrecuencia %></li>
+                        <li><%= (indicador.indicador_Meta!==null)?"Meta "+indicador.indicador_Meta+"%":"" %></li>
+                        <li><i>Actualizado: <%= indicador.indicador_FechaActualizacion %></i></li>
+                    </ul>
+                    <div class="container-fluid no-pd text-center">
+                        <a class="btn clr_indicador_VERDE btn-ver-det-indicador" data-idindicador="<%= indicador.indicador_IdIndicador %>">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+    <div class="container-fluid cnt-vista1 cnt-vista no-pd hidden">
+        <table id="grid-indicadores-asociados" class="table table-condensed table-hover table-striped grid-indicadores">
+            <thead>
+                <tr>
+                    <th data-column-id="" data-formatter="component-conta" data-type="numeric">#</th>
+                    <th data-column-id="indicador_Prefijo">Indicador</th>
+                    <th data-column-id="indicador_DescripcionCorta">Descripci&oacute;n</th>
+                    <th data-column-id="indicador_TipoIndicador">Tipo Inidicador&oacute;n</th>
+                    <th data-column-id="indicador_TipoCalculo">Tipo de Calculo</th>
+                    <th data-column-id="" data-formatter="component-indicador-asc-meta">Meta</th>
+                    <th data-column-id="indicador_TipoFrecuencia">Frecuencia</th>
+                    <th data-column-id="indicador_FechaActualizacion">Actualizado</th>
+                    <th data-column-id="" data-formatter="component-indicador-asc"></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-det-programa">
+    <tr class="trData">
+        <td><b>P</b></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AnioAnteriorProg%>" name="AnioAnteriorProg" id="agnoAnteriorProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.EneroProg%>" name="EneroProg" id="eneroProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.FebreroProg%>" name="FebreroProg" id="febreroProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.MarzoProg%>" name="MarzoProg" id="marzoProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AbrilProg%>" name="AbrilProg" id="abrilProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.MayoProg%>" name="MayoProg" id="mayoProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.JunioProg%>" name="JunioProg" id="junioProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.JulioProg%>" name="JulioProg" id="julioProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AgostoProg%>" name="AgostoProg" id="agostoProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.SeptiembreProg%>" name="SeptiembreProg" id="septiembreProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.OctubreProg%>" name="OctubreProg" id="octubreProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.NoviembreProg%>" name="NoviembreProg" id="noviembreProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.DiciembreProg%>" name="DiciembreProg" id="diciembreProgramado" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.ProyeccionAnualProg%>" name="ProyeccionAnualProg" id="anualProgramdo" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AnioSiguienteProg%>" name="AnioSiguienteProg" id="agnoSiguienteProgramado" /></td>
+    </tr>
+    <tr class="trData">
+        <td><b>R</b></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AnioAnteriorReal%>" name="AnioAnteriorReal" id="agnoAnteriorReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.EneroReal%>" name="EneroReal" id="eneroReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.FebreroReal%>" name="FebreroReal" id="febreroReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.MarzoReal%>" name="MarzoReal" id="marzoReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AbrilReal%>" name="AbrilReal" id="abrilReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.MayoReal%>" name="MayoReal" id="mayoReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.JunioReal%>" name="JunioReal" id="junioReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.JulioReal%>" name="JulioReal" id="julioReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AgostoReal%>" name="AgostoReal" id="agostoReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.SeptiembreReal%>" name="SeptiembreReal" id="septiembreReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.OctubreReal%>" name="OctubreReal" id="octubreReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.NoviembreReal%>" name="NoviembreReal" id="noviembreReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.DiciembreReal%>" name="DiciembreReal" id="diciembreReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.ProyeccionAnualReal%>" name="ProyeccionAnualReal" id="anualReal" /></td>
+        <td><input type="number" maxlength="4" size="2" value="<%=programa.AnioSiguienteReal%>" name="AnioSiguienteReal" id="agnoSiguienteReal" /></td>
+    </tr>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+
+        var OBJ = [];
+        initCarga();
+
+        $('#fechaCompromiso').datepicker({
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            language: 'es'
+        });
+
+        $(document).on('click', '.cnt-vista-opciones .btn-opc-ind', function () {
+            var mod = $(this).data('modvista');
+            var id = $(this).data('subsistema');
+            $('#tab-subsistema' + id + ' .cnt-vista').addClass('hidden');
+            $('#tab-subsistema' + id + ' .cnt-vista' + mod).removeClass('hidden');
+            $('.btn-opc-ind').removeClass('activo');
+            $(this).addClass('activo');
+        });
+
+        $(document).on('show.bs.tab', '#nav-subsis-ind a[data-toggle="tab"]', function (e) {
+            $('.btn-opc-ind[data-modvista="1"]').removeClass('activo');
+            $('.btn-opc-ind[data-modvista="2"]').addClass('activo');
+            $('.cnt-vista1').addClass('hidden');
+            $('.cnt-vista2').removeClass('hidden');
+        });
+
+        $(document).on('click', '#cnt-subsis-ind .btn-elim-proceso', function () {
+            var idElem = $(this).data('idetapa');
+            var clave = $('#datos-etapas-' + idElem).data('clave');
+            var desc = $('#datos-etapas-' + idElem).data('desc');
+            fc = $('#datos-etapas-fechas-' + idElem).data('fechacreacion'),
+            fa = $('#datos-etapas-fechas-' + idElem).data('fechaactualizacion'),
+            uc = $('#datos-etapas-usuarios-' + idElem).data('responsablecreacion'),
+            ua = $('#datos-etapas-usuarios-' + idElem).data('responsableactualizacion');
+
+            var modal = $('#modalProyectoElementos');
+            modal.find('.modal-title').text('ELIMINAR ELEMENTO');
+            modal.find('.msjEliminarModal').removeClass('hidden');
+            modal.find('.modal-body input#idEtapa').val(idElem);
+            modal.find('.modal-body input#claveEtapa').val(clave);
+            modal.find('.modal-body input#nombreEtapa').val(desc);
+            modal.find('.modal-body .fecha_creacion').text('').text(fc);
+            modal.find('.modal-body .usuario_creacion').text('').text(uc);
+            modal.find('.modal-body .fecha_actualizacion').text('').text(fa);
+            modal.find('.modal-body .usuario_actualizacion').text('').text(ua);
+            modal.find('.modal-body input#actionEtapa').val('delete');
+            modal.find('.modal-body .infoActualizar').removeClass('hidden');
+            modal.modal('show');
+        });
+
+        $(document).on('click', '#cnt-subsis-ind .btn-edit-proceso', function () {
+            var idElem = $(this).data('idetapa'),
+                clave = $('#datos-etapas-' + idElem).data('clave'),
+                desc = $('#datos-etapas-' + idElem).data('desc'),
+                fc = $('#datos-etapas-fechas-' + idElem).data('fechacreacion'),
+                fa = $('#datos-etapas-fechas-' + idElem).data('fechaactualizacion'),
+                uc = $('#datos-etapas-usuarios-' + idElem).data('responsablecreacion'),
+                ua = $('#datos-etapas-usuarios-' + idElem).data('responsableactualizacion');
+
+            var modal = $('#modalProyectoElementos');
+            modal.find('.modal-title').text('EDITAR ELEMENTO');
+            modal.find('.msjEliminarModal').addClass('hidden');
+            modal.find('.modal-body input#idEtapa').val(idElem);
+            modal.find('.modal-body input#claveEtapa').val(clave);
+            modal.find('.modal-body input#nombreEtapa').val(desc);
+            modal.find('.modal-body .fecha_creacion').text('').text(fc);
+            modal.find('.modal-body .usuario_creacion').text('').text(uc);
+            modal.find('.modal-body .fecha_actualizacion').text('').text(fa);
+            modal.find('.modal-body .usuario_actualizacion').text('').text(ua);
+            modal.find('.modal-body input#actionEtapa').val('edit');
+            modal.find('.modal-body .infoActualizar').removeClass('hidden');
+            modal.modal('show');
+        });
+
+        //Abrir form nuevo elemento
+        $(document).on('click', '#cnt-subsis-ind .btn-agregar-proceso', function () {
+            var idSubsistema = $(this).data('subsistema');
+            var modal = $('#modalProyectoElementos');
+            modal.find('.modal-title').text('AGREGAR ELEMENTO');
+            modal.find('.msjEliminarModal').addClass('hidden');
+            modal.find('.modal-body input#idEtapa').val(idSubsistema);
+            modal.find('.modal-body input#claveEtapa').val('');
+            modal.find('.modal-body input#nombreEtapa').val('');
+            modal.find('.modal-body input#actionEtapa').val('add');
+            modal.modal('show');
+        });
+
+        //Envio del formulario elemento
+        $(document).on('click', '#modalProyectoElementos .btnAceptar', function () {
+            var action = $("#modalProyectoElementos .modal-body input#actionEtapa").val();
+            if (action != null && action != undefined) {
+                action = (action == 'add') ? 'Indicadores/addElemento' : ((action == 'edit') ? 'Indicadores/editElemento' : 'Indicadores/deleteElemento');
+                $("#modalProyectoElementos .modal-body form").attr('action', action);
+                $('#modalProyectoElementos .modal-body form').submit();
+            }
+        });
+
+        //Validación del formulario nuevo elemento
+        $('#modalProyectoElementos .modal-body form').validate({
+            rules: {
+                'claveEtapa': { required: true, maxlength: 300 },
+                'nombreEtapa': { required: true, maxlength: 500 }
+            },
+            messages: {
+                'claveEtapa': { required: "La clave es requerida." },
+                'nombreEtapa': { required: "La descripción es requerida." }
+            }
+        });
+
+        //Procesar envío de nuevo elemento
+        $('#modalProyectoElementos .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                $('#modalProyectoElementos .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalProyectoElementos .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalProyectoElementos .modal-body .alert-warning').addClass('hidden');
+                        var action = $("#modalProyectoElementos .modal-body input#actionEtapa").val();
+                        if (d > 0) {
+                            if (action === "add" || "edit") {
+                                $('#modalProyectoElementos .modal-body .alert-success.edit').removeClass('hidden');
+                            } else {
+                                $('#modalProyectoElementos .modal-body .alert-success.delete').removeClass('hidden');
+                            }
+                        } else {
+                            $('#modalProyectoElementos .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalProyectoElementos').modal('hide');
+                            $('#modalProyectoElementos .modal-body .alert-success').addClass('hidden');
+                            $('#modalProyectoElementos .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(document).on('click', '#cnt-subsis-ind .btn-ver-indicadores', function () {  
+            var idelemento = $(this).data('idelemento');
+            var subsistemadesc = $(this).data('subsistemadesc');
+
+            cargarModIndicador(idelemento, subsistemadesc);
+        });
+
+        $(document).on('click', '#modalIndicadoresAsociados .btn-opc-ind', function () {
+            var mod = $(this).data('modvista');
+            var id = $(this).data('subsistema');
+            $('#modalIndicadoresAsociados .cnt-vista').addClass('hidden');
+            $('#modalIndicadoresAsociados .cnt-vista' + mod).removeClass('hidden');
+            $('#modalIndicadoresAsociados .btn-opc-ind').removeClass('activo');
+            $(this).addClass('activo');
+        });
+
+        $(document).on('click', '#modalIndicadoresAsociados .btn-edit-proceso', function () {
+            var idindicador = $(this).data('idindicador'),
+                idelemento = $('#modalIndicadoresAsociados .cnt-opc-ind-asoc .btn-opc-ind').data('idelemento'),
+                subsistema = $('#cnt-subsis-ind #datos-etapas-' + idelemento).data('nombresubsistema'),
+                clavelemento = $('#cnt-subsis-ind #datos-etapas-' + idelemento).data('clave'),
+                clave = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind1').data('clave'),
+                pref = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind1').data('prefijo'),
+                dsc_c = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind2').data('desccorta'),
+                dsc_l = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind2').data('desclarga'),
+                tpcal = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind3').data('tipocalculo'),
+                ayuda = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind4').data('ayuda'),
+                fechaCompromiso = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind5').data('fechacompromiso');
+
+            var modal = $('#modalDetalleIndicadorEdit');
+                modal.find('.modal-title').text('EDITAR INDICADOR');
+                modal.find('#nombreSubsistema').val(subsistema);
+                modal.find('#nombreElemento').val(clavelemento);
+                modal.find('#idElemento').val(idelemento);
+                modal.find('#idIndicador').val(idindicador);
+                modal.find('#claveIndicador').val(clave);
+                modal.find('#prefijoIndicador').val(pref);
+                modal.find('#descripcionCortaIndicador').val(dsc_c);
+                modal.find('#descripcionCompletaIndicador').val(dsc_l);
+                modal.find('#AyudaIndicador').val(ayuda);
+                modal.find('#fechaCompromiso').val(fechaCompromiso);
+                modal.find('#actionForm').val('edit');
+                modal.find('.edit-ind').addClass('hidden');
+                modal.find('.msjEliminarModal').addClass('hidden');
+            if (tpcal === "Programa") {
+                $('#modalDetalleIndicadorEdit .set-btn-programa').removeClass('hidden');
+                $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').removeClass('hidden');
+                $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').attr('data-idindicador', idindicador);
+                $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').attr('data-clave', pref);
+                $('#modalDetalleIndicadorEdit .set-btn-programa').find('#btnModalConsultarProgramaAsociado').attr('data-desc', dsc_c);
+            }
+            $('#modalDetalleIndicadorEdit form').data('tipo', 'validEdit');
+            $('#modalDetalleIndicadorEdit input[type="text"]').prop('readonly', false);
+
+            modal.modal('show');
+        });
+
+        $(document).on('click', '#modalIndicadoresAsociados .btn-elim-proceso', function () {
+            var idindicador = $(this).data('idindicador'),
+                idelemento = $('#modalIndicadoresAsociados .cnt-opc-ind-asoc .btn-opc-ind').data('idelemento'),
+                subsistema = $('#cnt-subsis-ind #datos-etapas-' + idelemento).data('nombresubsistema'),
+                clavelemento = $('#cnt-subsis-ind #datos-etapas-' + idelemento).data('clave'),
+                clave = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind1').data('clave'),
+                pref = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind1').data('prefijo'),
+                dsc_c = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind2').data('desccorta'),
+                dsc_l = $('#modalIndicadoresAsociados #cnt-indasoc' + idindicador + ' .datos-ind2').data('desclarga');
+
+            var modal = $('#modalDetalleIndicadorEdit');
+                modal.find('.modal-title').text('ELIMINAR INDICADOR');
+                modal.find('#nombreSubsistema').val(subsistema);
+                modal.find('#nombreElemento').val(clavelemento);
+                modal.find('#idElemento').val(idelemento);
+                modal.find('#idIndicador').val(idindicador);
+                modal.find('#claveIndicador').val(clave);
+                modal.find('#prefijoIndicador').val(pref);
+                modal.find('#descripcionCortaIndicador').val(dsc_c);
+                modal.find('#descripcionCompletaIndicador').val(dsc_l);
+                modal.find('#actionForm').val('delete');
+                modal.find('.edit-ind').addClass('hidden');
+                modal.find('.msjEliminarModal').removeClass('hidden');
+            $('#modalDetalleIndicadorEdit input[type="text"]').prop('readonly', true);
+
+            modal.modal('show');
+        });
+
+        //Mostrar form para agregar indicadores
+        $(document).on('click', '#modalIndicadoresAsociados .btn-agregar-proceso', function () {
+            var idelemento = $(this).data('idelemento'),
+                subsistema = $('#cnt-subsis-ind #datos-etapas-' + idelemento).data('nombresubsistema'),
+                clavelemento = $('#cnt-subsis-ind #datos-etapas-' + idelemento).data('clave'),
+                modal = $('#modalDetalleIndicadorEdit');
+
+                modal.find('.modal-title').text('AGREGAR INDICADOR');
+                modal.find("label.error").html('');
+                modal.find('#idElemento').val(idelemento);
+                modal.find('#nombreSubsistema').val(subsistema);
+                modal.find('#nombreElemento').val(clavelemento);
+                modal.find('#AyudaIndicador').val('');
+                modal.find('#actionForm').val('add');
+                modal.find('.edit-ind').removeClass('hidden');
+                modal.find('.edit-ind.set-btn-programa').addClass('hidden');
+                modal.find('.info-ce').addClass('hidden');
+                modal.find('.msjEliminarModal').addClass('hidden');
+            $('#modalDetalleIndicadorEdit form').data('tipo', 'validFormula');
+            $('#modalDetalleIndicadorEdit input[type="text"]').val('').prop('readonly', false);
+
+            modal.modal('show');
+        });
+
+        //Validación del formulario nuevo elemento
+        var validEdit = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." }
+            }
+        };
+
+        var validFormula = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'Meta': { required: true },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 },
+                'DescripcionValorFormula': { required: true, maxlength: 500 },
+                'EtiquetaValorProgramado': { required: true, maxlength: 100 },
+                'EtiquetaValorReal': { required: true, maxlength: 100 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'Meta': { required: "Seleccione un valor." },
+                'TipoFrecuencia': { required: "Coloque un valor numérico", number: "El campo debe ser numérico" },
+                'DescripcionValorFormula': { required: "Debe colocar una descripción" },
+                'EtiquetaValorProgramado': { required: "Debe colocar una descripción" },
+                'EtiquetaValorReal': { required: "Debe colocar una descripción" }
+            }
+        };
+
+        var validValor = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'Meta': { required: true },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 },
+                'DescripcionValorFormula': { required: true, maxlength: 500 },
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'Meta': { required: "Seleccione un valor." },
+                'TipoFrecuencia': { required: "Coloque un valor numérico", number: "El campo debe ser numérico" },
+                'DescripcionValorFormula': { required: "Debe colocar una descripción" }
+            }
+        };
+
+        var validPrograma = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'Meta': { required: true },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'Meta': { required: "Seleccione un valor." },
+                'TipoFrecuencia': { required: "Coloque un valor numérico", number: "El campo debe ser numérico" }
+            }
+        };
+
+        var validCheck = {
+            rules: {
+                'Clave': { required: true, maxlength: 50 },
+                'DescripcionCorta': { required: true, maxlength: 300 },
+                'DescripcionLarga': { required: true, maxlength: 500 },
+                'TipoFrecuencia': { required: true, number: true, maxlength: 3 }
+            },
+            messages: {
+                'Clave': { required: "La clave es requerida." },
+                'DescripcionCorta': { required: "La descripción es requerida." },
+                'DescripcionLarga': { required: "La descripción es requerida." },
+                'TipoFrecuencia': { required: "Coloque un valor numérico", number: "El campo debe ser numérico" }
+            }
+        };
+
+        //Envio del formulario indicadores
+        $(document).on('click', '#modalDetalleIndicadorEdit .btnAceptar', function () {
+            var action = $("#modalDetalleIndicadorEdit .modal-body input#actionForm").val();
+            if (action != null && action != undefined) {
+                action = (action == 'add') ? '/Indicadores/addIndicador' : ((action == 'edit') ? '/Indicadores/editIndicador' : '/Indicadores/deleteIndicador');
+                $("#modalDetalleIndicadorEdit .modal-body form").attr('action', action);
+                $('#modalDetalleIndicadorEdit .modal-body form').submit();
+            }
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#modalDetalleIndicadorEdit .modal-body form').submit(function () {
+            var tform = $("#modalDetalleIndicadorEdit .modal-body form").data('tipo');
+            switch (tform) {
+                case "validEdit":
+                    $(this).validate(validEdit);
+                    break;
+                case "validFormula":
+                    $(this).validate(validFormula);
+                    break;
+                case "validValor":
+                    $(this).validate(validValor);
+                    break;
+                case "validPrograma":
+                    $(this).validate(validPrograma);
+                    break;
+                case "validCheck":
+                    $(this).validate(validCheck);
+                    break;
+            }
+
+            if ($(this).valid() === true) {
+                $('#modalDetalleIndicadorEdit .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalDetalleIndicadorEdit .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalDetalleIndicadorEdit .modal-body .alert-warning').addClass('hidden');
+                        var action = $("#modalDetalleIndicadorEdit .modal-body input#actionForm").val();
+                        if (d > 0) {
+                            if (action === "add" || "edit") {
+                                $('#modalDetalleIndicadorEdit .modal-body .alert-success.edit').removeClass('hidden');
+                            } else {
+                                $('#modalDetalleIndicadorEdit .modal-body .alert-success.delete').removeClass('hidden');
+                            }
+                        } else {
+                            $('#modalDetalleIndicadorEdit .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalDetalleIndicadorEdit').modal('hide');
+                            $('#modalDetalleIndicadorEdit .modal-body .alert-success').addClass('hidden');
+                            $('#modalDetalleIndicadorEdit .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(document).on('click', '#modalDetalleIndicadorEdit input[type="radio"]', function () {
+            var tipo = this.value;
+            var eOrigen = $('#modalDetalleIndicadorEdit .group-ind.seguimiento');
+            switch (tipo) {
+                case "Seguimiento":
+                    eOrigen.removeClass('hidden');
+                    break;
+                case "Checkbox":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validCheck');
+                    eOrigen.addClass('hidden');
+                    break;
+                case "Formula":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validFormula');
+                    eOrigen.find('.set-formula').removeClass('hidden');
+                    eOrigen.find('.set-formula .lbl-desc').text('Descripción de la fórmula');
+                    break;
+                case "Valor":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validValor');
+                    eOrigen.find('.set-formula').addClass('hidden');
+                    eOrigen.find('.set-valor').removeClass('hidden');
+                    eOrigen.find('.set-valor .lbl-desc').text('Descripción de valor');
+                    break;
+                case "Programa":
+                    $('#modalDetalleIndicadorEdit form').data('tipo', 'validPrograma');
+                    eOrigen.find('.set-formula').addClass('hidden');
+                    break;
+            }
+        });
+
+        $(document).on('click', '#modalDetalleIndicadorEdit .chkpadre', function () {
+            var elem = $(this).data('check');
+            var val = $(this).val();
+            switch (elem) {
+                case "cheksup":
+                    $('#modalDetalleIndicadorEdit .content-checkbox .cheksup').prop({ 'disabled': false, 'checked': false });
+                    break;
+                case "chekcom":
+                    $('#modalDetalleIndicadorEdit .content-checkbox .chekcom').prop({ 'disabled': false, 'checked': false });
+                    break;
+            }
+        });
+
+        $(document).on('keyup', '#modalDetalleIndicadorEdit #claveIndicador', function (key) {
+            var subsistema = $('#modalDetalleIndicadorEdit #nombreSubsistema').val(),
+                clavelemento = $('#modalDetalleIndicadorEdit #nombreElemento').val();
+            $('#modalDetalleIndicadorEdit #prefijoIndicador').val(subsistema + '.' + clavelemento + '.' + this.value);
+        });
+
+        $(document).on('click', '#modalDetalleIndicadorEdit #btnModalConsultarProgramaAsociado', function () {
+            var IdInidcador = $(this).data('idindicador'),
+                clave = $(this).data('clave'),
+                desc = $(this).data('desc');
+
+            if (IdInidcador > 0) {
+                $.getJSON('@Url.Action("ProgramaAsociadoIndicador", "Indicadores")', { IdIndicador: IdInidcador }, function (data) {
+                    OBJ = JSON.parse(data);
+                    console.log(OBJ);
+                    var anio = (new Date).getFullYear();
+                    cargarProgramaAsociado(OBJ);
+                    $('#modalProgramaAsociado').find('#IdIndicador').val(IdInidcador);
+                    $('#modalProgramaAsociado').find('#actionForm').val('edit');
+                    $('#modalProgramaAsociado').find('.text-clave').text(clave);
+                    $('#modalProgramaAsociado').find('.text-desc').text(desc);
+                    $('#modalProgramaAsociado').find('.usuario_creacion').text(OBJ.NombreUsuarioCreacion);
+                    $('#modalProgramaAsociado').find('.fecha_creacion').text(OBJ.FechaCreacionStr);
+                    $('#modalProgramaAsociado').find('.usuario_actualizacion').text(OBJ.NombreUsuarioActualizacion);
+                    $('#modalProgramaAsociado').find('.fecha_actualizacion').text(OBJ.FechaActualizacionStr);
+                    $('#modalProgramaAsociado .trTitulo td span').text(anio);
+                    $('#modalProgramaAsociado').modal('show');
+                });
+            }
+        });
+
+        $(document).on('click', '#modalProgramaAsociado .btnAceptar', function () {
+            var action = $("#modalProgramaAsociado #actionForm").val();
+            if (action != null && action != undefined) {
+                action = ((action == 'edit') ? '/Indicadores/EditProgramaAsociadoIndicador' : '/Indicadores/DeleteProgramaAsociadoIndicador');
+                $("#modalProgramaAsociado .modal-body form").attr('action', action);
+                $('#modalProgramaAsociado .modal-body form').submit();
+            }
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#modalProgramaAsociado .modal-body form').submit(function () {
+            if ($(this).valid() === true) {
+                $('#modalProgramaAsociado .modal-body form').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#modalProgramaAsociado .modal-body .alert-warning').removeClass('hidden'); },
+                    success: function (d) {
+                        $('#modalProgramaAsociado .modal-body .alert-warning').addClass('hidden');
+                        var action = $("#modalProgramaAsociado .modal-body input#actionForm").val();
+                        if (d > 0) {
+                            if (action === "add" || "edit") {
+                                $('#modalProgramaAsociado .modal-body .alert-success.edit').removeClass('hidden');
+                            } else {
+                                $('#modalProgramaAsociado .modal-body .alert-success.delete').removeClass('hidden');
+                            }
+                        } else {
+                            $('#modalProgramaAsociado .modal-body .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            $('#modalProgramaAsociado').modal('hide');
+                            $('#modalProgramaAsociado .modal-body .alert-success').addClass('hidden');
+                            $('#modalProgramaAsociado .modal-body .alert-danger').addClass('hidden');
+                            location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        $(document).on('click', '#modalIndicadoresAsociados .btn-ver-det-indicador', function () {
+            var idIndicador = $(this).data('idindicador');
+            cargarModIndicadorDet(idIndicador);
+        });
+
+        $(document).on('click', '.modal-dialog .modal-footer .btn.btnCancelar', function () {
+            $('.modal-dialog .modal-body input.error').removeClass('error');
+            $('.modal-dialog .modal-body label.error').remove();
+        });
+
+    });
+
+    function cargarModIndicador(idelemento, subsistemadesc) {
+
+        $.ajax({
+            url: '@Url.Action("IndicadoresElemento", "Indicadores")',
+            dataType: "json",
+            data: {IdElemento: idelemento },
+            beforeSend: function(){
+                mostrarLoading();
+            },
+            success: function (data) {
+                var ind = JSON.parse(data);
+                $('#modalIndicadoresAsociados .modal-title').text(subsistemadesc);
+                $('#modalIndicadoresAsociados .sub-title span').text(ind[0].NombreElemento + ":" + ind[0].DescripcionElemento);
+                $('#modalIndicadoresAsociados .btn-agregar-proceso').data('idelemento', idelemento);
+                $('#modalIndicadoresAsociados .cnt-opc-ind-asoc .btn-opc-ind').data('idelemento', idelemento);
+                $('#modalIndicadoresAsociados .cnt-opc-ind-asoc .total-ind').text(ind[0].Indicadores.length);
+                if (ind[0].Indicadores.length > 0) {
+                    cargarIndentificadoresAsociados(ind[0].Indicadores, function () {
+                        cargaTablaEtapas('#grid-indicadores-asociados', ind[0].Indicadores);
+                        $('#modalIndicadoresAsociados').modal('show');
+                    }, ind[0].IdSubsistema);
+                } else {
+                    $('#modalIndicadoresAsociados .cnt-ind-asoc').empty().html('<p class="text-center">No se encontraron indicadores asociados.</p>');
+                    $('#modalIndicadoresAsociados').modal('show');
+                }
+                cerrarLoading();
+            },
+            error: function () {
+                errorLoading();
+            }
+        });
+
+    }
+
+    function cargarModIndicadorDet(idIndicador) {
+        if(idIndicador!== undefined){
+            $.ajax({
+                type: 'POST',
+                url: '/Compromisos/infoIndicador',
+                data: { idIndicador: idIndicador },
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    showDetails(data);
+                    $('#modalInfoCompromisos').modal('show');
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        }
+    }
+
+    function initCarga() {
+        $.getJSON('@Url.Action("IndicadoresSubsistemas", "Indicadores")', function (data) {
+            OBJ = { "subsistemas": JSON.parse(data) };
+            cargarTabsSistemas(OBJ);
+            cargarCntSistemas(OBJ);
+            cargarEtapas(OBJ)
+        });
+    }
+
+    function cargarTabsSistemas(d) {
+        if (d.subsistemas.length > 0) {
+            var tmpl = $("#tmp-coleccion-tab-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.subsistemas });
+            $('#nav-subsis-ind').html(html);
+        }
+    }
+
+    function cargarCntSistemas(d) {
+        if (d.subsistemas.length > 0) {
+            var tmpl = $("#tmp-coleccion-tabcont-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "subsistemas": d.subsistemas });
+            $('#cnt-subsis-ind').html(html);
+        }
+    }
+
+    function cargarIndentificadoresAsociados(d, callback, idss) {
+        if (d.length > 0) {
+            var tmpl = $("#tmp-etapas-ind").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "indicadores": d, "idss": idss });
+
+            $('#modalIndicadoresAsociados .cnt-ind-asoc').empty().html(html);
+
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        }
+    }
+
+    function cargarProgramaAsociado(d) {
+        if (d !== null) {
+            var tmpl = $("#tmp-det-programa").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "programa": d });
+            $('#modalProgramaAsociado .trData').remove();
+            $('#modalProgramaAsociado .trEncabezados').after(html);
+        }
+    }
+
+    function cargarEtapas(d) {
+        _.each(d.subsistemas, function (subsistema, i) {
+            cargaTablaEtapas('#grid-indicadores-' + i, subsistema.Elementos);
+        });
+    }
+
+    function cargaTablaEtapas(elem, dt) {
+        var i = 0;
+        _.each(dt, function (d, i) { dt[i].cont = (i + 1); });
+        var d = { "rows": dt };
+       
+            $(elem).bootgrid({
+                rowCount: 5,
+                columnSelection: true,
+                labels: {
+                    infos: "{{ctx.start}} de {{ctx.end}}, Total: {{ctx.total}}",
+                    noResults: "No hay resultados"
+                },
+                formatters: {
+                    "component-conta": function (culumn, row) {
+                        return row.cont;
+                    },
+                    "component-indicador": function (culumn, row) {
+                        var sbs = $(elem).data('subsistemadesc');
+                        return '<a class="btn clr_indicador_VERDE btn-ver-indicadores" onclick="cargarModIndicador(' + row.IdElemento + ', \'' + sbs + '\')">INDICADORES</a>';
+                    },
+                    "component-indicador-asc": function (culumn, row) {
+                        return '<a class="btn clr_indicador_VERDE btn-ver-det-indicador" onclick="cargarModIndicadorDet(' + row.indicador_IdIndicador + ')"> Ver detalles </a>';
+                    },
+                    "component-indicador-asc-meta": function (culumn, row) {
+                        return row.indicador_Meta + '%';
+                    }
+                }
+                //Carga de datos
+            }).bootgrid("append", d.rows);
+    }
+
+    function showDetails(data) {
+        var jdata = JSON.parse(data);
+        //Desactivar opciones que no son utilizadas
+        var modal = $('#modalInfoCompromisos');
+        modal.find('#ClaveIndicador').text(jdata.Clave);
+        modal.find('#PrefijoIndicador').text(jdata.Prefijo);
+        modal.find('#DescripcionCortaIndicador').text(jdata.DescripcionCorta);
+        modal.find('#DescripcionLargaIndicador').text(jdata.DescripcionLarga);
+        modal.find('#MetaIndicador').text(jdata.Meta + '%');
+        modal.find('#FrecuenciaActualizacionIndicador').text(jdata.TipoFrecuencia + ' Días');
+        modal.find('#DescripcionFormulaIndicador').text(jdata.DescripcionValorFormula);
+        modal.find('#EtiquetaValorProgramadoIndicador').text(jdata.EtiquetaValorProgramado);
+        modal.find('#EtiquetaValorRealIndicador').text(jdata.EtiquetaValorReal);
+        modal.find('#DescripcionValorIndicador').text(jdata.DescripcionValorFormula);
+        modal.find('#FechaCreacionIndicador').text(jdata.UsuarioCreacion + ' - ' + jdata.FechaCreacion);
+        modal.find('#FechaActualizacionIndicador').text(jdata.UsuarioActualizacion + ' - ' + jdata.FechaActualizacion);
+        modal.find('#Ayuda').text(jdata.Ayuda);
+        //configurar RadioButton
+        switch (jdata.TipoIndicador) {
+            case "Seguimiento":
+                checkRadiobuttons(1);
+                modal.find('#RadioButtonsTipoCalculo').show();
+                modal.find('#divMeta').show();
+
+                switch (jdata.TipoCalculo) {
+                    case 'Formula':
+                        modal.find('#tipoCalculoFormula').attr('checked', true);
+                        modal.find('#tipoCalculoValor').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoPrograma').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Formula
+                        modal.find('#detalle-formula').show();
+                        modal.find('#detalle-valor').hide();
+                        break;
+                    case 'Valor':
+                        modal.find('#tipoCalculoValor').attr('checked', true);
+                        modal.find('#tipoCalculoFormula').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoPrograma').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Valor
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').show();
+                        break;
+                    case 'Programa':
+                        modal.find('#tipoCalculoPrograma').attr('checked', true);
+                        modal.find('#tipoCalculoFormula').attr('disabled', 'disabled');
+                        modal.find('#tipoCalculoValor').attr('disabled', 'disabled');
+                        //Ocultar info cuando el tipo de Calculo Seguimiento - Programa Asociado
+                        modal.find('#detalle-formula').hide();
+                        modal.find('#detalle-valor').hide();
+                        modal.find('#DescripcionValorIndicador').hide();
+                        break;
+                }
+                break;
+            case "Check":
+                checkRadiobuttons(2);
+                modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+                modal.find('#tipoIndicadorCheck').attr('checked', true);
+
+                //Ocultar info cuando el tipo de indicador en Check
+                modal.find('#RadioButtonsTipoCalculo').hide();
+                modal.find('#divMeta').hide();
+                modal.find('#detalle-formula').hide();
+                modal.find('#detalle-valor').hide();
+                break;
+        }
+
+        //Configurar Checks
+        jdata.CheckSoporte === false ? modal.find('input#HabilitarSoporteIndicador').removeAttr('checked') : modal.find('input#HabilitarSoporteIndicador');
+        jdata.CheckReqSoporte === false ? modal.find('input#RequerirSoporteIndicador').removeAttr('checked') : modal.find('input#RequerirSoporteIndicador');
+        jdata.CheckComentarios === false ? modal.find('input#HabilitarComentariosIndicador').removeAttr('checked') : modal.find('input#HabilitarComentariosIndicador');
+        jdata.CheckReqComentario === false ? modal.find('input#RequerirComentariosIndicador').removeAttr('checked') : modal.find('input#RequerirComentariosIndicador');
+
+
+        $('#modalInfoCompromisos .modal-body > #detalle-programa').hide();
+    }
+
+    function checkRadiobuttons(id) {
+        var modal = $('#modalInfoCompromisos');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('checked');
+        modal.find('#tipoIndicadorSeguimiento').removeAttr('disabled');
+        modal.find('#tipoIndicadorCheck').removeAttr('checked');
+        modal.find('#tipoIndicadorCheck').removeAttr('disabled');
+
+        if (id === 1) {
+            modal.find('#tipoIndicadorSeguimiento').trigger('click');
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+        }
+        else {
+            modal.find('#tipoIndicadorCheck').trigger('click');
+            modal.find('#tipoIndicadorCheck').attr('disabled', 'disabled');
+            modal.find('#tipoIndicadorSeguimiento').attr('disabled', 'disabled');
+        }
+    }
+</script>
+

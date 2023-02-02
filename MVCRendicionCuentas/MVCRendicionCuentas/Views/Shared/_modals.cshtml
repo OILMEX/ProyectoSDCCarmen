@@ -1,0 +1,1690 @@
+﻿<!--
+    MODALS
+---------------------------------------- -->
+<!--
+    Modals organigrama
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalOrganigrama">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR NIVEL</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <form id="frmOrganigrama" method="post">
+                    <input type="hidden" name="IdNivel" id="IdNivel" />
+                    <input type="hidden" name="IdRelacion" id="IdRelacion" />
+                    <input type="hidden" name="tipo" id="tipo" />
+                    <input type="hidden" name="actionOrganigrama" id="actionOrganigrama" value="" />
+
+                    <div class="form-group">
+                        <label for="ClaveNivel" class="control-label">Clave del Nivel</label>
+                        <input type="text" class="form-control" name="ClaveNivel" id="ClaveNivel" />
+                    </div>
+                    <div class="form-group">
+                        <label for="NombreNivel" class="control-label">Nombre del Nivel</label>
+                        <input type="text" class="form-control" name="NombreNivel" id="NombreNivel" />
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger error0 hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+                <div class="alert alert-danger error1 hidden" role="alert"> <strong>Oh!</strong> Los datos ya se encuentran registrados. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnSubmitNivelOrganigrama">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals organigrama puesto
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalPuestoOrganigrama">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR PUESTO</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <form id="frmOrganigrama" method="post">
+                    <input type="hidden" name="idPuestoOrganigrama" id="idPuestoOrganigrama" />
+                    <input type="hidden" name="IdElemento" id="IdElemento" />
+                    <input type="hidden" name="IdTipoElementoOrganigrama" id="IdTipoElementoOrganigrama" />
+                    <input type="hidden" name="actionPuesto" id="actionPuesto" value="" />
+
+                    <div class="form-group">
+                        <label for="Clave" class="control-label">Clave del Puesto</label>
+                        <input type="text" class="form-control" name="Clave" id="Clave" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="NombrePuesto" class="control-label">Nombre del Puesto</label>
+                        <input type="text" class="form-control" name="NombrePuesto" id="NombrePuesto" />
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger error0 hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+                <div class="alert alert-danger error1 hidden" role="alert"> <strong>Oh!</strong> Los datos ya se encuentran registrados. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnSubmitPuestoOrganigrama">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+    Modals Etapa proyecto
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalProyectoEtapa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR ELEMENTO</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <form id="frmEtapaProyecto" method="post">
+                    <input type="hidden" name="idEtapa" id="idEtapa" />
+                    <input type="hidden" name="actionEtapa" id="actionEtapa" value="" />
+
+                    <div class="form-group">
+                        <label for="claveEtapa" class="control-label">Clave de la Etapa</label>
+                        <input type="text" class="form-control" name="claveEtapa" id="claveEtapa" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreEtapa" class="control-label">Nombre de la Etapa</label>
+                        <input type="text" class="form-control" name="nombreEtapa" id="nombreEtapa" value="" />
+                    </div>
+
+                    <div class="row infoActualizar hidden">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label pdl-0 pdr-0">Creado por:</label>
+                                <div class="col-md-8 pdr-0"><p class="form-control-static no-pd">Administrador <br />01-ene-2016</p></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label pdl-0 pdr-0">Modificado por:</label>
+                                <div class="col-md-8 pdr-0"><p class="form-control-static no-pd">Administrador <br />Hace 20 días</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnSubmitFrmEtapa">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Elementos proyecto
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalProyectoElementos">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR ELEMENTO</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" name="idEtapa" id="idEtapa" />
+                    <input type="hidden" name="actionEtapa" id="actionEtapa" value="" />
+
+                    <div class="form-group">
+                        <label for="claveEtapa" class="control-label">Clave del Elemento</label>
+                        <input type="text" class="form-control" name="claveEtapa" id="claveEtapa" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreEtapa" class="control-label">Nombre del Elemento</label>
+                        <input type="text" class="form-control" name="nombreEtapa" id="nombreEtapa" />
+                    </div>
+
+                    <div class="row infoActualizar hidden">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label pdl-0 pdr-0">Creado por:</label>
+                                <div class="col-md-8 pdr-0"><p class="form-control-static no-pd"><span class="usuario_creacion"></span><br /><span class="fecha_creacion"></span></p></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label pdl-0 pdr-0">Modificado por:</label>
+                                <div class="col-md-8 pdr-0"><p class="form-control-static no-pd"><span class="usuario_actualizacion"></span><br /><span class="fecha_actualizacion"></span></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals subetapa proyecto
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalProyectoSubetapa">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR ELEMENTO</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <form id="frmSubEtapaProyecto" method="post">
+                    <input type="hidden" name="idSubEtapa" id="idSubEtapa" />
+                    <input type="hidden" name="idEtapa" id="idEtapa" />
+                    <input type="hidden" name="actionSubEtapa" id="actionSubEtapa" value="" />
+
+                    <div class="form-group">
+                        <label for="claveSubEtapa" class="control-label">Clave de la SubEtapa</label>
+                        <input type="text" class="form-control" name="claveSubEtapa" id="claveSubEtapa" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreSubEtapa" class="control-label">Nombre de la SubEtapa</label>
+                        <input type="text" class="form-control" name="nombreSubEtapa" id="nombreSubEtapa" value="" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button id="btnSubmitFrmSubetapa" type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals subetapa proyecto - Indicadores Asociados
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalIndicadoresAsociados">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body no-pd">
+                <div class="container-fluid no-pd">
+                    <div class="container-fluid sub-title">
+                        <span>MP02-POL: Política de SSPA</span>
+                    </div>
+                    <div class="container-fluid cnt-opc-ind-asoc no-pd pdb-5 pdt-5 mrl-15 mrr-15">
+                        <div class="col-md-8 no-pd">
+                            <span class="subsistema-nombre-largo">Indicadores Asociados</span>
+                            <span class="label label-default mrl-10 total-ind"></span>
+                        </div>
+                        <div class="col-md-4 no-pd">
+                            <a class="pull-right btn glyphicon glyphicon-plus btn-agregar-proceso"></a>
+                            <a class="pull-right btn glyphicon btn-opc-ind glyphicon-th-large activo" data-modvista="2"></a>
+                            <a class="pull-right btn glyphicon btn-opc-ind fa fa-bars" data-modvista="1"></a>
+                        </div>
+                    </div>
+                    <div class="container-fluid cnt-ind-asoc">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer hidden">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+    Modal para asignar nuevo Responsable a elemento -> SECCIÓN COMPROMISOS
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAddUserCompromisos">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ASIGNAR RESPONSABLES AL INDICADOR</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-subtitle container-fluid no-pd">
+                    <div class="col-md-7">
+                        <span id="AddUser-Prefijo" class="title-addUserCompromisos">12MPI.PM03-RLM.I01</span> - <span id="AddUser-NombreCorto" class="subtitle-addUserCompromisos">Tener vigente la estructura organizacional</span>
+                    </div>
+                    <select id="filtroUbicaciones" class="col-md-5 hidden">
+                        <option value="">Todas las ubicaci&oacute;n</option>
+                    </select>
+                </div>
+                <div id="info-adduser" class="info-adduser" data-toggle="popover" data-placement="bottom" title="Instrucciones: " data-content="<strong>Asignar Usuarios</strong>. Para asignar usuarios (SIN ASIGNAR) arrastre el usuario a la columna de ASIGNAR o bien de click sobre el usuario y a continuación click sobre la flecha derecha <i class='fa fa-caret-right'></i> <br /><br /> <strong>Desasignar Usuarios</strong>. Para desasignar usuarios arrastre el usuario asignado a la columna de SIN ASIGNAR o bien de click sobre el usuario asignado y a continuación click sobre la flecha izquierda. <i class='fa fa-caret-left'></i>" data-html="true"><i class="fa fa-question-circle" role="button"></i></div>
+                <div class="row">
+                    <div class="ListasUsuarios">
+                        <div class="ListaUsuarios col-md-5">
+                            <div class="title-listaUsuario-compromisos">SIN ASIGNAR</div>
+                            <ul id="ListaUsuarios" class="connectedSortable col-md-5"></ul>
+                        </div>                        
+                        <div class="btn-addorDelUser col-md-2">
+                            <div class="btn fa fa-caret-left btn-asig-user-lft"></div>
+                            <div class="btn fa fa-caret-right btn-asig-user-rgt"></div>
+                        </div>
+                        <div class="ListaResponsables col-md-5">
+                            <div class="title-listaUsuario-compromisos">ASIGNADOS</div>
+                            <ul id="ListaAsignados" class="connectedSortable col-md-5"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+     Modal para consultar Detalle del indicador -> SECCIÓN COMPROMISOS
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalInfoCompromisos">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">DETALLE DEL INDICADOR</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row pdb-10">
+                    <div class="col-md-6">
+                        <div class="Titulo-indicador-cp">Clave del Indicador</div><div id="ClaveIndicador" class="Contenido-indicador-cp">I01</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="Titulo-indicador-cp">Indicador con Prefijo</div><div id="PrefijoIndicador" class="Contenido-indicador-cp">I01</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 pdb-10">
+                        <div class="Titulo-indicador-cp">Descripción corta del Indicador</div><div id="DescripcionCortaIndicador" class="Contenido-indicador-cp">Índice de cumplimiento de CVD</div>
+                    </div>
+                    <div class="col-md-12 pdb-10">
+                        <div class="Titulo-indicador-cp">F&oacute;rmula del Indicador</div><div id="DescripcionLargaIndicador" class="Contenido-indicador-cp">Índice de cumplimiento de CVD = Promedio de los Índices de las 11 MPI Restantes</div>
+                    </div>
+                </div>
+                <div class="row pdb-10">
+                    <div class="col-md-12">
+                        <div class="Titulo-indicador-cp">Ayuda</div><div id="Ayuda" class="Contenido-indicador-cp indicador-ayuda"></div>
+                    </div>
+                </div>
+                <div class="row pdb-10">
+                    <div class="col-md-6">
+                        <div class="Titulo-indicador-cp">Tipo de Indicador</div>
+                        <div class="Contenido-indicador-cp">
+                            <label class="radio-inline">
+                                <input type="radio" name="tipoIndicador" id="tipoIndicadorSeguimiento" value="Seguimiento"> Seguimiento
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tipoIndicador" id="tipoIndicadorCheck" value="Checkbox"> Checkbox
+                            </label>
+                        </div>
+                    </div>
+                    <div id="divMeta" class="col-md-6">
+                        <div  class="Titulo-indicador-cp">Meta</div><div id="MetaIndicador" class="Contenido-indicador-cp">100%</div>
+                    </div>
+                </div>
+                <div class="row pdb-10">
+                    <div id="RadioButtonsTipoCalculo" class="col-md-6">
+                        <div class="Titulo-indicador-cp">Tipo de Cálculo</div>
+                        <div class="Contenido-indicador-cp">
+                            <label class="radio-inline">
+                                <input type="radio" name="tipoCalculo" id="tipoCalculoFormula" value="Formula"> Fórmula
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tipoCalculo" id="tipoCalculoValor" value="Valor"> Valor
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tipoCalculo" id="tipoCalculoPrograma" value="Programa"> Programa Asociado
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="Titulo-indicador-cp">Frecuencia de actualización</div><div id="FrecuenciaActualizacionIndicador" class="Contenido-indicador-cp">Mensual</div>
+                    </div>
+
+                </div>
+                <div id="detalle-formula">
+                    <div class="row pdb-10">
+                        <div class="col-md-12">
+                            <div class="Titulo-indicador-cp">Descripción de la fórmula</div><div id="DescripcionFormulaIndicador" class="Contenido-indicador-cp">Índice de cumplimiento de CVD = Promedio de los Índices de las 11 MPI Restantes / Total de Calificación</div>
+                        </div>
+                    </div>
+                    <div class="row pdb-10">
+                        <div class="col-md-6">
+                            <div class="Titulo-indicador-cp">Etiqueta valor programado</div><div id="EtiquetaValorProgramadoIndicador" class="Contenido-indicador-cp">Promedio de los Indices de las 11 MPI restantes</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="Titulo-indicador-cp">Etiqueta valor real</div><div id="EtiquetaValorRealIndicador" class="Contenido-indicador-cp">Total de Calificación</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="detalle-valor">
+                    <div class="row pdb-10">
+                        <div class="col-md-12">
+                            <div class="Titulo-indicador-cp">Descripción del Valor</div><div id="DescripcionValorIndicador" class="Contenido-indicador-cp">Índice de cumplimiento de CVD = Promedio de los Índices de las 11 MPI Restantes / Total de Calificación</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="detalle-programa">
+                    <div class="row pdb-10">
+                        <!--Aqui hay que agregar una validación para saber si exite algun programa asociado o no,
+                            para mostrar cualquiera de los dos botones dependiendo la accion -->
+                        <div class="col-md-12">
+                            <a class="btn btn-danger pdt-0 pdb-0" href="#" role="button">Crear programa asociado</a>
+                            <a class="btn btn-info pdt-0 pdb-0" href="#" role="button">Consultar el programa asociado</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-checkbox pda-10">
+                    <div class="list-chkbxs row">
+                        <div class="col-md-6">
+                            <div class="sw-compromisos-detalle">
+                                <div class="checkbox checkbox-slider--b-flat">
+                                    <label>
+                                        <input id="HabilitarSoporteIndicador" type="checkbox" checked="checked" disabled="disabled"><span>¿Habilitar soportes?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="sw-compromisos-detalle">
+                                <div class="checkbox checkbox-slider--b-flat">
+                                    <label>
+                                        <input id="RequerirSoporteIndicador" type="checkbox" checked="checked" disabled="disabled"><span>¿Requerir Soportes?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-chkbxs row">
+                        <div class="col-md-6">
+                            <div class="sw-compromisos-detalle">
+                                <div class="checkbox checkbox-slider--b-flat">
+                                    <label>
+                                        <input id="HabilitarComentariosIndicador" type="checkbox" checked="checked" disabled="disabled"><span>¿Habilitar Comentarios?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="sw-compromisos-detalle">
+                                <div class="checkbox checkbox-slider--b-flat">
+                                    <label>
+                                        <input id="RequerirComentariosIndicador" type="checkbox" checked="checked" disabled="disabled"><span>¿Requerir Comentarios?</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-ce row pdt-10">
+                    <div class="col-md-4">
+                        <div class="Titulo-indicador-cp">Creado por:</div><div id="FechaCreacionIndicador" class="Contenido-indicador-cp">Administrador 01-Ene-2016</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="Titulo-indicador-cp">Actualizado por:</div><div id="FechaActualizacionIndicador" class="Contenido-indicador-cp">Administrador Hace 20 días</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+     Modal para Editar Detalle del indicador ->
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalDetalleIndicadorEdit">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">DETALLE DEL INDICADOR</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el indicador?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" name="nombreSubsistema" id="nombreSubsistema" />
+                    <input type="hidden" name="nombreElemento" id="nombreElemento" />
+                    <input type="hidden" name="IdElemento" id="idElemento" />
+                    <input type="hidden" name="IdIndicador" id="idIndicador" />
+                    <input type="hidden" name="IdSubEtapa" id="IdSubEtapa" />
+                    <input type="hidden" name="IdProyecto" id="IdProyecto" />
+                    <input type="hidden" name="actionForm" id="actionForm" />
+                    <div class="row pdb-10 edit-ind-asc">
+                        <div class="col-md-6">
+                            <div class="Titulo-indicador-cp">Clave del Indicador</div>
+                            <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="Clave" id="claveIndicador" /></div>
+                        </div>
+                        <div class="col-md-6 edit-ind-asc">
+                            <div class="Titulo-indicador-cp">Indicador con Prefijo</div>
+                            <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="Prefijo" id="prefijoIndicador" readonly /></div>
+                        </div>
+                    </div>
+                    <div class="row pdb-10 edit-ind-asc">
+                        <div class="col-md-12">
+                            <div class="Titulo-indicador-cp">Descripción corta del Indicador</div>
+                            <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="DescripcionCorta" id="descripcionCortaIndicador" /></div>
+                        </div>
+                    </div>
+                    <div class="row pdb-10 edit-ind-asc">
+                        <div class="col-md-12">
+                            <div class="Titulo-indicador-cp">F&oacute;rmula del Indicador</div>
+                            <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="DescripcionLarga" id="descripcionCompletaIndicador" /></div>
+                        </div>
+                    </div>
+                    <div class="row pdb-10 edit-ind-asc">
+                        <div class="col-md-12">
+                            <div class="Titulo-indicador-cp">Ayuda</div>
+                            <div class="Contenido-indicador-cp"><textarea class="form-control wp-100" name="Ayuda" id="AyudaIndicador" maxlength="1000" rows="3"></textarea> </div>
+                        </div>
+                    </div>
+                    <div class="row pdb-10 edit-ind">
+                        <div class="col-md-6">
+                            <div class="Titulo-indicador-cp">Tipo de Indicador</div>
+                            <div class="Contenido-indicador-cp">
+                                <label class="radio-inline">
+                                    <input type="radio" name="TipoIndicador" id="tipoIndicador" value="Seguimiento" checked> Seguimiento
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="TipoIndicador" id="tipoIndicador" value="Checkbox"> Checkbox
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 group-ind seguimiento">
+                            <div class="set-valor">
+                                <div class="Titulo-indicador-cp">Meta</div>
+                                <div class="Contenido-indicador-cp">
+                                    <select class="form-control" id="metaIndicador" name="Meta">
+                                        <option value="">Seleccione un valor</option>
+                                        <option value="0">0%</option>
+                                        <option value="100">100%</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pdb-10 edit-ind">
+                        <div class="col-md-6 group-ind seguimiento">
+                            <div class="Titulo-indicador-cp">Tipo de Cálculo</div>
+                            <div class="Contenido-indicador-cp">
+                                <label class="radio-inline">
+                                    <input type="radio" name="TipoCalculo" id="tipoCalculo" value="Formula" class="formula" checked> Fórmula
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="TipoCalculo" id="tipoCalculo" value="Valor" class="valor"> Valor
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="TipoCalculo" id="tipoCalculo" value="Programa" class="programa"> Programa Asociado
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="Titulo-indicador-cp">Frecuencia de actualización</div>
+                            <div class="Contenido-indicador-cp">
+                                <input class="form-control" id="frecuenciaActualizacion" name="TipoFrecuencia" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="detalle-formula" class="edit-ind group-ind seguimiento">
+                        <div class="row pdb-10 set-formula set-valor">
+                            <div class="col-md-12">
+                                <div class="Titulo-indicador-cp lbl-desc">Descripción de la fórmula</div>
+                                <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="DescripcionValorFormula" id="descripcionValorFormula" /></div>
+                            </div>
+                        </div>
+                        <div class="row pdb-10 set-formula">
+                            <div class="col-md-6">
+                                <div class="Titulo-indicador-cp">Etiqueta valor programado</div>
+                                <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="EtiquetaValorProgramado" id="etiquetaValorProgramado" /></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="Titulo-indicador-cp">Etiqueta valor real</div>
+                                <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="EtiquetaValorReal" id="etiquetaValorReal" value="" /></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div id="detalle-valor" class="edit-ind">
+                            <div class="row pdb-10">
+                                <div class="col-md-12">
+                                    <div class="Titulo-indicador-cp">Descripción del Valor</div>
+                                    <div class="Contenido-indicador-cp"><input type="text" class="form-control" name="descripcionValor" id="descripcionValor" /></div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div id="detalle-programa" class="edit-ind set-btn-programa">
+                        <div class="row pdb-10">
+                            <!--Aqui hay que agregar una validación para saber si exite algun programa asociado o no,
+                            para mostrar cualquiera de los dos botones dependiendo la accion -->
+                            <div class="col-md-12">
+                                <a class="btn btn-danger pdt-0 pdb-0 hidden" href="#" role="button" id="btnModalCrearProgramaAsociado">Crear programa asociado</a>
+                                <a class="btn btn-info pdt-0 pdb-0 hidden" href="#" role="button" id="btnModalConsultarProgramaAsociado">Consultar el programa asociado</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-checkbox pda-10 edit-ind">
+                        <div class="list-chkbxs row">
+                            <div class="col-md-6">
+                                <div class="sw-compromisos-detalle">
+                                    <div class="checkbox checkbox-slider--b-flat">
+                                        <label>
+                                            <input type="checkbox" name="CheckSoporte" class="chkpadre" data-check="cheksup"><span>¿Habilitar soportes?</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="sw-compromisos-detalle">
+                                    <div class="checkbox checkbox-slider--b-flat">
+                                        <label>
+                                            <input type="checkbox" name="CheckReqSoporte" class="cheksup" disabled><span>¿Requerir Soportes?</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-chkbxs row">
+                            <div class="col-md-6">
+                                <div class="sw-compromisos-detalle">
+                                    <div class="checkbox checkbox-slider--b-flat">
+                                        <label>
+                                            <input type="checkbox" name="CheckComentarios" class="chkpadre" data-check="chekcom"><span>¿Habilitar Comentarios?</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="sw-compromisos-detalle">
+                                    <div class="checkbox checkbox-slider--b-flat">
+                                        <label>
+                                            <input type="checkbox" name="CheckReqComentario" class="chekcom" disabled><span>¿Requerir Comentarios?</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-ce row pdt-10 edit-ind">
+                        <div class="col-md-4">
+                            <div class="Titulo-indicador-cp">Creado por:</div><div class="Contenido-indicador-cp">Administrador 01-Ene-2016</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="Titulo-indicador-cp">Actualizado por:</div><div class="Contenido-indicador-cp">Administrador Hace 20 días</div>
+                        </div>
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+     Modal Vacio -> SECCIÓN COMPROMISOS
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAddUserCompromisos">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+    Modals Programa asociado
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalProgramaAsociado">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">PROGRAMA ASOCIADO</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <span class="text-clave"><b>12MPI.MP06-AED.I05</b></span>
+                    <a class="fa fa-trash btn-elim-proceso pull-right hidden" aria-hidden="true" role="button" style="color:#b7c7d2;"></a>
+                    <a class="fa fa-file-o btn-edit-proceso pull-right hidden" aria-hidden="true" role="button" style="color:#b7c7d2;"><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></a>
+                </div>
+                <div class="text-desc">Índice de Cumplimiento del Programa de Elaboración de Procedimientos</div>
+                <form>
+                    <input type="hidden" name="IdIndicador" id="IdIndicador" />
+                    <input type="hidden" name="actionForm" id="actionForm" />
+                    
+                    <input type="hidden" name="idConfigRespInd" id="idConfigRespInd" />
+                    <input type="hidden" name="idproy" id="idproy" />
+                    <input type="hidden" name="IdDataValoresIndicadores" id="IdDataValoresIndicadores" />
+                    <input type="hidden" name="actionEtapa" id="actionEtapa" value="" />
+                    <input type="hidden" name="TipoCalculo" id="TipoCalculo" value="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-condensed">
+                                <tr class="trTitulo">
+                                    <td colspan="16">A&Ntilde;O <span></span></td>
+                                </tr>
+                                <tr class="trEncabezados">
+                                    <td>&nbsp;</td>
+                                    <td>Año<br />Anterior</td>
+                                    <td>Ene</td>
+                                    <td>Feb</td>
+                                    <td>Mar</td>
+                                    <td>Abr</td>
+                                    <td>May</td>
+                                    <td>Jun</td>
+                                    <td>Jul</td>
+                                    <td>Ago</td>
+                                    <td>Sep</td>
+                                    <td>Oct</td>
+                                    <td>Nov</td>
+                                    <td>Dic</td>
+                                    <td>Anual</td>
+                                    <td>Año<br />Siguiente</td>
+                                </tr>
+                                <tr class="trData hidden">
+                                    <td><b>A</b></td>
+                                    <td>100%</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>100%</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>30%</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row infoActualizar pdt-15">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label pdl-0 pdr-0">Creado por:</label>
+                                <div class="col-md-8 pdr-0"><p class="form-control-static no-pd"><span class="usuario_creacion"></span><br /><span class="fecha_creacion"></span></p></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label pdl-0 pdr-0">Modificado por:</label>
+                                <div class="col-md-8 pdr-0"><p class="form-control-static no-pd"><span class="usuario_actualizacion"></span><br /><span class="fecha_actualizacion"></span></p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row infoCalculo pdt-15 hidden">
+                        <div class="col-md-7">
+                            <div class="form-group divselectmes">
+                                <label class="col-md-4 control-label pdl-0 pdr-0">Seleccionar el mes:</label>
+                                <div class="col-md-8 pdr-0">
+                                    <select class="form-control" name="selMesCalculo" id="selMesCalculo">
+                                        <option value="">Seleccione opción</option>
+                                        <option value="enero">Enero</option>
+                                        <option value="febrero">Febrero</option>
+                                        <option value="marzo">Marzo</option>
+                                        <option value="abril">Abril</option>
+                                        <option value="mayo">Mayo</option>
+                                        <option value="junio">Junio</option>
+                                        <option value="julio">Julio</option>
+                                        <option value="agosto">Agosto</option>
+                                        <option value="septiembre">Septiembre</option>
+                                        <option value="octubre">Octubre</option>
+                                        <option value="noviembre">Noviembre</option>
+                                        <option value="diciembre">Diciembre</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label for="ResultPrograma" class="control-label lblResultFormula">Resultado del indicador</label>
+                                <div class="col-md-10 pdl-0"><input type="text" class="form-control" name="ResultPrograma" id="ResultPrograma" readonly /></div>
+                                <div class="col-md-2"><button type="button" class="btn btnCalculo">Calcular</button></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* modal nuevo personal *@
+<div class="modal frmNuevoResponsable" id="nuevoModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    ALTA DE USUARIO EN EL SISTEMA
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid no-pd">
+                    <form id="frmNuevoPersonal" method="post">
+                        <input type="hidden" name="actionPersonal" id="actionPersonal" value="" />
+                        <input type="hidden" name="InputExistCorreo" id="InputExistCorreo" />
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="InputPersonal">Nombre de la Persona</label>
+                                <input type="hidden" name="InputExistCorreo" id="InputExistNombre" />
+                                <input type="text" class="form-control" id="InputPersonal" name="InputPersonal" placeholder="Ingresar Nombre Personal" />
+                                <span class="col-md-12 pdl-0 pdr-0 msj-error msj-nombre hidden">Nombre no valido, el nombre ya se encuentra registrado</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="InputUsuario">Nombre del Usuario</label>
+                                <input type="text" class="form-control" id="InputUsuario" name="InputUsuario" placeholder="Ingresar Nombre Usuario" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="InputPassword1">Contrase&ntilde;a</label>
+                                <input type="password" class="form-control" id="InputPassword1" name="InputPassword1" placeholder="Contraseña" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="InputPassword2">Repetir Contrase&ntilde;a</label>
+                                <input type="password" class="form-control" id="InputPassword2" name="InputPassword2" placeholder="Repetir Contraseña" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="InputEmail1">Correo Electronico</label>
+                                <input type="hidden" name="InputExistCorreo" id="InputExistCorreo" />
+                                <input type="email" class="form-control" id="InputEmail1" name="InputEmail1" placeholder="Ingresar correo" />
+                                <span class="col-md-12 pdl-0 pdr-0 msj-error msj-mail hidden">Correo no valido, el correo ya se encuentra registrado</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="InputFicha">Número de Ficha Pemex</label>
+                                <input type="text" class="form-control" id="InputFicha" name="InputFicha" placeholder="Ingresar Ficha" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="idPuesto" class="col-xs-12 no-pd">Puesto de la Persona</label>
+                                <select id="idPuesto" class="combo-puesto form-control" name="idPuesto">
+                                    <option value="">Seleccione Puesto...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="idJefe" class="col-xs-12 no-pd">Seleccione el Nombre del Jefe Directo</label>
+                                <select id="idJefe" class="combo-jefes col-xs-12" name="idJefe">
+                                    <option value="">Seleccione Jefe...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="idRol" class="col-xs-12 no-pd">Seleccione Rol</label>
+                                <select id="idRol" class="col-xs-12 combo-roles" name="idRol">
+                                    <option value="">Seleccione Rol...</option>
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="SubAdministrador">SubAdministrador</option>
+                                    <option value="Carga">Carga</option>
+                                    <option value="Consulta">Consulta</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="idJefe" class="col-xs-12 no-pd">Seleccione la Ubicaci&oacute;n</label>
+                                <select id="idUbicacion" class="combo-ubicacion col-xs-12" name="idUbicacion">
+                                    <option value="">Seleccione una Ubicaci&oacute;n...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtSubdireccion" class="col-xs-12 no-pd">Subdirección a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtSubdireccion" name="txtSubdireccion" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtGerencia" class="col-xs-12 no-pd">Gerencia a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtGerencia" name="txtGerencia" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtCoordinacion" class="col-xs-12 no-pd">Coordinación a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtCoordinacion" name="txtCoordinacion" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtSuperintendencia" class="col-xs-12 no-pd">Superintencia a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtSuperintendencia" name="txtSuperintendencia" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                @*<div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>*@
+                <div class="alert alert-danger alert-mail hidden" role="alert"> <strong>Oh!</strong> El correo que ha ingresado ya se encuentra registrado. </div>
+                <div class="alert alert-danger alert-nombre hidden" role="alert"> <strong>Oh!</strong> El nombre que ha ingresado ya se encuentra registrado. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnSubmitFrmPersonal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+    Modals Agregar Nuevo proyecto
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAddProyectoConfig">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR COMPONENTE DE PROYECTO</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid no-pd">
+                    <form id="frmAddProyectoConfig" method="post">
+                        <div class="container-fluid no-pd">
+                            <div class="col-md-12 no-pd">
+                                <div class="form-group">
+                                    <label class="control-label" for="NombreProyecto">Nombre del Componente de Proyecto</label>
+                                    <input type="text" class="form-control" id="NombreProyecto" name="NombreProyecto" maxlength="500">
+                                    <input type="hidden" id="EstatusProyecto" name="EstatusProyecto" value="" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 pdl-0">
+                                <div class="form-group">
+                                    @*<label class="control-label" for="AreaOperativa">Área Operativa</label>
+                                    <select class="form-control" id="AreaOperativa" name="AreaOperativa"></select>*@
+                                    <label class="control-label" for="Ubicaciones">Ubicación</label>
+                                    <select class="form-control" id="Ubicaciones" name="Ubicaciones"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="Responsable">Responsable</label>
+                                    <select class="form-control" id="Responsable" name="Responsable"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label" for="FechaInicio">F. Inicio</label>
+                                    <input type="text" class="form-control" id="FechaInicio" name="FechaInicio">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 pdr-0">
+                                <div class="form-group">
+                                    <label class="control-label" for="FechaFin">F. Fin</label>
+                                    <input type="text" class="form-control" id="FechaFin" name="FechaFin">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 pdl-0">
+                                <div class="form-group">
+                                    <label class="control-label" for="Coordinaciones">Coordinación</label>
+                                    <input type="hidden" name="Coordinaciones" id="Coordinaciones" />
+                                    <input type="text" id="NombreCoordinacion" value="" class="form-control" readonly />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="Superintendencias">Superintendencias</label>
+                                    <input type="hidden" name="Superintendencias" id="Superintendencias" />
+                                    <input type="text" id="NombreSuperintendencia" value="" class="form-control" readonly />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 pdr-0">
+                                <div class="form-group">
+                                    <label class="control-label" for="TiposProyecto">Tipo Proyecto</label>
+                                    <select class="form-control" id="TiposProyecto" name="TiposProyecto"></select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnSubmitFrmAddProyectoConfig">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* modal update Personal *@
+<div class="modal fade" id="UpdateModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    EDITAR USUARIO
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid no-pd">
+                    <form id="frmUpdatePersonal" method="post" onsubmit="return checkForm(this);">
+                        <input type="hidden" name="actionPersonal" id="actionPersonal" value="" />
+                        <input type="hidden" name="idResponsable" id="idResponsable" value="" />
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="InputPersonal">Nombre de la Persona</label>
+                                <input type="text" class="form-control" id="InputPersonal" name="InputPersonal" placeholder="Ingresar Nombre Personal" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="InputUsuario">Nombre del Usuario</label>
+                                <input type="text" class="form-control" id="InputUsuario" name="InputUsuario" placeholder="Ingresar Nombre Usuario" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="InputPassword1">Contraseña</label>
+                                <input type="password" class="form-control" id="InputPassword1" name="InputPassword1" placeholder="Contraseña" />
+                            </div>
+                            <div class="col-xs-6">
+                                <label for="InputPassword2">Repetir Contraseña</label>
+                                <input type="password" class="form-control" id="InputPassword2" name="InputPassword2" placeholder="Repetir Contraseña" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="InputEmail1">Correo Electronico</label>
+                                <input type="email" class="form-control" id="InputEmail1" name="InputEmail1" placeholder="Ingresar correo" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="InputFicha">Número de Ficha Pemex</label>
+                                <input type="text" class="form-control" id="InputFicha" name="InputFicha" placeholder="Ingresar Ficha" />
+                            </div>
+                            <div class="col-xs-6 dropdown">
+                                <label for="idPuesto">Puesto de la Persona</label>
+                                <select id="idPuesto" class="form-control combo-puestoU" name="idPuesto">
+                                    <option value="">Seleccione Puesto...</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="idJefe" style="width:100%">Seleccione el Nombre del Jefe Directo</label>
+                                <select id="idJefe" class="combo-jefesU" name="idJefe" style="width:100%">
+                                    <option value="">Seleccione Jefe...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="idRol" class="col-xs-12">Seleccione Rol</label>
+                                <select id="idRol" class="combo-rolesU col-xs-12" name="idRol">
+                                    <option value="">Seleccione Rol...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="idJefe" class="col-xs-12 no-pd">Seleccione la Ubicaci&oacute;n</label>
+                                <select id="idUbicacion" class="combo-ubicacionU col-xs-12" name="idUbicacion">
+                                    <option value="">Seleccione una Ubicaci&oacute;n...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtSubdireccion" class="col-xs-12 no-pd">Subdirección a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtSubdireccion" name="txtSubdireccion" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtGerencia" class="col-xs-12 no-pd">Gerencia a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtGerencia" name="txtGerencia" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtCoordinacion" class="col-xs-12 no-pd">Coordinación a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtCoordinacion" name="txtCoordinacion" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 AlinearCenter">
+                                <label for="txtSuperintendencia" class="col-xs-12 no-pd">Superintencia a la que pertenece</label>
+                                <input type="text" class="form-control" id="txtSuperintendencia" name="txtSuperintendencia" placeholder="No aplica" disabled />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnSubmitFrmPersonalU">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Publicar Tableros - Sección Publicar Tableros
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalPubTableros">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">PUBLICAR TABLEROS</h4>
+            </div>
+            <div class="col-md-12 msjPublicarTableroModal text-center">
+                <p>¿DESEA PUBLICAR ESTE TABLERO?</p>
+                @*<span>Precaución: Esta operación no podrá revertise</span>*@
+            </div>
+            <div class="contentModelPubtableros">
+                <label class="title-Select">Tipo de Publicación: </label>
+                <div class="modal-body no-pd">
+                    <select id="slcTipoPublicacion" name="slcTipoPublicacion" class="form-control">
+                        <option value="1">Publicar</option>
+                        <option value="2">Demo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btnAceptar btnAceptarPubTableros">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Edit Valores Indicador
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalEditValoresIndicador">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ACTUALIZAR VALOR DEL INDICADOR</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 titulo-indicador">
+                    <span class="prefijo-indicador"></span> <br />
+                    <span class="desc-indicador"></span>
+                </div>
+                <div class="col-md-12 detalle-indicador">
+                    <ul>
+                        <li><div>Tipo</div><span class="tipo-indicador"></span></li>
+                        <li><div>Frecuencia</div><span class="frecuencia-indicador"></span></li>
+                        <li><div>Meta</div><span class="meta-indicador"></span></li>
+                    </ul>
+                </div>
+                <div class="container-fluid no-pd">
+                    <form name="frmEditIndicadorResponsable" id="frmEditIndicadorResponsable" method="post">
+                        <input type="hidden" name="idIndicador" id="idIndicador" />
+                        <input type="hidden" name="idConfigRespInd" id="idConfigRespInd" />
+                        <input type="hidden" name="idproy" id="idproy" />
+                        <input type="hidden" name="IdDataValoresIndicadores" id="IdDataValoresIndicadores" />
+                        <input type="hidden" name="actionEtapa" id="actionEtapa" value="" />
+                        <input type="hidden" name="TipoCalculo" id="TipoCalculo" value="" />
+                        <div class="form-group Valor">
+                            <label for="claveEtapa" class="control-label lblResultValor"></label>
+                            <input type="text" class="form-control" name="ResultValor" id="ResultValor" />
+                        </div>
+                        <div class="form-group Formula">
+                            <label for="nombreEtapa" class="control-label lbldataProgramada"></label>
+                            <input type="text" class="form-control" name="dataProgramada" id="dataProgramada" />
+                        </div>
+                        <div class="form-group Formula">
+                            <label for="nombreEtapa" class="control-label lbldataReal"></label>
+                            <input type="text" class="form-control" name="dataReal" id="dataReal" />
+                        </div>
+                        <div class="form-group Formula">
+                            <label for="nombreEtapa" class="control-label lblResultFormula">Resultado del indicador</label>
+                            <div class="col-md-10 pdl-0"><input type="text" class="form-control" name="ResultFormula" id="ResultFormula" readonly /></div>
+                            <div class="col-md-2"><button type="button" class="btn btnCalculo">Calcular</button></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Edit Notas
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalNotaIndicador">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">NOTAS DEL INDICADOR</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 titulo-indicador">
+                    <span class="prefijo-indicador"></span> <br />
+                    <span class="desc-indicador"></span>
+                </div>
+                <div class="col-md-12 detalle-indicador">
+                    <ul>
+                        <li><div>Tipo</div><span class="tipo-indicador"></span></li>
+                        <li><div>Frecuencia</div><span class="frecuencia-indicador"></span></li>
+                        <li class="seguimiento"><div>Meta</div><span class="meta-indicador"></span></li>
+                    </ul>
+                </div>
+
+                <form name="frmNotaIndicador" id="frmNotaIndicador" method="post">
+                    <input type="hidden" name="IdDataValoresIndicadores" id="IdDataValoresIndicadores" />
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" name="Comentario" id="Comentario" placeholder="En esta sección se colocan notas explicativas relacionadas con el indicador"></textarea>
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Carga de Documentos para Indicador
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalDocumentosIndicador">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">SOPORTES ASOCIADOS AL INDICADOR</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid no-pd">
+                    <div class="col-md-12 no-pd pdb-15">
+                        <div class="Titulo-indicador-cp">Indicador con prefijo</div>
+                        <div id="IndicadorPrefijo" class="Contenido-indicador-cp">&nbsp;</div>
+                    </div>
+
+                    <div class="col-md-12 no-pd pdb-15">
+                        <div class="Titulo-indicador-cp">Descripción corta del Indicador</div>
+                        <div id="DescripcionCortaIndicador" class="Contenido-indicador-cp">&nbsp;</div>
+                    </div>
+
+                    <div class="col-md-12 cnt-vista-opciones no-pd">
+                        <span class="titulo-proyecto">DOCUMENTOS SOPORTES DEL INDICADOR</span>
+                        <a title="Agregar documento" class="pull-right btn glyphicon btn-opc-ind fa fa-plus activo" id="btnAddDocumentoIndicador"></a>
+                        <div class="alert alert-info" role="alert">
+                            <strong>¡Advertencia!</strong> El usuario es responsable de la información a subir
+                        </div>
+                    </div>
+                    <div class="col-md-12 no-pd pdt-10">
+                        <table id="grid-documentos" class="table table-condensed table-hover table-striped grid-documentos">
+                            <thead>
+                                <tr>
+                                    @*<th data-formatter="component-conta" data-column-id="IdSoportesAsignadosaIndicador" data-type="numeric" data-align="center"
+                                        data-sortable="false" data-searchable="false">#</th>*@
+                                    <th data-column-id="NombreDoc" data-formatter="proyecto_nombre" data-order="asc" data-searchable="false">DOCUMENTO</th>
+                                    <th data-column-id="FechaCreacion" data-align="center" data-formatter="fecha-ini-format" data-searchable="false">FECHA</th>
+                                    <th data-align="center" data-formatter="view-document" data-sortable="false" data-searchable="false">&nbsp;</th>
+                                    <th data-formatter="menu-contextual" data-sortable="false">&nbsp;</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>*@
+                <button type="button" class="btn btnAceptar" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Agregar Recurso
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAddResource">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR DOCUMENTO</h4>
+            </div>
+            <div class="modal-body">
+                
+                <form name="frmAddDocumento" id="frmAddDocumento" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="IdDataValoresIndicadores" id="IdDataValoresIndicadores" />
+                    <div class="form-group">
+                        <label for="NombreDoc" class="control-label">Nombre del documento</label>
+                        <input type="text" class="form-control" name="NombreDoc" id="NombreDoc" maxlength="300" />
+                    </div>
+                    <div class="form-group">
+                        <input name="inputFiles" id="inputFiles" type="file">
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Ubicación
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalCatUbicacion">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR UBICACI&Oacute;N</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center hidden">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE la ubicaci&oacute;n?</p>
+                <span>Precaución: Esta operación no podrá revertise</span>
+            </div>
+            <div class="modal-body">
+                <form name="frmCatUbicacion" id="frmCatUbicacion" method="post">
+                    <input type="hidden" name="actionUbicacion" id="actionUbicacion" />
+                    <input type="hidden" name="idUbicacion" id="idUbicacion" />
+                    <div class="form-group">
+                        <label for="nombre_ubicacion" class="control-label">Nombre de la Ubicaci&oacute;n</label>
+                        <input type="text" class="form-control" name="nombre_ubicacion" id="nombre_ubicacion" maxlength="500" />
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Confirm delete
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalConfirmDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">CONFIRMACIÓN DE BORRADO</h4>
+            </div>
+            <div class="col-md-12 msjEliminarModal text-center">
+                <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                @*<span>Precaución: Esta operación no podrá revertise</span>*@
+            </div>
+            <div class="modal-body">
+                <form method="post" name="frmConfirmDelete" id="frmConfirmDelete">
+                    <input type="hidden" name="idResposable" id="idResposable" />
+                    <input type="hidden" name="idIndicador" id="idIndicador" />
+                    <input type="hidden" name="idConfig" id="idConfig" />
+                    <input type="hidden" name="idproyecto" id="idproyecto" />
+                    <input type="hidden" name="datepublicacion" id="datepublicacion" />
+                
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnConfirmDelete">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals agregar indicadres a nivel de subetapas
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAgregarIndSE">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR INDICADORES</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input type="hidden" name="IdProyecto" id="IdProyecto" />
+                    <input type="hidden" name="IdSubEtapa" id="IdSubEtapa" />
+                    <div class="form-group">
+                        <label for="IdSubsistema" class="col-md-2">Subsistema</label>
+                        <select class="col-md-10" name="IdSubsistema" id="IdSubsistema"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="IdElemento" class="col-md-2">Elementos</label>
+                        <select class="col-md-10" name="IdElemento" id="IdElemento"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Indicadores" class="col-md-2">Indicadores</label>
+                        <select class="col-md-10" name="Indicadores" id="Indicadores" multiple></select>
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals agregar fecha compromiso
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAgregarFechaCompriso">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR FECHA COMPROMISO</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal container-fluid" action="/Compromisos/addFechaCompromiso">
+                    <input type="hidden" name="IdElemento" id="IdElemento" />
+                    <div class="form-group">
+                        <label for="FechaCompromiso" class="control-label">Fecha Compromiso</label>
+                        <input type="text" class="form-control" name="FechaCompromiso" id="FechaCompromiso" />
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+    Modals Ubicación
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalEliminarGenerico">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">ELIMINAR USUARIO</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 msjEliminarModal text-center">
+                    <p>¿Desea ELIMINAR el usuario?</p>
+                    <span>Precaución: Esta operación no podrá revertise</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+    Modals Historial Cambios Fechas
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalHistorialCambiosFechas">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">HISTORIAL DE CAMBIOS DE FECHAS</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid no-pd">
+                    <div class="col-md-12 no-pd pdt-10">
+                        <table id="grid-historial" class="table table-condensed table-hover table-striped grid-historial">
+                            <thead>
+                                <tr>
+                                    @*<th data-formatter="component-conta" data-column-id="IdSoportesAsignadosaIndicador" data-type="numeric" data-align="center"
+                                        data-sortable="false" data-searchable="false">#</th>*@
+                                    <th data-column-id="FechaInicioAnt" data-formatter="fecha-ini-format" data-order="asc" data-searchable="false" style="width:100px !important;">Fecha Ini. <br>Anterior</th>
+                                    <th data-column-id="FechaFinAnt" data-formatter="fecha-ini-format" data-order="asc" data-wrap="false" data-searchable="false">Fecha Fin. <br>Anterior</th>
+                                    <th data-column-id="FechaInicio" data-align="center" data-formatter="fecha-ini-format" data-wrap="false" data-searchable="false">Fecha Ini. <br>Actual</th>
+                                    <th data-column-id="FechaFin" data-align="center" data-formatter="fecha-ini-format" data-wrap="false" data-searchable="false">Fecha Fin. <br>Actual</th>
+                                    <th data-column-id="Motivo" data-align="left" data-searchable="false" data-cssclass="td-motivo">Motivo (300 caracteres máximo)</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>*@
+                <button type="button" class="btn btnAceptar" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+    Modals Tipo Proyecto
+-------------------------------------------- -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalTipoProyecto">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">AGREGAR NIVEL</h4>
+            </div>
+            
+            <div class="modal-body">
+                <div class="col-md-12 msjEliminarModal text-center hidden">
+                    <p>¿Desea ELIMINAR PERMANENTEMENTE el elemento?</p>
+                    <span>Precaución: Esta operación no podrá revertise</span>
+                </div>
+                <form id="frmTipoProyecto" method="post">
+                    <input type="hidden" name="IdTipoProyecto" id="IdTipoProyecto" />
+                    <input type="hidden" name="action" id="action" value="" />
+
+                    <div class="form-group">
+                        <label for="TipoProyecto" class="control-label">Tipo de Proyecto</label>
+                        <input type="text" class="form-control" name="TipoProyecto" id="TipoProyecto" maxlength="200" />
+                    </div>
+                </form>
+                <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido guardados corrrectamente. </div>
+                <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                <div class="alert alert-danger error0 hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron guardar correctamente. </div>
+                <div class="alert alert-danger error1 hidden" role="alert"> <strong>Oh!</strong> Los datos ya se encuentran registrados. </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btnCancelar" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btnAceptar" id="btnSubmitTipoProyecto">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function checkForm(form) {
+        if (form.id != "frmUpdatePersonal") {
+            if (form.InputPassword1.value != "" && form.InputPassword1.value == form.InputPassword2.value) {
+
+            }
+            else {
+                alert("Error: Por favor verifique que coincidan su password y contraseña!");
+                form.InputPassword1.focus();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+</script>

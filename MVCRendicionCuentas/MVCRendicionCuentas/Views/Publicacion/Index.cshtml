@@ -1,0 +1,651 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPublicado.cshtml";
+}
+<input type="hidden" id="IdPublicacion" value="@ViewData["IdPublicacion"]" data-anioactual="@ViewData["Anio"]" />
+<div class="container-fluid no-pd text-center">
+    <span class="txt-fecha-pub">@ViewData["FechaActual"]</span>
+</div>
+<div class="container-fluid no-pd text-center">
+    <span class="txt-tipo">NIVEL DE CUMPLIMIENTO</span>
+</div>
+<div class="container-fluid no-pd text-center">
+    <span class="txt-tt-proy">[&nbsp;<b></b> EN EJECUCI&Oacute;N&nbsp;]</span>
+</div>
+<!-- Contenedor de modulos -->
+<div class="container-fluid no-pd cnt-modulo-publ">
+    <!-- header subtitulo -->
+    <div class="container txt-glob text-center mrt-70">
+        <span class="txt-set-resul-glob hidden">RESULTADOS GLOBAL</span>
+    </div>
+    <!-- contenedor de tableros -->
+    <div class="container-publicado cnt-vista-graf-pie no-pd">
+        <!--Contenedor gráfica principal global de pay-->
+        <div class="cnt-pbl cnt-publicado-global mrt-20 hidden">
+            <div class="container-fluid no-pd cnt-tbl-subsis"></div>
+            <div class="container-fluid no-pd cnt-tbl-subsis-glob"></div>
+        </div>
+        <!-- Contenedor gráficas barra global -->
+        <div class="cnt-pbl cnt-vista-graf-bar container mrt-20 hidden"></div>
+        <!-- Contenedor gráficas barra detalle -->
+        <div class="container-fluid no-pd mrt-20 cnt-graf-bar-det"></div>
+        <!-- Contenedor modulo de elementos por subsistema-->
+        <div class="container-fluid no-pd mrt-20 cnt-tbl-subsis-elem"></div>
+        <!-- Contenedor modulo de proyectos global-->
+        <div class="container-fluid no-pd mrt-20 cnt-tbl-proy-glob hidden">
+            <div class="container-fluid no-pd cnt-graf-proy-subsis"></div>
+            <div class="container-fluid no-pd cnt-graf-proy-glob"></div>
+            <div class="container-fluid no-pd cnt-tbl-proy">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-center"><img src="../Images/logos/sspa_.png" width="60" height="40" alt="." /></th>
+                            <th class="text-center">COMP. DE PROYECTO</th>
+                            <th class="text-center">RESPONSABLE</th>
+                            <th class="text-center">INICIO</th>
+                            <th class="text-center">FINAL</th>
+                            <th class="text-center">12MPI</th>
+                            <th class="text-center">SASP</th>
+                            <th class="text-center">SAA</th>
+                            <th class="text-center">SAST</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="rows-proyectos"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container-fluid no-pd cnt-proy-det"></div>      
+    </div>
+</div>
+<!-- Leyenda -->
+<div class="container-fluid no-pd img-leyenda">
+    <img class="mrl-100" src="~/Images/publicacion/escala.png" height="50" alt="." />
+    <img class="mrr-100 pull-right" src="~/Images/publicacion/leyenda_mejora.png" height="40" alt="." />
+</div>
+<!-- Línea de tiempo -->
+<div class="container cnt-set-linea-tiempo hidden">
+    <div class="container-fluid pos-rel no-pd">
+        <div class="cnt-linea-tiempo"></div>
+    </div>
+</div>
+<!--Elemento loading-->
+<div class="loading-pub hidden">
+    <div></div>  
+    <img src="~/Images/loadergif.gif" width="80" height="80" alt="." />
+    <span>Cargando...</span>
+</div>
+<!--Mensaje para datos null-->
+<h1 class="datos-null hidden">No se encontraron datos</h1>
+
+<!--Template gráfica principal global de pay-->
+<script type="text/template" id="tmp-tablero-subsis-glob-prin">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":((e.EstatusMejora === 3)?"right":"")); %>
+    <div class="cnt-grafica-pie principal cnt-grafica-nivel1">
+        <div class="circulo-wrap"></div>
+        <canvas class="circulo-dinamico" id="chart-nivel1-container<%=i%>" width="200" height="200" data-elem="#chart-nivel1-container<%=i%>" data-avance="<%= e.Valor %>" data-color="<%= e.Semaforo %>"></canvas>
+        <div class="cnt-grafica-text lnk-concepto" data-lnk=""><span><%= e.Valor %></span><span>%</span></div>
+        <% if(e.EstatusMejora !== undefined){ %><div class="ind-item-flecha pos"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+    </div>
+    <% } }); %>
+</script>
+<!--Template gráfica principal global de pay-->
+<script type="text/template" id="tmp-tablero-subsis-prin">
+    <div class="cnt-graficas-subsis">
+        <% _.each(elementos, function(e,i){ 
+        if(elementos.length > 0 && (i > 0)){
+        var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":((e.EstatusMejora === 3)?"right":""));  %>
+        <div class="cnt-wrp-diagrama">
+            <div class="container-fluid diagrama-nodo no-pd">
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === (elementos.length-1)))?' nodo-right':((i > 1)?' nodo-inter':''))%>"></div>
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === 1))?' nodo-left':((i < elementos.length-1)?' nodo-inter':''))%> nodo-conec"></div>
+            </div>
+            <div class="cnt-grafica-pie<%=(elementos.length>0)?'s':''%> principal cnt-grafica-nivel2<%=(i===2)?' mrr-130':((i===3)?' mrl-130':'')%>" data-subsistema="<%=e.NombreSubsistema%>" data-tproy="<%=elementos.length%>">
+                <% if(i < 3){ %><div class="nodo-conect-vertical-l"></div><% } %>
+                <% if(i > 2){ %><div class="nodo-conect-vertical-r"></div><% } %>
+                <canvas class="circulo-dinamico" id="chart-nivel2-container<%=i%>" width="200" height="200" data-elem="#chart-nivel2-container<%=i%>" data-avance="<%= e.Valor %>" data-color="<%= e.Semaforo %>"></canvas>
+                <div class="cnt-grafica-text lnk-concepto" data-lnk=""><span><%=e.Valor%></span><span>%</span></div>
+                <% if(e.EstatusMejora !== undefined){ %><div class="ind-item-flecha"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+                <div class="logo-subsis-<%=e.logo%>"></div>
+            </div>
+        </div>
+        <% } }); %>
+    </div>
+</script>
+<!-- Template gráficas barra global -->
+<script type="text/template" id="tmp-tablero-subsis-bar">
+    <% _.each(elementos, function(e,i){
+    var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":((e.EstatusMejora === 3)?"right":""));  %>
+    <div class="container-fluid cnt-grafica-subsis-bar no-pd">
+        <div class="col-md-2">
+            <a data-tproy="<%=elementos.length%>" data-subsistema="<%=e.NombreSistema%>" class="lnk-susbsis-det <%='logo-subsis-' + (e.logo) %>"></a>
+        </div>
+        <div class="col-md-3 no-pd">
+            <div class="container-fluid lbl-avance no-pd" style="border-color: <%=setColor(e.Semaforo)%>;">
+                <div class="txt"><span><%=e.Valor%></span><span>%</span></div>
+            </div>
+        </div>
+        <div class="col-md-7 no-pd cnt-bars">
+            <%_.each(e.AvancesMes,function(e,i){%>
+            <div class="col-md-1 no-pd">
+                <span class="wp-100" style="color:<%=setColor(e.Semaforo)%>;"><%=e.Valor%>%</span>
+                <div><div class="bar"><div style="height:<%=e.Valor%>%; background-color:<%=setColor(e.Semaforo)%>;"></div></div></div>
+                <span class="wp-100"><%=setMes(e.Mes)%></span>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+    <% }); %>
+</script>
+<!-- Template gráficas barra detalle -->
+<script type="text/template" id="tmp-tablero-subsis-bar-det">
+    <% _.each(elementos, function(e,i){
+    var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":((e.EstatusMejora === 3)?"right":""));  %>
+    <div id="det-subsistema-<%=i%>" class="container-fluid cnt-grafica-subsis-bar-det no-pd hidden">
+        <div class="container-fluid text-center cnt-logos-center mrb-40">
+            <a data-tproy="<%=elementos.length%>" data-subsistema="<%=e.NombreSistema%>" class="lnk-susbsis-det <%='logo-subsis-' + (e.logo)  %>"></a>
+        </div>
+        <div class="container-fluid no-pd cnt-bars screem-full text-center">
+            <div class="fondo"></div>
+            <div class="container-fluid brd">
+                <div class="col-md-1 no-pd"></div>
+                <div class="col-md-10 col-center no-pd">
+                    <%_.each(e.AvancesMes,function(e,i){%>
+                    <div class="col-md-1 no-pd center-inline-block">
+                        <span class="wp-100" style="color:<%=setColor(e.Semaforo)%>;"><%=e.Valor%>%</span>
+                        <div><div class="bar"><div style="height:<%=e.Valor%>%; background-color:<%=setColor(e.Semaforo)%>;"></div></div></div>
+                        <span class="wp-100"><%=setMes(e.Mes)%></span>
+                    </div>
+                    <% }); %>
+                </div>
+                <div class="col-md-1 no-pd"></div>
+                <div class="bar-prom" style="bottom: <%=(150*(e.Valor/100))%>px;"></div>
+            </div>
+        </div>
+        <div class="container-fluid no-pd screem-full text-center mrt-20">
+            <div class="container-fluid lbl-avance no-pd" style="border-color: <%=setColor(e.Semaforo)%>;">
+                <div class="txt"><span><%=e.Valor%></span><span>%</span></div>
+            </div>
+            <div class="container-fluid pie-lbl-promedio mrt-20">RESULTADO PROMEDIO</div>
+        </div>
+    </div>
+    <% }); %>
+</script>
+<!-- Template modulo de elementos por subsistema-->
+<script type="text/template" id="tmp-tablero-subsis-elem">
+    <% _.each(elementos,function(elem,i){ 
+       if(elem.Elementos.length > 0){ %>
+    <div id="det-subsistema-elem-<%=i%>" class="wp-90 container-fluid cnt-tbl-elem hidden">
+        <div class="container-fluid no-pd">
+            <div class="col-md-3 no-pd">
+                <a class="logo-tbl-elem logo-subsis-<%=(elem.logo)%>"></a>
+            </div>
+            <div class="col-md-6 no-pd">
+                <div class="graf-bar-prom">
+                    <div class="h-10 mrt-30 wp-100 cnt-bar-prom-elem-hz"><div style="width: <%= elem.Valor %>%; background-color: <%=setColor(elem.Semaforo)%>; "></div></div>
+                </div>
+            </div>
+            <div class="col-md-3 no-pd">
+                <div class="container-fluid lbl-avance-elem no-pd" style="border-color: <%=setColor(elem.Semaforo)%>; ">
+                    <div class="txt col-md-6"><span><%=elem.Valor%></span><span>%</span></div>
+                    <% var clss = (elem.EstatusMejora === 1)?"up":((elem.EstatusMejora === 2)?"down":((elem.EstatusMejora === 3)?"right":""));
+                    if(elem.EstatusMejora !== undefined){ %><div class="col-md-6 text-center estatus-mejora"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid cnt-vista2 cnt-vista no-pd mrt-30">
+            <% _.each(elem.Elementos, function(proceso, k){
+            var clss2 = (proceso.EstatusMejora === 1)?"up":((proceso.EstatusMejora === 2)?"down":((proceso.EstatusMejora === 3)?"right":"")); %>
+            <div class="col-md-2 cnt-box-subsistema">
+                <div class="container-fluid box-subsistema-elem no-pd"
+                    <%=((proceso.Semaforo !== 'Verde')?'style="border-color:'+setColor(proceso.Semaforo)+';"':'')%>>
+                    <div class="container-fluid cnt-head-elem">
+                        <div class="col-md-11 no-pd"<%=(proceso.Semaforo!=='Verde')?' style="color:'+setColor(proceso.Semaforo)+';"':''%>><%= proceso.NombreElemento %></div>
+                        <% if(proceso.EstatusMejora !== undefined){ %><div class="col-md-1 no-pd box-estatus-mejora"><span class="glyphicon glyphicon-chevron-<%=clss2%>"></span></div><% } %>
+                    </div>
+                    <div class="container-fluid cnt-recuadro no-pd">
+                        <div class="container-fluid no-pd mrt-10">
+                            <a><%= proceso.DescripcionElemento %></a>
+                        </div>
+                        <div class="container-fluid mrt-10">
+                            <div class="h-5 mrt-20 wp-90 cnt-bar-prom-elem-hz center-block"><div style="width: <%=proceso.Valor%>%; background-color: <%=setColor(proceso.Semaforo)%>;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+    <% } }); %>
+</script>
+<!-- Template modulo de proyectos global-->
+<script type="text/template" id="tmp-tablero-proy-glob">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":((e.EstatusMejora === 3)?"right":"")); %>
+    <div class="cnt-grafica-pie-proy cnt-grafica-nivel1">
+        <div class="circulo-wrap"></div>
+        <canvas class="circulo-dinamico" id="chart-graf-proy-<%=i%>" width="140" height="140" data-elem="#chart-graf-proy-<%=i%>" data-avance="<%= e.Valor %>" data-color="<%= e.Semaforo %>"></canvas>
+        <div class="cnt-grafica-proy-text lnk-concepto" data-lnk=""><span><%= e.Valor %></span><span>%</span></div>
+        <% if(e.EstatusMejora !== undefined){ %><div class="ind-item-flecha pos"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+    </div>
+    <div class="container-fluid text-center">
+        <div class="logo-proy-subsis-publ"></div>
+    </div>
+    <% } }); %>
+</script>
+<!-- Template modulo de proyectos global-->
+<script type="text/template" id="tmp-tablero-proy-subsis">
+    <div class="cnt-graficas-proy-subsis">
+        <% _.each(elementos, function(e,i){
+        if(elementos.length > 0 && (i > 0)){
+        var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":((e.EstatusMejora === 3)?"right":""));  %>
+        <div class="cnt-wrp-diagrama">
+            <div class="container-fluid diagrama-nodo no-pd">
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === (elementos.length-1)))?' nodo-right':((i > 1)?' nodo-inter':''))%>"></div>
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === 1))?' nodo-left':((i < elementos.length-1)?' nodo-inter':''))%> nodo-conec"></div>
+            </div>
+            <div class="cnt-grafica-pie<%=(elementos.length>0)?'s':''%> principal cnt-grafica-nivel2<%=(i===2)?' mrr-130':((i===3)?' mrl-130':'')%>" data-subsistema="<%=e.NombreSubsistema%>" data-tproy="<%=elementos.length%>">
+                <% if(i < 3){ %><div class="nodo-conect-vertical-l"></div><% } %>
+                <% if(i > 2){ %><div class="nodo-conect-vertical-r"></div><% } %>
+                <canvas class="circulo-dinamico" id="chart-graf-proy-<%=i%>" width="140" height="140" data-elem="#chart-graf-proy-<%=i%>" data-avance="<%= e.Valor %>" data-color="<%= e.Semaforo %>"></canvas>
+                <div class="cnt-grafica-text lnk-concepto" data-lnk=""><span><%=e.Valor%></span><span>%</span></div>
+                <% if(e.EstatusMejora !== undefined){ %><div class="ind-item-flecha"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+                <div class="logo-subsis-<%=e.logo%>"></div>
+            </div>
+        </div>
+        <% } }); %>
+    </div>
+</script>
+<!-- Template tabla de proyectos global-->
+<script type="text/template" id="tmp-rows-proyectos">
+    <% _.each(elementos, function(proy,i){ %>
+    <tr>
+        <td></td>
+        <td class="text-center ind-proy" style="color:<%=setColor(proy.Semaforo)%>;">&bull;</td>
+        <td><%=proy.NombreProyecto%></td>
+        <td><%=proy.Responsable%></td>
+        <td><%=moment(proy.FechaInicio).format('DD-MM-YYYY')%></td>
+        <td><%=moment(proy.FechaFin).format('DD-MM-YYYY')%></td>
+        <td class="text-center ind-proy" style="color: <%=setColor(proy.Semaforo12MPI)%>;">&bull;</td>
+        <td class="text-center ind-proy" style="color: <%=setColor(proy.SemaforoSAA)%>;">&bull;</td>
+        <td class="text-center ind-proy" style="color: <%=setColor(proy.SemaforoSASP)%>;">&bull;</td>
+        <td class="text-center ind-proy" style="color: <%=setColor(proy.SemaforoSAST)%>;">&bull;</td>
+        <td></td>
+    </tr>
+    <% }); %>
+</script>
+<!-- Template tabla de detalles de proyectos global-->
+<script type="text/template" id="tmp-coleccion-detalleProy">
+    <%  _.each(elementos,function(elemento,i){ %>
+    <div class="container-fluid no-pd tbl-det-proy-ind hidden" id="tbl-det-proy-ind-<%=i%>">
+        <div class="container-fluid no-pd detalle-proy-publ">
+            <div class="fnd-proy-det"></div>
+            <div class="col-md-1 no-pd"></div>
+            <div class="col-md-10 no-pd body-detalle-proy">
+                <div class="desc-detalle-proy col-md-9">
+                    <div class="col-md-4 mrt-20"><span>RESPONSABLE:</span><span class="mrl-10"><%= elemento.Responsable %></span></div>
+                    <div class="col-md-4 mrt-20"><span>INICIO:</span><span class="mrl-10"><%=(elemento.FechaInicio!==null)?moment(elemento.FechaInicio).locale('es').format('L'):'- / - / -'%></span></div>
+                    <div class="col-md-4 mrt-20"><span>FIN:</span><span class="mrl-10"><%=(elemento.FechaFin!==null)?moment(elemento.FechaFin).locale('es').format('L'):'- / - / -'%></span></div>
+                </div>
+                <div class="semaforos-proy col-md-3">
+                    <div class="col-md-3">
+                        <span>12MPI</span><br />
+                        <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elemento.Semaforo12MPI %>"><%= elemento.Valor12MPI %>% </a>
+                    </div>
+                    <div class="col-md-3">
+                        <span>SASP</span><br />
+                        <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elemento.SemaforoSASP %>"><%= elemento.ValorSASP %>% </a>
+                    </div>
+                    <div class="col-md-3">
+                        <span>SAA</span><br />
+                        <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elemento.SemaforoSAA %>"><%= elemento.ValorSAA %>% </a>
+                    </div>
+                    <div class="col-md-3">
+                        <span>SAST</span><br />
+                        <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elemento.SemaforoSAST %>"><%= elemento.ValorSAST %>% </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 no-pd"></div>
+        </div>
+        <div class="container-fluid cnt-vista2 cnt-vista no-pd mrt-30">
+            <div class="col-md-1 no-pd"></div>
+            <div class="col-md-10 no-pd">
+                <% _.each(elemento.Etapas, function(elem,i) { %>
+                <div class="col-md-2 detalle-proy-box pdl-0">
+                    <div>
+                        <div class="title-det-proy"><%= wrapText(elem.proyecto_nombre, 35 , '...') %></div>
+                        <div class="container-fluid body-det-proy mrt-15">
+                            <div class="col-md-4">FIN</div>
+                            <div class="col-md-8"><%= (elem.proyecto_fecha_fin !== null)?moment(elem.proyecto_fecha_fin).locale('es').format('L'):'- / - / -' %></div>
+                        </div>
+                        <div class="semaforos-det-eproy">
+                            <div class="container-fluid mrt-20 no-pd">
+                                <div class="col-md-3">
+                                    <span>12MPI</span>
+                                    <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elem.semaforo_12MPI %>"><%= elem.porcentaje_12MPI %>% </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>SASP</span>
+                                    <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elem.semaforo_SASP %>"><%= elem.porcentaje_SASP %>% </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>SAA</span>
+                                    <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elem.semaforo_SAA %>"><%= elem.porcentaje_SAA %>% </a>
+                                </div>
+                                <div class="col-md-3">
+                                    <span>SAST</span>
+                                    <a class="btn pdt-0 pdb-0 clr-ind-proy-<%= elem.semaforo_SAST %>"><%= elem.porcentaje_SAST %>% </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <div class="col-md-1 no-pd"></div>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        //Se obtiene Id de publicación
+        var IdPublicacion = $('#IdPublicacion').val();
+        //Validación de datos
+        if (IdPublicacion === "") {
+            $('.txt-fecha-pub, .txt-tipo, .txt-tt-proy, .img-leyenda').css('visibility', 'hidden');
+            $('.datos-null').removeClass('hidden');
+            return false;
+        }
+        else {
+            $('.loading-pub').removeClass('hidden');
+        }
+        //Petición de publicaciones
+        $.getJSON('@Url.Action("TablerosPublicadosActuales", "Publicacion")', { IdPublicacion: IdPublicacion }).done(function (data) {
+
+            var Tableros = JSON.parse(data);
+            var txtProy = (Tableros.TotalProyectos > 1) ? " COMPONENTES DE PROYECTO" : " COMPONENTE DE PROYECTO";
+            $('.txt-tt-proy b').text(Tableros.TotalProyectos + txtProy);
+            //Se ordenan los subsistemas
+            orderSubsistema(Tableros.Subsistemas, function (datos) {
+
+                var TabGlb = [];
+                TabGlb[0] = datos[0]
+                cargarDiagrama({ //Se carga gráfica circular global
+                    tmpl: "#ContentPublicacion #tmp-tablero-subsis-glob-prin",
+                    datos: TabGlb,
+                    cnt: ".cnt-tbl-subsis-glob"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                });
+
+                cargarDiagrama({ //Se cargan gráficas circulares subsistemas
+                    tmpl: "#ContentPublicacion #tmp-tablero-subsis-prin",
+                    datos: datos,
+                    cnt: ".cnt-tbl-subsis"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+
+                    cargarDiagrama({ //Se cargan gráficas porcentaje por mes subsistemas
+                            tmpl: "#ContentPublicacion #tmp-tablero-subsis-bar",
+                            datos: datos,
+                            cnt: ".cnt-vista-graf-bar",
+                            agregar: true
+                        }, function () {
+
+                            cargarDiagrama({ //Se cargan gráficas porcentaje por mes individual subsistemas
+                                    tmpl: "#ContentPublicacion #tmp-tablero-subsis-bar-det",
+                                    datos: datos,
+                                    cnt: "#ContentPublicacion .cnt-graf-bar-det",
+                                    agregar: true
+                                }, function () {
+
+                                    cargarDiagrama({ //Se cargan elementos por subsistemas
+                                        tmpl: "#ContentPublicacion #tmp-tablero-subsis-elem",
+                                        datos: datos,
+                                        cnt: "#ContentPublicacion .cnt-tbl-subsis-elem",
+                                        agregar: true
+                                    }, function () {
+
+                                        cargarDiagrama({ //Se cargan gráfica global de subsistema
+                                            tmpl: "#ContentPublicacion #tmp-tablero-proy-glob",
+                                            datos: TabGlb,
+                                            cnt: ".cnt-tbl-proy-glob .cnt-graf-proy-glob"
+                                        }, function () {
+                                            initGraficaDinamicaPie(".cnt-tbl-proy-glob .cnt-grafica-nivel1 .circulo-dinamico");
+                                        });
+
+                                        cargarDiagrama({ //Se cargan gráficas global de subsistemas
+                                            tmpl: "#ContentPublicacion #tmp-tablero-proy-subsis",
+                                            datos: datos,
+                                            cnt: ".cnt-tbl-proy-glob .cnt-graf-proy-subsis"
+                                        }, function () {
+
+                                            initGraficaDinamicaPie(".cnt-graficas-proy-subsis .cnt-grafica-nivel2 .circulo-dinamico");
+                                            cargarDiagrama({ //Se carga tabla global de proyectos
+                                                tmpl: "#ContentPublicacion #tmp-rows-proyectos",
+                                                datos: Tableros.Proyectos,
+                                                cnt: "#ContentPublicacion .cnt-tbl-proy .rows-proyectos",
+                                                agregar: true
+                                            }, function () {
+
+                                                cargarDiagrama({ //Se carga tabla de indicadores por proyectos
+                                                    tmpl: "#ContentPublicacion #tmp-coleccion-detalleProy",
+                                                    datos: Tableros.Proyectos,
+                                                    cnt: "#ContentPublicacion .cnt-proy-det",
+                                                    agregar: true
+                                                }, function () {
+
+                                                    $('.loading-pub').addClass('hidden');
+                                                    //Se agregan modulos al carrusel, configuraciones y eventos
+                                                    var tabs = [{
+                                                        item: ".cnt-publicado-global",
+                                                        time: 8000,
+                                                        completado: function () {
+                                                            $('#ContentPublicacion .container.txt-glob').addClass('hidden');
+                                                        }
+                                                    }, {
+                                                        item: ".cnt-vista-graf-bar",
+                                                        time: 5000,
+                                                        completado: function () {
+                                                            $('#ContentPublicacion .container.txt-glob').removeClass('hidden');
+                                                        }
+                                                    }];
+
+                                                    var ndetSub = $(".cnt-grafica-subsis-bar-det").length;
+                                                    $(".cnt-grafica-subsis-bar-det").each(function (i, e) {
+                                                        var inif = function () {
+                                                            if (i === 0) {
+                                                                $('#ContentPublicacion .container.txt-glob').addClass('hidden');
+                                                                elemlienaTimepo.crear(ndetSub);
+                                                                elemlienaTimepo.mostrar();
+                                                            }
+                                                            elemlienaTimepo.activar(i + 1);
+                                                        }
+                                                        var finf = function () {
+                                                            if (i === (ndetSub - 1)) { elemlienaTimepo.ocultar(); }
+                                                        };
+                                                        tabs.push({ item: "#" + $(this).prop('id'), time: 4000, antes: inif, completado: finf });
+                                                    });
+
+                                                    var ndetElem = $(".cnt-tbl-elem").length;
+                                                    $(".cnt-tbl-elem").each(function (i, e) {
+                                                        var inif = function () {
+                                                            if (i === 0) {
+                                                                elemlienaTimepo.crear(ndetElem);
+                                                                elemlienaTimepo.mostrar();
+                                                            }
+                                                            elemlienaTimepo.activar(i + 1);
+                                                        }
+                                                        var finf = function () {
+                                                            if (i === (ndetElem - 1)) {
+                                                                $('#ContentPublicacion .container.txt-glob').removeClass('hidden');
+                                                                elemlienaTimepo.ocultar();
+                                                            }
+                                                        };
+                                                        tabs.push({ item: "#" + $(this).prop('id'), time: 5000, antes: inif, completado: finf });
+                                                    });
+
+                                                    tabs.push({ item: ".cnt-tbl-proy-glob", time: 5000 });
+
+                                                    var ndetProy = $('.tbl-det-proy-ind').length;
+                                                    $(".tbl-det-proy-ind").each(function (i, e) {
+                                                        tabs.push({ item: "#" + $(this).prop('id'), time: 5000 });
+                                                    });
+
+                                                    //Se inicia el modo presentación
+                                                    modoPresentacion(tabs, 0);
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                        });
+                });
+            });
+        });
+    });
+
+    //Función línea de tiempo
+    var elemlienaTimepo = {
+        crear : function (n) {
+            var pin = "", pinActivo = "", p = 0;
+            $('#ContentPublicacion').find('.cnt-set-linea-tiempo .pin-item').remove();
+            for (var i = 1; i <= n; i++) {
+                pin = $('<div class="pin-item"></div>');
+                if (i === 1) {
+                    pinActivo = '<div class="pin-activo" data-item="' + i + '"></div>';
+                } else {
+                    pinActivo = '<div class="pin-activo hidden" data-item="' + i + '"></div>';
+                    p = ((100 * (i - 1)) / (n - 1));
+                }
+                pin.css("left", p + "%").append(pinActivo);
+                $('#ContentPublicacion').find('.cnt-linea-tiempo').after(pin);
+            }
+        },
+        activar: function (item, callback) {
+            $('.cnt-set-linea-tiempo').find('.pin-activo').addClass('hidden');
+            $('.cnt-set-linea-tiempo').find('.pin-activo[data-item="' + item + '"]').removeClass('hidden');
+        },
+        mostrar: function () {
+            $('.cnt-set-linea-tiempo').removeClass('hidden');
+        },
+        ocultar: function () {
+            $('.cnt-set-linea-tiempo').addClass('hidden');
+        }
+    };
+
+    //Función para ejecutar gráficos en presentación
+    function modoPresentacion(tabs, i) {
+        $(tabs[i].item).removeClass('hidden');
+        if (typeof tabs[i].antes === "function") {
+            tabs[i].antes();
+        }
+        setTimeout(function () {
+            $(tabs[i].item).addClass('hidden');
+            if (typeof tabs[i].completado === "function") {
+                tabs[i].completado();
+            }
+            i = (i < tabs.length-1)?(i+1):0;
+            modoPresentacion(tabs, i);
+        }, tabs[i].time);
+    }
+
+    //Carga para gráficas
+    function cargarDiagrama(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.length > 0) {
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos });
+
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).append(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+        }
+    }
+
+    function initGraficaDinamicaPie(elemp) {
+        $(elemp).each(function (i, e) {
+            var elem = $(e).data('elem');
+            var avance = $(e).data('avance');
+            var color = $(e).data('color');
+            GraficaDinamicaPie(elem, avance, color);
+        });
+    }
+
+    function GraficaDinamicaPie(elem, avance, color) {
+        var avance_rest = 100 - avance;
+        var ctx = $(elem);
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [avance, avance_rest],
+                    backgroundColor: [setColor(color), setColor('default')],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                percentageInnerCutout: 80,
+                responsive: true,
+                tooltips: { enabled: false }
+            }
+        });
+    }
+
+    function setColor(c) {
+        var setColor = [];
+        setColor["Verde"] = "#00F0C8";
+        setColor["Amarillo"] = "#FFFF00";
+        setColor["Rojo"] = "#DA4C76";
+        setColor["Azul"] = "#008DAC";
+        setColor["Gris"] = "#A4A09B";
+        setColor["default"] = "#4B5D6C";
+        setColor["null"] = "#4B5D6C";
+
+        return setColor[c];
+    }
+
+    function orderSubsistema(d, callback) {
+        var anio = $('#IdPublicacion').data('anioactual');
+        var TbSb = [];
+        _.each(d, function (v, i) {
+            if (i < d.length - 1) {
+                TbSb[i + 1] = v;
+                TbSb[i + 1].logo = i + 1;
+            } else {
+                TbSb[0] = v;
+                TbSb[0].anio = anio;
+                TbSb[0].logo = 0;
+            }
+        });
+
+        if (typeof callback === "function") {
+            setTimeout(callback(TbSb), 500);
+        }
+    }
+
+    function setMes(m) {
+        var setMes = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+        return setMes[m-1];
+    }
+</script>

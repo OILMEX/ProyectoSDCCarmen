@@ -1,0 +1,691 @@
+﻿<div class="container-fluid">
+    <div class="container-fluid lbl-mod-tit pdb-20 pdl-0">
+
+        <div class="media">
+            <div class="media-left media-middle">
+                <img class="media-object" src="~/Images/iconos_secciones/tableros_gestion.png" />
+            </div>
+            <div class="media-body">
+                <span>PUBLICACI&Oacute;N DE TABLEROS</span>
+            </div>
+        </div>
+    </div>
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-PubTableros" class="nav nav-tabs" role="tablist">
+        <li id="tabpanel-1" role="presentation" class="active">
+            <a href="#tab-tablero1" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Tablero Global Prueba</a>
+        </li>
+        <li id="tabpanel-2" role="presentation">
+            <a href="#tab-tablero2" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Hist&oacute;rico de Tableros</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div id="cnt-subsis-PubTableros" class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tab-tablero1">
+            <div class="container-fluid no-pd opc-tbl">
+                <div class="group-opc-graf">
+                    <div class="opc-tab2 hidden">
+                        <select class="sel-tbl-glob" id="sel-tbl-glob"></select>
+                        <button class="btn btn-verde" id="btn-tbl-buscar">Ir</button>
+                        <a class="btn btn-vista-tbl pull-left btn-delete-publicacion" title="Eliminar publicación"><i class="fa fa-trash"></i></a>
+                        <span class="fecha"></span>
+                    </div>
+
+                    <div class="opc-tab1">
+                        <span>VISTA PRELIMINAR CON INFORMACI&Oacute;N AL @DateTime.Now.ToString("dd MMMM yyyy")</span>
+                    </div>
+
+                    <a class="btn btn-vista-tbl" id="btn-tipo-vista">
+                        <i id="btn-graficas-pie" class="glyphicon glyphicon-stats"></i>
+                        <i id="btn-graficas-bar" class="fa fa-circle-o-notch hidden"></i>
+                    </a>
+
+                    <div class="opc-tab1">
+                        <button id="btnPublicar" type="button" class="btn btnCancelar">Publicar</button>
+                    </div>
+
+                </div>
+                <div class="group-opc-det hidden">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6"><div class="w-300 center-block" style="line-height: 50px;"><span class="lbl-n-proyectos text-center"></span></div></div>
+                    <div class="col-md-3">
+                        <a class="pull-right btn btn-regresar" id="btn-tbl-det-regresar"><i class="glyphicon glyphicon-chevron-left"></i>REGRESAR</a>
+                    </div>
+                </div>
+                <div id="idTitleProyectos" class="lbl-n-proyectos mrr-20"></div>
+            </div>
+            <div class="cnt-vista-graf-pie">
+                <div class="container-fluid no-pd cnt-tbl-subsis-glob"></div>
+                <div class="container-fluid no-pd cnt-tbl-subsis"></div>
+            </div>
+            <div class="cnt-vista-graf-bar hidden"></div>
+            <div class="cnt-vista-subsis-det hidden">
+                <div class="container-fluid row-subsis-det-glob"></div>
+                <div class="container-fluid row-subsis-det"></div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-tablero2"></div>
+
+        <div class="content-leyenda">
+            <div class="cnt-leyendas">
+                <div class="circle circle-red"></div><div class="text-circle"> 0% a 80%</div>
+                <div class="circle circle-amarillo"></div><div class="text-circle"> 81% a 95%</div>
+                <div class="circle circle-verde"></div><div class="text-circle"> 96% a 100%</div>
+                <div class="circle circle-gris"></div><div class="text-circle"> No aplica </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-up"></i> Mejoró </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-down"></i> Empeoró </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-right"></i> Igual </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script type="text/template" id="tmp-tablero-subsis-glob">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    if(e !== undefined) {
+    var clss = (e.mejora === 1)?"up":((e.mejora === 2)?"down":"right"); %>
+    <div class="cnt-grafica-pie cnt-grafica-nivel1">
+        <canvas class="circulo-dinamico" id="chart-nivel1-container<%=i%>" width="160" height="160" data-elem="#chart-nivel1-container<%=i%>" data-avance="<%= e.avance %>" data-color="<%= e.estatus %>"></canvas>
+        <div class="cnt-grafica-text lnk-concepto" data-lnk=""><span><%= e.avance %></span><span>%</span></div>
+        <% if(e.mejora !== undefined){ %><div class="ind-item-flecha pos"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+        <div class="logo-subsistema"></div>
+    </div>
+    <div class="container-fluid text-center">
+        <span>AVANCE GLOBAL</span>
+        <div class="container-fluid">
+            <div class="nodo nodo-conec no-pd"></div>
+        </div>
+    </div>
+    <% } } }); %>
+</script>
+
+<script type="text/template" id="tmp-tablero-subsis">
+    <div class="cnt-graficas-subsis">
+        <% _.each(elementos, function(e,i){
+        if(elementos.length > 0){
+        var clss = (e.mejora === 1)?"up":((e.mejora === 2)?"down":"right");  %>
+        <div class="cnt-wrp-diagrama">
+            <div class="container-fluid diagrama-nodo no-pd">
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === (elementos.length - 1)))?' nodo-right':((i > 0)?' nodo-inter':''))%>"></div>
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === 0))?' nodo-left':((i < elementos.length - 1)?' nodo-inter':''))%> nodo-conec"></div>
+            </div>
+            <div class="cnt-grafica-pie<%=(elementos.length>1)?'s':''%> cnt-grafica-nivel2" data-subsistema="<%=e.subsistema_id%>" data-idpub="<%= e.subsistema_idpublicacion %>" data-tproy="<%=e.TotalProyectos%>">
+                <canvas class="circulo-dinamico" id="chart-nivel2-container<%=i%>" width="160" height="160" data-elem="#chart-nivel2-container<%=i%>" data-avance="<%= e.avance %>" data-color="<%= e.estatus %>"></canvas>
+                <div class="cnt-grafica-text lnk-concepto" data-lnk="" role="button" rel='popover' data-toggle="popover" data-content="<strong>Click</strong> para ver detalle de subsistema"><span><%=e.avance%></span><span>%</span></div>
+                <% if(e.mejora !== undefined){ %><div class="ind-item-flecha"><i class="glyphicon glyphicon-chevron-<%=clss%>"></i></div><% } %>
+                <% if(e.completados !== undefined){ %><span class="lbl-comp"><%=e.completados%></span><% } %>
+                <div class="logo-subsis-<%=(i+1)%>"></div>
+            </div>
+        </div>
+        <% } }); %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-tablero-subsis-bar">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    var clss = (e.mejora === 1)?"up":((e.mejora === 2)?"down":"right");  %>
+    <div class="container-fluid cnt-grafica-subsis-bar no-pd">
+        <div class="col-md-2">
+            <a data-tproy="<%=elementos[0].TotalProyectos%>" data-idpub="<%= e.subsistema_idpublicacion %>" data-subsistema="<%=e.subsistema_id%>" class="lnk-susbsis-det <%=(elementos.length === 1)?'logo-subsis-0':'logo-subsis-' + (i+1) %>"></a>
+        </div>
+        <div class="col-md-3 no-pd">
+            <div class="container-fluid lbl-avance no-pd">
+                <div class="container-fluid"><%=(elementos.length === 1)?'año ' + e.anio:''%></div>
+                <div class="container-fluid txt"><span><%=e.avance%></span><span>%</span></div>
+                <div class="container-fluid"><%=(elementos.length === 1)?'Promedio':''%></div>
+            </div>
+        </div>
+        <div class="col-md-7 no-pd cnt-bars">
+            <% var prom = 0;
+            var promi = 0;
+            _.each(e.avances_mes,function(e,i){  if(e.valor > 0) { prom+= e.valor; promi++; } %>
+            <div class="col-md-1 no-pd">
+                <span class="wp-100"><%=e.valor%>%</span>
+                <div><div style="height:<%=e.valor%>%; background-color:<%=setColor(e.color)%>;"></div></div>
+                <span class="wp-100"><%=setMes(i)%></span>
+            </div>
+            <% });%>
+            <div class="bar-prom" style="bottom: <%=((80*((prom/promi)/100))+19)%>px;">
+                <span>&#8226;</span><span>&#8226;</span>
+            </div>
+        </div>
+    </div>
+    <% } }); %>
+</script>
+
+<script type="text/template" id="tmp-subsis-det-glob">
+    <div class="col-md-3">
+        <a data-subsistema="<%=elementos[0].subsistema%>" class="logo-subsis-<%=elementos[0].logo%>"></a>
+    </div>
+    <div class="col-md-6">
+        <div class="graf-bar-prom">
+            <div class="h-30 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%= elementos[0].avance %>%;  background-color: <%=setColor(elementos[0].color)%>; "></div></div>
+            <div class="w-100 cnt-bar-lbl-prom glob center-block">
+                <span><%=elementos[0].avance%>%</span>
+                <% var clss = (elementos[0].mejora === 1)?"up":((elementos[0].mejora === 2)?"down":"right");
+                if(elementos[0].mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-subsis-det-globTitle">
+    <div class="col-md-3">
+        <a data-subsistema="<%=elementos.subsistema_id%>" class="logo-subsis-<%=elementos.subsistema_id%>"></a>
+    </div>
+    <div class="col-md-6">
+        <div class="graf-bar-prom">
+            <div class="h-30 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%= elementos.avance %>%;  background-color: <%=setColor(elementos.color)%>; "></div></div>
+            <div class="w-100 cnt-bar-lbl-prom glob center-block">
+                <span><%=elementos.avance%>%</span>
+                <% var clss = (elementos.mejora === 1)?"up":((elementos.mejora === 2)?"down":"right");
+                if(elementos.mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-subsis-det">
+    <div class="container-fluid cnt-vista2 cnt-vista no-pd pdt-15">
+        <% _.each(elementos, function(proceso, k){
+        var clss = (proceso.proceso_mejora === 1)?"up":((proceso.proceso_mejora === 2)?"down":"right"); %>
+        <div class="col-md-4 cnt-box-subsistema">
+            <div class="container-fluid box-subsistema no-pd">
+                <div class="container-fluid cnt-head-ss<%= idss %>">
+                    <%= proceso.proceso_sigla %>
+                </div>
+                <div class="container-fluid cnt-recuadro no-pd">
+                    <div class="container-fluid no-pd">
+                        <a><%= proceso.proceso_nombre %></a>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="cnt-bar-lbl-prom">
+                            <span><%=proceso.proceso_avance%>%</span>
+                            <% if(proceso.proceso_mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+                        </div>
+                        <div class="h-20 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%=proceso.proceso_avance%>%; background-color: <%=setColor(proceso.proceso_color)%>;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        var OBJ = [];
+        initTablerosSubsistema();
+
+        var popOverSetting = {
+            placement: 'top',
+            container: 'body',
+            html: true,
+            selector: '[rel="popover"]',
+            trigger: "hover"
+        }
+
+        $('body').popover(popOverSetting);
+
+        $(document).on('click', '.btn-delete-publicacion', function () {
+            var publicacion = $('#sel-tbl-glob');
+            var option = $('option:selected', publicacion).attr('data-id');
+            //var btnpress = elem;
+            var modal = $('#modalConfirmDelete');
+            modal.modal({ backdrop: 'static', keyboard: false })
+            .one('click', '#btnConfirmDelete', function () {
+                //modal.find('.modal-body form#frmConfirmDelete input#idResposable').val(btnpress.data('idresponsable'));
+                //modal.find('.modal-body form#frmConfirmDelete input#idIndicador').val(btnpress.data('idindicador'));
+                //modal.find('.modal-body form#frmConfirmDelete input#idConfig').val(btnpress.data('idconfigrlation'));
+                modal.find('.modal-body form#frmConfirmDelete input#datepublicacion').val(option);
+
+                $("#frmConfirmDelete").attr('action', '/PublicarTablero/deletePublicacion/');
+                $('#frmConfirmDelete').submit();
+
+            });
+        });
+
+
+
+        $(document).on('click', '#tab-tablero1 #btn-tipo-vista', function () {
+            if ($(this).find('#btn-graficas-pie').hasClass('hidden')) {
+                $(this).find('#btn-graficas-pie').removeClass('hidden');
+                $(this).find('#btn-graficas-bar').addClass('hidden');
+
+                $('.cnt-vista-graf-bar').addClass('hidden');
+                $('.cnt-vista-graf-pie').removeClass('hidden');
+
+            } else if ($(this).find('#btn-graficas-bar').hasClass('hidden')) {
+                $(this).find('#btn-graficas-bar').removeClass('hidden');
+                $(this).find('#btn-graficas-pie').addClass('hidden');
+
+                $('.cnt-vista-graf-pie').addClass('hidden');
+                $('.cnt-vista-graf-bar').removeClass('hidden');
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 .lnk-susbsis-det', function () {
+            $('#tab-tablero1 #btn-tbl-det-regresar').data('acceso', 1);
+            cargarDetalleProcesos(this);
+        });
+
+        $(document).on('click', '#tab-tablero1 #btn-tbl-det-regresar', function () {
+            var opc = $(this).data('acceso');
+            if (opc === 1) {
+                $('.group-opc-graf').removeClass('hidden');
+                $('.group-opc-det').addClass('hidden');
+                $('.cnt-vista-graf-bar').removeClass('hidden');
+                $('.cnt-vista-subsis-det').addClass('hidden');
+            } else {
+                $('.group-opc-graf').removeClass('hidden');
+                $('.group-opc-det').addClass('hidden');
+                $('.cnt-vista-graf-pie').removeClass('hidden');
+                $('.cnt-vista-subsis-det').addClass('hidden');
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 .cnt-grafica-pies', function (e) {
+            $('#tab-tablero1 #btn-tbl-det-regresar').data('acceso', 2);
+            cargarDetalleProcesos(this);
+        });
+
+        $(document).on('click', '#btnPublicar.btnCancelar', function () {
+            $('#modalPubTableros').modal('show');
+        });
+
+        $(document).on('click', '.btnAceptarPubTableros', function () {
+            var TipoPublicacion = $('#slcTipoPublicacion').val();
+            $.ajax({
+                url: '/PublicarTablero/Publicacion',
+                type: "GET",
+                data: { TipoPublicacion: TipoPublicacion },
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function () {
+                    //Cerrando Loading
+                    cerrarLoading();
+                    location.reload();
+                }
+            });
+
+        });
+
+        $(document).on('click', 'ul#nav-subsis-PubTableros > li#tabpanel-2', function () {
+
+            $.ajax({
+                url: '/PublicarTablero/TablerosJsonInit2',
+                type: "GET",
+                data: { status: "Produccion" },
+                beforeSend: function(data){
+                    mostrarLoading();
+                },
+                success: function (data) {
+
+                    if (data !== "") {
+
+                        $('#cnt-subsis-PubTableros > #tab-tablero2').removeClass('active');
+                        $('#cnt-subsis-PubTableros > #tab-tablero1').addClass('active');
+
+                        //Ocultar opciones para tab1
+                        $('.opc-tab1').addClass('hidden');
+                        //mostrar opciones para tab2
+                        $('.opc-tab2').removeClass('hidden');
+
+                        var GBL = [];
+                        OBJ = JSON.parse(data);
+                        localStorage.setItem('OBJ', data);
+                        if (OBJ.tablero_subsistema[0] !== undefined) {
+                            GBL[0] = OBJ.tablero_subsistema[0];
+                            setTotalProyecto(GBL[0].TotalProyectos);
+                        }
+
+                        cargarDiagrama({
+                            tmpl: "#tmp-tablero-subsis-glob",
+                            datos: GBL,
+                            cnt: ".cnt-tbl-subsis-glob"
+                        }, function () {
+                            initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                        });
+
+                        cargarDiagrama({
+                            tmpl: "#tmp-tablero-subsis",
+                            datos: OBJ.tablero_subsistema[0] !== undefined ? OBJ.tablero_subsistema[0].tablero_subsistema : "",
+                            cnt: ".cnt-tbl-subsis"
+                        }, function () {
+                            initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+                        });
+
+                        cargarDiagrama({
+                            tmpl: "#tmp-tablero-subsis-bar",
+                            datos: GBL,
+                            cnt: ".cnt-vista-graf-bar",
+                        });
+
+                        cargarDiagrama({
+                            tmpl: "#tmp-tablero-subsis-bar",
+                            datos: OBJ.tablero_subsistema[0] !== undefined ? OBJ.tablero_subsistema[0].tablero_subsistema : "",
+                            cnt: ".cnt-vista-graf-bar",
+                            agregar: true
+                        });
+
+                        initEventos();
+                    } else {
+                        //Ocultar opciones para tab1
+                        $('.opc-tab1').addClass('hidden');
+                        //mostrar opciones para tab2
+                        $('.opc-tab2').removeClass('hidden');
+                    }
+
+                    //Cerrando Loading
+                    cerrarLoading();
+                },
+                error: function (data) {
+                    errorLoading();
+                }
+
+            });
+
+
+
+        });
+
+        $(document).on('click', 'ul#nav-subsis-PubTableros > li#tabpanel-1', function () {
+            window.location.reload();
+        });
+
+        $(document).on('click', '#tab-tablero1 #btn-tbl-buscar', function () {
+            var OBJ = JSON.parse(localStorage.getItem('OBJ'));
+
+            if (OBJ.tablero_subsistema.length > 0) {
+                var f = $('#tab-tablero1 #sel-tbl-glob').val();
+                obj = _.where(OBJ.tablero_subsistema, { fecha: f });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-glob",
+                    datos: obj,
+                    cnt: ".cnt-tbl-subsis-glob"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis",
+                    datos: obj[0].tablero_subsistema,
+                    cnt: ".cnt-tbl-subsis"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+                });
+
+                $('.cnt-vista-graf-bar').empty();
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: obj,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: obj[0].tablero_subsistema,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                //Establece fecha en label
+                setFechaTblGlobal(f);
+            }
+        });
+
+    });
+
+    function initEventos() {
+        initComboTblGlobal();
+        setFechaTblGlobal();
+    }
+
+
+    //Iniciar vista de gráficas
+    function initTablerosSubsistema() {
+        //$.getJSON('../Models/TableroSubsistema.json', function (data) {
+        $.ajax({
+            type: 'GET',
+            url: '/PublicarTablero/TablerosJsonInit',
+            beforeSend: function(){
+                mostrarLoading();
+            },
+            success: function (data) {
+                var GBL = [];
+                OBJ = JSON.parse(data);
+                if (OBJ.tablero_subsistema[0] !== undefined) {
+                    GBL[0] = OBJ.tablero_subsistema[0];
+                    setTotalProyecto(GBL[0].TotalProyectos);
+                }
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-glob",
+                    datos: GBL,
+                    cnt: ".cnt-tbl-subsis-glob"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis",
+                    datos: OBJ.tablero_subsistema[0] !== undefined ? OBJ.tablero_subsistema[0].tablero_subsistema : "",
+                    cnt: ".cnt-tbl-subsis"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: GBL,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: OBJ.tablero_subsistema[0] !== undefined ? OBJ.tablero_subsistema[0].tablero_subsistema : "",
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                initEventos();
+                
+                //Cerramos Loading de carga
+                cerrarLoading();
+            },
+            error: function () {
+                errorLoading();
+            }
+        });
+    }
+
+    //Carga para gráficas
+    function cargarDiagrama(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.length > 0) {
+
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos, "idss": atr.idss });
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).html(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+            $('.cnt-tbl-subsis').empty().html('');
+        }
+    }
+
+    function cargarDiagramaTitle(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.procesos.length > 0) {
+
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos });
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).html(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+            $('.cnt-tbl-subsis').empty().html('');
+        }
+    }
+
+    function initGraficaDinamicaPie(elemp) {
+        $(elemp).each(function (i, e) {
+            var elem = $(e).data('elem');
+            var avance = $(e).data('avance');
+            var color = $(e).data('color');
+            GraficaDinamicaPie(elem, avance, color);
+        });
+    }
+
+    function GraficaDinamicaPie(elem, avance, color) {
+        var avance_rest = 100 - avance;
+        var ctx = $(elem);
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [avance, avance_rest],
+                    backgroundColor: [setColor(color), setColor('default')],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: { enabled: false }
+            }
+        });
+    }
+
+    function setColor(c) {
+        var setColor = [];
+        setColor["verde"] = "#00CE93";
+        setColor["amarillo"] = "#FFC542";
+        setColor["rojo"] = "#FF364D";
+        setColor["azul"] = "#008DAC";
+        setColor["gris"] = "#A4A09B";
+        setColor["default"] = "#E9E7E4";
+
+        return setColor[c];
+    }
+
+    function initComboTblGlobal() {
+        var OBJ = JSON.parse(localStorage.getItem('OBJ'));
+        
+        if (OBJ != null) {
+            $('#sel-tbl-glob').html('');
+            _.each(OBJ.tablero_subsistema, function (e, i) {
+                $('#sel-tbl-glob').append('<option data-id="' + e.idpublicacion + '" value="' + e.fecha + '">' + e.fecha + '</option>');
+            });
+        }
+    }
+
+    function setFechaTblGlobal(opc) {
+        if (opc === undefined || opc === "") {
+            if (OBJ.lenght !== undefined) {
+                var f = OBJ.tablero_subsistema[0].fecha;
+            }
+
+        } else {
+            var f = opc;
+        }
+        $('.group-opc-graf>.fecha').text(f);
+    }
+
+    function setTotalProyecto(N) {
+        if (N > 0) {
+            $('.lbl-n-proyectos').text(N + " PROYECTO" + ((N > 1) ? "S" : "") + " EN EJECUCIÓN");
+        }
+    }
+
+    function setMes(m) {
+        var setMes = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+        return setMes[m];
+    }
+
+    function cargarDetalleProcesos(e) {
+        var subsis = $(e).data('subsistema');
+        var fecha = $('#tab-tablero1 #sel-tbl-glob').val();
+        var publicacion = $(e).data('idpub');
+        var option = $('option:selected', publicacion).attr('data-id');
+
+        if (subsis !== "") {
+            $('div[class*="cnt-vista-graf-"]').addClass('hidden');
+            $('.cnt-vista-subsis-det').removeClass('hidden');
+            $('.group-opc-det').removeClass('hidden');
+            $('.group-opc-graf').addClass('hidden');
+
+            //$.getJSON('../Models/TableroSubsistemaDet.json', function (data) {
+            $.ajax({
+                url: '/PublicarTablero/TablerosDetJson',
+                type: 'GET',
+                data: { idpublicacion: publicacion, idss: subsis },
+                beforeSend: function(){
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var i = 0;
+                    var jdata = JSON.parse(data);
+
+                    if (jdata !== undefined) {
+                        cargarDiagramaTitle({
+                            tmpl: "#tmp-subsis-det-globTitle",
+                            datos: jdata,
+                            cnt: ".row-subsis-det-glob"
+                        }, function () {
+                            $('.row-subsis-det-glob').removeClass("hidden");
+                        });
+
+                        cargarDiagrama({
+                            tmpl: "#tmp-subsis-det",
+                            datos: jdata.procesos,
+                            cnt: ".row-subsis-det",
+                            idss: jdata.subsistema_id
+                        });
+                    }
+
+                    //Cerramos loading
+                    cerrarLoading();
+                },
+                error: function (data) {
+                    errorLoading();
+                }
+            });
+        }
+    }
+</script>

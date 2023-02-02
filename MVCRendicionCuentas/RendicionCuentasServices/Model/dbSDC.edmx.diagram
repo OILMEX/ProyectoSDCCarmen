@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="10f5ef57830148bb8c6458596bf37411" Name="Diagram1">
+        <EntityTypeShape EntityType="dbSDC.Config_Avisos" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Config_FechasEtapasProyecto" Width="1.5" PointX="10.5" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Config_FechasSubEtapasProyecto" Width="1.5" PointX="10.5" PointY="39.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Config_IndicadorResponsable" Width="1.5" PointX="15.75" PointY="38.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Config_RelacionIndicadorProyecto" Width="1.5" PointX="13.5" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Config_SubEtapaIndicador" Width="1.5" PointX="7.5" PointY="42.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_PublicacionAvanceGlobal" Width="1.5" PointX="13.5" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_PublicacionAvanceSubsistema" Width="1.5" PointX="16.5" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_PublicacionElemento" Width="1.5" PointX="13.5" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_Publicaciones" Width="1.5" PointX="11.25" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_PublicacionProyectoEtapa" Width="1.5" PointX="15.75" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_PublicacionProyectos" Width="1.5" PointX="13.5" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_PublicacionProyectoSubetapa" Width="1.5" PointX="18" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Dashboard_PublicacionTabular" Width="1.5" PointX="19.5" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Data_ValoresIndicador" Width="1.5" PointX="18" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.LogAuditoria" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Predata__ValoresIndicadoresPrograma" Width="1.5" PointX="20.25" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Predata_ValoresIndicadoresFormula" Width="1.5" PointX="20.25" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.Rel_ProgramaAsociadoIndicador" Width="1.5" PointX="23" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.RunTime_PorcentajesProyecto" Width="1.5" PointX="10.5" PointY="32" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.sysdiagrams" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Areas" Width="1.5" PointX="6" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_ComentariosAsignadosIndicador" Width="1.5" PointX="20.25" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Coordinaciones" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Elementos" Width="1.5" PointX="11.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Etapas" Width="1.5" PointX="5.25" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Gerencias" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_HistorialCambioFechas" Width="1.5" PointX="6.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Historico" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Indicadores" Width="1.5" PointX="5.25" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Organigrama" Width="1.5" PointX="5.25" PointY="38" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Proyectos" Width="1.5" PointX="8.25" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Puesto" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_PuestoOrganigrama" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Responsables" Width="1.5" PointX="3" PointY="36.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Revisiones" Width="1.5" PointX="18" PointY="57.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_SoportesAsignadosaIndicador" Width="1.5" PointX="20.25" PointY="44.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Subdirecciones" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_SubEtapas" Width="1.5" PointX="5.25" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Subsistemas" Width="1.5" PointX="8.25" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Superintendencias" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_TipoElementoOrganigrama" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_TipoProyectos" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbSDC.tbl_Ubicaciones" Width="1.5" PointX="0.75" PointY="31.5" IsExpanded="true" />
+        <AssociationConnector Association="dbSDC.FK_Config_FechasEtapasProyecto_tbl_Etapas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_FechasEtapasProyecto_tbl_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_FechasSubEtapasProyecto_tbl_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_FechasSubEtapasProyecto_tbl_SubEtapas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_IndicadorResponsable_Config_RelacionIndicadorProyecto" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_IndicadorResponsable_tbl_Indicadores" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_IndicadorResponsable_tbl_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Data_ValoresIndicador_Config_IndicadorResponsable" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Rel_ProgramaAsociadoIndicador_Config_IndicadorResponsable" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Revisiones_Config_IndicadorResponsable" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_RelacionIndicadorProyecto_Config_SubEtapaIndicador" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_RelacionIndicadorProyecto_tbl_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_SubEtapaIndicador_tbl_Indicadores" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Config_SubEtapaIndicador_tbl_SubEtapas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionAvanceGlobal_Dashboard_Publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionAvanceSubsistema_Dashboard_Publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionAvanceSubsistema_tbl_Subsistemas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionElemento_Dashboard_Publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionElemento_tbl_Elementos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionElemento_tbl_Subsistemas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionProyectoEtapa_Dashboard_Publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionProyectos_Dashboard_Publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionSemaforoSubsistemaProyectoSubetapa_Dashboard_Publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionTabular_Dashboard_Publicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionProyectoEtapa_Dashboard_PublicacionProyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionProyectoEtapa_tbl_Etapas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionSemaforoSubsistemaProyectoSubetapa_Dashboard_PublicacionProyectoEtapa" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionProyectos_tbl_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionProyectos_tbl_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionSemaforoSubsistemaProyectoSubetapa_Dashboard_PublicacionProyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionSemaforoSubsistemaProyectoSubetapa_tbl_Etapas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionSemaforoSubsistemaProyectoSubetapa_tbl_SubEtapas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Dashboard_PublicacionTabular_tbl_Subsistemas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Predata__ValoresIndicadoresPrograma_Predata__ValoresIndicadoresPrograma" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Predata_ValoresIndicadoresFormula_Data_ValoresIndicador" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_ComentariosAsignadosIndicador_Data_ValoresIndicador" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_SoportesAsignadosaIndicador_Data_ValoresIndicador" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Rel_ProgramaAsociadoIndicador_tbl_Indicadores" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Rel_ProgramaAsociadoIndicador_tbl_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_Rel_ProgramaAsociadoIndicador_tbl_Responsables1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_RunTime_PorcentajesProyecto_tbl_Proyectos" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_RunTime_PorcentajesProyecto_tbl_Subsistemas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Proyectos_tbl_Areas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Coordinaciones_tbl_Gerencias" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Superintendencias_tbl_Coordinaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Elementos_tbl_Subsistemas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Etapas_tbl_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Gerencias_tbl_Subdirecciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Organigrama_tbl_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Organigrama_tbl_Responsables1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Proyectos_tbl_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Proyectos_tbl_Responsables1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Proyectos_tbl_Responsables2" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Proyectos_tbl_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_Responsables_tbl_Ubicaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_SubEtapas_tbl_Etapas" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_SubEtapas_tbl_Responsables" ManuallyRouted="false" />
+        <AssociationConnector Association="dbSDC.FK_tbl_SubEtapas_tbl_Responsables1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

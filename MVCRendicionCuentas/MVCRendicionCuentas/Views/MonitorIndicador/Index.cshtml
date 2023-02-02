@@ -1,0 +1,1606 @@
+﻿@{
+    List<RendicionCuentasServices.Model.SP_SelectAll_IndicadoresLlenosFaltantesGlobalesMonitoreo_Result> listaInd = (List<RendicionCuentasServices.Model.SP_SelectAll_IndicadoresLlenosFaltantesGlobalesMonitoreo_Result>)ViewData["LstFaltante"];
+    int ContPE = (int)ViewData["ContPEjec"];
+    String[] NombreProyectos = (String[])ViewData["Proyectos"];
+}
+<style type="text/css">
+    .cnt-recuadro1 {
+        height: 40px !important;
+    }
+
+    #vcent {
+        display: table;
+    }
+
+        #vcent span {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+    #nav-subsis-ind > li.active > a {
+        background-color: #6f7d96;
+        color: #fff;
+    }
+
+    .lbl-mod-tit1 {
+        color: #707888;
+        float: left;
+        font-size: 16px !important;
+        /*font-weight: bold;*/
+        height: 40px !important;
+        margin-right: 10px;
+        display: table;
+        vertical-align: middle;
+    }
+
+    .caja1 {
+        float: left !important;
+        width: 100px !important;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        margin-right: 10px;
+        text-align: center;
+        display: table;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+
+    .caja2 {
+        /*float: left;*/
+        width: 50px !important;
+        background: #e21937;
+        border: 1px solid #e21937;
+        color: white;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .caja3 {
+        /*float: left;*/
+        width: 50px !important;
+        border: 1px solid #e21937;
+        height: 40px !important;
+        color: #7e8081;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .caja1SASP {
+        float: left !important;
+        display: table;
+        text-align: center;
+        width: 100px !important;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        margin-right: 10px;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+
+    .caja2SASP {
+        /*float: left;*/
+        width: 50px !important;
+        background: #00539a;
+        border: 1px solid #00539a;
+        color: white;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .caja3SASP {
+        /*float: left;*/
+        width: 50px !important;
+        border: 1px solid #00539a;
+        height: 40px !important;
+        color: #7e8081;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .caja1SAA {
+        float: left !important;
+        display: table;
+        text-align: center;
+        width: 100px !important;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        margin-right: 10px;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+
+    .caja2SAA {
+        /*float: left;*/
+        width: 50px !important;
+        background: #008851;
+        border: 1px solid #008851;
+        color: white;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .caja3SAA {
+        /*float: left;*/
+        width: 50px !important;
+        border: 1px solid #008851;
+        height: 40px !important;
+        color: #7e8081;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .caja1SAST {
+        float: left !important;
+        display: table;
+        text-align: center;
+        width: 100px !important;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        margin-right: 10px;
+        border: 1px solid;
+        border-radius: 5px;
+    }
+
+    .caja2SAST {
+        /*float: left;*/
+        width: 50px !important;
+        background: #7e8081;
+        border: 1px solid #7e8081;
+        color: white;
+        height: 40px !important;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .caja3SAST {
+        /*float: left;*/
+        width: 50px !important;
+        border: 1px solid #7e8081;
+        height: 40px !important;
+        color: #7e8081;
+        font-family: "Open Sans",sans-serif !important;
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+<div class="container-fluid no-pd">
+    <div class="container-fluid lbl-mod-tit pdb-10 pdl-0">
+        <div class="media">
+            <div class="media-left media-middle">
+                <img class="media-object" src="~/Images/iconos_secciones/monitoreo_llenado_indicadores.png" />
+            </div>
+            <div class="media-body">
+                <span>MONITOREO DE LLENADO DE INDICADORES</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid lbl-mod-tit pdb-20 pdl-0" style="background:#ffffff">
+        <div class="media">
+            <div class="container-fluid cnt-vista2 cnt-vista no-pd">
+                <div class="cnt-box-subsistema" style="margin-bottom:5px;">
+                    <div class="container-fluid @*box-subsistema*@ no-pd">
+                        <div class="lbl-mod-tit1" id="vcent">Indicadores que requieren actualización:</div>
+                        @foreach (RendicionCuentasServices.Model.SP_SelectAll_IndicadoresLlenosFaltantesGlobalesMonitoreo_Result x in listaInd)
+                        {
+                            switch (x.IdSubsistema)
+                            {
+
+                                case 1:
+                                    <div class="caja1">
+                                        <div class="caja2">12 MPI</div>
+                                        <div class="caja3">@x.Pendientes.ToString()</div>
+                                    </div>
+                                    break;
+                                case 2:
+                                <div class="caja1SASP">
+                                    <div class="caja2SASP">SASP</div>
+                                    <div class="caja3SASP">@x.Pendientes.ToString()</div>
+                                </div>
+                                    break;
+                                case 3:
+                                <div class="caja1SAA">
+                                    <div class="caja2SAA">SAA</div>
+                                    <div class="caja3SAA">@x.Pendientes.ToString()</div>
+                                </div>
+                                    break;
+                                case 4:
+                                <div class="caja1SAST">
+                                    <div class="caja2SAST">SAST</div>
+                                    <div class="caja3SAST">@x.Pendientes.ToString()</div>
+                                </div>
+                                    break;
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-ind" class="nav nav-tabs" role="tablist">
+        <li id="tab1" role="presentation" class="active">
+            <a href="#tab-tablero1" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Avance de<br /> la carga</a>
+        </li>
+        <li id="tab2" role="presentation">
+            <a href="#tab-tablero2" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Indicadores no<br />Actualizados 12MPI</a>
+        </li>
+        <li id="tab3" role="presentation">
+            <a href="#tab-tablero3" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Indicadores no<br />Actualizados Subsistemas</a>
+        </li>
+        <li id="tab4" role="presentation">
+            <a href="#tab-tablero4" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Soportes Faltantes<br />12MPI</a>
+        </li>
+        <li id="tab5" role="presentation">
+            <a href="#tab-tablero5" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Soportes Faltantes<br />Subsistemas</a>
+        </li>
+        <li id="tab6" role="presentation">
+            <a href="#tab-tablero6" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Indicadores Activados No<br />asignados Subsistemas</a>
+        </li>
+        <li id="tab7" role="presentation">
+            <a href="#tab-tablero7" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Indicadores 12MPI Activados No<br />asignados</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div id="cnt-subsis-ind" class="tab-content" style="background:white">
+        <div role="tabpanel" class="tab-pane active" id="tab-tablero1">
+            <div class="container-fluid no-pd opc-tbl">
+                <div class="group-opc-graf">
+                    <div class="lbl-n-proyectos mrr-20" style="float:left !important;">
+                        <span>@ContPE.ToString()</span>  COMPONENTE DE PROYECTO EN EJECUCIÓN
+                        @if (NombreProyectos.Count() > 0)
+                        {
+                            <i title="" data-toggle="popover" rel="popover" class="btn fa fa-info-circle btn-infoCompromiso" data-original-title="Proyectos en Ejecución"
+                               data-content="@foreach(string x in NombreProyectos){<h6>@x</h6>}">
+                        </i>
+                        }
+                    </div>
+                </div>
+                @*<div class="group-opc-det hidden">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6"><div class="w-300 center-block" style="line-height: 50px;"><span class="lbl-n-proyectos text-center"></span></div></div>
+                        <div class="col-md-3">
+                            <a class="pull-right btn btn-regresar" id="btn-tbl-det-regresar"><i class="glyphicon glyphicon-chevron-left"></i>REGRESAR</a>
+                        </div>
+                    </div>*@
+            </div>
+            <div class="cnt-vista-graf-pie">
+                <div class="container-fluid no-pd cnt-tbl-subsis-glob"></div>
+                <div class="container-fluid no-pd cnt-tbl-subsis"></div>
+            </div>
+            <div class="cnt-vista-graf-bar hidden"></div>
+            <div class="cnt-vista-subsis-det hidden">
+                <div class="container-fluid row-subsis-det-glob"></div>
+                <div class="container-fluid row-subsis-det"></div>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-tablero2">
+            <!-- Tab panes -->
+            <div id="cnt-indicadores-12mpi-faltantes" class="tab-content">
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tab-tablero3">
+            <!-- Tab panes -->
+            <div id="cnt-indicadores-subsis" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-tablero4">
+            <!-- Tab panes -->
+            <div id="cnt-soportes-12mpi" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-tablero5">
+            <!-- Tab panes -->
+            <div id="cnt-soportes-subsis" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-tablero6">
+            <!-- Tab panes -->
+            <div id="cnt-soportes-subsis-NoAsig" class="tab-content">
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-tablero7">
+            <!-- Tab panes -->
+            <div id="cnt-soportes-12mpi-NoAsig" class="tab-content">
+            </div>
+        </div>
+
+        <div class="content-leyenda">
+            <div class="cnt-leyendas">
+                <div class="circle circle-red"></div><div class="text-circle"> 0% a 80%</div>
+                <div class="circle circle-amarillo"></div><div class="text-circle"> 81% a 95%</div>
+                <div class="circle circle-verde"></div><div class="text-circle"> 96% a 100%</div>
+                <div class="circle circle-gris"></div><div class="text-circle"> No aplica </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-up"></i> Mejoró </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-down"></i> Empeoró </div>
+                <div class="leyenda-flecha"><i class="glyphicon glyphicon-chevron-right"></i> Igual </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script type="text/template" id="tmp-tablero-subsis-glob">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    var clss = (e.mejora === 1)?"up":(e.mejora === 2)?"down":(e.mejora === 3)?"right":"";  %>
+    <div class="cnt-grafica-pie cnt-grafica-nivel1">
+        <canvas class="circulo-dinamico" id="chart-nivel1-container<%=i%>" width="160" height="160" data-elem="#chart-nivel1-container<%=i%>" data-avance="<%= e.avance %>" data-color="<%= e.estatus %>"></canvas>
+        <div class="cnt-grafica-text lnk-concepto" data-lnk=""><span><%= e.avance %></span><span>%</span></div>
+
+        <div class="logo-subsistema"></div>
+    </div>
+    <div class="container-fluid text-center">
+        <span>AVANCE GLOBAL</span>
+        <div class="container-fluid">
+            <div class="nodo nodo-conec no-pd"></div>
+        </div>
+    </div>
+    <% } }); %>
+</script>
+
+<script type="text/template" id="tmp-tablero-subsis">
+    <div class="cnt-graficas-subsis">
+        <% _.each(elementos, function(e,i){
+        if(elementos.length > 0){
+        var clss = (e.mejora === 1)?"up":(e.mejora === 2)?"down":(e.mejora === 3)?"right":"";  %>
+        <div class="cnt-wrp-diagrama">
+            <div class="container-fluid diagrama-nodo no-pd">
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === (elementos.length - 1)))?' nodo-right':((i > 0)?' nodo-inter':''))%>"></div>
+                <div class="col-md-6 no-pd nodo<%=(((elementos.length > 0)&&(i === 0))?' nodo-left':((i < elementos.length - 1)?' nodo-inter':''))%> nodo-conec"></div>
+            </div>
+            <div class="cnt-grafica-pie<%=(elementos.length>1)?'s':''%> cnt-grafica-nivel2" data-subsistema="<%=e.subsistema%>" data-tproy="<%=elementos.length%>">
+                <canvas class="circulo-dinamico" id="chart-nivel2-container<%=i%>" width="160" height="160" data-elem="#chart-nivel2-container<%=i%>" data-avance="<%= e.avance %>" data-color="<%= e.estatus %>"></canvas>
+                <div class="cnt-grafica-text lnk-concepto" data-lnk=""><span><%=e.avance%></span><span>%</span></div>
+                <% if(e.mejora !== undefined){ %><div class="ind-item-flecha" style="background-color:#fff !important"></div><% } %>
+                <% if(e.completados !== undefined){ %><span class="lbl-comp"><%=e.completados%></span><% } %>
+                <div class="logo-subsis-<%=(i+1)%>"></div>
+            </div>
+        </div>
+        <% } }); %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-tablero-subsis-bar">
+    <% _.each(elementos, function(e,i){
+    if(elementos.length > 0){
+    var clss = (e.mejora === 1)?"up":(e.mejora === 2)?"down":(e.mejora === 3)?"right":"";  %>
+    <div class="container-fluid cnt-grafica-subsis-bar no-pd">
+        <div class="col-md-2">
+            <a data-tproy="<%=elementos.length%>" data-subsistema="<%=e.subsistema%>" class="lnk-susbsis-det <%=(elementos.length === 1)?'logo-subsis-0':'logo-subsis-' + (i+1) %>"></a>
+        </div>
+        <div class="col-md-3 no-pd">
+            <div class="container-fluid lbl-avance no-pd">
+                <div class="container-fluid"><%=(elementos.length === 1)?'año ' + e.anio:''%></div>
+                <div class="container-fluid txt"><span><%=e.avance%></span><span>%</span></div>
+                <div class="container-fluid"><%=(elementos.length === 1)?'Promedio':''%></div>
+            </div>
+        </div>
+        <div class="col-md-7 no-pd cnt-bars">
+            <%_.each(e.avances_mes,function(e,i){%>
+            <div class="col-md-1 no-pd">
+                <span class="wp-100"><%=e.valor%>%</span>
+                <div><div style="height:<%=e.valor%>%; background-color:<%=setColor(e.color)%>;"></div></div>
+                <span class="wp-100"><%=setMes(i)%></span>
+            </div>
+            <% }); %>
+            <div class="bar-prom" style="bottom: <%=((80*(e.avance/100))+19)%>px;">
+                <span>&#8226;</span><span>&#8226;</span>
+            </div>
+        </div>
+    </div>
+    <% } }); %>
+</script>
+
+<script type="text/template" id="tmp-subsis-det-glob">
+    <div class="col-md-3">
+        <a data-subsistema="<%=elementos[0].subsistema%>" class="logo-subsis-<%=elementos[0].logo%>"></a>
+    </div>
+    <div class="col-md-6">
+        <div class="graf-bar-prom">
+            <div class="h-30 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%=elementos[0].avance%>%;  background-color: <%=setColor(elementos[0].color)%>; "></div></div>
+            <div class="w-100 cnt-bar-lbl-prom glob center-block">
+                <span><%=elementos[0].avance%>%</span>
+                <% var clss = (elementos[0].mejora === 1)?"up":((elementos[0].mejora === 2)?"down":"right");
+                if(elementos[0].mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-subsis-det">
+    <div class="container-fluid cnt-vista2 cnt-vista no-pd pdt-15">
+        <% _.each(elementos, function(proceso, k){
+        var clss = (proceso.proceso_mejora === 1)?"up":(proceso.proceso_mejora === 2)?"down":(proceso.proceso_mejora === 3)?"right":""; %>
+        <div class="col-md-4 cnt-box-subsistema">
+            <div class="container-fluid box-subsistema no-pd">
+                <div class="container-fluid cnt-head-rojo">
+                    <%= proceso.proceso_sigla %>
+                </div>
+                <div class="container-fluid cnt-recuadro no-pd">
+                    <div class="container-fluid no-pd">
+                        <a><%= proceso.proceso_nombre %></a>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="cnt-bar-lbl-prom">
+                            <span><%=proceso.proceso_avance%>%</span>
+                            <% if(proceso.proceso_mejora !== undefined){ %><div class="proc-item-flecha"><span class="glyphicon glyphicon-chevron-<%=clss%>"></span></div><% } %>
+                        </div>
+                        <div class="h-20 wp-90 cnt-bar-prom-hz center-block"><div style="width: <%=proceso.proceso_avance%>%; background-color: <%=setColor(proceso.proceso_color)%>;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+    <table class="table table-condensed">
+        <tr>
+            <th width="50">&nbsp;</th>
+            <th width="150">Clave Indicador</th>
+            <th>Nombre</th>
+            <th width="100" class="text-center">Estatus</th>
+            <th width="100" class="text-center">Información</th>
+        </tr>
+
+        <% _.each(indicadores,function(indicador, i){ %>
+        <tr class="row-indicadores">
+            <td><div id="divCirculo<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="circle <%= indicador.Semaforo %>"></div></td>
+            <td><%= indicador.Prefijo %></td>
+            <td><%= indicador.DescripcionCorta %></td>
+            <td class="text-center">
+                <span id="lblestatus<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="fa <%= (indicador.Valor!=null)? 'fa-check-square green':'fa-times red'  %> "></span>
+                <br />
+                @*<span><%= indicador.indicador_fechactualizado %></span>*@
+            </td>
+            <td class="text-center">
+                <span><%= indicador.TipoIndicador %></span>
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                - <%= indicador.TipoCalculo %>
+                <% } %>
+                <br />
+                <span><%= indicador.TipoFrecuencia %> días</span><br />
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                <span>Meta <%= indicador.Meta > 0 ? indicador.Meta + '%' : indicador.Meta %></span><br />
+                <% } %>
+            </td>
+        </tr>
+
+        <% }); %>
+
+    </table>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind-NoAsig">
+    <table class="table table-condensed">
+        <tr>
+            <th width="50">&nbsp;</th>
+            <th width="150">Clave Indicador</th>
+            <th>Nombre</th>
+            <th width="100" class="text-center">Estatus</th>
+            <th width="100" class="text-center">Información</th>
+        </tr>
+        <% _.each(indicadores, function(indicador, i) { %>
+        <tr class="row-indicadores">
+            <td><div id="divCirculo<%= indicador.IdIndicador %>" class="circle <%= indicador.Semaforo %>"></div></td>
+            <td><%= indicador.Prefijo %></td>
+            <td><%= indicador.DescripcionCorta %></td>
+            <td class="text-center">
+                <span id="lblestatus<%= indicador.IdIndicador %>" class="fa <%= (indicador.Valor!=null)? 'fa-check-square green':'fa-times red'  %> "></span>
+                <br />
+                @*<span><%= indicador.indicador_fechactualizado %></span>*@
+            </td>
+            <td class="text-center">
+                <span><%= indicador.TipoIndicador %></span>
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                - <%= indicador.TipoCalculo %>
+                <% } %>
+                <br />
+                <span><%= indicador.TipoFrecuencia %> días</span><br />
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                <span>Meta <%= indicador.Meta > 0 ? indicador.Meta + '%' : indicador.Meta %></span><br />
+                <% } %>
+            </td>
+        </tr>
+        <% }); %>
+    </table>
+</script>
+
+<script id="tmp-colection-proy-resp" type="text/template">
+    <div class="container-fluid no-pd headProyectos">
+        <div class="col-md-6">Responsable</div>
+        <div class="col-md-6">Resumen de Indicadores Pendientes</div>
+    </div>
+
+    <% _.each(indicadores, function(p, i){ %>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-12 no-pd">
+                    <% if(band) {
+                    if(p.Indicadores.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN1-<%= p.responsable_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% }
+                    } else {
+                    if(p.proyectos.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN1-<%= p.responsable_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% }} %>
+                    <%= i+1 %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5"><%= p.responsable_nombre %></div>
+        <% if(band) { %>
+        <div class="col-md-6">
+            <div class="caja1">
+                <div class="caja2">12 MPI</div>
+                <div class="caja3"><%= p.Indicadores.length %></div>
+            </div>
+        </div>
+        <% } else { %>
+        <div class="caja1SASP" style="height: 33px !important">
+            <div class="caja2SASP" style="height: 33px !important">SASP</div>
+            <div class="caja3SASP" style="height: 33px !important"><%= p.responsable_count_sasp %></div>
+        </div>
+        <div class="caja1SAA" style="height: 33px !important">
+            <div class="caja2SAA" style="height: 33px !important">SAA</div>
+            <div class="caja3SAA" style="height: 33px !important"><%= p.responsable_count_saa %></div>
+        </div>
+        <div class="caja1SAST" style="height: 33px !important">
+            <div class="caja2SAST" style="height: 33px !important">SAST</div>
+            <div class="caja3SAST" style="height: 33px !important"><%= p.responsable_count_sast %></div>
+        </div>
+        <% } %>
+    </div>
+    <% if(band) {
+    if(p.Indicadores.length>0) { %>
+    <div id="bEN1-<%= p.responsable_id %>" class="collapse etapas-proyecto">
+        <%= ( templateFnInd12mpi({indicadores: p.Indicadores, pid:p.responsable_id}) ) %>
+    </div>
+    <% } } else { ;
+    if(p.proyectos.length > 0) { %>
+
+    <div id="bEN1-<%= p.responsable_id %>" class="collapse etapas-proyecto">
+        <%= ( templateFnInd({indicadores: p.proyectos, pid:p.responsable_id}) ) %>
+    </div>
+
+    <% }}}); %>
+</script>
+
+<script id="tmp-colection-soporte-resp" type="text/template">
+    <div class="container-fluid no-pd headProyectos">
+        <div class="col-md-6">Responsable</div>
+        <div class="col-md-6">Resumen de Indicadores sin Soporte, incluyendo Indicadores Llenos y Faltantes</div>
+    </div>
+
+    <% _.each(indicadores, function(p, i){%>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-12 no-pd">
+                    <% if(band) {
+                    if(p.Indicadores.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN1-<%= p.responsable_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% }
+                    } else {
+                    if(p.proyectos.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN1-<%= p.responsable_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% }} %>
+                    <%= i+1 %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5"><%= p.responsable_nombre %></div>
+        <% if(band) { %>
+        <div class="col-md-6">
+            <div class="caja1">
+                <div class="caja2">12 MPI</div>
+                <div class="caja3"><%= p.Indicadores.length %></div>
+            </div>
+        </div>
+        <% } else { %>
+        <div class="caja1SASP" style="height: 33px !important">
+            <div class="caja2SASP" style="height: 33px !important">SASP</div>
+            <div class="caja3SASP" style="height: 33px !important"><%= p.responsable_count_sasp %></div>
+        </div>
+        <div class="caja1SAA" style="height: 33px !important">
+            <div class="caja2SAA" style="height: 33px !important">SAA</div>
+            <div class="caja3SAA" style="height: 33px !important"><%= p.responsable_count_saa %></div>
+        </div>
+        <div class="caja1SAST" style="height: 33px !important">
+            <div class="caja2SAST" style="height: 33px !important">SAST</div>
+            <div class="caja3SAST" style="height: 33px !important"><%= p.responsable_count_sast %></div>
+        </div>
+        <% } %>
+    </div>
+
+
+    <% if(band) {
+    if(p.Indicadores.length>0) { %>
+    <div id="bEN1-<%= p.responsable_id %>" class="collapse etapas-proyecto">
+        <%= ( templtaFnSop12mpi({indicadores: p.Indicadores, pid:p.responsable_id}) ) %>
+    </div>
+    <% } } else {
+    if(p.proyectos.length > 0) { %>
+
+    <div id="bEN1-<%= p.responsable_id %>" class="collapse etapas-proyecto">
+        <%= ( templateFnInd({indicadores: p.proyectos, pid:p.responsable_id, soporte:soporte}) ) %>
+    </div>
+
+    <% }}}); %>
+</script>
+
+<script id="tmp-colection-proy12mpi" type="text/template">
+    <table class="table table-condensed">
+        <tr>
+            <th width="50">&nbsp;</th>
+            <th width="150">Clave Indicador</th>
+            <th>Nombre</th>
+            <th width="100" class="text-center">Estatus</th>
+            <th width="100" class="text-center">Información</th>
+        </tr>
+
+        <% _.each(indicadores,function(indicador, i){ %>
+        <tr class="row-indicadores">
+            <td><div id="divCirculo<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="circle <%= indicador.Semaforo %>"></div></td>
+            <td><%= indicador.Prefijo %></td>
+            <td><%= indicador.DescripcionCorta %></td>
+            <td class="text-center">
+                <span id="lblestatus<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="fa <%= (indicador.Valor!=null)? 'fa-check-square green':'fa-times red'  %> "></span>
+                <br />
+                @*<span><%= indicador.indicador_fechactualizado %></span>*@
+            </td>
+            <td class="text-center">
+                <span><%= indicador.TipoIndicador %></span>
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                - <%= indicador.TipoCalculo %>
+                <% } %>
+                <br />
+                <span><%= indicador.TipoFrecuencia %> días</span><br />
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                <span>Meta <%= indicador.Meta > 0 ? indicador.Meta + '%' : indicador.Meta %></span><br />
+                <% } %>
+            </td>
+        </tr>
+
+        <% }); %>
+
+    </table>
+</script>
+
+
+<script type="text/template" id="tmp-coleccion-sop12mpi">
+    <table class="table table-condensed">
+        <tr>
+            <th width="50">&nbsp;</th>
+            <th width="150">Clave Indicador</th>
+            <th>Nombre</th>
+            <th width="100" class="text-center">Estatus</th>
+            <th width="100" class="text-center">Información</th>
+            <th width="100" class="text-center">Otros</th>
+        </tr>
+
+        <% _.each(indicadores,function(indicador, i){ %>
+        <tr class="row-indicadores">
+            <td><div id="divCirculo<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="circle <%= indicador.Semaforo %>"></div></td>
+            <td><%= indicador.Prefijo %></td>
+            <td><%= indicador.DescripcionCorta %></td>
+            <td class="text-center">
+                <span id="lblestatus<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="fa <%= (indicador.Valor!=null)? 'fa-check-square green':'fa-times red'  %> "></span>
+                <br />
+                @*<span><%= indicador.indicador_fechactualizado %></span>*@
+            </td>
+            <td class="text-center">
+                <span><%= indicador.TipoIndicador %></span>
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                - <%= indicador.TipoCalculo %>
+                <% } %>
+                <br />
+                <span><%= indicador.TipoFrecuencia %> días</span><br />
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                <span>Meta <%= indicador.Meta %>%</span><br />
+                <% } %>
+            </td>
+
+            <td class="text-center">
+                <a style="cursor:default" class="btn btnDocumentIndicador <%= indicador.SemaforoSoportes %> <%= (indicador.IdDataValoresIndicadores == null)? 'disabled': 'activo' %>
+                   " href="#" id="btnSoportes<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"
+                   data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                   data-prefijo="<%= indicador.Prefijo %>"
+                   data-desccort="<%= indicador.DescripcionCorta %>"
+                   data-tipoindicador="<%= indicador.TipoIndicador %>"
+                   data-tipocalculo="<%= indicador.TipoCalculo %>"
+                   data-frecuencia="<%= indicador.TipoFrecuencia %>"
+                   data-meta="<%= indicador.Meta %>">Soportes</a>
+
+                <br />
+
+                @*<a disable class="btn btnNotaIndicador <%= indicador.SemaforoComentarios %>
+                    <%= (indicador.IdDataValoresIndicadores == null)? 'disabled': 'activo' %>
+                    " href="#" id="btnNotas<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"
+                    data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                    data-prefijo="<%= indicador.Prefijo %>"
+                    data-desccort="<%= indicador.DescripcionCorta %>"
+                    data-tipoindicador="<%= indicador.TipoIndicador %>"
+                    data-tipocalculo="<%= indicador.TipoCalculo %>"
+                    data-frecuencia="<%= indicador.TipoFrecuencia %>"
+                    data-meta="<%= indicador.Meta %>">Notas</a>*@
+            </td>
+        </tr>
+
+        <% }); %>
+
+    </table>
+</script>
+
+<script id="tmp-colection-proy" type="text/template">
+    <div class="container-fluid no-pd headProyectos">
+        <div class="col-md-1 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd text-center">#</div>
+                <div class="col-md-6 no-pd">IND</div>
+            </div>
+        </div>
+        <div class="col-md-4">Componente de Proyecto</div>
+        <div class="col-md-3">Responsable</div>
+        <div class="col-md-2">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">F. Inicio</div>
+                <div class="col-md-6 no-pd text-center">F. Fin</div>
+            </div>
+        </div>
+        <div class="col-md-2 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center">SASP</div>
+                <div class="col-md-4 no-pd text-center">SAA</div>
+                <div class="col-md-4 no-pd text-center">SAST</div>
+            </div>
+        </div>
+    </div>
+
+    <% _.each(indicadores, function(p, i){ %>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">
+                    <% if(p.Etapas.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN2-<%= pid %><%= p.proyecto_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= i+1 %>
+                </div>
+                <div class="col-md-6 no-pd">
+                    <div class="circle <%= p.proyecto_indicador_global %>"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"><%= p.proyecto_nombre %></div>
+        <div class="col-md-3"><%= p.proyecto_responsable %></div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_ini!=null)? moment(p.proyecto_fecha_ini).format('DD/MM/YYYY'): '' %></div>
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_fin!=null)? moment(p.proyecto_fecha_fin).format('DD/MM/YYYY'): '' %></div>
+            </div>
+        </div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SASP %>"> <%= p.porcentaje_SASP %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAA %>"> <%= p.porcentaje_SAA %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAST %>"> <%= p.porcentaje_SAST %>% </a></div>
+            </div>
+        </div>
+    </div>
+
+    <% if(p.Etapas.length>0) { %>
+    <div id="bEN2-<%= pid %><%= p.proyecto_id %>" class="collapse etapas-proyecto">
+        <%=  ( templateFn({etapas: p.Etapas, pid:pid, ppid: p.proyecto_id, soporte:soporte}) ) %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+<script id="tmp-colection-proy-NoAsig" type="text/template">
+    <div class="container-fluid no-pd headProyectos NoAsig">
+        <div class="col-md-1 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd text-center">#</div>
+                <div class="col-md-6 no-pd">IND</div>
+            </div>
+        </div>
+        <div class="col-md-4">Componente de Proyecto</div>
+        <div class="col-md-3">Responsable</div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2 pdl-0 pdr-0"></div>
+    </div>
+    <% var proyectos = _.groupBy(indicadores, 'IdProyecto'); console.log(proyectos);
+    _.each(proyectos, function(indicadoresxproy, idproyecto) {
+    var count = 0;
+    %>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bNAs2-<%= indicadoresxproy[0].IdProyecto %>-<%= count %>" role="button"></i>
+                </div>
+                <div class="col-md-6 no-pd"></div>
+            </div>
+        </div>
+        <div class="col-md-4"><%= indicadoresxproy[0].NombreProyecto %></div>
+        <div class="col-md-3"><%= indicadoresxproy[0].NombreResponsable %></div>
+        <div class="col-md-2 no-pd"></div>
+        <div class="col-md-2 no-pd"></div>
+    </div>
+
+    <div id="bNAs2-<%= indicadoresxproy[0].IdProyecto %>-<%= count %>" class="collapse etapas-proyecto">
+        <%= (templateFnNoAsig({indicadoresxetapas: indicadoresxproy , ppid: count})) %>
+    </div>
+
+    <% count++;
+    }); %>
+</script>
+
+<script id="tmp-colection-proy-falt" type="text/template">
+    <div class="container-fluid no-pd headProyectos">
+        <div class="col-md-1 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd text-center">#</div>
+                <div class="col-md-6 no-pd">IND</div>
+            </div>
+        </div>
+        <div class="col-md-4">Componente de Proyecto</div>
+        <div class="col-md-3">Responsable</div>
+        <div class="col-md-2">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">F. Inicio</div>
+                <div class="col-md-6 no-pd text-center">F. Fin</div>
+            </div>
+        </div>
+        <div class="col-md-2 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center">SASP</div>
+                <div class="col-md-4 no-pd text-center">SAA</div>
+                <div class="col-md-4 no-pd text-center">SAST</div>
+            </div>
+        </div>
+    </div>
+
+    <% _.each(indicadores, function(p, i){ %>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">
+                    <% if(p.Etapas.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#boxElemef<%= p.proyecto_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= i+1 %>
+                </div>
+                <div class="col-md-6 no-pd">
+                    <div class="circle <%= p.proyecto_indicador_global %>"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"><%= p.proyecto_nombre %></div>
+        <div class="col-md-3"><%= p.proyecto_responsable %></div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_ini!=null)? moment(p.proyecto_fecha_ini).format('DD/MM/YYYY'): '' %></div>
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_fin!=null)? moment(p.proyecto_fecha_fin).format('DD/MM/YYYY'): '' %></div>
+            </div>
+        </div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SASP %>"> <%= p.porcentaje_SASP %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAA %>"> <%= p.porcentaje_SAA %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAST %>"> <%= p.porcentaje_SAST %>% </a></div>
+            </div>
+        </div>
+    </div>
+
+    <% if(p.Etapas.length>0) { %>
+    <div id="box-elemef<%= p.proyecto_id %>" class="collapse etapas-proyecto">
+        <%= ( templateFnFalt({etapas: p.Etapas, pid:p.proyecto_id}) ) %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+
+<script id="tmp-colection-etapas" type="text/template">
+    <%
+    _.each(etapas, function(e, i){
+    i++; %>
+    <div class="container-fluid <%= (i == etapas.length)? 'last' : '' %> ">
+        <div class="col-md-7">
+            <% if(e.SubEtapas.length>0) { %>
+            <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN3-<%= pid %><%= ppid %><%= e.etapa_id %>" role="button" style="float:left;"></i>
+            <% }else{ %>
+            <i class="fa" style="width:13px; height:14px;"></i>
+            <% } %>
+            &nbsp;<i class="icon-rc-img icon-rc-etapa-g"></i>&nbsp;
+            <%= e.etapa_id %> <%= e.etapa_nombre %>
+        </div>
+        <div class="col-md-4 text-right">Fecha de conclusión de la etapa:</div>
+        <div class="col-md-1"><%= (e.FechaFin!=null)? moment(e.FechaFin).format('DD/MM/YYYY') : '' %>&nbsp;</div>
+    </div>
+    <% if(e.SubEtapas.length>0) { %>
+    <div id="bEN3-<%= pid %><%= ppid %><%= e.etapa_id %>" class="collapse nivel-1">
+        <% _.each(e.SubEtapas, function(sub, a){ %>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <% if(sub.Subsistemas.length>0) { %>
+                <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN4-<%= pid %><%= ppid %><%= sub.subetapa_id %>" role="button" style="float:left;"></i>
+                <% }else{ %>
+                <i class="fa" style="width:13px; height:14px;"></i>
+                <% } %>
+                &nbsp;<i class="icon-rc-img icon-rc-subetapa-g"></i>&nbsp;
+                <%= sub.clave %> <%= sub.subetapa_nombre %>
+            </div>
+
+        </div>
+
+        <% if(sub.Subsistemas.length>0) { %>
+        <div id="bEN4-<%= pid %><%= ppid %><%= sub.subetapa_id %>" class="collapse nivel-2">
+            <% _.each(sub.Subsistemas, function(sis, b){ %>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <% if(soporte){ %>
+                    <% if(sis.IndicadoresProy!=null){ if(sis.IndicadoresProy.length > 0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN5<%= b %>-<%= pid %><%= ppid %><%= sub.subetapa_id %><%= sis.b %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } }%>
+                    <%= sis.siglas %>
+                    <% }else{ %>
+                    <% if(sis.IndicadoresProy!=null){  if(sis.Indicadores.length > 0) { %>
+                    <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bEN5<%= b %>-<%= pid %><%= ppid %><%= sub.subetapa_id %><%= sis.b %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } }%>
+                    <%= sis.siglas %>
+                    <% } %>
+
+                </div>
+            </div>
+            <% if(soporte){ %>
+            <% if(sis.IndicadoresProy!=null){ if(sis.IndicadoresProy.length > 0) { %>
+
+            <div id="bEN5<%= b %>-<%= pid %><%= ppid %><%= sub.subetapa_id %><%= sis.b %>" class="collapse nivel-3">
+                <%= ( templtaFnSop12mpi({indicadores: sis.IndicadoresProy}) ) %>
+            </div>
+
+            <% } }%>
+            <% }else{ %>
+            <% if(sis.IndicadoresProy!=null){ if(sis.Indicadores.length > 0) { %>
+
+            <div id="bEN5<%= b %>-<%= pid %><%= ppid %><%= sub.subetapa_id %><%= sis.b %>" class="collapse nivel-3">
+                <%= ( tblndicadoresFN({indicadores: sis.Indicadores}) ) %>
+            </div>
+            <% } }%>
+            <% } %>
+            <% }); %>
+        </div>
+        <% } %>
+        <% }); %>
+    </div>
+    <% } %>
+    <% }); %>
+</script>
+
+<script id="tmp-colection-etapas-NoAsig" type="text/template">
+    <%
+    var i = 0;
+    i++;
+    _.each(_.groupBy(indicadoresxetapas, 'IdEtapa'), function(indicadoresxsetapas, idetapa) { %>
+    <div class="container-fluid <%= (i == indicadoresxsetapas.length)? 'last' : '' %> ">
+        <div class="col-md-7">
+            <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bNAs3-<%= ppid %>-<%= indicadoresxsetapas[0].IdProyecto %>-<%= indicadoresxsetapas[0].IdEtapa %>" role="button" style="float:left;"></i>
+            &nbsp;<i class="icon-rc-img icon-rc-etapa-g"></i>&nbsp;
+            <%= indicadoresxsetapas[0].IdEtapa %> <%= indicadoresxsetapas[0].NombreEtapa %>
+        </div>
+        <div class="col-md-4 text-right">Fecha de conclusión de la etapa:</div>
+        <div class="col-md-1"><%= (indicadoresxsetapas[0].FechaFinEtapa!=null)? moment(indicadoresxsetapas[0].FechaFinEtapa).format('DD/MM/YYYY') : '' %>&nbsp;</div>
+    </div>
+    <div id="bNAs3-<%= ppid %>-<%= indicadoresxsetapas[0].IdProyecto %>-<%= indicadoresxsetapas[0].IdEtapa %>" class="collapse nivel-1">
+        <div class="container-fluid">
+        <% _.each(_.groupBy(indicadoresxsetapas,'IdSubEtapa'), function(IndicadoresxSubEtapa, NombreSubsistema){ %>
+            <div class="col-md-12">
+                <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bNAs4-<%= ppid %>-<%= IndicadoresxSubEtapa[0].IdProyecto %>-<%= IndicadoresxSubEtapa[0].IdEtapa %>-<%= IndicadoresxSubEtapa[0].IdSubEtapa %>" role="button" style="float:left;"></i>
+                &nbsp;<i class="icon-rc-img icon-rc-subetapa-g"></i>&nbsp;
+                <%= IndicadoresxSubEtapa[0].ClaveSubEtapa %> <%= IndicadoresxSubEtapa[0].NombreSubEtapa %>
+            </div>
+            <% if(indicadoresxsetapas.length > 0) { %>
+            <div id="bNAs4-<%= ppid %>-<%= IndicadoresxSubEtapa[0].IdProyecto %>-<%= IndicadoresxSubEtapa[0].IdEtapa %>-<%= IndicadoresxSubEtapa[0].IdSubEtapa %>" class="collapse nivel-2" style="border-left: none; border-right: none;">
+                <% _.each(_.groupBy(IndicadoresxSubEtapa,'NombreSubsistema'), function(IndicadoresxSubSis, NombreSubsistema){ %>
+                <div class="container-fluid">
+                    <div class="col-md-12">
+                        <i class="glyphicon glyphicon-triangle-right" data-toggle="collapse" data-target="#bNAs5-<%= ppid %>-<%= indicadoresxsetapas[0].IdProyecto %>-<%= IndicadoresxSubSis[0].IdEtapa %>-<%= IndicadoresxSubSis[0].IdSubEtapa %>-<%= IndicadoresxSubSis[0].IdIndicador %>" role="button"></i>
+                        <%= NombreSubsistema %>
+                        <div id="bNAs5-<%= ppid %>-<%= indicadoresxsetapas[0].IdProyecto %>-<%= IndicadoresxSubSis[0].IdEtapa %>-<%= IndicadoresxSubSis[0].IdSubEtapa %>-<%= IndicadoresxSubSis[0].IdIndicador %>" class="collapse nivel-3">
+                            <%= ( tblndicadoresFNNoAsig({indicadores: IndicadoresxSubSis, pid: ppid}) ) %>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <% } %>
+        <%});%>
+        </div>
+    </div>
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-det-programa">
+    <tr class="trData">
+        <td><b>P</b></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioAnteriorProg%>" name="AnioAnteriorProg" id="agnoAnteriorProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.EneroProg%>" name="EneroProg" id="eneroProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.FebreroProg%>" name="FebreroProg" id="febreroProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MarzoProg%>" name="MarzoProg" id="marzoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AbrilProg%>" name="AbrilProg" id="abrilProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MayoProg%>" name="MayoProg" id="mayoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JunioProg%>" name="JunioProg" id="junioProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JulioProg%>" name="JulioProg" id="julioProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AgostoProg%>" name="AgostoProg" id="agostoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.SeptiembreProg%>" name="SeptiembreProg" id="septiembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.OctubreProg%>" name="OctubreProg" id="octubreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.NoviembreProg%>" name="NoviembreProg" id="noviembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.DiciembreProg%>" name="DiciembreProg" id="diciembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.ProyeccionAnualProg%>" name="ProyeccionAnualProg" id="anualProgramdo" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioSiguienteProg%>" name="AnioSiguienteProg" id="agnoSiguienteProgramado" /></td>
+    </tr>
+    <tr class="trData">
+        <td><b>R</b></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioAnteriorReal%>" name="AnioAnteriorReal" id="agnoAnteriorReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.EneroReal%>" name="EneroReal" id="eneroReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.FebreroReal%>" name="FebreroReal" id="febreroReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MarzoReal%>" name="MarzoReal" id="marzoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AbrilReal%>" name="AbrilReal" id="abrilReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.MayoReal%>" name="MayoReal" id="mayoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JunioReal%>" name="JunioReal" id="junioReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.JulioReal%>" name="JulioReal" id="julioReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AgostoReal%>" name="AgostoReal" id="agostoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.SeptiembreReal%>" name="SeptiembreReal" id="septiembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.OctubreReal%>" name="OctubreReal" id="octubreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.NoviembreReal%>" name="NoviembreReal" id="noviembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.DiciembreReal%>" name="DiciembreReal" id="diciembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.ProyeccionAnualReal%>" name="ProyeccionAnualReal" id="anualReal" /></td>
+        <td><input type="text" maxlength="4" size="2" value="<%=programa.AnioSiguienteReal%>" name="AnioSiguienteReal" id="agnoSiguienteReal" /></td>
+    </tr>
+</script>
+
+<script type="text/javascript">
+    var templateFn = _.template($('#tmp-colection-etapas').html());
+    var templateFnNoAsig = _.template($('#tmp-colection-etapas-NoAsig').html());
+    var templateFnInd = _.template($('#tmp-colection-proy').html());
+    var templateFnIndNoAsig = _.template($('#tmp-colection-proy-NoAsig').html());
+    var templateFnInd12mpi = _.template($('#tmp-colection-proy12mpi').html());
+    var tblndicadoresFN = _.template($('#tmp-coleccion-tabcont-ind').html());
+    var tblndicadoresFNNoAsig = _.template($('#tmp-coleccion-tabcont-ind-NoAsig').html());
+    var templtaFnSop12mpi = _.template($('#tmp-coleccion-sop12mpi').html());
+    $(function () {
+        var OBJ = [];
+        initTablerosSubsistema();
+
+        var popOverSetting = {
+            placement: 'top',
+            container: 'body',
+            html: true,
+            selector: '[rel="popover"]',
+            trigger: "hover"
+        }
+
+        $('body').popover(popOverSetting);
+
+        $(document).on('click', '.nav-tabs > li#tab2', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/MonitorIndicador/getIndicadores12mpiFaltantes',
+                data: {},
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    //Eliminamos elementos
+                    eliminarIndicadores(1);
+
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-indicadores-12mpi-faltantes', "#tmp-colection-proy-resp", d.ind12mpifaltantes, band = true, soporte = false);
+
+                    //Cerrar Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $(document).on('click', '.nav-tabs > li#tab3', function () {
+
+            $.ajax({
+                type: 'GET',
+                url: '/MonitorIndicador/getIndicadoresSubsistemasFaltantes',
+                data: {},
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    //Eliminamos elementos
+                    eliminarIndicadores(2);
+
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-indicadores-subsis', "#tmp-colection-proy-resp", d.faltantessubsis, band = false, soporte = false);
+
+                    //Cerrar loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+
+        $(document).on('click', '.nav-tabs > li#tab4', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/MonitorIndicador/getSoportes12mpiFaltantes',
+                data: {},
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    //Eliminamos elementos
+                    eliminarIndicadores(3);
+
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-soportes-12mpi', "#tmp-colection-soporte-resp", d.ind12mpifaltantes, band = true, soporte = false);
+
+                    //Cerrar Loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $(document).on('click', '.nav-tabs > li#tab5', function () {
+
+            $.ajax({
+                type: 'GET',
+                url: '/MonitorIndicador/getSoportesSubsistemasFaltantes',
+                data: {},
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    //Eliminamos elementos
+                    eliminarIndicadores(4);
+
+                    var d = JSON.parse(data)
+                    cargarCntSistemas('#cnt-soportes-subsis', "#tmp-colection-soporte-resp", d.faltantessubsis, band = false, soporte = true);
+
+                    //Cerrar loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $(document).on('click', '.nav-tabs > li#tab6', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/MonitorIndicador/getSistemasActivadosSinResponsable',
+                data: {},
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    var tmpl = $('#tmp-colection-proy-NoAsig').html();
+                    var compiled = _.template(tmpl);
+                    var html = compiled({ "indicadores": d });
+                    $('#cnt-soportes-subsis-NoAsig').html(html);
+                    //Cerrar loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        $(document).on('click', '.nav-tabs > li#tab7', function () {
+            $.ajax({
+                type: 'GET',
+                url: '/MonitorIndicador/getSistemas12mpiActivadosSinResponsable',
+                data: {},
+                beforeSend: function () {
+                    mostrarLoading();
+                },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    var tmpl = $('#tmp-coleccion-tabcont-ind-NoAsig').html();
+                    var compiled = _.template(tmpl);
+                    var html = compiled({ "indicadores": d });
+                    $('#cnt-soportes-12mpi-NoAsig').html(html)
+                    //Cerrar loading
+                    cerrarLoading();
+                },
+                error: function (msg) {
+                    errorLoading();
+                }
+            });
+        });
+
+        //Eventos para árbol
+        $(document).on('click', 'i[data-toggle="collapse"]', function () {
+            if ($(this).hasClass('glyphicon-triangle-right')) {
+                $(this).removeClass('glyphicon-triangle-right').addClass('glyphicon-triangle-bottom');
+            } else {
+                $(this).removeClass('glyphicon-triangle-bottom').addClass('glyphicon-triangle-right');
+            }
+        });
+    });
+
+    function initEventos() {
+
+        initComboTblGlobal();
+
+        setFechaTblGlobal();
+
+        $(document).on('click', '#tab-tablero1 #btn-tbl-buscar', function () {
+            if (OBJ.tablero_subsistema.length > 0) {
+                var f = $('#tab-tablero1 #sel-tbl-glob').val();
+                obj = _.where(OBJ.tablero_subsistema, { fecha: f });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-glob",
+                    datos: obj,
+                    cnt: ".cnt-tbl-subsis-glob"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis",
+                    datos: obj[0].tablero_subsistema,
+                    cnt: ".cnt-tbl-subsis"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+                });
+
+                $('.cnt-vista-graf-bar').empty();
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: obj,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: obj[0].tablero_subsistema,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                //Establece fecha en label
+                setFechaTblGlobal(f);
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 #btn-tipo-vista', function () {
+            if ($(this).find('#btn-graficas-pie').hasClass('hidden')) {
+                $(this).find('#btn-graficas-pie').removeClass('hidden');
+                $(this).find('#btn-graficas-bar').addClass('hidden');
+
+                $('.cnt-vista-graf-bar').addClass('hidden');
+                $('.cnt-vista-graf-pie').removeClass('hidden');
+
+            } else if ($(this).find('#btn-graficas-bar').hasClass('hidden')) {
+                $(this).find('#btn-graficas-bar').removeClass('hidden');
+                $(this).find('#btn-graficas-pie').addClass('hidden');
+
+                $('.cnt-vista-graf-pie').addClass('hidden');
+                $('.cnt-vista-graf-bar').removeClass('hidden');
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 .lnk-susbsis-det', function () {
+            $('#tab-tablero1 #btn-tbl-det-regresar').data('acceso', 1);
+            cargarDetalleProcesos(this);
+        });
+
+        $(document).on('click', '#tab-tablero1 #btn-tbl-det-regresar', function () {
+            var opc = $(this).data('acceso');
+            if (opc === 1) {
+                $('.group-opc-graf').removeClass('hidden');
+                $('.group-opc-det').addClass('hidden');
+                $('.cnt-vista-graf-bar').removeClass('hidden');
+                $('.cnt-vista-subsis-det').addClass('hidden');
+            } else {
+                $('.group-opc-graf').removeClass('hidden');
+                $('.group-opc-det').addClass('hidden');
+                $('.cnt-vista-graf-pie').removeClass('hidden');
+                $('.cnt-vista-subsis-det').addClass('hidden');
+            }
+        });
+
+        $(document).on('click', '#tab-tablero1 .cnt-grafica-pies', function () {
+            $('#tab-tablero1 #btn-tbl-det-regresar').data('acceso', 2);
+            cargarDetalleProcesos(this);
+        });
+    }
+
+
+    //Iniciar vista de gráficas
+    function initTablerosSubsistema() {
+        $.ajax({
+            type: 'GET',
+            url: '/MonitorIndicador/GetJsonMonitoreoIndicadores',
+            beforeSend: function () {
+                mostrarLoading();
+            },
+            success: function (data) {
+                var GBL = [];
+                OBJ = data;
+                GBL[0] = OBJ.tablero_subsistema[0];
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-glob",
+                    datos: GBL,
+                    cnt: ".cnt-tbl-subsis-glob"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel1 .circulo-dinamico");
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis",
+                    datos: OBJ.tablero_subsistema[0].tablero_subsistema,
+                    cnt: ".cnt-tbl-subsis"
+                }, function () {
+                    initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: GBL,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                cargarDiagrama({
+                    tmpl: "#tmp-tablero-subsis-bar",
+                    datos: OBJ.tablero_subsistema[0].tablero_subsistema,
+                    cnt: ".cnt-vista-graf-bar",
+                    agregar: true
+                });
+
+                initEventos();
+
+                //Cerramos Loading
+                cerrarLoading();
+            },
+            error: function () {
+                errorLoading();
+            }
+        });
+    }
+
+    //Carga para gráficas
+    function cargarDiagrama(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.length > 0) {
+
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos });
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).append(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+        }
+    }
+
+    function initGraficaDinamicaPie(elemp) {
+        $(elemp).each(function (i, e) {
+            var elem = $(e).data('elem');
+            var avance = $(e).data('avance');
+            var color = $(e).data('color');
+            GraficaDinamicaPie(elem, avance, color);
+        });
+    }
+
+    function GraficaDinamicaPie(elem, avance, color) {
+        var avance_rest = 100 - avance;
+        var ctx = $(elem);
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [avance, avance_rest],
+                    backgroundColor: [setColor(color), setColor('default')],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: { enabled: false }
+            }
+        });
+    }
+
+    function setColor(c) {
+        var setColor = [];
+        setColor["verde"] = "#00CE93";
+        setColor["amarillo"] = "#FFC542";
+        setColor["rojo"] = "#FF364D";
+        setColor["azul"] = "#008DAC";
+        setColor["gris"] = "#A4A09B";
+        setColor["default"] = "#E9E7E4";
+
+        return setColor[c];
+    }
+
+    function initComboTblGlobal() {
+        _.each(OBJ.tablero_subsistema, function (e, i) {
+            $('#sel-tbl-glob').append('<option value="' + e.fecha + '">' + e.fecha + '</option>');
+        });
+    }
+
+    function setFechaTblGlobal(opc) {
+        if (opc === undefined || opc === "") {
+            var f = OBJ.tablero_subsistema[0].fecha;
+
+        } else {
+            var f = opc;
+        }
+        $('.group-opc-graf>.fecha').text(f);
+    }
+
+    function setMes(m) {
+        var setMes = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"];
+        return setMes[m];
+    }
+
+    function cargarCntSistemas(elem, temp, d, band) {
+        var tmpl = $(temp).html();
+        var compiled = _.template(tmpl);
+        var html = compiled({ "indicadores": d, "band": band });
+        $(elem).html(html);
+    }
+
+    //Accion que manda traer la info del indicador
+    $(document).on('click', '.btn-datos', function () {
+        var idIndicador = $(this).data('idindicador');
+        var idconfig = $(this).data('idconfigresp');
+        var iddata = ($(this).attr('data-iddatavaloresind') != "") ? $(this).attr('data-iddatavaloresind') : 0;
+        $.ajax({
+            type: 'POST',
+            url: '/MonitorIndicador/infoIndicador',
+            data: { idIndicador: idIndicador, idconfig: idconfig, iddata: iddata },
+            success: function (data) {
+                showDetails(data, idconfig);
+            },
+            error: function (msg) {
+                console.log('Error: ' + msg);
+            }
+        });
+    });
+
+
+
+    $(document).on('click', '.btnNotaIndicador.activo', function () {
+
+        var iddata = ($(this).data('iddatavaloresind') != "") ? $(this).data('iddatavaloresind') : 0;
+        var modal = $('#modalNotaIndicador');
+        var tipoind = ($(this).data('tipoindicador') == 'Seguimiento') ? $(this).data('tipoindicador') + ' - ' + $(this).data('tipocalculo') : $(this).data('tipoindicador');
+
+        if ($(this).data('tipoindicador') == 'Seguimiento') {
+            modal.find('.seguimiento').show();
+        }
+        else {
+            modal.find('.seguimiento').hide();
+        }
+
+        modal.find('#IdDataValoresIndicadores').val(iddata);
+        modal.find('.prefijo-indicador').text($(this).data('prefijo'));
+        modal.find('.desc-indicador').text($(this).data('desccort'));
+        modal.find('.tipo-indicador').text(tipoind);
+        modal.find('.meta-indicador').text($(this).data('meta') + '%');
+        modal.find('.frecuencia-indicador').text($(this).data('frecuencia') + ' Días');
+
+        $.ajax({
+            type: 'POST',
+            url: '/MonitorIndicador/infoNota',
+            data: { iddata: iddata },
+            success: function (data) {
+                //Eventos para los botones del modal
+                var jdata = JSON.parse(data);
+                var nota = (jdata.nota == "") ? "" : jdata.nota;
+                modal.find('#Comentario').val(nota);
+                modal.modal('show');
+            },
+            error: function (msg) {
+                console.log('Error: ' + msg);
+            }
+        });
+
+    });
+
+    //Función que elimina los elementos de un contenedor específico. Lo anterior para que no exista problema de duplicidad de elementos collapse
+    function eliminarIndicadores(band) {
+        switch (band) {
+            case 1:
+                $('#cnt-soportes-subsis').empty('');
+                $('#cnt-soportes-12mpi').empty('');
+                $('#cnt-indicadores-subsis').empty();
+                break;
+            case 2:
+                $('#cnt-indicadores-12mpi-faltantes').empty();
+                $('#cnt-soportes-12mpi').empty();
+                $('#cnt-indicadores-subsis').empty();
+                break;
+            case 3:
+                $('#cnt-indicadores-12mpi-faltantes').empty();
+                $('#cnt-indicadores-subsis').empty();
+                $('#cnt-soportes-subsis').empty();
+                break;
+            case 4:
+                $('#cnt-indicadores-12mpi-faltantes').empty();
+                $('#cnt-soportes-subsis').empty();
+                $('#cnt-soportes-12mpi').empty();
+                $('#cnt-indicadores-subsis').empty();
+                break;
+        }
+    }
+
+</script>

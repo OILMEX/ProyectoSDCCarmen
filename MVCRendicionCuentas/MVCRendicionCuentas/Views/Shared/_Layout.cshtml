@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @RenderPage(Url.Content("~/views/shared/_heads.cshtml"))
+    @RenderSection("ScriptsHead", false)
+</head>
+
+<body>
+    <!-- Navegación TOP layout-top-bar-Lat -->
+    <div class="container-fluid no-pd">
+        <div class="row no-mr bg-header h-40">
+            @RenderPage(Url.Content("~/views/shared/_header.cshtml"))
+        </div>
+    </div>
+    <!-- Contenedor general -->
+    <div id="divContainer" class="container no-pd pos-rel" style="min-height:calc(100% - 40px); ">
+
+        <div class="col-md-12 no-pd pull-right">
+            <!--Set donde se muestra la ruta actual-->
+            @*<div class=" row no-mr set-ruta-actual h-40">
+                <ul class="pager text-left no-mr">
+                    <li><a href="#">Ubicación</a></li>
+                        <li><a href="#">Localidad</a></li>
+                        <li><a href="#">Piso</a></li>
+                        <li><a href="#">Sala</a></li>
+                    <div class="row no-mr" id="HeadPrincipal">
+
+                    </div>
+                </ul>
+            </div>*@
+
+
+            <!--Set-content para modulos-->
+            <div class="row no-mr" id="ContentPrincipal">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <!--Context menu organigrama -->
+    <div id="contextMenu" class="dropdown clearfix" style="display:none; position:absolute;">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li><a tabindex="-1" href="#" data-action="1" data-target="modalOrganigrama"><i class="fa fa-plus-square-o"></i> Agregar Elemento</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#" data-action="2" data-target="modalOrganigrama"><i class="fa fa-edit" aria-hidden="true"></i> Editar Elemento</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="-1" href="#" data-action="3" data-target="modalOrganigrama"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar Elemento</a></li>
+        </ul>
+    </div>
+    <!--Context Menu Proyectos Etapas y subetapas-->
+    <div id="contextMenuProyecto" class="dropdown clearfix" style="display:none; position:absolute;">
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+            <li><a tabindex="-1" href="#" data-action="1" data-target="modalProyectoEtapa"><i class="fa fa-plus-square-o"></i> Agregar Etapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="2" data-target="modalProyectoEtapa"><i class="fa fa-edit" aria-hidden="true"></i> Editar Etapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="3" data-target="modalProyectoEtapa"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar Etapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="4" data-target="modalProyectoSubetapa"><i class="fa fa-plus-square-o"></i> Agregar SubEtapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="5" data-target="modalProyectoSubetapa"><i class="fa fa-edit" aria-hidden="true"></i> Editar SubEtapa</a></li>
+            <li><a tabindex="-1" href="#" data-action="6" data-target="modalProyectoSubetapa"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar SubEtapa</a></li>
+        </ul>
+    </div>
+
+    <!--Contenedor de loading-->
+    <div class="loading-mod hidden">
+        <div></div><div><span>Cargando...</span><span class="hidden">¡Error de conexi&oacute;n!</span></div>
+    </div>
+
+    @*@RenderSection("ScriptsFoot", false)*@
+
+    @RenderPage(Url.Content("~/views/shared/_modals.cshtml"))
+
+
+</body>
+</html>
+<script type="text/javascript">
+    var xhr = null;
+    function loadComboBox(nombrecombo, metodo, idelemento, indi) {
+        var combo = $('.' + nombrecombo);
+        xhr = $.ajax({
+            type: "GET",
+            url: "/Catalogos/" + metodo,
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                var datos = JSON.parse(msg);
+                //console.log('method:' + datos);
+                $(datos).each(function () {
+                    var option = $(document.createElement('option'));
+                    //console.log(datos);
+                    switch (indi) {
+                        case 1: //puesto
+                            if (this.idPuestoOrganigrama == idelemento) {
+                                option.attr('selected', 'selected');
+                            }
+                            option.text(this.Clave);
+                            option.val(this.idPuestoOrganigrama);
+                            break;
+                        case 2: //area
+                            if (this.idArea === idelemento) {
+                                option.attr('selected', 'selected');
+                            }
+                            option.text(this.NombreArea);
+                            option.val(this.idArea);
+                            break;
+                        case 3://jefes
+                            if (this.id === idelemento) {
+                                option.attr('selected', 'selected');
+                            }
+                            option.text(this.Nombre);
+                            option.val(this.id);
+                            break;
+                        case 4://roles
+                            //console.log(idelemento);
+                            //console.log(this.id);
+                            if (this.id === idelemento) {
+                                option.attr('selected', 'selected');
+                            }
+                            option.text(this.Roles);
+                            option.val(this.id);
+                            break;
+                    }
+                    combo.append(option);
+                });
+            },
+            error: function (msg) {
+                console.log("Error al llenar el combo");
+            }
+        });
+    }
+
+    function getfila() {
+        var cont = 1;
+
+        $("#tablaUsuarios1").on("click", "tr", function (e) {
+            if (cont === 1) {
+                var fila2 = $(this).attr("data-rel");
+                 $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("GetUsuarios", "Catalogos")",
+                    data: { id: fila2 },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (msg) {
+                        var datos = JSON.parse(msg);
+                        $('#frmUpdatePersonal #idPuesto').empty();
+                        $('#frmUpdatePersonal #idArea').empty();
+                        $('#frmUpdatePersonal #idJefe').empty();
+                        $('#frmUpdatePersonal #idRol').empty();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("getDependencias", "Catalogos")",
+                            data: { idpuesto: datos.idPuesto },
+                            dataType: "json",
+                            success: function (msg) {
+                                var data = JSON.parse(msg);
+                                if (data[0] != undefined) {
+                                    var d = data[0];
+                                    var modal = $("#UpdateModal");
+                                    modal.find("#txtSubdireccion").val(d.NombreSubdireccion);
+                                    modal.find("#txtGerencia").val(d.NombreGerencia);
+                                    modal.find("#txtCoordinacion").val(d.NombreCoordinacion);
+                                    modal.find("#txtSuperintendencia").val(d.NombreSuperintendencia);
+                                }
+                            },
+                            error: function (msg) {
+                                console.log("Error al llenar el combo");
+                            }
+                        });
+
+                        loadComboBox('combo-puestoU', 'CatalogosPuestos', datos.idPuesto, 1);
+                        loadComboBox('combo-areaU', 'CatalogosAreas', datos.idArea, 2);
+                        loadComboBox('combo-jefesU', 'CatalogosJefes', datos.idAquienReporta, 3);
+                        loadComboBox('combo-rolesU', 'CatalogosRoles', datos.Rol, 4);
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/Ubicacion/getListUbicacion",
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (msg) {
+                                var datosCombo = JSON.parse(msg);
+                                $(datosCombo).each(function () { 
+                                    var option = $(document.createElement('option'));
+                                    console.log(this.idUbicacion+ "==="+ datos.idUbicacion);
+                                    if (this.idUbicacion === datos.idUbicacion) { 
+                                        option.attr('selected', 'selected');
+                                    }
+                                    option.text(this.Ubicacion);
+                                    option.val(this.idUbicacion);
+                                    $('.combo-ubicacionU').append(option);
+                                });
+                            },
+                            error: function (msg) {
+                                console.log("Error al llenar el combo");
+                            }
+                        });
+
+                        var modal1 = $("#UpdateModal");
+                        //console.log('idusuario=' + fila2);
+                        modal1.find('.modal-body input#idResponsable').val(fila2);
+                        modal1.find('.modal-body input#InputPersonal').val(datos.Nombre);
+                        modal1.find('.modal-body input#InputUsuario').val(datos.Usuario);
+                        //modal1.find('.modal-body input#InputPassword1').val(datos.Password);
+                        //modal1.find('.modal-body input#InputPassword2').val(datos.Password);
+                        modal1.find('.modal-body input#InputEmail1').val(datos.Email);
+                        modal1.find('.modal-body input#InputFicha').val(datos.ficha);
+                        modal1.modal('show');
+                    },
+                    error: function (msg) {
+                        console.log("ha ocurrido un Error");
+                    }
+                });
+            }
+            cont++;
+        });
+    }
+
+</script>

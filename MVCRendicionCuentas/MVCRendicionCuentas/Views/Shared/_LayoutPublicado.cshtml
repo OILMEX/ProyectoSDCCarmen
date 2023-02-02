@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/publicacion.css" rel="stylesheet" />
+    @RenderPage(Url.Content("~/views/shared/_heads.cshtml"))
+    @RenderSection("ScriptsHead", false)
+</head>
+
+<body>
+    <div class="bg-animado-publ">
+        <object type="application/x-shockwave-flash" width="100%" height="100%">
+            <param name="movie" value="~/Images/publicacion/BGRC.swf" />
+            <param name="wmode" value="transparent" />
+        </object>
+    </div>
+    <!-- Contenedor general -->
+    <div class="cnt-general-publicacion ">
+        <!--Set-content para modulos-->
+        <div class="row no-mr" id="ContentPublicacion">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

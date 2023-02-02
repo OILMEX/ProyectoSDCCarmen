@@ -1,0 +1,86 @@
+﻿@{
+    string fechaactual = DateTime.Now.ToString("dd \\de MMMM \\de yyyy");
+    var user = System.Web.HttpContext.Current.Request.Cookies["myCookie"];
+}
+<div class="container no-pd">
+    <div id="div-logo-set" class="col-md-3 pdb-5 pdr-0 pdt-5">
+        <span><a href="@Url.Action("Index", "Principal")" role="button">
+            <img src="~/Images/logos/logo_sistema_p.png" height="33" /></a></span>
+    </div>
+
+    <div class="col-md-9 pdr-0">
+@if (user!=null)
+            {
+        <div class="pull-left pdt-5">
+            <img src="~/Images/logos/logo_SDCA.png" />
+            <img src="~/Images/logos/logo_pemex.png" />
+        </div>
+        <!-- Menu de opciones -->
+        <div id="div-btn-eng" class="pull-right col-md-1 menu-dropdown-top-nav dropdown">
+            <a class="dropdown-toggle set-left btn-menu-opcion" data-toggle="dropdown" href="#"></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="margin-bottom: 5px; *width: 180px;" data-rol="@user["Rol"].ToString()">
+            
+                @if (user["Rol"].ToString() == "Administrador")
+                { 
+                   
+                   <li><a href="@Url.Action("Index", "RendicionCuenta")" id="opcMenuConfig"><i class="mrr-10 glyphicon glyphicon-cog"></i>Rendición X Responsable</a></li>
+                    <li ><a href="@Url.Action("Usuarios", "Catalogos")"><i class="mrr-10 glyphicon glyphicon-user"></i>Usuarios</a></li>
+                    <li ><a href="@Url.Action("UsuariosEliminados", "Catalogos")"><i class="mrr-10 glyphicon glyphicon-user"></i>Restaurar usuario</a></li>
+                    <li><a href="@Url.Action("TipoProyectos", "Catalogos")"><i class="mrr-10 glyphicon glyphicon-cog"></i>Tipos de Proyectos</a></li>
+                    <li ><a href="@Url.Action("Index", "Ubicacion")"><i class="mrr-10 glyphicon glyphicon-map-marker"></i>Ubicaci&oacute;n</a></li>
+                    <li><a href="@Url.Action("Index", "Indicadores")" id="opcMenuConfig"><i class="mrr-10 glyphicon glyphicon-cog"></i>Administración</a></li>
+                    <li><a href="@Url.Action("Index", "Publicacion")" id="opcMenuConfig"><i class="mrr-10 glyphicon glyphicon-cog"></i>Tablero Pantallas</a></li>
+                    @*<li><a href="@Url.Action("ExportReport", "Reporte")" id="opcMenuConfig"><i class="mrr-10 fa fa-list-alt"></i>Reporte</a></li>*@
+                    <li><a href="@Url.Action("ReporteGeneral", "Reporte")" id="opcMenuConfig"><i class="mrr-10 fa fa-list-alt"></i>Reporte General</a></li>
+                    <li><a href="@Url.Action("Index", "MacroProyectos")" id="opcMenuConfig"><i class="mrr-10 glyphicon glyphicon-cog"></i>Macroproyectos</a></li>
+                    <li><a href="~/Content/Manual%20de%20Usuario%20Tableros%20SDC.pdf" target="_blank"><i class="mrr-10 glyphicon glyphicon-question-sign"></i>Ayuda</a></li>
+                    <li><a href="@Url.Action("Salir", "Login")"><i class="mrr-10 glyphicon glyphicon-log-out"></i>Salir</a></li>
+                }
+                else if (user["Rol"].ToString() == "SubAdministrador")
+                { 
+                   <li><a href="@Url.Action("Index", "RendicionCuenta")" id="opcMenuConfig"><i class="mrr-10 glyphicon glyphicon-cog"></i>Rendición X Responsable</a></li>
+                    <li><a href="@Url.Action("Index", "Indicadores")" id="opcMenuConfig"><i class="mrr-10 glyphicon glyphicon-cog"></i>Administración</a></li>
+                    <li><a href="@Url.Action("Index", "Publicacion")" id="opcMenuConfig"><i class="mrr-10 glyphicon glyphicon-cog"></i>Tablero Pantallas</a></li>
+                    <li><a href="~/Content/Manual%20de%20Usuario%20Tableros%20SDC.pdf" target="_blank"><i class="mrr-10 glyphicon glyphicon-question-sign"></i>Ayuda</a></li>
+                    <li><a href="@Url.Action("Salir", "Login")"><i class="mrr-10 glyphicon glyphicon-log-out"></i>Salir</a></li>
+                }
+                else
+                {
+                
+                    <li><a href="~/Content/Manual%20de%20Usuario%20Tableros%20SDC.pdf" target="_blank"><i class="mrr-10 glyphicon glyphicon-question-sign"></i>Ayuda</a></li>
+                    <li><a href="@Url.Action("Salir", "Login")"><i class="mrr-10 glyphicon glyphicon-log-out"></i>Salir</a></li>
+                }
+          
+                        </ul>
+        </div>
+        <!-- btn menú -->
+        <div id="div-lbl-nombre" class="pull-right col-md-8 text-right pdl-0 pdr-0">
+            <span class="username set-left"> Bienvenido <strong><em>@Html.Raw(HttpUtility.UrlDecode(user["Nombre"].ToString()))</em></strong></span>
+            
+        </div>
+      }
+            else
+            {
+                <script type="text/javascript">
+
+                    
+                    setTimeout(function () {
+                        window.location.href = 'http://'+window.location.hostname+':'+location.port+'/';
+                    }, 3000);
+                                       
+                </script>
+            }
+    </div>
+</div>
+
+<script>
+    //$(document).ready(function () {
+    //    CheckSession();
+    //    var timer = setInterval(CheckSession, 400000);
+    //});
+
+    function load_Catalalogo(url) {
+        $('#divContainer').load(url);
+    }
+
+</script>

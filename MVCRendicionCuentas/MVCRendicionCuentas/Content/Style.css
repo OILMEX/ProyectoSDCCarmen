@@ -1,0 +1,1732 @@
+﻿/* FONTS */
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Regular.ttf");
+}
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Open Sans";
+    src: url("../fonts/OpenSans-Italic.ttf");
+    font-style: italic;
+}
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif !important;
+    height: 100% !important;
+    min-height:100% !important;
+}
+
+body .popover{
+        max-width: 100%;
+    }
+
+#fullheight{
+    min-height:100% !important;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight:bold;
+}
+
+.nav > li > a {
+    padding:3px 15px;
+}
+
+/* main layout
+----------------------------------------------------------*/
+/* Medidas para 1024 */
+.container { width: 1000px !important; min-width:1000px; max-width: 1000px; }
+
+.content-wrapper {
+    margin: 0 auto;
+    max-width: 960px;
+}
+
+#body {
+    background-color: #efeeef !important;
+    clear: both;
+    padding-bottom: 35px;
+}
+
+footer {
+    clear: both;
+    background-color: #e2e2e2;
+    font-size: .8em;
+    height: 100px;
+}
+
+/* login
+----------------------------------------------------------*/
+.login{
+    padding:50px;
+    padding-top:30px;
+}
+
+.logos div{text-align:center;}
+.logos div:first-child, .logos div:last-child{position:relative; top:+20px;}
+
+.login-logo-placa{
+    text-align:center;
+}
+.login-logo-placa p{font-size:16px; color:#e6e6e6; padding-top:50px;}
+
+.Msj-Error{
+    clear:both;
+    margin:15px auto;
+    width:300px;
+    position:relative;
+    top:5px;
+}
+
+.form-field{
+    margin-bottom: 30px;
+}
+
+.txtForm{
+    height: 30px;
+    width: 100%;
+    font-weight: lighter;
+    color: black;
+    border-radius: 6px;
+    border:0px none;
+    padding:5px 15px;
+}
+
+.link-RemPass{
+    color:#a91b5c !important;
+    font-size: 14px;
+    width:auto;
+    font-weight:bold;
+}
+
+#btnEnviar{
+    margin-left: 16px !important;
+}
+
+#btnCancel{
+    margin-left: 16px !important;
+}
+
+.loginControl .info-User,
+.loginControl .btn-log {
+    float:left;
+    margin-left:30px;
+    font-size: 18px;
+    color:white;
+}
+
+.loginControl
+{
+    float: right;
+    margin-top: 8px;
+    margin-right: 25px;
+    font-size: 12px;
+}
+
+
+.btnIngresar{
+    background-color: #357385 !important;
+    border-radius: 6px;
+    color: #fff;
+    font-weight:normal;
+    border:0px none;
+    padding:7px 40px;
+}
+
+.btnCancelar{
+    background-color: #357385 !important;
+    border-radius: 6px;
+    color: #000;
+    font-weight:normal;
+    border:0px none;
+    padding:7px 40px;
+}
+
+.Buttons{
+    margin-top:20px;
+}
+
+
+/* Estilos header
+-------------------------------------------------------------------------*/
+.bg-header {
+    background-color: #6f7d96;
+}
+
+.logo-img,.logo-lbl {height: 40px;}
+
+.bg-header .container {
+    color: #FFF;
+    height: 40px;
+}
+
+.bg-header .container > div{height:40px;}
+#div-logo-set > div,
+#div-lbl-nombre,
+#div-btn-eng {
+    display: table;
+    height: 40px;
+}
+#div-logo-set > a,
+#div-logo-set > div > span,
+#div-lbl-nombre > span,
+#div-btn-eng > a {
+    display: table-cell;
+    vertical-align: middle;
+    height:40px;
+}
+
+#div-logo-set > a{
+    float:left;
+    width: 70px;
+}
+.logo-img {
+    float: left;
+    width: 63px;
+    height: 26px;
+    /*background: url("/Images/header/logo.png") no-repeat center;*/
+    overflow:hidden;
+}
+
+#div-logo-set{background-color:#fff; color:#000;}
+
+#div-logo-set > div {
+    float:left;
+}
+.logo-text2 {
+    margin-left: 10px;
+    text-align: left;
+    color: #ffa409;
+}
+
+.btn-menu-opcion {
+    background: url("/Images/header/flecha_opciones.png") no-repeat center;
+    background-size: 12px 7px;
+}
+.btn-menu-opcion:hover {
+    background: url("/Images/header/flecha_opciones_over.png") no-repeat center;
+}
+#div-btn-eng .dropdown-menu > li > a > i {
+    color: #ffa409;
+}
+
+.principal-container {
+    text-align: center;
+}
+.lnk-menu-principal {
+    display: inline-block;
+    width: 243px;
+    height: 155px;
+}
+
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu:hover>.dropdown-menu{display:block;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+
+/*
+    MENU PRINCIPAL
+------------------------------------------------------------------------*/
+ul.menuprincipal{text-decoration:none; list-style:none;}
+
+ul.menuprincipal li{float:left; width:115px; text-align:center;}
+ul.menuprincipal li a{ margin:0px auto;}
+ul.menuprincipal li span{color:#fff;}
+ul.menuprincipal li:hover span{color:#28ca96;}
+ul.menuprincipal li:hover a{ border-radius:5px ;border:2px solid #28ca96;}
+
+
+a.mnprincipal{
+    display:block;
+}
+
+a.btnTableroGestion{width:74px; height:74px; background-image:url(../Images/principal/iconos_rc1.png); background-repeat:no-repeat; background-position:center;}
+a.btnRendicionCuenta{width:74px; height:74px; background-image:url(../Images/principal/iconos_rc2.png); background-repeat:no-repeat;background-position:center;}
+a.btnPublicarTablero{width:74px; height:74px; background-image:url(../Images/principal/iconos_rc3.png); background-repeat:no-repeat;background-position:center;}
+a.btnConfiguracionProyecto{width:74px; height:74px; background-image:url(../Images/principal/iconos_rc4.png); background-repeat:no-repeat;background-position:center;}
+a.btnMonitorCarga{width:74px; height:74px; background-image:url(../Images/principal/iconos_rc5.png); background-repeat:no-repeat;background-position:center;}
+a.btnCargaIndicadores{width:74px; height:74px; background-image:url(../Images/principal/iconos_rc6.png); background-repeat:no-repeat;background-position:center;}
+a.btnAvisosAlarmas{width:74px; height:74px; background-image:url(../Images/principal/iconos_rc7.png); background-repeat:no-repeat;background-position:center;}
+
+/** Seccion Inidicadores **/
+#nav-subsis-ind > li:not(.active) a{
+    background-color: #E1E5F0;
+    color: #76746d;
+}
+
+#nav-subsis-ind > li.active > a {
+    color: #FFF;
+    background-color: #D3353C;
+}
+
+
+#nav-subsis-ind > li > a {
+    min-width: 100px;
+    text-align: center;
+}
+#nav-subsis-ind > li:not(.active) a:hover {
+    color: white !important;
+}
+
+#nav-subsis-ind > li.active > a:hover {
+    color: #FFF;
+}
+.cnt-opc-ind-asoc,
+.cnt-vista-opciones{
+    border-bottom: 1px solid #EDEFF6;
+}
+    .cnt-opc-ind-asoc div:nth-child(1),
+    .cnt-vista-opciones span:nth-child(1) {
+        font-size: 16px;
+        text-transform: uppercase;
+        color: #6F7D96;
+    }
+    .cnt-vista-opciones .label-default,
+    .cnt-opc-ind-asoc div:nth-child(1) span:last-child {
+        position: relative;
+        top: -4px;
+    }
+    .cnt-opc-ind-asoc div:nth-child(1) {
+        font-size: 14px;
+    }
+
+.cnt-box-subsistema {
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+.cnt-box-subsistema:nth-child(3n+0) {
+    padding-right: 0;
+}
+.box-subsistema {
+    border: 1px solid #E2E6F0;
+}
+.box-subsistema:hover{
+    background-color: #E2E2F1;
+}
+
+#modalIndicadoresAsociados .box-subsistema .cnt-recuadro:hover div:nth-child(1){
+    color: #FFF;
+}
+.box-subsistema div > ul {
+    height: 75px;
+}
+.cnt-head-rojo{
+    background-color: #D3353C;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+.cnt-head-rojo a,
+.cnt-head-ss1 a, .cnt-head-ss2 a,.cnt-head-ss3 a, .cnt-head-ss4 a{
+        cursor: pointer;
+        text-decoration: none;
+        color: #FFF !important;
+        float: right;
+        line-height: 25px;
+    }
+
+.cnt-head-ss1{
+    background-color: #E41535;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+.cnt-head-ss2{
+    background-color: #1B4E9C;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+.cnt-head-ss3{
+    background-color: #008751;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+.cnt-head-ss4{
+    background-color: #787676;
+    color: #FFF;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 5px 10px;
+}
+
+.bg-color-ss1:hover, li.active > .bg-color-ss1{
+    background-color: #E41535 !important;
+}
+
+.bg-color-ss2:hover, li.active > .bg-color-ss2{
+    background-color: #1B4E9C !important;
+}
+
+.bg-color-ss3:hover, li.active > .bg-color-ss3{
+    background-color: #008751 !important;
+}
+
+.bg-color-ss4:hover, li.active > .bg-color-ss4{
+    background-color: #787676 !important;
+}
+
+    
+.cnt-recuadro {
+    border-top: none;
+    min-height: 150px;
+}
+    .cnt-recuadro div:first-child {
+        text-align: center;
+    }
+    /*.cnt-recuadro > div:first-child {
+        margin-top: 25px;
+    }*/
+    .cnt-recuadro div:first-child a {
+        display: block;
+        width: 200px;
+        height: 60px;
+        margin: 0 auto;
+        color: #6F7D96;
+        font-weight: bold;
+        text-decoration: none;
+        overflow: hidden;
+    }
+    .cnt-recuadro div:first-child a:hover {
+        color: #6F7D96 !important;
+    }
+    .cnt-recuadro div:nth-child(2) {
+        text-align: center;
+    }
+    .cnt-recuadro div:nth-child(2) a {
+        display: block;
+        width: 120px;
+        margin: 10px auto;
+        border: 1px solid;
+    }
+
+#modalIndicadoresAsociados .cnt-box-subsistema .cnt-recuadro {
+    min-height: 230px;
+}
+    #modalIndicadoresAsociados .cnt-box-subsistema .cnt-recuadro div:nth-child(1),
+    #modalIndicadoresAsociados .cnt-box-subsistema .cnt-recuadro div:nth-child(2){
+        text-align: left !important;
+        line-height: 13px;
+    }
+    #modalIndicadoresAsociados .cnt-box-subsistema .cnt-recuadro div:nth-child(1) {
+        color: #D9DFE8;
+    }
+    #modalIndicadoresAsociados .cnt-box-subsistema .cnt-recuadro div:nth-child(2) {
+        font-weight: 600;
+        color: #889CAF;
+        height: 55px;
+        overflow: hidden;
+    }
+    #modalIndicadoresAsociados .cnt-box-subsistema ul>li{
+        position: relative;
+    }
+    #modalIndicadoresAsociados .cnt-box-subsistema ul > li:last-child {
+        font-size: 10px;
+    }
+    .item-icon-ind {
+        top: -10px !important;
+        left: -25px !important;
+        font-size: 30px !important;
+        position: absolute !important;
+        line-height:1 !important;
+    }
+.clr_indicador_VERDE,
+.clr_indicador_VERDE:hover {
+    border-color: #31CC9B !important;
+    color: #31CC9B !important;
+}
+
+.fa-file-o .glyphicon-pencil{
+    position: relative;
+    right: 8px;
+    font-size: 12px;
+    top: -1px;
+}
+
+
+.cnt-vista-opciones .glyphicon,
+.cnt-opc-ind-asoc .glyphicon {
+    width: 24px;
+    background-color: #B0C2CE;
+    color: #FFF;
+    padding: 0 5px;
+    text-align: center;
+    margin-left: 5px;
+    line-height: 20px;
+}
+    .cnt-vista-opciones .glyphicon.activo,
+    .cnt-opc-ind-asoc .glyphicon.activo {
+        background-color: #697892;
+    }
+    .cnt-vista .bootgrid-header{
+        display: none !important;
+    }
+    .cnt-vista .bootgrid-footer{
+        margin-bottom: 0;
+    }
+    .cnt-vista .bootgrid-footer > .row div:first-child{
+        padding-left: 0;
+    }
+    .cnt-vista .bootgrid-footer .infoBar {
+        padding-right: 0;
+    }
+    .cnt-vista .bootgrid-footer .pagination > .active > a {
+        background-color: #6f7d96 !important;
+    }
+    .cnt-vista .bootgrid-footer .pagination>.disabled>a {
+        color: #ccc !important;
+    }
+    .cnt-vista .bootgrid-footer .pagination > li > a,
+    .cnt-vista .bootgrid-footer .pagination > li > span {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        font-size: 12px;
+    }
+    .cnt-vista .bootgrid-footer .infoBar .infos{
+        font-size: 10px;
+    }
+    .grid-indicadores {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+        .grid-indicadores > tbody > tr:nth-of-type(2n+1) {
+            background-color: #FFF !important;
+        }
+        .grid-indicadores > thead > tr > th {
+            background-color: #6f7d96;
+            border-width: 1px !important;
+        }
+            .grid-indicadores > thead > tr > th:hover {
+                background-color: #6f7d96;
+            }
+            .grid-indicadores > thead > tr > th > a span{
+                color: #FFF !important;
+            }
+    .grid-indicadores th:first-child{ width: 40px; text-align: center !important; }
+    .grid-indicadores th:nth-child(2) { width: 70px;  }
+    .grid-indicadores th:nth-child(3) { width: 120px;  }
+    .grid-indicadores th:nth-child(4) { width: 80px; text-align: center !important;  }
+    .grid-indicadores th:nth-child(5) { width: 80px; text-align: center !important;  }
+    .grid-indicadores tbody tr td:nth-child(1),
+    .grid-indicadores tbody tr td:nth-child(4),
+    .grid-indicadores tbody tr td:nth-child(5){
+        text-align: center !important;
+    }
+    .grid-indicadores th:first-child a span {
+        margin-right: 4px !important;
+    }
+    .grid-indicadores td {
+        vertical-align: middle !important;
+    }
+    .grid-indicadores td a[class*="btn clr_indicador_"] {
+        padding: 0 5px !important;
+    }
+
+    #grid-indicadores-asociados th:nth-child(2) { width: 100px !important;  }
+    #grid-indicadores-asociados th:nth-child(3) { width: 170px !important;  }
+    #grid-indicadores-asociados th:nth-child(4) { width: 135px !important; text-align: center !important;  }
+    #grid-indicadores-asociados th:nth-child(5) { width: 125px !important; text-align: center !important;  }
+    #grid-indicadores-asociados th:nth-child(6) { width: 70px !important; text-align: center !important;  }
+/*
+    ESTILOS PARA EL LLENADO DE INDICADORES-PROYECTOS
+---------------------------------------------------------------------------------------*/
+.title-proyecto, .title-etapa, .title-subetapa, .title-proceso{
+    font-size:13px;
+    color:#2da2e3;
+    border-bottom:1px solid #ebeef5;
+}
+
+.title-etapa, .title-subetapa, .title-proceso {
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+.cabecera{font-weight:bold; font-style:italic;}
+.row-indicadores{font-size:12px; color:#828ea4; border-bottom:1px solid #ebeef5; padding-bottom: 3px; padding-top: 3px;}
+.row-indicadores .btn{font-size:12px; padding:0px; width:54px;margin-bottom:2px;}
+.btn-success{background-color:#28ca96; border-color: #2db78b;}
+.btn-danger{background-color:#ff4a5f; border-color: #e23045;}
+.btn-info{background-color:#32a1ff; border-color:#108ef9;}
+.btn-datos{background-color:#6f7d96; border-color: #6a7485; color:#fff;}
+.btn-meta{background-color:#fff; border-color: #6a7485; color:#6a7485;}
+.green{color:#28ca96 !important;}
+.red{color:#ff4a5f !important;}
+.checkbox-slider--b-flat input:checked + span::before {
+    background: #28ca96 none repeat scroll 0 0;
+    top:0px !important;
+}
+.checkbox-slider--b-flat input+span:before{top:0px !important;}
+
+
+.lbl-mod-tit span{
+    font-size: 20px;
+    font-weight: bold;
+    color: #707888;
+}
+
+.lbl-mod-tit span.bulet{
+    color:white !important;
+    font-size:12px !important;
+    padding:0px 9px !important;
+    text-align:center;
+    background-color:#6f7d96;
+    position:relative;
+    top:-3px;
+
+}
+
+span.indent{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#proyecto div{border-bottom:1px solid #ebeef5; padding:4px 0px;}
+#proyecto div:last-child{
+    border-bottom:0px;
+    padding-bottom:2px;
+}
+#organigrama .nodo-padre,
+#organigrama .nodo-fijo{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left:15px;
+    border-bottom:1px solid #ebeef5; 
+}
+
+
+/*
+    ESTILOS PARA SECCIÓN DE INDICADORES-ASOCIADOS
+---------------------------------------------------------------------------------------*/
+
+.titulo-proyecto{
+    color: #6f7d96 !important;
+}
+
+.Square-indicadores{
+    border: 1px solid lightgray;
+    padding: 4px;
+}
+
+.Square-indicadores > span{
+    color: lightgray;
+}
+
+.separador-indicadores{
+    width:100%;
+    margin-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+#nav-proyecto{
+    border: none;
+}
+
+#nav-proyecto > li:not(.active) a{
+   color: black;
+}
+#nav-proyecto > li > a {
+    min-width: 100px;
+    text-align: center;
+    border: none !important;
+    border-radius: 0 !important;
+    font-size: 15px;
+    font-weight: bold;
+}
+#nav-proyecto > li:not(.active) a:hover {
+    color: #6F7D96 !important;
+}
+#nav-proyecto > li.active > a {
+    color: black;
+}
+#nav-proyecto > li.active > a:hover {
+    color: #FFF;
+}
+.clr_indicador_Gris {
+    background-color:#a5a5a7; border-color: #8e8e90;
+    color: white;
+}
+
+.clr_indicador_Rojo {
+    background-color:#ff4a5f; border-color: #e23045;
+    color: white;
+}
+
+.clr_indicador_Verde {
+    background-color:#28ca96; border-color: #2db78b;
+    color: white;
+}
+
+.clr_indicador_Amarillo {
+    background-color: #FFA71B;
+    color: #564000;
+}
+.bootgrid-table th:hover{background-color: #6f7d96 !important; border-width: 1px !important; color:#fff;}
+.grid-proyectos .btn{ padding:0px 10px;}
+.grid-proyectos > thead > tr > th{background-color: #6f7d96; border-width: 1px !important; }
+.grid-proyectos > thead > tr > th > a span{color:#fff;}
+.grid-proyectos th{
+    text-align: center !important;
+}
+
+.grid-proyectos th:nth-child(3){
+    width: 28% !important;
+}
+.grid-proyectos > thead > tr > th:nth-child(1) { width: 42px !important; }
+.grid-proyectos > thead > tr > th:nth-child(2) { width: 53px !important; }
+.grid-proyectos > thead > tr > th:nth-child(5),#grid-proyectos > thead > tr > th:nth-child(6) { width: 85px !important; }
+.grid-proyectos > thead > tr > th:nth-child(7){ width: 64px !important; padding-right:0px; }
+.grid-proyectos > thead > tr > th:nth-child(8),
+.grid-proyectos > thead > tr > th:nth-child(9),
+.grid-proyectos > thead > tr > th:nth-child(10) { width: 60px !important; }
+.grid-proyectos > thead > tr > th:nth-child(11) { width: 35px !important; }
+
+.circle{
+    border-radius: 10px;
+    height: 10px;
+    width:10px;
+    display: table;
+    margin-top:5px;
+}
+
+.circle.Rojo{background-color:#ff4a5f; border-color: #e23045;}
+.circle.Verde{background-color:#28ca96; border-color: #2db78b;}
+.circle.Amarillo{background-color:#FFA71B; border-color: #FFA71B;}
+.circle.Gris{background-color:#a5a5a7; border-color: #8e8e90;}
+
+.titulo-ss{
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 30%;
+}
+
+.graf-subsistema{
+    float:left;
+    width: 150px;
+    height: 60px;
+    border-right: 2px solid lightgray;
+    padding-left: 2px;
+    position:relative;
+}
+
+.grafico-ss{
+    position: absolute;
+    right: 10%;
+}
+
+/*
+    ESTILOS CATALOGO PROYECTO
+--------------------------------------------------------------*/
+#organigrama div[role="button"]:hover{
+    color:#0f90de;
+}
+#proyecto .nivel-1 div{
+    padding-left:30px;
+}
+
+#proyecto div.pos-rel[aria-expanded="true"], #proyecto div.pos-rel:hover, #proyecto .nivel-1 div:hover{
+    color:#0f90de;
+}
+
+/*
+    Ventanas modal
+---------------------------------------------------------------- */
+.modal-header{
+    padding:5px;
+    background-color: #6f7d96;
+    color:#fff;
+    border-bottom:1px solid #4d6081;
+}
+.modal-header .close{color:#fff; opacity:1;}
+.modal-header .modal-title{font-size:14px;}
+.modal-body{color:#636c95;}
+.msjEliminarModal{margin:15px 0px; padding:10px 0px; background-color:#ff7a77; color:#fff;}
+.modal-footer .btnCancelar{background-color: transparent !important; border: 1px solid #b7b7b7 !important; color:#b7b7b7 !important; padding: 6px 12px !important;}
+.modal-footer .btnAceptar{ background-color: #5aba00; color:#fff;}
+
+/*
+    Indicadores tableros - Filtros
+---------------------------------------------------------------- */
+.opc-tbl {
+    padding: 10px !important;
+}
+.opc-tbl>select,
+.opc-tbl>span{
+    vertical-align: middle;
+    color: #66718A;
+}
+.btn-verde {
+    display: inline-block;
+    color: #FFF;
+    background-color: #5ABA00;
+    padding: 0 10px !important;
+}
+.row-subsis-det-glob {
+    height: 120px;
+}
+
+.btn-regresar {
+    background-color: #364450 !important;
+    color:#FFF !important;
+}
+.cnt-bar-prom-hz {
+    margin-top: 10px !important;
+    background-color: #E7E6E6;
+    border-radius: 87px;
+}
+.cnt-vista-subsis-det .cnt-bar-lbl-prom {
+    margin-top: 10px !important;
+    font-size: 20px;
+    font-weight: 600;
+    color: #66718A;
+}
+.cnt-vista-subsis-det .cnt-bar-lbl-prom.glob .proc-item-flecha span{
+    left: 4px !important;
+}
+    .cnt-vista-subsis-det .cnt-bar-lbl-prom.glob > span:first-child {
+        font-size: 35px;
+    }
+.cnt-bar-prom-hz > div{
+    height: 100%;
+    border-radius: 87px;
+}
+
+/*
+    Editar proyecto
+-----------------------------------------------------------------------*/
+#tab-enproceso a:hover.btn-vista-tbl{color:#fff; background-color:#6f7d96;}
+#form_editar{color:#6f7d96;}
+#form_editar form .col-md-2{padding-top:0px; padding-bottom:0px;}
+.form-control{color:#6f7d96; height:24px; padding:2px 12px; }
+#etapas_proyecto{font-size:12px; color:#6f7d96; padding-top:30px;}
+/*#etapas_proyecto .nivel-5{font-size:10px !important;}*/
+#etapas_proyecto .btn{font-size:12px;}
+#etapas_proyecto a:hover.btn-vista-tbl{color:#fff; background-color:#6f7d96;}
+#etapas_proyecto div.container-fluid{border-bottom:1px solid #ebeef5; padding:4px 0px;}
+/*#etapas_proyecto div.container-fluid:last-child{
+    border-bottom:0px;
+    padding-bottom:2px;
+}*/
+.titlefechaeditproyecto{background-color:#6f7d96; color:#fff;}
+
+.nivel-1 > .container-fluid > .col-md-8{padding-left:30px;}
+.nivel-1 > .container-fluid > .col-md-6{padding-left:30px;}
+.nivel-1 > .container-fluid > .col-md-12{padding-left:30px;}
+.nivel-2 > .container-fluid > .col-md-12{padding-left:45px;}
+.nivel-3 > .container-fluid > .col-md-10{padding-left:60px;}
+.nivel-4 > .container-fluid > .col-md-8{padding-left:75px;}
+.nivel-5 > .container-fluid > .col-md-8{padding-left:105px;}
+.nivel-5 > .container-fluid > .col-md-12.tblResponsables{padding-left:105px;}
+
+#etapas_proyecto div.container-fluid{padding:0px;}
+#etapas_proyecto  div.container-fluid div.col-md-12,
+#etapas_proyecto  div.container-fluid div.col-md-10,
+#etapas_proyecto  div.container-fluid div.col-md-8,
+#etapas_proyecto  div.container-fluid div.col-md-6,
+#etapas_proyecto  div.container-fluid div.col-md-3,
+#etapas_proyecto  div.container-fluid div.col-md-2,
+#etapas_proyecto  div.container-fluid div.col-md-1{padding-top:7px; padding-bottom:7px;}
+#etapas_proyecto > .container-fluid > .col-md-2.divFechaEtapa {padding-top:11px !important; padding-bottom:11px !important;}
+.nivel-1 > .container-fluid > .col-md-2.text-center{padding-top:11px !important; padding-bottom:11px !important;}
+
+#etapas_proyecto > div.container-fluid > div:nth-child(2){border-left:1px dotted #6f7d96;border-right:1px dotted #6f7d96; }
+#etapas_proyecto > div.container-fluid > div:nth-child(3){border-right:1px dotted #6f7d96; }
+div#etapas_proyecto > div.container-fluid.last > div:nth-child(2) {border-bottom:1px dotted #6f7d96; }
+div#etapas_proyecto > div.container-fluid.last > div:nth-child(3) {border-bottom:1px dotted #6f7d96; }
+.nivel-1 > div.container-fluid > div:nth-child(2){border-left:1px dotted #6f7d96;border-right:1px dotted #6f7d96;  }
+.nivel-1 > div.container-fluid > div.col-md-4 > div:nth-child(1){border-right:1px dotted #6f7d96;  }
+
+/*
+   ESTILOS PARA GRID DE COMPROMISOS
+---------------------------------------------------------------- */
+#nav-compromisos-etapas > li{
+    margin: 3px;
+    font-size: 12px;
+}
+
+#nav-compromisos-etapas > li > a{
+    padding: 5px 7px;
+}
+
+#nav-compromisos-etapas > li:not(.active) > a {
+    color: gray;
+    background-color: #E1E5F0;
+}
+
+#nav-compromisos-etapas > li.active.ss-red > a, #nav-compromisos-etapas > li.ss-red:not(.active) > a:hover {
+    color: white;
+    background-color: #D3353C !important;
+}
+
+#nav-compromisos-etapas > li.active.ss-blue > a, #nav-compromisos-etapas > li.ss-blue:not(.active) > a:hover {
+    color: white;
+    background-color: #008DAC !important;
+}
+
+#nav-compromisos-ind > li:not(.active) a{
+    background-color: #E1E5F0;
+    color: #6F7D96;
+}
+#nav-compromisos-ind > li > a {
+    min-width: 100px;
+    text-align: center;
+}
+
+#nav-compromisos-ind > li.active.ss-red > a , #nav-compromisos-ind > li.ss-red:not(.active) > a:hover{
+    color: #FFF;
+    background-color: #D3353C;
+}
+
+#nav-compromisos-ind > li.active.ss-blue > a , #nav-compromisos-ind > li.ss-blue:not(.active) > a:hover{
+    color: #FFF;
+    background-color: #008DAC;
+}
+
+#cnt-compromisos-ind{
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+#ListSubEtapa{
+    border: 1px solid lightgray;
+}
+
+.TituloCompromisos{
+    color: gray;
+    margin: 10px 0;
+}
+
+.grid-indicadores-Compromisos > thead > tr > th{
+    background-color: #6f7d96 !important;
+    border-width: 1px !important;
+}
+
+.grid-indicadores-Compromisos > thead > tr > th > a{
+    color: white !important;
+}
+
+.grid-indicadores-Compromisos td {
+    vertical-align: middle !important;
+}
+
+.grid-indicadores-Compromisos{
+    font-size: 12px;
+}
+
+.grid-indicadores-Compromisos tbody tr td:nth-child(1),
+.grid-indicadores-Compromisos tbody tr td:nth-child(4),
+.grid-indicadores-Compromisos tbody tr td:nth-child(5),
+.grid-indicadores-Compromisos > thead > tr > th {
+    text-align: center !important;
+}
+
+.icon-rc-Etapa{
+    font-size: 22px;
+}
+
+.icon-rc-SubEtapa{
+    font-size: 22px;
+}
+
+.a-subetapa{
+    cursor: pointer;
+    padding: 3px 0 !important;
+    color:white;
+}
+
+.a-subetapa.active{
+    color:#6EDEDF
+}
+
+#listCompromisos{
+    padding-left: 0;
+}
+
+#listCompromisos a{
+    padding: 0 0 0 10px !important;
+    text-decoration: none;
+}
+
+#listCompromisos div.subMenu-Etapas {
+    margin: 8px 0;
+}
+
+.info-adduser{
+    left: 391px;
+    position: absolute;
+    font-size: 20px;
+    top: 26px;
+}
+
+/*
+   ESTILOS PARA MODULO INDICACORES ASOCIADOS
+---------------------------------------------------------------- */
+
+#nav-subsis-ind > li.active > a {
+    color: #FFF;
+}
+#nav-subsis-ind > li.active > a:hover {
+    color: #FFF;
+}
+
+#modalIndicadoresAsociados .modal-dialog{
+    width: 960px;
+    height: 300px;
+}
+
+#modalIndicadoresAsociados .sub-title {
+    background-color: #A8ADC8;
+    color: #FFF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#modalIndicadoresAsociados .modal-body .cnt-ind-asoc {
+    overflow: auto;
+    max-height: 520px;
+    min-height: 300px;
+}
+
+.grid-indicadores-Compromisos .btn-newUserCompromiso:hover,
+.grid-indicadores-Compromisos .btn-infoCompromiso:hover {
+    color: black !important;
+}
+
+.btn-newUserCompromiso,
+.btn-infoCompromiso {
+    color: #6f7d96;
+    font-size: 15px !important;
+}
+
+.grid-indicadores-Compromisos th:nth-child(1){
+    width: 20% !important;
+}
+
+.grid-indicadores-Compromisos th:nth-child(2){
+    width: 40% !important;
+}
+
+.grid-indicadores-Compromisos th:nth-child(3){
+    width: 20% !important;
+}
+
+.Titulo-indicador-cp{
+    color: #6f7d96;
+    font-weight: bold;
+}
+
+.content-checkbox {
+    border: 1px solid lightgray;
+    margin: 0 auto;
+    width: 70%;
+}
+
+.dropdown-menu > li > a{
+    padding: 7px !important;
+}
+
+.ListasUsuarios{
+    margin-top:10px;
+}
+
+.title-listaUsuario-compromisos {
+    background-color: #6f7d96;
+    width: 100%;
+    color: white;
+}
+
+.title-addUserCompromisos{
+    font-style: italic;
+    color: gray;
+}
+
+.subtitle-addUserCompromisos{
+    font-weight: bold;
+    font-style: italic;
+    color: gray;
+}
+
+.ListaUsuarios  > div, .ListaResponsables > div{
+    text-align:center;
+}
+
+.btn-addorDelUser{
+    text-align: center;
+    font-size:50px;
+}
+
+.btn-asig-user {
+    font-size: 60px !important;
+}
+
+#ListaUsuarios, #ListaAsignados{
+    border: 1px solid #eee;
+    width: 100%;
+    min-height: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+}
+
+#ListaUsuarios li, #ListaAsignados li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 1.2em;
+  }
+
+#ListaUsuarios li:hover, #ListaUsuarios li.active,
+#ListaAsignados li:hover, #ListaAsignados li.active{
+    background-color: lightgray;
+    color: white;
+    cursor: default;
+}
+
+span.indent-compromisos{
+    margin: 0 3px 0 3px;
+}
+
+span.indent-compromisosSe{
+    margin: 0 0 0 40px;
+}
+
+.dropdown-menu > li{
+    color: white;
+}
+
+.titulo-subetapa-compromisos{
+    font-size: 20px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+/*
+    Tabla programa asociado
+--------------------------------------------------------*/
+.trTitulo{font-size:14px; font-weight:bold; text-align:center;}
+.trTitulo td{border-top:0px none !important;}
+.trEncabezados{font-weight:bold; text-align:center;}
+.trEncabezados td{border-top:0px none; vertical-align:bottom !important;}
+.trData td{text-align:center;align-content:center;}
+.trEncabezados .anterior, .trData .anterior{background-color:#d0f9ff;}
+.trEncabezados .actual, .trData .actual{background-color:#6dedff;}
+
+#modalProgramaAsociado .trData td input[type="number"] {
+    width: 35px !important;
+}
+
+#modalProgramaAsociado .trData td input[type="number"]::-webkit-inner-spin-button,
+#modalProgramaAsociado .trData td input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/*
+    Estilos de validación
+ ------------------------------------------------------*/
+label.error {
+    font-size: 12px;
+    color: #D3353C;
+}
+
+#etapas_proyecto .dropdown-menu > li a, #etapas_proyecto .dropdown-menu > li i{
+    color: #6f7d96;
+}
+
+.cnt-tab-subsist-grl.cnt-tbl-subsis {text-align:left;}
+
+.cnt-tab-subsist-grl .cnt-nomb-sub{
+    float:left;
+    display:table-cell;
+    vertical-align:middle;
+    height:85px;
+    font-size:20px;
+    width:65px;
+    padding-top:25px;
+}
+.cnt-nomb-sub.sub1{color:#d23239;}
+.cnt-nomb-sub.sub2{color:#008db2;}
+.cnt-nomb-sub.sub3{color:#3ba329;}
+.cnt-nomb-sub.sub4{color:#76746d;}
+
+
+.cnt-tab-subsist-grl .cnt-grafica-pies{
+    background-size: 50px;
+    height: 80px;
+    margin: 5px 15px 0;
+    width: 80px;
+    margin-left:0px;
+    border-right:1px solid #959fb1;
+}
+
+.cnt-tab-subsist-grl .cnt-grafica-text{
+    background-size:50px;
+    height:60px;
+    width:60px;
+    left:10px;
+    top:10px;
+}
+
+.cnt-tab-subsist-grl .cnt-grafica-text span:first-child{
+    font-size:16px;
+    line-height:65px;
+}
+
+.cnt-tab-subsist-grl .cnt-grafica-text span:last-child{
+    font-size:16px;
+    line-height:65px;
+}
+
+.cnt-tab-subsist-grl .ind-item-flecha{
+    width:15px;
+    height:15px;
+    border-radius:15px;
+    margin: 17px auto 0;
+}
+
+.cnt-tab-subsist-grl  .ind-item-flecha i{
+    font-size:6px;
+    top:-4px;
+}
+
+/*    ESTILOS PARA LA SECCIÓN PUBLICACIÓN TABLEROS   */
+#divdetalle-proyecto .btn, #divTablaProyectos .btn{padding:6px 8px;}
+
+#btnPublicar.btnCancelar{
+    background-color: #5aba00 !important;
+    color:#fff !important;
+    float: right;
+    width: 80px;
+    padding: 2px !important;
+    margin-right: 20px !important;
+}
+
+#cnt-subsis-PubTableros > #btn-tipo-vista{
+    float: right;
+}
+
+#modalPubTableros .modal-footer{
+    margin-top: 20px !important;
+}
+
+.msjPublicarTableroModal{
+    background-color: dodgerblue;
+    margin:15px 0;
+    padding:10px 0;
+    color:#fff;
+}
+
+.contentModelPubtableros{
+    margin: 0 auto !important;
+    width: 400px;
+}
+
+#nav-subsis-PubTableros > li:not(.active) a{
+    background-color: #E1E5F0;
+    color: #6F7D96;
+}
+#nav-subsis-PubTableros > li > a {
+    min-width: 100px;
+    text-align: center;
+}
+#nav-subsis-PubTableros > li:not(.active) a:hover {
+    color: #6F7D96 !important;
+}
+#nav-subsis-PubTableros > li.active > a {
+    color: #FFF;
+    background-color: #D3353C;
+}
+#nav-subsis-PubTableros > li.active > a:hover {
+    color: #FFF;
+}
+
+/*
+    Carga Indicadores
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+#modalEditValoresIndicador .prefijo-indicador{font-weight:bold;}
+#modalEditValoresIndicador form{padding:0px 15px;}
+#modalEditValoresIndicador .detalle-indicador{padding:20px 15px;}
+#modalEditValoresIndicador .detalle-indicador ul{list-style:none; padding:0px;}
+#modalEditValoresIndicador .detalle-indicador ul li div { width:150px; float:left;}
+
+
+#modalNotaIndicador .prefijo-indicador{font-weight:bold;}
+#modalNotaIndicador form{padding:0px 15px;}
+#modalNotaIndicador .detalle-indicador{padding:20px 15px;}
+#modalNotaIndicador .detalle-indicador ul{list-style:none; padding:0px;}
+#modalNotaIndicador .detalle-indicador ul li div { width:150px; float:left;}
+#cnt-indicadores-subsis > .row-proy, #cnt-indicadores-subsis-faltantes > .row-proy{padding:4px 0px; border-bottom:1px solid #ddd; color:#6f7d96;}
+
+#cnt-soportes-12mpi > .row-proy,
+#cnt-soportes-subsis > .row-proy,
+#cnt-soportes-subsis-NoAsig > .row-proy {
+    color:#6f7d96;
+}
+
+#cnt-indicadores-subsis > .row-proy:last-child, #cnt-indicadores-subsis-faltantes > .row-proy:last-child{border-bottom:0px !important;}
+.headProyectos{background-color:#6f7d96; color:#fff; font-weight:bold;}
+.headProyectos > div{padding-top:5px; padding-bottom:5px;}
+#cnt-indicadores-12mpi table tr th, #cnt-indicadores-12mpi-faltantes table tr th{background-color:#6f7d96; color:#fff; font-weight:bold;}
+.etapas-proyecto{color:#6f7d96; font-size:12px;}
+.etapas-proyecto  div.container-fluid{padding:5px 15px; border-bottom:1px solid #ddd;}
+.etapas-proyecto  div.container-fluid .table > tbody > tr > th{border-top:0px none;}
+.row-proy .btn{padding:0px 8px !important;}
+
+textarea.form-control{display:inline;}
+
+.row-indicadores .Verde{background-color:#28ca96; border-color: #2db78b; color:white;}
+.row-indicadores .Rojo{background-color:#ff4a5f; border-color: #e23045;color:white;}
+.row-indicadores .Gris {
+    background-color: #a5a5a7;
+    border-color: #8e8e90;
+    color: white;
+}
+
+
+/*  Estilos para Tableros - Por Proyecto   */
+.detalle-proy {
+    border: 1px solid lightgray;
+    margin-top: 45px;
+}
+
+.desc-detalle-proy > div {
+    padding: 5px;
+}
+
+.title-detalle-proy{
+    background-color: #6F7D96;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.semaforos-proy > div{
+    margin: 15px auto;
+}
+
+.semaforos-proy > div > span{
+    margin-left: 8px;
+}
+
+.subtitle-detalleproy{
+    color:gray;
+    font-weight: bold;
+}
+
+.elementos-proy{
+    margin-top: 15px;
+}
+
+.title-elemento-detalleproy{
+    background-color: #6F7D96;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    height: 55px;
+}
+
+.elemento-detalleproy{
+    width: 300px !important;
+    margin: 10px 17px;
+    border: 1px solid lightgray;
+    float: left;
+}
+
+.body-elemento-detalleproy{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.semaforos-elemento-detalleproy{
+    height: 80px;
+}
+
+.content-semaforos{
+    margin: 10% auto ! important;
+}
+
+.estatus-tiempo-En{
+    background-color: lightgray !important;
+}
+
+.opc-regresar{
+    float:right;
+    margin-top: -36px;
+}
+
+.opc-regresar-sub{
+    float:right;
+    margin-top: -36px;
+}
+
+.body-elemento-detalleproy > div,
+.content-semaforos > .col-md-3 > span, .elem-proy,
+.semaforos-proy > .col-md-3 > span{
+    color: #6F7D96;
+}
+
+.elementos-proy > .elemento-detalleproy:nth-child(3n+1){
+    margin-left: 0 !important;
+}
+
+.elementos-proy > .elemento-detalleproy:nth-child(3n+3){
+    margin-right: 0 !important;
+}
+
+.subelementos-proy > .elemento-detalleproy:nth-child(3n+1){
+    margin-left: 0 !important;
+}
+
+.subelementos-proy > .elemento-detalleproy:nth-child(3n+3){
+    margin-right: 0 !important;
+}
+
+.body-detalle-subetapa{
+    margin-top:-46px;
+}
+
+.circle-red{
+    background-color: red;
+    border-color: red;
+    float:left;
+}
+
+.circle-verde{
+    background-color:#28ca96;
+    border-color: #2db78b;
+    float:left;
+}
+
+.circle-amarillo{
+    background-color:#FFA71B;
+    border-color: #FFA71B;
+    float:left;
+}
+
+.circle-gris{
+    background-color:#a5a5a7;
+    border-color: #8e8e90;
+    float:left;
+}
+
+.text-circle, .leyenda-flecha{
+    float:left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.content-leyenda{
+    margin-left: 19%;
+    margin-top: 75px;
+}
+
+#cnt-subfiltros > .ListEtapas{
+    margin: 10px;
+}
+
+.nav-pills > li.tp-subfiltro.active > a, 
+#cnt-subfiltros > .ListEtapas > .nav-pills > li.active > a:hover,
+#cnt-subfiltros > .ListEtapas > .nav-pills > li:not(.active) > a:hover {
+    background-color: #6f7d96 !important;
+    color: #fff;
+}
+
+.nav-pills > li.tp-subfiltro:not(.active) > a {
+    background-color: #e1e5f0;
+    color: #6f7d96;
+}
+
+/*
+    Estilos para tala de documentos */
+.grid-documentos  {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+        .grid-documentos  > tbody > tr:nth-of-type(2n+1) {
+            background-color: #FFF !important;
+        }
+        .grid-documentos  > thead > tr > th {
+            background-color: #6f7d96;
+            border-width: 1px !important;
+        }
+            .grid-documentos  > thead > tr > th:hover {
+                background-color: #6f7d96;
+            }
+            .grid-documentos  > thead > tr > th > a span{
+                color: #FFF !important;
+            }
+    /*.grid-documentos  th:first-child{ width: 40px; text-align: center !important; }*/
+    /*.grid-documentos  th:nth-child(2) { width: 70px;  }*/
+    .grid-documentos  th:nth-child(2) { width: 80px;  }
+    .grid-documentos  th:nth-child(3) { width: 80px; text-align: center !important;  }
+    .grid-documentos  th:nth-child(4) { width: 40px; text-align: center !important;  }
+
+    .grid-documentos  tbody tr td:nth-child(2),
+    .grid-documentos  tbody tr td:nth-child(3){
+        text-align: center !important;
+    }
+    .grid-indicadores th:first-child a span {
+        margin-right: 4px !important;
+    }
+    .grid-indicadores td {
+        vertical-align: middle !important;
+    }
+    .grid-indicadores td a[class*="btn clr_indicador_"] {
+        padding: 0 5px !important;
+    }
+    #grid-documentos-footer{padding:0px;}
+    .btnConsultarDoc, .btnConsultarDoc:hover{padding:0px 3px; font-size:12px;background-color:#fff; border-color: #28ca96; color:#28ca96;}
+
+/*  Estilos para modulo Avisos   */
+.disable-opt {
+    background-color: lightgray;
+    color: gray;
+}
+
+
+/* Estilos para Monitor de Indicadores Faltantes */
+
+#cnt-indicadores-subsis .etapas-proyecto div.container-fluid {
+    border-bottom: none !important;
+}
+
+#cnt-indicadores-subsis .etapas-proyecto > div.container-fluid {
+    border-bottom: 1px solid #ddd !important;
+}
+
+#cnt-indicadores-12mpi-faltantes .row-proy .col-md-1,
+#cnt-indicadores-12mpi-faltantes .row-proy .col-md-5
+{
+    color:#828ea4;
+}
+
+/** Elemento loading **/
+.loading-mod {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index:2500;
+}
+.loading-mod > div:first-child{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.6;
+}
+    .loading-mod > div:last-child {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: white;
+        background: url('../Images/loadergif.gif') no-repeat center center;
+    }
+.loading-mod > div > span {
+    position: absolute;
+    left:0;
+    top: 40%;
+    width: 100%;
+    display: inline-block;
+    height: 30px;
+}
+
+.loading-mod > div > span:last-child {
+    color: #FF9FAB;
+}
+
+/**Mod usuario**/
+.DropSize {
+    width: 100%;
+    text-align: left !important;
+}
+.AlinearCenter {
+    text-align: left !important;
+}
+
+.AlinearBotonesPie {
+    margin-top: 10px !important;
+}
+.grid-Usuarios > thead > tr > th {
+    background-color: #6f7d96;
+    border-width: 1px !important;
+    color: white;
+    font-family: "Open Sans",sans-serif !important;
+}
+/*Estilo tabla usuario*/
+.grid-Usuarios td {
+    vertical-align: middle !important;
+}
+.grid-Usuarios {
+    font-family: "Open Sans",sans-serif !important;
+    font-size: 14px;
+}
+.grid-Usuarios tbody tr td:nth-child(1),
+.grid-Usuarios tbody tr td:nth-child(4),
+.grid-Usuarios tbody tr td:nth-child(5),
+.grid-Usuarios > thead > tr > th {
+    text-align: center !important;
+}
+.tablaUsuarios td {
+    vertical-align: middle !important;
+}
+.CentrarTexto {
+    text-align: center;
+    font-size: 12px;
+}
+.sizeCuadroCmb {
+    width: 100%;
+    text-align: left;
+}
+/*Estilo titulo Usuarios*/
+.HeaderUsuarios {
+    font-size: 19px;
+    font-weight: 400;
+    color: #6F7D96;
+}
+#tablaUsuarios1.table-condensed > tbody > tr > td {
+    padding: 0 !important;
+}
+
+#UpdateModal label,
+#frmNuevoPersonal label {
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 7px;
+    margin-bottom: 1px;
+    font-weight: 600;
+}
+
+.icon-rc-img {
+    min-width: 16px;
+    min-height: 16px;    
+    float: left;
+    background-position: center !important;
+}
+
+.icon-rc-etapa-g {
+    background: url('../../Images/miscelaneo/etapa_icon-g.png') no-repeat;
+    margin-left: 5px;
+    background-size: 16px !important;
+}
+
+.icon-rc-subetapa-g {
+    background: url('../../Images/miscelaneo/subetapa_icon-g.png') no-repeat;
+    margin-left: 5px;
+    background-size: 16px !important;
+}
+
+.icon-rc-etapa-w {
+    background: url('../../Images/miscelaneo/etapa_icon-w.png') no-repeat;
+    margin-left: 25px;
+    margin-right: 5px;
+    background-size: 16px !important;
+}
+
+.icon-rc-subetapa-w {
+    background: url('../../Images/miscelaneo/subetapa_icon-w.png') no-repeat;
+    margin-left: 35px;
+    margin-right: 5px;
+    background-size: 14px !important;
+}
+
+.icon-rc-indicador-i {
+    background: url('../../Images/miscelaneo/indicador_icon.png') no-repeat;
+}
+
+.icon-rc-rowright {
+    background-image: url('../../Images/miscelaneo/flechas_desplegables.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px !important;
+}
+
+.icon-rc-rowdown {
+    background-image: url('../../Images/miscelaneo/flechas_desplegables.png');
+    background-repeat: no-repeat;
+    background-position: 0px -16px !important;
+}
+
+/** Estilos de modal nuevo indidcador en subetapa **/
+#modalAgregarIndSE form label {
+    font-weight: normal !important;
+}
+
+.indicador-ayuda {
+    overflow: auto;
+    max-height: 60px;
+}
+
+#modalAgregarFechaCompriso .modal-dialog {
+    width: 300px !important;
+}
+
+/**Estilos de modal nuevo responsable **/
+.msj-error{
+    display: inline-block;
+    max-width: 100%;
+    margin-top: 7px;
+    margin-bottom: 1px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #D3353C;
+}
+
+/**Estilos de para elemento grid compromisos**/
+table[id*="grid-indicadores-"] th:nth-child(4) {
+    width: 65px !important;
+}
+    table[id*="grid-indicadores-"] th:nth-child(4) > a {
+        display: inline-block;
+    }
+
+    .chkall-indicadores {
+        position: relative;
+        top: 3px;
+        left: 3px;
+    }
+
+
+.fechas-subetapas{min-height:40px;}
+.grid-historial > thead > tr > th {
+    background-color: #6f7d96;
+    border-width: 1px !important;
+}
+.grid-historial th > .column-header-anchor {
+    color: #fff !important;
+}
+.grid-historial th:first-child { width: 100px !important;  }
+.grid-historial th:nth-child(2) { width: 100px !important;  }
+.grid-historial th:nth-child(3) { width: 100px !important;  }
+.grid-historial th:nth-child(4) { width: 100px !important;  }
+.grid-historial th > .column-header-anchor > .text {
+    white-space: normal !important;
+}
+
+.grid-historial td {
+    white-space: normal !important;
+}
+
+.grid-cell-usuario td {
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+}

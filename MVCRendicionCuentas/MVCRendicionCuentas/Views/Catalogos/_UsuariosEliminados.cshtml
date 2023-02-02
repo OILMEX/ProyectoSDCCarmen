@@ -1,0 +1,75 @@
+﻿@model List<RendicionCuentasServices.DTO.EntUsuariosEliminados>
+<div class="@*panel panel-heading*@" style="padding-top:10px; padding-bottom:15px;">
+    <img src="~/Images/logos/Usuario1.png" alt="USUARIOS ELIMINADOS" style="width:40px;height:40px;" />
+    <span class="HeaderUsuarios">CATÁLOGO DE USUARIOS ELIMINADOS</span>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body ">
+        <div class="container-fluid no-pd">
+            <form method="post" action="@Url.Action("UsuariosEliminados", "Catalogos")">
+                <div class="col-md-9">
+                    <div id="alert-msj" class="@ViewData["class"]">@ViewData["msj"]</div>
+                </div>
+                <div class="col-md-3 pdr-0 pdb-5">
+                    <button type="submit" class="pull-right btn btn-info">Restaurar Seleccionados</button>
+                </div>
+                <div class="col-md-12 pdl-0 pdr-0">
+                    <table id="tablaUsuarios1" class="table table-condensed table-hover table-striped table-bordered grid-Usuarios" style="table-layout:fixed; word-wrap:break-word;overflow:hidden;">
+                        <thead>
+                            <tr class="CentrarTexto">
+                                <th>#</th>
+                                <th>FICHA</th>
+                                <th>NOMBRE</th>
+                                <th>USUARIO</th>
+                                <th>ÁREA</th>
+                                <th>EMAIL</th>
+                                <th>TIPO DE ACCESO</th>
+                                <th>¿QUIEN ELIMINÓ?</th>
+                                <th>FECHA Y HORA DE ELIMINACION</th>
+                                <th>RESTAURAR</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaUsuarios2">
+                            @if (Model != null)
+                            {
+                                var i = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr id="filaTabla" class="CentrarTexto grid-cell-usuario">
+                                        <td>@i</td>
+                                        <td>@item.Ficha</td>
+                                        <td>@item.NombreResponsable</td>
+                                        <td>@item.Usuario</td>
+                                        <td>@item.NombreArea</td>
+                                        <td>@item.Correo</td>
+                                        <td>@item.Rol</td>
+                                        <td>@item.UsuarioElimino</td>
+                                        <td>@item.FechaActualizacion</td>
+                                        <td class="text-center"><input type="checkbox" name="idUsers[]" value="@item.idResponsable" /></td>
+                                    </tr>
+                                    ++i;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var msj = @ViewData["showmsg"];
+        console.log(msj);
+        if(msj){
+            setTimeout(function () {
+                $('#alert-msj').addClass('hidden');
+            }, 2000);
+        }
+        else{
+            $('#alert-msj').removeClass('hidden');
+        }
+    });
+
+</script>

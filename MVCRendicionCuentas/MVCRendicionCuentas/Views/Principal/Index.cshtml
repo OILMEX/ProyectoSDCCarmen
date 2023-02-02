@@ -1,0 +1,51 @@
+﻿@{
+    
+    var user = System.Web.HttpContext.Current.Request.Cookies["myCookie"];
+}
+
+<style>
+    body{
+        background-image: url(../../Images/fondo_login.jpg);
+        background-color: #2f363e;
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+        background-size:cover !important;
+        background-position:center center;
+    }
+</style>
+
+<script type="text/javascript">
+    $('#Hidden1').val(@ViewBag.cookiename);
+</script>
+
+<div class="container-fluid" style="margin-top:25%;">
+    <ul class="menuprincipal">
+@if (user!=null)
+{
+    if (user["Rol"].ToString() == "Administrador" || user["Rol"].ToString() == "SubAdministrador")
+    { 
+            <li><a href="@Url.Action("Index", "ConfigProyecto")" class="mnprincipal btnConfiguracionProyecto"></a><span>Configuración <br />de Proyectos</span></li>
+            <li><a href="@Url.Action("Index", "CargaIndicadores")" class="mnprincipal btnCargaIndicadores"></a><span>Carga de<br />Indicadores</span></li>
+            <li><a href="@Url.Action("Index", "MonitorIndicador")" class="mnprincipal btnMonitorCarga"></a><span>Monitoreo<br />de Carga</span></li>
+            <!-- <li><a href="@Url.Action("Index", "RendicionCuenta")" class="mnprincipal btnRendicionCuenta"></a><span>Rendición<br />de Cuentas Nivel Responsable</span></li> -->
+            <li><a href="@Url.Action("IndicadoresGerencia12MPI", "RendicionCuenta")" class="mnprincipal btnRendicionCuenta"></a><span>Rendición<br />de Cuentas 12MPI</span></li>
+            <li><a href="@Url.Action("IndicadoresGerencia", "RendicionCuenta")" class="mnprincipal btnRendicionCuenta"></a><span>Rendición<br />de Cuentas<br />Nivel Proyecto</span></li>
+            <li><a href="@Url.Action("Alarmas", "Avisos")" class="mnprincipal btnAvisosAlarmas"></a><span>Avisos y<br />Alarmas</span></li>
+            <li><a href="@Url.Action("Index", "PublicarTablero")" class="mnprincipal btnPublicarTablero"></a><span>Publicar<br />Tablero</span></li>    
+            <li><a href="@Url.Action("Index", "Tableros")" class="mnprincipal btnTableroGestion"></a><span>Tableros<br />de Gestión</span></li>
+    }
+    else if (user["Rol"].ToString() == "Carga")
+    {
+        <li><a href="@Url.Action("Index", "CargaIndicadores")" class="mnprincipal btnCargaIndicadores"></a></li>
+        <li><a href="@Url.Action("Index", "RendicionCuenta")" class="mnprincipal btnRendicionCuenta"></a></li>
+        <li><a href="@Url.Action("Index", "Tableros")" class="mnprincipal btnTableroGestion"></a></li>
+    }
+    else
+    {
+        <li><a href="@Url.Action("Index", "RendicionCuenta")" class="mnprincipal btnRendicionCuenta"></a></li>
+        <li><a href="@Url.Action("Index", "Tableros")" class="mnprincipal btnTableroGestion"></a></li>  
+    }
+}
+
+    </ul>
+</div>

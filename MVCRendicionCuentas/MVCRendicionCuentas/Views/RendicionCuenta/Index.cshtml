@@ -1,0 +1,858 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model HtmlString
+
+<div class="container-fluid lbl-mod-tit pdb-20 pdl-0">
+
+    <div class="media">
+        <div class="media-left media-middle">
+            <img class="media-object" src="~/Images/iconos_secciones/proyectos.png" />
+        </div>
+        <div class="media-body">
+            <span>RENDICIÓN DE CUENTAS</span>
+            <span class="label label-default mrl-10 bulet" id="bulet-proy"></span>
+        </div>
+        <div class="content-leyenda mrt-10">
+            <div class="cnt-leyendas">
+                <div class="circle circle-red"></div><div class="text-circle"> 0% a 80%</div>
+                <div class="circle circle-amarillo"></div><div class="text-circle"> 81% a 95%</div>
+                <div class="circle circle-verde"></div><div class="text-circle"> 96% a 100%</div>
+                <div class="circle circle-gris"></div><div class="text-circle"> No aplica </div>
+                <div class="leyenda-flecha"><span class="fa fa-check-square green "></span> Indicador actualizado </div>
+                <div class="leyenda-flecha"><span class="fa fa-times red "></span> Indicador NO actualizado </div>
+            </div>
+        </div>
+        <div class="col-md-12 no-pd" id="divFiltro">
+            <form id="frmResponsableIndicadores" name="frmResponsableIndicadores" method="post" action="/RendicionCuenta/getIndicadoresxresponsable">
+                <div class="col-md-5 pdl-0 pdt-5 form-group" id="divGerenciaX">
+                    <label for="selGerencia">Gerencias</label>
+                    <select class="form-control" name="selGerencia" id="selGerencia">
+                        <option value="">TODOS</option>
+                    </select>
+                </div>
+                <div class="col-md-5 pdl-0 pdt-5 form-group">
+                    <label for="selResponsable">Responsables</label>
+                    <select class="form-control" name="selResponsable" id="selResponsable">
+                        <option value="">SELECCIONE EL NOMBRE DE LA PERSONA</option>
+                    </select>
+                </div>
+                <div class="col-md-2 modal-footer pdt-20 pdb-0 text-center" style="border-top:0px none;"><button type="button" class="btn btnAceptar">Aceptar</button></div>
+                <div class="col-md-12 pdl-0">
+                    <div class="alert alert-success delete hidden" role="alert"><strong>Completado!</strong>Se elimino correctamente.</div>
+                    <div class="alert alert-success edit hidden" role="alert"> <strong>Completado!</strong> Tus datos han sido cargados corrrectamente. </div>
+                    <div class="alert alert-warning hidden" role="alert"> <strong>Enviando...!</strong> Espere un momento por favor.</div>
+                    <div class="alert alert-danger hidden" role="alert"> <strong>Oh!</strong> Los datos no se pudieron cargar correctamente. </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid Square-indicadores">
+    <!-- Nav tabs -->
+    <ul id="nav-subsis-ind" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#tab-12mpi" aria-controls="tab-tablero1" role="tab" data-toggle="tab">12 MPI</a>
+        </li>
+        <li role="presentation">
+            <a href="#tab-subsistemas" aria-controls="tab-tablero1" role="tab" data-toggle="tab">Subsistemas</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- Grafica de subsistemas -->
+        <div class="cnt-vista-graf-pie">
+            <div class="container-fluid no-pd cnt-tbl-subsis cnt-tab-subsist-grl"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane active" id="tab-12mpi">
+            <div class="ListEtapas"></div>
+                <!-- Tab panes -->
+            <div id="cnt-indicadores-12mpi" class="tab-content"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="tab-subsistemas">
+            <!-- Tab panes -->
+            <div id="cnt-indicadores-subsis" class="tab-content">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/template" id="tmp-list-elementos">
+    <!-- Elemento de Etapas  -->
+    
+    <ul id="nav-compromisos-etapas" class="nav nav-pills" role="tablist">
+        <% _.each(indicadores, function(elemento, j){
+        if(true) { %>
+        <li role="presentation"<%= (j === 0)? 'class="ss-red active"': 'class="ss-red"' %>>
+                    <a href="#tab-subsistemaE<%= j %>" aria-controls="tab-subsistemaE<%= j %>" role="tab" 
+                       data-toggle="tab" data-idelemento="<%= elemento.elemento_id %>" class="btnElemento"><%= elemento.elemento_nombre %></a>
+                </li>
+        <% } %>
+        <% }); %>
+    </ul>
+</script>
+
+<script type="text/template" id="tmp-tablero-subsis">
+    <div class="cnt-graficas-subsis">
+        <% _.each(elementos, function(e,i){
+        if(elementos.length > 0 && i < 4){
+        var clss = (e.EstatusMejora === 1)?"up":((e.EstatusMejora === 2)?"down":"right");  %>
+        <div class="cnt-nomb-sub sub<%= e.IdSubsistema %>"><span><%=e.NombreSubsistema%></span></div>
+        <div class="cnt-wrp-diagrama">
+            <div class="cnt-grafica-pie<%=(elementos.length>1)?'s':''%> cnt-grafica-nivel2" data-subsistema="<%=e.NombreSubsistema%>" data-tproy="<%=elementos.length%>">
+                <canvas class="circulo-dinamico" id="chart-nivel2-container<%=i%>" width="80" height="80" data-elem="#chart-nivel2-container<%=i%>" data-avance="<%= e.Porcentaje %>" data-color="<%= e.Semaforo %>"></canvas>
+                <div class="cnt-grafica-text lnk-concepto" data-lnk="" role="button"><span><%=e.Porcentaje%></span><span>%</span></div>
+
+                <% if(e.completados !== undefined){ %><span class="lbl-comp"><%=e.completados%></span><% } %>
+            </div>
+        </div>
+        <% } }); %>
+    </div>
+</script>
+
+<script type="text/template" id="tmp-coleccion-tabcont-ind">
+    <table class="table table-condensed">
+        <tr>
+            <th width="50">&nbsp;</th>
+            <th width="150">Clave Indicador</th>
+            <th>Nombre</th>
+            <th width="100" class="text-center">Estatus</th>
+            <th width="100" class="text-center">Información</th>
+            <th width="100" class="text-center">Valor</th>
+            <th width="100" class="text-center">Otros</th>
+        </tr>
+
+        <% _.each(indicadores,function(indicador, i){ %>
+        <tr class="row-indicadores element<%= indicador.IdElemento %> <%= (indicador.IdElemento<=10)? ((indicador.IdElemento==1)? '':'hidden'):'' %>">
+            <td><div id="divCirculo<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="circle <%= indicador.Semaforo %>"></div></td>
+            <td><%= indicador.Prefijo %></td>
+            <td><%= indicador.DescripcionCorta %></td>
+            <td class="text-center">
+                <span id="lblestatus<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="fa <%= (indicador.Valor!=null)? 'fa-check-square green':'fa-times red'  %> "></span>
+                <br />
+                @*<span><%= indicador.indicador_fechactualizado %></span>*@
+            </td>
+            <td class="text-center">
+                <span><%= indicador.TipoIndicador %></span>
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                - <%= indicador.TipoCalculo %>
+                <% } %>
+                <br />
+                <span><%= indicador.TipoFrecuencia %> días</span><br />
+                <% if(indicador.TipoIndicador == 'Seguimiento'){  %>
+                <span>Meta <%= indicador.Meta > 0 ? indicador.Meta + '%' : indicador.Meta %></span><br />
+                <% } %>
+            </td>
+            <td class="text-center">
+                <% if(indicador.TipoIndicador=="Seguimiento"){ %>
+                <a class="btn btn-meta" id="lblMeta<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"><%= indicador.Valor %>%</a>
+                <a id="btnDatos<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="btn btn-datos"
+                   data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                   data-idindicador="<%= indicador.IdIndicador %>"
+                   data-idconfigresp="<%= indicador.IdConfigIndicadorResponsable %>">Datos</a>
+                <% } %>
+
+                <% if(indicador.TipoIndicador=="Checkbox" || indicador.TipoIndicador=="Check"){ %>
+                ¿Realizado?
+                <div class="checkbox checkbox-slider--b-flat mrl-20">
+                    <label>
+                        <input id="chk<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>" class="chkDataValor" onclick="checkedBox12mpi(this)" data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                               data-estatus="<%= (indicador.Valor=='100')? 'True' : 'False' %>"
+                               data-idindicador="<%= indicador.IdIndicador %>"
+                               data-idconfigresp="<%= indicador.IdConfigIndicadorResponsable %>"
+                               type="checkbox" disabled="disabled" <%= (indicador.Valor=='100')? 'checked="checked"' : '' %>  ><span></span>
+                    </label>
+                </div>
+
+                <% } %>
+
+            </td>
+            <td class="text-center">
+                <a class="btn btnDocumentIndicador <%= indicador.SemaforoSoportes %> <%= (indicador.IdDataValoresIndicadores == null)? 'disabled': 'activo' %>
+                   " href="#" id="btnSoportes<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"
+                   data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                   data-prefijo="<%= indicador.Prefijo %>"
+                   data-desccort="<%= indicador.DescripcionCorta %>"
+                   data-tipoindicador="<%= indicador.TipoIndicador %>"
+                   data-tipocalculo="<%= indicador.TipoCalculo %>"
+                   data-frecuencia="<%= indicador.TipoFrecuencia %>"
+                   data-meta="<%= indicador.Meta %>">Soportes</a>
+
+                <br />
+
+                <a disable class="btn btnNotaIndicador <%= indicador.SemaforoComentarios %>
+                   <%= (indicador.IdDataValoresIndicadores == null)? 'disabled': 'activo' %>
+                   " href="#" id="btnNotas<%= indicador.IdIndicador %><%= indicador.IdConfigIndicadorResponsable %>"
+                   data-iddatavaloresind="<%= indicador.IdDataValoresIndicadores %>"
+                   data-prefijo="<%= indicador.Prefijo %>"
+                   data-desccort="<%= indicador.DescripcionCorta %>"
+                   data-tipoindicador="<%= indicador.TipoIndicador %>"
+                   data-tipocalculo="<%= indicador.TipoCalculo %>"
+                   data-frecuencia="<%= indicador.TipoFrecuencia %>"
+                   data-meta="<%= indicador.Meta %>">Notas</a>
+            </td>
+        </tr>
+
+        <% }); %>
+
+    </table>
+</script>
+
+<script id="tmp-colection-proy" type="text/template">
+    <div class="container-fluid no-pd headProyectos">
+        <div class="col-md-1 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd text-center">#</div>
+                <div class="col-md-6 no-pd">IND</div>
+            </div>
+        </div>
+        <div class="col-md-4">Componente de Proyecto</div>
+        <div class="col-md-3">Responsable</div>
+        <div class="col-md-2">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">F. Inicio</div>
+                <div class="col-md-6 no-pd text-center">F. Fin</div>
+            </div>
+        </div>
+        <div class="col-md-2 pdl-0 pdr-0">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center">SASP</div>
+                <div class="col-md-4 no-pd text-center">SAA</div>
+                <div class="col-md-4 no-pd text-center">SAST</div>
+            </div>
+        </div>
+    </div>
+
+    <% _.each(indicadores, function(p, i){ %>
+    <div class="container-fluid no-pd pdt-5 pdb-5 row-proy">
+        <div class="col-md-1 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd">
+                    <% if(p.Etapas.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-eleme<%= p.proyecto_id %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= i+1 %>
+                </div>
+                <div class="col-md-6 no-pd">
+                    <div class="circle <%= p.proyecto_indicador_global %>"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"><%= p.proyecto_nombre %></div>
+        <div class="col-md-3"><%= p.proyecto_responsable %></div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_ini!=null)? moment(p.proyecto_fecha_ini).format('DD/MM/YYYY'): '' %></div>
+                <div class="col-md-6 no-pd"><%= (p.proyecto_fecha_fin!=null)? moment(p.proyecto_fecha_fin).format('DD/MM/YYYY'): '' %></div>
+            </div>
+        </div>
+        <div class="col-md-2 no-pd">
+            <div class="container-fluid no-pd">
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SASP %>"> <%= p.porcentaje_SASP %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAA %>"> <%= p.porcentaje_SAA %>% </a></div>
+                <div class="col-md-4 no-pd text-center"><a class="btn pdt-0 pdb-0 clr_indicador_<%= p.semaforo_SAST %>"> <%= p.porcentaje_SAST %>% </a></div>
+            </div>
+        </div>
+    </div>
+
+    <% if(p.Etapas.length>0) { %>
+    <div id="box-eleme<%= p.proyecto_id %>" class="collapse etapas-proyecto">
+        <%= ( templateFn({etapas: p.Etapas, pid:p.proyecto_id}) ) %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+<script id="tmp-colection-etapas" type="text/template">
+    <%
+    var i = 0;
+    _.each(etapas, function(e){
+    i++; %>
+    <div class="container-fluid <%= (i == etapas.length)? 'last' : '' %> ">
+        <div class="col-md-7">
+            <% if(e.SubEtapas.length>0) { %>
+            <i class="glyphicon glyphicon-triangle-bottom pull-left" data-toggle="collapse" data-target="#box-eleme<%= e.etapa_id %><%= pid %>" role="button"></i>
+            <% }else{ %>
+            <i class="fa pull-left" style="width:13px; height:14px;"></i>
+            <% } %>
+            &nbsp;<div class="icon-rc-img icon-rc-etapa-g"></div>&nbsp;
+            <%= e.clave %> <%= e.etapa_nombre %>
+        </div>
+        <div class="col-md-4 text-right">Fecha de conclusión de la etapa:</div>
+        <div class="col-md-1"><%= (e.FechaFin!=null)? moment(e.FechaFin).format('DD/MM/YYYY') : '' %>&nbsp;</div>
+    </div>
+    <% if(e.SubEtapas.length>0) { %>
+    <div id="box-eleme<%= e.etapa_id %><%= pid %>" class="collapse nivel-1">
+        <% _.each(e.SubEtapas, function(sub){ %>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <% if(sub.Subsistemas.length>0) { %>
+                <i class="glyphicon glyphicon-triangle-bottom pull-left" data-toggle="collapse" data-target="#box-subetapa<%= sub.subetapa_id %><%= pid %>" role="button"></i>
+                <% }else{ %>
+                <i class="fa pull-left" style="width:13px; height:14px;"></i>
+                <% } %>
+                &nbsp;<i class="icon-rc-img icon-rc-subetapa-g"></i>&nbsp;
+
+                <%= sub.clave %> <%= sub.subetapa_nombre %>
+            </div>
+
+        </div>
+
+        <% if(sub.Subsistemas.length>0) { %>
+        <div id="box-subetapa<%= sub.subetapa_id %><%= pid %>" class="collapse nivel-2">
+            <% _.each(sub.Subsistemas, function(sis){ %>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <% if(sis.Procesos.length>0) { %>
+                    <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-sistemas<%= sub.subetapa_id %>-<%= sis.id_subsistema %><%= pid %>" role="button"></i>
+                    <% }else{ %>
+                    <i class="fa" style="width:13px; height:14px;"></i>
+                    <% } %>
+                    <%= sis.siglas %>
+                </div>
+            </div>
+
+            <% if(sis.Procesos.length>0) { %>
+            <div id="box-sistemas<%= sub.subetapa_id %>-<%= sis.id_subsistema %><%= pid %>" class="collapse nivel-3">
+                <% _.each(sis.Procesos, function(proc){ %>
+                <div class="container-fluid">
+                    <div class="col-md-10">
+                        <% if(proc.IndicadoresProy.length>0) { %>
+                        <i class="glyphicon glyphicon-triangle-bottom" data-toggle="collapse" data-target="#box-procesos<%= sub.subetapa_id %>-<%= proc.proceso_id %><%= pid %>" role="button"></i>
+                        <% }else{ %>
+                        <i class="fa" style="width:13px; height:14px;"></i>
+                        <% } %>
+                        <%= proc.proceso_sigla %> <%= proc.proceso_nombre %>
+                    </div>
+
+                </div>
+
+                <% if(proc.IndicadoresProy.length>0) { %>
+                <div id="box-procesos<%= sub.subetapa_id %>-<%= proc.proceso_id %><%= pid %>" class="collapse nivel-4">
+
+                    <%= ( tblndicadoresFN({indicadores: proc.IndicadoresProy}) ) %>
+
+                </div>
+                <% } %>
+
+                <% }); %>
+            </div>
+            <% } %>
+
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% }); %>
+    </div>
+    <% } %>
+
+    <% }); %>
+</script>
+
+<script type="text/template" id="tmp-det-programa">
+    <tr class="trData">
+        <td><b>P</b></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AnioAnteriorProg%>" name="AnioAnteriorProg" id="agnoAnteriorProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.EneroProg%>" name="EneroProg" id="eneroProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.FebreroProg%>" name="FebreroProg" id="febreroProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.MarzoProg%>" name="MarzoProg" id="marzoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AbrilProg%>" name="AbrilProg" id="abrilProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.MayoProg%>" name="MayoProg" id="mayoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.JunioProg%>" name="JunioProg" id="junioProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.JulioProg%>" name="JulioProg" id="julioProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AgostoProg%>" name="AgostoProg" id="agostoProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.SeptiembreProg%>" name="SeptiembreProg" id="septiembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.OctubreProg%>" name="OctubreProg" id="octubreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.NoviembreProg%>" name="NoviembreProg" id="noviembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.DiciembreProg%>" name="DiciembreProg" id="diciembreProgramado" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.ProyeccionAnualProg%>" name="ProyeccionAnualProg" id="anualProgramdo" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AnioSiguienteProg%>" name="AnioSiguienteProg" id="agnoSiguienteProgramado" /></td>
+    </tr>
+    <tr class="trData">
+        <td><b>R</b></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AnioAnteriorReal%>" name="AnioAnteriorReal" id="agnoAnteriorReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.EneroReal%>" name="EneroReal" id="eneroReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.FebreroReal%>" name="FebreroReal" id="febreroReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.MarzoReal%>" name="MarzoReal" id="marzoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AbrilReal%>" name="AbrilReal" id="abrilReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.MayoReal%>" name="MayoReal" id="mayoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.JunioReal%>" name="JunioReal" id="junioReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.JulioReal%>" name="JulioReal" id="julioReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AgostoReal%>" name="AgostoReal" id="agostoReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.SeptiembreReal%>" name="SeptiembreReal" id="septiembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.OctubreReal%>" name="OctubreReal" id="octubreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.NoviembreReal%>" name="NoviembreReal" id="noviembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.DiciembreReal%>" name="DiciembreReal" id="diciembreReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.ProyeccionAnualReal%>" name="ProyeccionAnualReal" id="anualReal" /></td>
+        <td><input type="text" maxlength="4" size="2" disabled="disabled" value="<%=programa.AnioSiguienteReal%>" name="AnioSiguienteReal" id="agnoSiguienteReal" /></td>
+    </tr>
+</script>
+
+
+<script type="text/javascript">
+    var templateFn = _.template($('#tmp-colection-etapas').html());
+    var tblndicadoresFN = _.template($('#tmp-coleccion-tabcont-ind').html());
+
+    $(function () {
+        var OBJ = [];
+        initCarga();
+
+        //validacion formulario indicadores x responsable
+        $('#frmResponsableIndicadores').validate({
+            rules: {
+                'selResponsable': {required: true},
+            },
+            messages: {
+                'selResponsable': { required: "El campo es requerido" },
+            }
+        });
+
+        //Envio del formulario indicadores x responsable
+        $(document).on('click', '#frmResponsableIndicadores .btnAceptar', function () {
+            $('#frmResponsableIndicadores').submit();
+        });
+
+        //Procesar envío de nuevo indicadores
+        $('#frmResponsableIndicadores').submit(function () {
+            if ($(this).valid() === true) {
+                $('#frmResponsableIndicadores').ajaxSubmit({
+                    dataType: 'json',
+                    beforeSend: function () { $('#frmResponsableIndicadores .alert-warning').removeClass('hidden'); },
+                    success: function (data) {
+                        var d = JSON.parse(data);
+                        console.log(d);
+                        $('#frmResponsableIndicadores .alert-warning').addClass('hidden');
+                        if (d.accion) {
+                            $('#frmResponsableIndicadores .alert-success.edit').removeClass('hidden');
+                            cargarCntSistemas('#cnt-indicadores-12mpi', "#tmp-coleccion-tabcont-ind", d.ind12mpi);
+                            cargarCntSistemas('#cnt-indicadores-subsis', "#tmp-colection-proy", d.proyectos);
+                            cargarCntSistemas('.ListEtapas','#tmp-list-elementos',OBJ.elementos);
+                        } else {
+                            $('#frmResponsableIndicadores .alert-danger').removeClass('hidden');
+                        }
+                        setTimeout(function () {
+                            //$('#modalProgramaAsociado').modal('hide');
+                            $('#frmResponsableIndicadores .alert-success').addClass('hidden');
+                            $('#frmResponsableIndicadores .alert-danger').addClass('hidden');
+                            //location.reload();
+                        }, 1000);
+                    }
+                });
+            }
+            return false;
+        });
+
+        //Evento de elementos 12mpi
+        $(document).on('click', '.btnElemento', function(){
+            var parent = $(this).parent();
+            var idelemento = $(this).data('idelemento');
+            var clselemento = ".element"+idelemento;
+
+            var tab12mpi = $('#cnt-indicadores-12mpi');
+            tab12mpi.find('.table tr.row-indicadores').removeClass('hidden').addClass('hidden');
+            tab12mpi.find('.table tr.row-indicadores'+clselemento).removeClass('hidden');
+
+        });
+
+        //Eventos clic en tabs
+        $('#tabOpc12mpiFaltantes').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/getIndicadores12mpiFaltantes',
+                data: { },
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargarCntSistemas('#cnt-indicadores-12mpi-faltantes', "#tmp-coleccion-tabcont-ind", d.ind12mpifaltantes);
+                },
+                error: function (msg) {
+                    console.log('Error: ' + msg);
+                }
+            });
+        });
+
+        //Envio del formulario indicacodr valor/formula
+        $(document).on('click', '#modalEditValoresIndicador .btnAceptar', function () {
+            $('#modalEditValoresIndicador').modal('hide');
+        });
+
+        //Envio del formulario agregar Nota
+        $(document).on('click', '#modalNotaIndicador .btnAceptar', function () {
+            $('#modalNotaIndicador').modal('hide');
+        });
+
+        //Envio datos indicador programa
+        $(document).on('click', '#modalProgramaAsociado .btnAceptar', function () {
+            $('#modalProgramaAsociado').modal('hide');
+        });
+
+        //Accion que manda traer la info del indicador
+        $(document).on('click', '.btn-datos', function(){
+            var idIndicador = $(this).data('idindicador');
+            var idconfig = $(this).data('idconfigresp');
+            var iddata = ($(this).attr('data-iddatavaloresind') != "")? $(this).attr('data-iddatavaloresind') : 0;
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/infoIndicador',
+                data: { idIndicador: idIndicador, idconfig: idconfig, iddata:iddata },
+                success: function (data) {
+                    showDetails(data, idconfig);
+                    //Eventos para los botones del modal
+                    //$('#modalEditValoresIndicador').modal('show');
+                },
+                error: function (msg) {
+                    console.log('Error: ' + msg);
+                }
+            });
+        });
+
+        $(document).on('click','.btnDocumentIndicador.activo' , function(){
+            var modal = $('#modalDocumentosIndicador');
+            modal.find('#IndicadorPrefijo').text($(this).data('prefijo'));
+            modal.find('#DescripcionCortaIndicador').text($(this).data('desccort'));
+            modal.find('#btnAddDocumentoIndicador').removeClass('hidden');
+            modal.find('#btnAddDocumentoIndicador').addClass('hidden');
+            modal.find('#btnAddDocumentoIndicador').attr('data-iddatavaloresind', $(this).data('iddatavaloresind'));
+
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/getDocumentos',
+                data: { iddataidentificador: $(this).data('iddatavaloresind')},
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    cargaTablaDocumentos(modal.find('#grid-documentos'), d.documentos);
+
+                    //Eventos para los botones del modal
+                    modal.modal('show');
+                },
+                error: function (msg) {
+                    console.log('Error: ' + msg);
+                }
+            });
+        });
+
+        $('#modalDocumentosIndicador #btnAddDocumentoIndicador').on('click', function() {
+            var modal2 = $('#modalAddResource');
+            modal2.find('form#frmAddDocumento').trigger('reset');
+            modal2.find('.error').text('');
+            modal2.find('#IdDataValoresIndicadores').val($(this).data('iddatavaloresind'));
+            modal2.modal('show');
+        });
+
+        $(document).on('change', '#selGerencia', function(){
+            var id = $(this).val();
+            if(id==""){
+                populateComboResponsable('#selResponsable', OBJ.responsables);
+            }else{
+                var filter = _.where(OBJ.responsables, { idUbicacion: parseInt(id) });
+                populateComboResponsable('#selResponsable', filter);
+            }
+        });
+
+        $(document).on('click','.btnNotaIndicador.activo', function(){
+
+            var iddata = ($(this).data('iddatavaloresind') != "")? $(this).data('iddatavaloresind') : 0;
+            var modal = $('#modalNotaIndicador');
+            var tipoind = ($(this).data('tipoindicador') == 'Seguimiento')? $(this).data('tipoindicador') + ' - ' + $(this).data('tipocalculo') : $(this).data('tipoindicador');
+
+            if($(this).data('tipoindicador') == 'Seguimiento')
+            {
+                modal.find('.seguimiento').show();
+            }
+            else{
+                modal.find('.seguimiento').hide();
+            }
+
+            modal.find('#IdDataValoresIndicadores').val(iddata);
+            modal.find('.prefijo-indicador').text($(this).data('prefijo'));
+            modal.find('.desc-indicador').text($(this).data('desccort'));
+            modal.find('.tipo-indicador').text(tipoind);
+            modal.find('.meta-indicador').text($(this).data('meta') + '%');
+            modal.find('.frecuencia-indicador').text($(this).data('frecuencia') + ' Días');
+
+            $.ajax({
+                type: 'POST',
+                url: '/CargaIndicadores/infoNota',
+                data: { iddata:iddata },
+                success: function (data) {
+                    //Eventos para los botones del modal
+                    var jdata = JSON.parse(data);
+                    var nota = (jdata.nota=="")? "" : jdata.nota;
+                    modal.find('#Comentario').prop('disabled', true);
+                    modal.find('#Comentario').val(nota);
+                    modal.modal('show');
+                },
+                error: function (msg) {
+                    console.log('Error: ' + msg);
+                }
+            });
+
+        });
+
+        function initCarga() {
+
+            OBJ = @Model;
+
+            $(OBJ.ubicaciones).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.Ubicacion);
+                option.val(this.idUbicacion);
+                //if(this.id == d.dataproyecto.proyecto_idresponsable){option.prop('selected', true)}
+                $("#selGerencia").append(option);
+            });
+
+            populateComboResponsable("#selResponsable",OBJ.responsables);
+
+            //$(OBJ.responsables).each(function () {
+            //    var option = $(document.createElement('option'));
+            //    option.text(this.Nombre);
+            //    option.val(this.id);
+            //    //if(this.id == d.dataproyecto.proyecto_idresponsable){option.prop('selected', true)}
+            //    $("#selResponsable").append(option);
+            //});
+
+            if(!OBJ.admin)
+                $('#divGerenciaX').hide();
+            
+            
+            
+            //if(OBJ.admin){$('#divFiltro').removeClass('hidden');}
+            //else{$('#divFiltro').addClass('hidden');}
+            cargarCntSistemas('.ListEtapas','#tmp-list-elementos',OBJ.elementos);
+            cargarCntSistemas('#cnt-indicadores-12mpi', "#tmp-coleccion-tabcont-ind", OBJ.ind12mpi);
+            cargarCntSistemas('#cnt-indicadores-subsis', "#tmp-colection-proy", OBJ.proyectos);
+            cargarDiagrama({
+                tmpl: "#tmp-tablero-subsis",
+                datos: OBJ.graficas,
+                cnt: ".cnt-tbl-subsis"
+            }, function () {
+                initGraficaDinamicaPie(".cnt-grafica-nivel2 .circulo-dinamico");
+            });
+        }
+
+
+
+        function cargarCntSistemas(elem, temp, d) {
+            //if (d.length > 0)
+            {
+                var tmpl = $(temp).html();
+                var compiled = _.template(tmpl);
+                var html = compiled({ "indicadores": d} );
+                $(elem).html(html);
+            }
+        }
+
+        function showDetails(data, idconf) {
+
+            var jdata = JSON.parse(data);
+            var jvalor = jdata.data;
+            jdata = jdata.detalle;
+            if(jdata.TipoCalculo != 'Programa'){
+                //Populando
+                var modal = $('#modalEditValoresIndicador');
+                modal.find('form').trigger('reset');
+                modal.find('#idIndicador').val(jdata.IdIndicador);
+                modal.find('#TipoCalculo').val(jdata.TipoCalculo);
+                modal.find('#idConfigRespInd').val(idconf);
+                modal.find('.prefijo-indicador').text(jdata.Prefijo);
+                modal.find('.desc-indicador').text(jdata.DescripcionCorta);
+                modal.find('.tipo-indicador').text(jdata.TipoIndicador + ' - ' + jdata.TipoCalculo);
+                modal.find('.meta-indicador').text(jdata.Meta + '%');
+                modal.find('.frecuencia-indicador').text(jdata.TipoFrecuencia + ' Días');
+                modal.find('#IdDataValoresIndicadores').val(jvalor.IdDataValoresIndicadores);
+
+                modal.find('form input').prop('disabled', true);
+                modal.find('.btnCalculo').removeClass('hidden');
+                modal.find('.btnCalculo').addClass('hidden');
+            }else{
+                var modal = $('#modalProgramaAsociado');
+                modal.find('form').trigger('reset');
+                modal.find('.modal-body .infoActualizar').addClass('hidden');
+                modal.find('.modal-body .infoCalculo').removeClass('hidden');
+                modal.find('.modal-body span.text-clave b').text(jdata.Prefijo);
+                modal.find('.modal-body div.text-desc').text(jdata.DescripcionCorta);
+                modal.find('#IdIndicador').val(jdata.IdIndicador);
+                modal.find('#TipoCalculo').val(jdata.TipoCalculo);
+                modal.find('#idConfigRespInd').val(idconf);
+                modal.find('#IdDataValoresIndicadores').val(jvalor.IdDataValoresIndicadores);
+
+                modal.find('form input').prop('disabled', true);
+                modal.find('.divselectmes').addClass('hidden');
+                modal.find('.btnCalculo').removeClass('hidden');
+                modal.find('.btnCalculo').addClass('hidden');
+            }
+
+            switch(jdata.TipoCalculo)
+            {
+                case 'Valor':
+                    modal.find('.lblResultValor').text(jdata.DescripcionValorFormula);
+                    modal.find('div.form-group.Valor').show();
+                    modal.find('div.form-group.Formula').hide();
+                    modal.find('#ResultValor').val(jvalor.Valor);
+
+                    //LimpiamosCampos
+                    modal.find('#ResultFormula').val('');
+                    break;
+                case 'Formula':
+                    modal.find('.lbldataProgramada').text(jdata.EtiquetaValorProgramado);
+                    modal.find('.lbldataReal').text(jdata.EtiquetaValorReal);
+                    //modal.find('.lblResultValor').text(jdata.DescripcionValorFormula);
+                    modal.find('div.form-group.Valor').hide();
+                    modal.find('div.form-group.Formula').show();
+
+                    //LimpiamosCampos
+                    modal.find('#ResultValor').val('');
+                    if(jvalor.Predata_ValoresIndicadoresFormula[0] != undefined){
+                        modal.find('#dataProgramada').val(jvalor.Predata_ValoresIndicadoresFormula[0].ValorProgramado);
+                        modal.find('#dataReal').val(jvalor.Predata_ValoresIndicadoresFormula[0].ValorReal);
+                    }
+                    else{
+                        modal.find('#dataProgramada').val('');
+                        modal.find('#dataReal').val('');
+                    }
+                    modal.find('#ResultFormula').val(jvalor.Valor);
+                    break;
+                case 'Programa':
+                    modal.find('#ResultPrograma').val(jvalor.Valor);
+                    cargarProgramaAsociado(jvalor.Predata__ValoresIndicadoresPrograma[0]);
+                    break;
+            }
+
+            modal.modal('show');
+        }
+
+    });
+
+    function cargaTablaDocumentos(elem, dt) {
+        _.each(dt, function (d,i) { dt[i].cont = (i + 1); });
+        var d = { "rows": dt };
+        $(elem).bootgrid({
+            rowCount: 5,
+            navigation:2,
+            columnSelection: false,
+            labels: {
+                infos: "",
+                noResults: "No hay resultados"
+            },
+            formatters: {
+                "fecha-ini-format": function(colum, row){
+                    var fecha = moment(row.proyecto_fecha_ini);
+                    return fecha.locale('es').format('L');
+                },
+                "view-document": function(colum, row){
+                    return '<a data-ruta="' + row.RutaDoc + '" data-iddoc="'+ row.IdSoportesAsignadosaIndicador +'" href="/CargaIndicadores/Download/?idFile='+row.IdSoportesAsignadosaIndicador+'" class="btn btnConsultarDoc activo"  title="Ver documento" >Consultar</a>';
+                },
+                "menu-contextual": function(culumn, row)
+                {
+                    return '';
+                }
+            }
+            //Carga de datos
+        }).bootgrid("clear").bootgrid("append", d.rows);
+    }
+
+    function cargarProgramaAsociado(d) {
+        if (d !== null) {
+            var tmpl = $("#tmp-det-programa").html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "programa": d });
+            $('#modalProgramaAsociado .trData').remove();
+            $('#modalProgramaAsociado .trEncabezados').after(html);
+        }
+    }
+
+    //Carga para gráficas
+    function cargarDiagrama(atr, callback) {
+        var diagrama = "";
+        if (atr.datos.length > 0) {
+
+            var tmpl = $(atr.tmpl).html();
+            var compiled = _.template(tmpl);
+            var html = compiled({ "elementos": atr.datos });
+            diagrama = html;
+
+            if (atr.agregar === true) {
+                $(atr.cnt).append(diagrama);
+            } else {
+                $(atr.cnt).empty().html(diagrama);
+            }
+            // Comprobamos que se trate de una funcion
+            if (typeof callback === "function") {
+                setTimeout(callback, 1000);
+            }
+        } else {
+            diagrama = '<p class="msj-info-galeria">Diagrama no encontrado</p>';
+            $('.cnt-tbl-subsis-glob').empty().html(diagrama);
+        }
+    }
+
+    function initGraficaDinamicaPie(elemp) {
+        $(elemp).each(function (i, e) {
+            var elem = $(e).data('elem');
+            var avance = $(e).data('avance');
+            var color = $(e).data('color');
+            GraficaDinamicaPie(elem, avance, color);
+        });
+    }
+
+    function GraficaDinamicaPie(elem, avance, color) {
+        var avance_rest = 100 - avance;
+        var ctx = $(elem);
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [],
+                datasets: [{
+                    data: [avance, avance_rest],
+                    backgroundColor: [setColor(color), setColor('default')],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                tooltips: { enabled: false }
+            }
+        });
+    }
+
+    function setColor(c) {
+        var setColor = [];
+        setColor["Verde"] = "#00CE93";
+        setColor["Amarillo"] = "#FFC542";
+        setColor["Rojo"] = "#FF364D";
+        setColor["Azul"] = "#008DAC";
+        setColor["Gris"] = "#A4A09B";
+        setColor["default"] = "#E9E7E4";
+
+        return setColor[c];
+    }
+
+    function populateComboResponsable(combo, data){
+        $(combo).find('option').remove().end();
+
+        if(data.length > 0){
+            var option = $(document.createElement('option'));
+            option.text("SELECCIONE EL NOMBRE DE LA PERSONA");
+            option.val("");
+            $(combo).append(option);
+
+            $(data).each(function () {
+                var option = $(document.createElement('option'));
+                option.text(this.Nombre);
+                option.val(this.id);
+                $(combo).append(option);
+            });
+        }
+        else{
+            var option = $(document.createElement('option'));
+            option.text("NO HAY RESPONSABLES");
+            option.val("");
+            $(combo).append(option);
+        }
+    }
+
+</script>
