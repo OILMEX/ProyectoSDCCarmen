@@ -16,7 +16,7 @@ body {
     z-index:1; 
     width:100%; 
     height:99%;
-    background-color: #1F3046;
+    background-image: url(~/Images/publicacion/fonndo_publicacion.png);
 }
 
 .cnt-general-publicacion {
